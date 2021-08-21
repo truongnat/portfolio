@@ -10,10 +10,7 @@ export function HomePage() {
     <>
       <Helmet>
         <title>Home Page</title>
-        <meta
-          name="description"
-          content="A React Boilerplate application homepage"
-        />
+        <meta name="Home Page" content="My page for Truong.Nat" />
       </Helmet>
       <NavBar />
       <PageWrapper>
