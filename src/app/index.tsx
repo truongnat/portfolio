@@ -26,7 +26,7 @@ export function App() {
         defaultTitle="Homepage"
         htmlAttributes={{ lang: i18n.language }}
       >
-        <meta name="description" content="A React Boilerplate application" />
+        <meta name="Portfolio" content="Portfolio peanut" />
       </Helmet>
 
       <Switch>
