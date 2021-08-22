@@ -2,6 +2,7 @@
   "name": "portfilo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/truongnat/portfolio",
   "dependencies": {
     "@reduxjs/toolkit": "1.6.0",
     "@testing-library/jest-dom": "5.14.1",
@@ -83,7 +84,9 @@
     "cleanAndSetup": "ts-node --project=./internals/ts-node.tsconfig.json ./internals/scripts/clean.ts",
     "prettify": "prettier --write",
     "extract-messages": "i18next-scanner --config=internals/extractMessages/i18next-scanner.config.js",
-    "rc": "rm -rf yarn-error.log yarn.lock node_modules build"
+    "rc": "rm -rf yarn-error.log yarn.lock node_modules build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -129,5 +132,8 @@
         "statements": 90
       }
     }
+  },
+  "devDependencies": {
+    "gh-pages": "3.2.3"
   }
 }
