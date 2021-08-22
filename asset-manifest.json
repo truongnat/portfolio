@@ -1,0 +1,22 @@
+{
+  "files": {
+    "static/js/0.c08fb286.chunk.js": "/truongnat/portfolio/static/js/0.c08fb286.chunk.js",
+    "main.js": "/truongnat/portfolio/static/js/main.0aa9f56d.chunk.js",
+    "runtime-main.js": "/truongnat/portfolio/static/js/runtime-main.628c6aa2.js",
+    "static/css/3.e6924ae7.chunk.css": "/truongnat/portfolio/static/css/3.e6924ae7.chunk.css",
+    "static/js/3.a3403e87.chunk.js": "/truongnat/portfolio/static/js/3.a3403e87.chunk.js",
+    "static/js/4.22e75417.chunk.js": "/truongnat/portfolio/static/js/4.22e75417.chunk.js",
+    "static/js/5.b59072f2.chunk.js": "/truongnat/portfolio/static/js/5.b59072f2.chunk.js",
+    "static/js/6.39cbb568.chunk.js": "/truongnat/portfolio/static/js/6.39cbb568.chunk.js",
+    "static/js/7.0966fd20.chunk.js": "/truongnat/portfolio/static/js/7.0966fd20.chunk.js",
+    "static/js/8.ec7a1696.chunk.js": "/truongnat/portfolio/static/js/8.ec7a1696.chunk.js",
+    "index.html": "/truongnat/portfolio/index.html",
+    "static/js/3.a3403e87.chunk.js.LICENSE.txt": "/truongnat/portfolio/static/js/3.a3403e87.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.628c6aa2.js",
+    "static/css/3.e6924ae7.chunk.css",
+    "static/js/3.a3403e87.chunk.js",
+    "static/js/main.0aa9f56d.chunk.js"
+  ]
+}
