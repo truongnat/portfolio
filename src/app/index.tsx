@@ -1,21 +1,13 @@
-/**
- *
- * App
- *
- * This component is the skeleton around the actual pages, and should only
- * contain code that should be seen on all pages. (e.g. navigation bar)
- */
-
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-
+import 'react-tsparticles';
 import { GlobalStyle } from '../styles/global-styles';
 
-// import { HomePage } from './pages/HomePage/Loadable';
 import { NotFoundPage } from './pages/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
-import { HomePageTop2 } from './pages/HomepageTop2';
+import { HomePageTop2 } from './pages/HomepageTop2/Loadable';
+import { ContactPage } from './pages/ContactPage/Loadable';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -30,11 +22,15 @@ export function App() {
       </Helmet>
 
       <Switch>
-        {/* <Route exact path={process.env.PUBLIC_URL + '/'} component={HomePage} /> */}
         <Route
           exact
           path={process.env.PUBLIC_URL + '/'}
           component={HomePageTop2}
+        />
+        <Route
+          exact
+          path={process.env.PUBLIC_URL + '/contact'}
+          component={ContactPage}
         />
         <Route component={NotFoundPage} />
       </Switch>

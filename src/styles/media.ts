@@ -21,6 +21,7 @@ export const sizes = {
   small: 320,
   xsmall: 600,
   lg: 768,
+  xLg: 992,
   medium: 1024,
   large: 1440,
   xlarge: 1920,

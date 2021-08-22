@@ -2,16 +2,24 @@ import * as React from 'react';
 import styled, { keyframes } from 'styled-components/macro';
 import { media } from '../../../../styles/media';
 import { useSpring, animated } from 'react-spring';
-const LINKS: string[] = ['Home', 'Art', 'About', 'Contact'];
+import { ILink, LINKS } from '../../../../constants/route';
+import { useHistory } from 'react-router-dom';
+import { ButtonShape } from '../../../components/ButtonShape';
 
 export function NavMobile() {
-  const [toggleMenu, setToggleMenu] = React.useState(false);
+  const history = useHistory();
+  const [toggleMenu, setToggleMenu] = React.useState<boolean>(false);
 
   const props = useSpring({
     opacity: toggleMenu ? 1 : 0,
     transform: toggleMenu ? `rotateX(0deg)` : `rotateX(90deg)`,
     transformOrigin: toggleMenu ? 'top left' : 'top left',
   });
+
+  const _handleRouter = (path: string) => {
+    setToggleMenu(false);
+    history.push(path);
+  };
 
   return (
     <Wrapper>
@@ -27,10 +35,13 @@ export function NavMobile() {
         )}
       </WrapIcon>
       <WrapNavItem style={props}>
-        {LINKS.map((link: string, index: number) => (
-          <NavItem onClick={() => setToggleMenu(false)} key={index}>
-            {link}
-          </NavItem>
+        {LINKS.map((link: ILink, index: number) => (
+          <ButtonShape
+            key={index}
+            title={link.name}
+            click={() => _handleRouter(link.path)}
+            customStyle={{ marginTop: '1.5rem' }}
+          />
         ))}
       </WrapNavItem>
     </Wrapper>
@@ -102,35 +113,12 @@ const Path = styled.path`
 `;
 
 const WrapNavItem = styled(animated.ul)`
-  background-color: #e9e9e9;
   list-style-type: none;
   padding: 0;
   margin: 0;
   border-radius: 0.5rem;
-  margin-top: 1rem;
   z-index: 10;
   ${media.lg`
     display : none
   `}
-`;
-
-const NavItem = styled.li`
-  color: black;
-  cursor: pointer;
-  font-weight: 700;
-  padding: 0.75rem 2rem;
-  transition: 0.2s ease-in-out all;
-  &:first-child {
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-  }
-  &:last-child {
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-  }
-  &:hover {
-    background-color: #d0d0d0;
-    transform: scale(1.05);
-    border-radius: 0.5rem;
-  }
 `;
