@@ -10,47 +10,47 @@ import { ButtonShape } from '../ButtonShape';
 import { useMedia } from 'react-use';
 
 export function MenuMobile() {
-	const history = useHistory();
-	const isxLg = useMedia('(min-width: 992px)');
-	const [checked, setChecked] = React.useState<boolean>(false);
-	const _handleRouter = (path: string) => {
-		history.push(path);
-	};
-	const props = useSpring({
-		left: checked ? '0%' : '100%',
-	});
+  const history = useHistory();
+  const isxLg = useMedia('(min-width: 992px)');
+  const [checked, setChecked] = React.useState<boolean>(false);
+  const _handleRouter = (path: string) => {
+    history.push(path);
+  };
+  const props = useSpring({
+    left: checked ? '0%' : '100%',
+  });
 
-	React.useEffect(() => {
-		if (isxLg) {
-			setChecked(false);
-		}
-	}, [isxLg])
-	return (
-		<React.Fragment>
-			<WrapperMenu
-				reverse={checked}
-				onClick={() => {
-					setChecked(!checked);
-				}}
-				size={40}
-				strokeColor="#fff"
-				animation={menu3}
-				speed={2.5}
-			/>
-			<MenuFullScreen style={props}>
-				<WrapNavItem>
-					{LINKS.map((link: ILink, index: number) => (
-						<ButtonShape
-							title={link.name}
-							key={index}
-							click={() => _handleRouter(link.path)}
-							customStyle={{ marginTop: '2rem' }}
-						/>
-					))}
-				</WrapNavItem>
-			</MenuFullScreen>
-		</React.Fragment>
-	);
+  React.useEffect(() => {
+    if (isxLg) {
+      setChecked(false);
+    }
+  }, [isxLg]);
+  return (
+    <React.Fragment>
+      <WrapperMenu
+        reverse={checked}
+        onClick={() => {
+          setChecked(!checked);
+        }}
+        size={40}
+        strokeColor="#fff"
+        animation={menu3}
+        speed={2.5}
+      />
+      <MenuFullScreen style={props}>
+        <WrapNavItem>
+          {LINKS.map((link: ILink, index: number) => (
+            <ButtonShape
+              title={link.name}
+              key={index}
+              click={() => _handleRouter(link.path)}
+              customStyle={{ marginTop: '2rem' }}
+            />
+          ))}
+        </WrapNavItem>
+      </MenuFullScreen>
+    </React.Fragment>
+  );
 }
 
 const WrapperMenu = styled(UseAnimations)`
