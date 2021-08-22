@@ -4,7 +4,7 @@ import styled from 'styled-components/macro';
 export function Logo() {
   return (
     <Wrapper>
-      <Title>NAT</Title>
+      <Title>Peanut</Title>
     </Wrapper>
   );
 }
@@ -12,12 +12,13 @@ export function Logo() {
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  z-index: 10;
 `;
 
 const Title = styled.div`
-  font-size: 1.25rem;
-  color: ${p => p.theme.text};
+  font-size: 1.5rem;
+  /* color: ${p => p.theme.text}; */
+  color: #fff;
   font-weight: bold;
-  margin-right: 1rem;
   cursor: pointer;
 `;

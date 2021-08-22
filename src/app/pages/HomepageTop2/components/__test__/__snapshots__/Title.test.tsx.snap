@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Title /> should render and match the snapshot 1`] = `
+.c0 {
+ font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 2rem;
+  margin: 0;
+  padding: 1rem 0;
+  color: #fff;
+  animation: scale 1.875s ease-in-out infinite alternate;
+  transform-origin: center;
+  text-transform: uppercase;
+}
+
+@keyframes scale {
+	  0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.02);
+    }
+}
+
+@media only screen and (min-width: 320px) {
+  .c0 {
+   font-size : 1.25rem;
+	 letter-spacing: 0.5rem;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .c0 {
+  	font-size: 1.5rem;
+		letter-spacing: 0.75rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .c0 {
+		font-size : 2rem;
+		letter-spacing: 1rem;
+  }
+}
+
+<h1
+  class="c0"
+/>
+`;

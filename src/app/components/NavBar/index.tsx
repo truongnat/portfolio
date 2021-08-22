@@ -2,15 +2,17 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { Logo } from './Logo';
 import { StyleConstants } from 'styles/StyleConstants';
-import { Nav } from './Nav';
 import { PageWrapper } from '../PageWrapper';
+import { MenuDesktop } from './MenuDesktop';
+import { MenuMobile } from './MenuMobile';
 
 export function NavBar() {
   return (
     <Wrapper>
       <PageWrapper>
         <Logo />
-        <Nav />
+        <MenuMobile />
+        <MenuDesktop />
       </PageWrapper>
     </Wrapper>
   );
@@ -23,21 +25,5 @@ const Wrapper = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: ${p => p.theme.background};
   z-index: 2;
-
-  @supports (backdrop-filter: blur(10px)) {
-    backdrop-filter: blur(10px);
-    background-color: ${p =>
-      p.theme.background.replace(
-        /rgba?(\(\s*\d+\s*,\s*\d+\s*,\s*\d+)(?:\s*,.+?)?\)/,
-        'rgba$1,0.75)',
-      )};
-  }
-
-  ${PageWrapper} {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
 `;

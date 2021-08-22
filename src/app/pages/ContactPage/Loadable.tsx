@@ -1,9 +1,7 @@
 import * as React from 'react';
-
 import styled from 'styled-components/macro';
 import { lazyLoad } from '../../../utils/loadable';
 import { LoadingIndicator } from '../../components/LoadingIndicator';
-
 const LoadingWrapper = styled.div`
   width: 100%;
   height: 100vh;
@@ -11,10 +9,9 @@ const LoadingWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-export const HomePageTop2 = lazyLoad(
+export const ContactPage = lazyLoad(
   () => import('./index'),
-  module => module.HomePageTop2,
+  module => module.ContactPage,
   {
     fallback: (
       <LoadingWrapper>
