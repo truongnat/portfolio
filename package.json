@@ -2,7 +2,6 @@
   "name": "portfilo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/truongnat/portfolio",
   "dependencies": {
     "@reduxjs/toolkit": "1.6.0",
     "@testing-library/jest-dom": "5.14.1",
@@ -26,6 +25,7 @@
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-react-hooks": "4.2.0",
+    "express": "4.17.1",
     "fontfaceobserver": "2.1.0",
     "husky": "7.0.0",
     "i18next": "20.3.2",
@@ -69,12 +69,12 @@
     "web-vitals": "2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test:generators": "ts-node --project=./internals/ts-node.tsconfig.json ./internals/testing/generators/test-generators.ts",
-    "start:prod": "yarn run build && serve -s build",
+    "start:prod": "yarn; yarn run build; serve -s build",
     "checkTs": "tsc --noEmit",
     "eslint": "eslint --ext js,ts,tsx",
     "lint": "yarn run eslint src",
@@ -85,8 +85,7 @@
     "prettify": "prettier --write",
     "extract-messages": "i18next-scanner --config=internals/extractMessages/i18next-scanner.config.js",
     "rc": "rm -rf yarn-error.log yarn.lock node_modules build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "run-client": "react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -135,5 +134,6 @@
   },
   "devDependencies": {
     "gh-pages": "3.2.3"
-  }
+  },
+  "type": "commonjs"
 }
