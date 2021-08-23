@@ -54,7 +54,7 @@ export function MenuMobile() {
 }
 
 const WrapperMenu = styled(UseAnimations)`
-  z-index: 10;
+  z-index: 30;
   ${media.xLg`
 	display : none;
 `}
@@ -69,7 +69,7 @@ const MenuFullScreen = styled(animated.div)`
   right: 0;
   width: 100%;
   height: 100vh;
-  z-index: 8;
+  z-index: 20;
   background-color: #0e0a0a;
   transition: 0.1s linear all;
 `;
