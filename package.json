@@ -2,6 +2,7 @@
   "name": "portfilo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/truongnat/portfolio",
   "dependencies": {
     "@reduxjs/toolkit": "1.6.0",
     "@testing-library/jest-dom": "5.14.1",
@@ -69,7 +70,7 @@
     "web-vitals": "2.1.0"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -84,8 +85,7 @@
     "cleanAndSetup": "ts-node --project=./internals/ts-node.tsconfig.json ./internals/scripts/clean.ts",
     "prettify": "prettier --write",
     "extract-messages": "i18next-scanner --config=internals/extractMessages/i18next-scanner.config.js",
-    "rc": "rm -rf yarn-error.log yarn.lock node_modules build",
-    "run-client": "react-scripts start"
+    "rc": "rm -rf yarn-error.log yarn.lock node_modules build"
   },
   "eslintConfig": {
     "extends": "react-app"
