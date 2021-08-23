@@ -24,7 +24,7 @@ export const Title = styled.h1`
 		font-size : 1.25rem;
 		letter-spacing: 0.5rem;
   `};
-  ${media.xsmall`
+  ${media.xSmall`
 		font-size: 1.5rem;
 		letter-spacing: 0.75rem;
 	`};

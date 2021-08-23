@@ -23,7 +23,7 @@ export const SubTitle = styled.span`
 	  font-size : 0.75rem;
       letter-spacing:  0.2rem;
   `};
-  ${media.xsmall`
+  ${media.xSmall`
 		font-size: 1rem;
 		letter-spacing: 0.5rem;
     `};
