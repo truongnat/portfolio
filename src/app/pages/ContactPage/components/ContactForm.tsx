@@ -3,12 +3,9 @@ import styled from 'styled-components/macro';
 import { media } from '../../../../styles/media';
 import { ButtonShape } from '../../../components/ButtonShape';
 import { animated, useSpring } from 'react-spring';
-const INIT_FORM = {
-  name: '',
-  email: '',
-  phone: '',
-};
-
+import { FocusBorder, InputFields } from './InputFields';
+import { RG } from '../../../../constants/rg';
+import { useForm } from 'react-hook-form';
 interface IFields {
   name: string;
   email: string;
@@ -16,16 +13,18 @@ interface IFields {
 }
 
 export function ContactForm() {
-  const [fields, setFields] = React.useState<Partial<IFields>>(INIT_FORM);
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFields>();
 
-  const _handleSetValFields = ({
-    target: { value, name },
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setFields({
-      ...fields,
-      [name]: value,
-    });
-  };
+  const onSubmit = handleSubmit((data: IFields) => {
+    console.log('show form', data);
+  });
+  console.log('show error', errors);
+
   const propsLef = useSpring({
     from: {
       x: -200,
@@ -48,44 +47,40 @@ export function ContactForm() {
     <React.Fragment>
       <MailFormContainer>
         <Title style={propsLef}>Contact Page</Title>
-        <Container>
+        <ContainerForm>
           <WrapperInputFields style={propsLef}>
             <InputFields
-              placeholder="Name"
-              type="text"
-              value={fields.name}
-              name="name"
-              onChange={_handleSetValFields}
+              placeholder="Join Will"
+              {...register('name', { required: true })}
+              error={!!errors?.name}
             />
             <FocusBorder />
           </WrapperInputFields>
           <WrapperInputFields style={propsRight}>
             <InputFields
-              placeholder="Email"
-              type="text"
-              value={fields.email}
-              name="email"
-              onChange={_handleSetValFields}
+              placeholder="vtc@gmail.com"
+              {...register('email', { required: true, pattern: RG.email })}
+              error={!!errors?.email}
             />
             <FocusBorder />
           </WrapperInputFields>
           <WrapperInputFields style={propsLef}>
             <InputFields
-              placeholder="Phone"
+              placeholder="0 -> 9"
               type="number"
-              value={fields.phone}
-              name="phone"
-              onChange={_handleSetValFields}
+              {...register('phone', { required: true })}
+              error={!!errors?.email}
             />
             <FocusBorder />
           </WrapperInputFields>
           <WrapperButton style={propsRight}>
             <ButtonShape
               title="Send"
-              customStyle={{ margin: '1.5rem 0', padding: '0.35rem' }}
+              click={onSubmit}
+              customStyle={{ margin: '1.5rem 0', padding: '0.5rem' }}
             />
           </WrapperButton>
-        </Container>
+        </ContainerForm>
       </MailFormContainer>
     </React.Fragment>
   );
@@ -100,7 +95,7 @@ const MailFormContainer = styled.div`
   padding: 0 2rem;
 `;
 
-const Container = styled.div`
+const ContainerForm = styled.form`
   ${media.small`
 		width : 100%;
 		height: 10rem;
@@ -117,34 +112,6 @@ const WrapperInputFields = styled(animated.div)`
   &:first-child {
     margin-top: 0;
   }
-`;
-
-const InputFields = styled.input`
-  width: 100%;
-  font-size: 1rem;
-  box-sizing: border-box;
-  border: 0;
-  padding: 0.438rem 0;
-  border-bottom: 1px solid #ccc;
-  background-color: transparent;
-  color: #fff;
-  &:focus {
-    outline: none;
-  }
-`;
-
-const FocusBorder = styled.span`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #7b4397;
-  transition: 0.4s;
-  ${InputFields}:focus ~ & {
-    width: 100%;
-    transition: 0.4s;
-  } ;
 `;
 
 const WrapperButton = styled(animated.div)`
