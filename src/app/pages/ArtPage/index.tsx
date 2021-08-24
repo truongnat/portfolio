@@ -1,22 +1,27 @@
-import * as React from 'react';
-import { Helmet } from 'react-helmet-async';
+import React from 'react';
 import Particles from 'react-particles-js';
+import styled from 'styled-components';
 import { useMedia } from 'react-use';
-import styled from 'styled-components/macro';
+import { Gallery } from './components/Gallery';
 import { NavBar } from '../../components/NavBar';
-import { ContactForm } from './components/ContactForm';
+import { animated, useSpring } from 'react-spring';
 
-export function ContactPage() {
+export function ArtPage() {
   const isLg = useMedia('(min-width: 768px)');
+
   const isMedium = useMedia('(min-width: 1024px)');
   const particlesVal = isMedium ? 100 : isLg ? 50 : 20;
+  const propsLef = useSpring({
+    from: {
+      x: -200,
+    },
+    to: {
+      x: 0,
+    },
+  });
 
   return (
     <React.Fragment>
-      <Helmet>
-        <title>Contact Page</title>
-        <meta name="Contact Page" content="Contact page for Truong.Nat" />
-      </Helmet>
       <WrapParticles
         params={{
           particles: {
@@ -40,7 +45,8 @@ export function ContactPage() {
       <Wrapper>
         <NavBar />
         <Container>
-          <ContactForm />
+          <Title style={propsLef}>Art Page</Title>
+          <Gallery />
         </Container>
       </Wrapper>
     </React.Fragment>
@@ -55,14 +61,19 @@ const WrapParticles = styled(Particles)`
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   background-color: #1d1d25;
   align-items: center;
   justify-content: center;
 `;
-
 export const Container = styled(Wrapper)`
-  height: 100%;
   flex-direction: column;
+`;
+
+export const Title = styled(animated.h1)`
+  color: #7b4397;
+  font-size: 1.75rem;
+  margin: 2rem 0;
+  margin-top: 7rem;
 `;

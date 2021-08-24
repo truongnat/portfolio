@@ -72,6 +72,8 @@ const MenuFullScreen = styled(animated.div)`
   z-index: 20;
   background-color: #0e0a0a;
   transition: 0.1s linear all;
+  overflow: hidden;
+  margin: 0;
 `;
 const WrapNavItem = styled(animated.ul)`
   display: flex;
