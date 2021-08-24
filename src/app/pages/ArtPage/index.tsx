@@ -1,92 +1,79 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import useMeasure from 'react-use-measure';
+import React from 'react';
+import Particles from 'react-particles-js';
 import styled from 'styled-components';
-import { useTransition, a } from 'react-spring';
-import shuffle from 'lodash/shuffle';
-import mockData from './mockData';
-import useMedia from '../../../hooks/useMedia';
+import { useMedia } from 'react-use';
+import { Gallery } from './components/Gallery';
+import { NavBar } from '../../components/NavBar';
+import { animated, useSpring } from 'react-spring';
 
 export function ArtPage() {
-  const columns = useMedia(
-    ['(min-width: 1024px)', '(min-width: 768px)', '(min-width: 600px)'],
-    [5, 4, 3],
-    2,
-  );
+  const isLg = useMedia('(min-width: 768px)');
 
-  const [ref, { width }] = useMeasure();
-
-  const [items, set] = useState(mockData);
-
-  useEffect(() => {
-    const t = setInterval(() => set(shuffle), 5000);
-    return () => clearInterval(t);
-  }, []);
-
-  const [heights, gridItems] = useMemo(() => {
-    let heights = new Array(columns).fill(0);
-    let gridItems = items.map((child, i) => {
-      const column = heights.indexOf(Math.min(...heights));
-      const x = (width / columns) * column;
-      const y = (heights[column] += child.height / 2) - child.height / 2;
-
-      return {
-        ...child,
-        x,
-        y,
-        width: width / columns,
-        height: child.height / 2,
-      };
-    });
-    return [heights, gridItems];
-  }, [columns, items, width]);
-
-  const transitions = useTransition(gridItems, {
-    key: (item: { css: string; height: number }) => item.css,
-    from: ({ x, y, width, height }) => ({ x, y, width, height, opacity: 0 }),
-    enter: ({ x, y, width, height }) => ({ x, y, width, height, opacity: 1 }),
-    update: ({ x, y, width, height }) => ({ x, y, width, height }),
-    leave: { height: 0, opacity: 0 },
-    config: { mass: 5, tension: 500, friction: 100 },
-    trail: 25,
+  const isMedium = useMedia('(min-width: 1024px)');
+  const particlesVal = isMedium ? 100 : isLg ? 50 : 20;
+  const propsLef = useSpring({
+    from: {
+      x: -200,
+    },
+    to: {
+      x: 0,
+    },
   });
 
   return (
     <React.Fragment>
-      <List ref={ref} style={{ height: Math.max(...heights) }}>
-        {transitions((style, item) => (
-          <a.div style={style}>
-            <div
-              style={{
-                backgroundImage: `url(${item.css}?auto=compress&dpr=2&h=500&w=500)`,
-              }}
-            />
-          </a.div>
-        ))}
-      </List>
+      <WrapParticles
+        params={{
+          particles: {
+            number: {
+              value: particlesVal,
+            },
+            size: {
+              value: 1,
+            },
+          },
+          interactivity: {
+            events: {
+              onhover: {
+                enable: true,
+                mode: 'repulse',
+              },
+            },
+          },
+        }}
+      />
+      <Wrapper>
+        <NavBar />
+        <Container>
+          <Title style={propsLef}>Art Page</Title>
+          <Gallery />
+        </Container>
+      </Wrapper>
     </React.Fragment>
   );
 }
 
-const List = styled.div`
-  position: relative;
+const WrapParticles = styled(Particles)`
+  height: 100%;
+  width: 100%;
+  position: fixed;
+`;
+
+const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  & > div {
-    position: absolute;
-    will-change: transform, width, height, opacity;
-    padding: 15px;
-  }
-  & > div > div {
-    position: relative;
-    background-size: cover;
-    background-position: center center;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    text-transform: uppercase;
-    font-size: 10px;
-    line-height: 10px;
-    border-radius: 4px;
-    box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
-  }
+  display: flex;
+  background-color: #1d1d25;
+  align-items: center;
+  justify-content: center;
+`;
+export const Container = styled(Wrapper)`
+  flex-direction: column;
+`;
+
+export const Title = styled(animated.h1)`
+  color: #7b4397;
+  font-size: 1.75rem;
+  margin: 2rem 0;
+  margin-top: 7rem;
 `;

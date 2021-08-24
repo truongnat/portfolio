@@ -17,8 +17,6 @@ import { configureAppStore } from 'store/configureStore';
 
 import { ThemeProvider } from 'styles/theme/ThemeProvider';
 
-import reportWebVitals from 'reportWebVitals';
-
 // Initialize languages
 import './locales/i18n';
 
@@ -53,5 +51,3 @@ if (module.hot) {
     // No need to render the App again because i18next works with the hooks
   });
 }
-
-reportWebVitals();
