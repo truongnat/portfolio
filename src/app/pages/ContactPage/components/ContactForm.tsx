@@ -15,7 +15,6 @@ interface IFields {
 export function ContactForm() {
   const {
     register,
-    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<IFields>();
