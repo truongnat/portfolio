@@ -35,7 +35,7 @@ const Wrapper = styled.div`
 		justify-content: center;
   `}
 `;
-const WrapNavItem = styled(animated.ul)`
+const WrapNavItem = styled(animated.ul)<{}>`
   display: flex;
   flex-direction: row;
   padding: 0;

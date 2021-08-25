@@ -22,7 +22,6 @@ export function ContactForm() {
   const onSubmit = handleSubmit((data: IFields) => {
     console.log('show form', data);
   });
-  console.log('show error', errors);
 
   const propsLef = useSpring({
     from: {
