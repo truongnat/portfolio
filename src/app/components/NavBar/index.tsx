@@ -10,7 +10,7 @@ import { useWindowScroll } from 'react-use';
 export function NavBar() {
   const { y } = useWindowScroll();
   return (
-    <Wrapper display={y <= 50 ? 'flex' : 'none'}>
+    <Wrapper display={y <= 30 ? 'flex' : 'none'}>
       <PageWrapper>
         <Logo />
         <MenuMobile />
