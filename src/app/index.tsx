@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { HomePageTop2 } from './pages/HomepageTop2/Loadable';
 import { ContactPage } from './pages/ContactPage/Loadable';
 import { ArtPage } from './pages/ArtPage/Loadable';
+import { AboutPage } from './pages/AboutPage/Loadable';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -37,6 +38,11 @@ export function App() {
           exact
           path={process.env.PUBLIC_URL + '/art'}
           component={ArtPage}
+        />
+        <Route
+          exact
+          path={process.env.PUBLIC_URL + '/about'}
+          component={AboutPage}
         />
         <Route component={NotFoundPage} />
       </Switch>

@@ -1,30 +1,25 @@
-import React from 'react';
-import Particles from 'react-particles-js';
-import styled from 'styled-components';
+import * as React from 'react';
+import styled from 'styled-components/macro';
 import { useMedia } from 'react-use';
-import { Gallery } from './components/Gallery';
+import Particles from 'react-particles-js';
 import { NavBar } from '../../components/NavBar';
-import { animated, useSpring } from 'react-spring';
 import { Helmet } from 'react-helmet-async';
+import { AboutHeader } from './Features/AboutHeader';
+import { AboutMe } from './Features/AboutMe';
+import { Experience } from './Features/Experience';
+import { Skills } from './Features/Skills';
+import { media } from '../../../styles/media';
 
-export function ArtPage() {
+export function AboutPage() {
   const isLg = useMedia('(min-width: 768px)');
   const isMedium = useMedia('(min-width: 1024px)');
-  const particlesVal = isMedium ? 100 : isLg ? 50 : 20;
-  const propsLef = useSpring({
-    from: {
-      x: -200,
-    },
-    to: {
-      x: 0,
-    },
-  });
+  const particlesVal = isMedium ? 50 : isLg ? 30 : 10;
 
   return (
     <React.Fragment>
       <Helmet>
-        <title>Art Page</title>
-        <meta name="Art Page" content="Art page for Truong.Nat" />
+        <title>About Page</title>
+        <meta name="About Page" content="About page for Truong.Nat" />
       </Helmet>
       <WrapParticles
         params={{
@@ -49,8 +44,14 @@ export function ArtPage() {
       <Wrapper>
         <NavBar />
         <Container>
-          <Title style={propsLef}>Art Page</Title>
-          <Gallery />
+          <AboutHeader />
+          <FlexCol2>
+            <WrapperFlex>
+              <AboutMe />
+              <Experience />
+            </WrapperFlex>
+            <Skills />
+          </FlexCol2>
         </Container>
       </Wrapper>
     </React.Fragment>
@@ -61,7 +62,6 @@ const WrapParticles = styled(Particles)`
   height: 100%;
   width: 100%;
   position: fixed;
-  background-color: #000;
 `;
 
 const Wrapper = styled.div`
@@ -74,12 +74,23 @@ const Wrapper = styled.div`
 `;
 export const Container = styled(Wrapper)`
   flex-direction: column;
+  margin-top: 7rem;
 `;
 
-export const Title = styled(animated.h1)`
-  color: #7b4397;
-  font-size: 1.75rem;
-  margin: 2rem 0;
-  z-index: 1;
-  margin-top: 7rem;
+const WrapperFlex = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const FlexCol2 = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  ${media.lg`
+  flex-direction: row;
+  align-items: flex-start;
+  `}
 `;
