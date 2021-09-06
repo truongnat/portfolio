@@ -1,83 +1,196 @@
-import { useMemo, useState } from 'react';
-import { useTransition, a } from 'react-spring';
-import useMeasure from 'react-use-measure';
+import { useRef } from 'react';
 import styled from 'styled-components/macro';
-import useMedia from '../../../../hooks/useMedia';
-import mockData from '../mockData';
+import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax';
+
+// Little helpers ...
+const url = (name: string, wrap = false) =>
+  `${
+    wrap ? 'url(' : ''
+  }https://awv3node-homepage.surge.sh/build/assets/${name}.svg${
+    wrap ? ')' : ''
+  }`;
 
 export function Gallery() {
-  const columns = useMedia(
-    ['(min-width: 1024px)', '(min-width: 768px)', '(min-width: 600px)'],
-    [5, 4, 3],
-    2,
-  );
-
-  const [ref, { width }] = useMeasure();
-
-  const [items] = useState(mockData);
-
-  const [heights, gridItems] = useMemo(() => {
-    let heights = new Array(columns).fill(0);
-    let gridItems = items.map((child, i) => {
-      const column = heights.indexOf(Math.min(...heights));
-      const x = (width / columns) * column;
-      const y = (heights[column] += child.height / 2) - child.height / 2;
-
-      return {
-        ...child,
-        x,
-        y,
-        width: width / columns,
-        height: child.height / 2,
-      };
-    });
-    return [heights, gridItems];
-  }, [columns, items, width]);
-  const transitions = useTransition(gridItems, {
-    key: (item: { css: string; height: number }) => item.css,
-    from: ({ x, y, width, height }) => ({ x, y, width, height, opacity: 0 }),
-    enter: ({ x, y, width, height }) => ({ x, y, width, height, opacity: 1 }),
-    update: ({ x, y, width, height }) => ({ x, y, width, height }),
-    leave: { height: 0, opacity: 0 },
-    config: { mass: 5, tension: 500, friction: 100 },
-    trail: 25,
-  });
+  const parallax = useRef<IParallax>(null!);
 
   return (
-    <List ref={ref} style={{ height: Math.max(...heights) }}>
-      {transitions((style, item) => (
-        <a.div style={style}>
-          <div
-            style={{
-              backgroundImage: `url(${item.css}?auto=compress&dpr=2&h=500&w=500)`,
-            }}
+    <Container>
+      <Parallax
+        ref={parallax}
+        pages={3}
+        style={{ backgroundColor: 'InfoText' }}
+      >
+        <ParallaxLayer
+          offset={1}
+          speed={1}
+          style={{ backgroundColor: '#805E73' }}
+        />
+        <ParallaxLayer
+          offset={2}
+          speed={1}
+          style={{ backgroundColor: '#87BCDE' }}
+        />
+
+        <ParallaxLayer
+          offset={0}
+          speed={0}
+          factor={3}
+          style={{
+            backgroundImage: url('stars', true),
+            backgroundSize: 'cover',
+          }}
+        />
+
+        <ParallaxLayer
+          offset={1.3}
+          speed={-0.3}
+          style={{ pointerEvents: 'none' }}
+        >
+          <img
+            alt="test"
+            src={url('satellite4')}
+            style={{ width: '15%', marginLeft: '70%' }}
           />
-        </a.div>
-      ))}
-    </List>
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.1 }}>
+          <img
+            alt="test"
+            src={url('cloud')}
+            style={{ display: 'block', width: '20%', marginLeft: '55%' }}
+          />
+          <img
+            alt="test"
+            src={url('cloud')}
+            style={{ display: 'block', width: '10%', marginLeft: '15%' }}
+          />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={1.75} speed={0.5} style={{ opacity: 0.1 }}>
+          <img
+            alt="test"
+            src={url('cloud')}
+            style={{ display: 'block', width: '20%', marginLeft: '70%' }}
+          />
+          <img
+            alt="test"
+            src={url('cloud')}
+            style={{ display: 'block', width: '20%', marginLeft: '40%' }}
+          />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={1} speed={0.2} style={{ opacity: 0.2 }}>
+          <img
+            alt="test"
+            src={url('cloud')}
+            style={{ display: 'block', width: '10%', marginLeft: '10%' }}
+          />
+          <img
+            alt="test"
+            src={url('cloud')}
+            style={{ display: 'block', width: '20%', marginLeft: '75%' }}
+          />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={1.6} speed={-0.1} style={{ opacity: 0.4 }}>
+          <img
+            alt="test"
+            src={url('cloud')}
+            style={{ display: 'block', width: '20%', marginLeft: '60%' }}
+          />
+          <img
+            alt="test"
+            src={url('cloud')}
+            style={{ display: 'block', width: '25%', marginLeft: '30%' }}
+          />
+          <img
+            alt="test"
+            src={url('cloud')}
+            style={{ display: 'block', width: '10%', marginLeft: '80%' }}
+          />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={2.6} speed={0.4} style={{ opacity: 0.6 }}>
+          <img
+            alt="test"
+            src={url('cloud')}
+            style={{ display: 'block', width: '20%', marginLeft: '5%' }}
+          />
+          <img
+            alt="test"
+            src={url('cloud')}
+            style={{ display: 'block', width: '15%', marginLeft: '75%' }}
+          />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={2.5}
+          speed={-0.4}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            pointerEvents: 'none',
+          }}
+        >
+          <img alt="test" src={url('earth')} style={{ width: '60%' }} />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={2}
+          speed={-0.3}
+          style={{
+            backgroundSize: '80%',
+            backgroundPosition: 'center',
+            backgroundImage: url('clients', true),
+          }}
+        />
+
+        <ParallaxLayer
+          offset={0}
+          speed={0.1}
+          onClick={() => parallax.current.scrollTo(1)}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <img alt="test" src={url('server')} style={{ width: '20%' }} />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={1}
+          speed={0.1}
+          onClick={() => parallax.current.scrollTo(2)}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <img alt="test" src={url('bash')} style={{ width: '40%' }} />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={2}
+          speed={-0}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          onClick={() => parallax.current.scrollTo(0)}
+        >
+          <img alt="test" src={url('clients-main')} style={{ width: '40%' }} />
+        </ParallaxLayer>
+      </Parallax>
+    </Container>
   );
 }
 
-const List = styled.div`
-  position: relative;
+const Container = styled.div`
   width: 100%;
   height: 100%;
-  & > div {
-    position: absolute;
-    will-change: transform, width, height, opacity;
-    padding: 15px;
-  }
-  & > div > div {
-    position: relative;
-    background-size: cover;
-    background-position: center center;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    text-transform: uppercase;
-    font-size: 10px;
-    line-height: 10px;
-    border-radius: 4px;
-    box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
-  }
+  background-color: '#253237';
 `;

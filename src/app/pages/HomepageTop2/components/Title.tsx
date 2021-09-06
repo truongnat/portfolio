@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components/macro';
+import { speed } from '../../../../constants/common';
 import { media } from '../../../../styles/media';
-const speed = 1.5;
 
 const scale = keyframes`
    0% {

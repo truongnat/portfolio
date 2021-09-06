@@ -7,14 +7,19 @@ import { MenuDesktop } from './MenuDesktop';
 import { MenuMobile } from './MenuMobile';
 import { useWindowScroll } from 'react-use';
 
-export function NavBar() {
+interface INavbar {
+  menuMobile?: boolean;
+  menuDesktop?: boolean;
+}
+
+export function NavBar({ menuMobile = true, menuDesktop = true }: INavbar) {
   const { y } = useWindowScroll();
   return (
     <Wrapper display={y <= 30 ? 'flex' : 'none'}>
       <PageWrapper>
         <Logo />
-        <MenuMobile />
-        <MenuDesktop />
+        {menuMobile ? <MenuMobile /> : null}
+        {menuDesktop ? <MenuDesktop /> : null}
       </PageWrapper>
     </Wrapper>
   );

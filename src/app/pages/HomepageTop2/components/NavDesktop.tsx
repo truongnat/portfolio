@@ -28,14 +28,14 @@ const Wrapper = styled.div`
   width: 100%;
   margin-top: 5rem;
   display: none;
-  ${media.lg`
+  ${media.xLg`
     display : flex;
 		flex-direction : row;
 		align-items : center;
 		justify-content: center;
   `}
 `;
-const WrapNavItem = styled(animated.ul)<{}>`
+const WrapNavItem = styled(animated.ul)`
   display: flex;
   flex-direction: row;
   padding: 0;
