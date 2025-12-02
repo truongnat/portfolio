@@ -1,0 +1,382 @@
+# Implementation Plan
+
+- [x] 1. Project initialization and configuration
+
+
+
+
+
+
+
+  - Initialize Next.js 16 project with TypeScript and App Router using Bun
+  - Configure Tailwind CSS v3.4+ with custom theme
+  - Set up shadcn/ui component library
+  - Configure ESLint, Prettier, and TypeScript strict mode
+  - Create environment variables template (.env.local.example)
+  - Set up project directory structure (app, components, lib, types, hooks)
+  - _Requirements: 1.1, 1.2, 1.3, 1.4, 15.1, 15.2, 15.3, 15
+-
+
+- [x] 2. Database setup and type generation
+
+
+
+
+
+
+
+
+
+  - Create Supabase project and obtain credentials
+  - Execute schema.sql to create posts, projects, and github_projects tables
+  - Configure Row Level Security policies for public read access
+  - Generate TypeScript types from Supabase schema
+  - Create Supabase client utilities (lib/supabase.ts)
+  - Add sample seed data for development
+
+  - _Requirements: 13.1, 13.2, 13.3, 13.4, 13.5_
+
+- [x] 3. Core layout and providers
+
+
+
+
+
+
+  - Create root layout with metadata and font configuration
+  - Implement Providers component (ThemeProvider, QueryClientProvider)
+  - Set up next-themes for dark mode support
+  - Configure TanStack Query with default options and error handling
+  - Apply bg-background and text-foreground classes to body
+  - Create Navigation component with theme toggle
+  - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5, 7.1_
+-
+
+
+
+
+- [ ] 4. Utility functions and custom hooks
+
+
+
+
+
+
+  - Implement utility functions (cn, formatDate, calculateReadingTime, slugify)
+  - Create useIntersectionObserver hook for scroll-triggered animations
+  - Create useMediaQuery hook for responsive behavior
+  - Create useScrollSpy hook for table of contents
+  - Add error boundary component with fallback UI
+
+
+  - _Requirements: 8.1, 8.5_
+
+- [ ] 4.1 Write unit tests for utility functions
+  - Test calculateReadingTime with various content lengths
+  - Test slugify with special characters and edge cases
+  - Test formatDate with different date formats
+  - _Requirements: 8.1, 8.5_
+
+- [ ] 5. Hero section with animations
+  - Create Hero component with typing animation effect
+  - Implement gradient blob background with CSS/Framer Motion
+  - Add staggered fade-in animations for hero elements
+  - Create CTA buttons with hover animations
+  - Ensure mobile responsiveness without horizontal scroll
+  - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
+
+- [ ] 5.1 Write property test for responsive layout
+  - **Property 4: Responsive layout without overflow**
+  - **Validates: Requirements 2.4, 3.8, 4.7**
+
+- [ ] 6. Skills section with progress rings
+  - Create Skills component with two-part layout
+  - Implement six circular progress rings using SVG + Framer Motion
+  - Add viewport detection to trigger animations from 0% to target
+  - Implement glowing effect for completed rings
+  - Create skill pills grid with 20+ pills grouped by category
+  - Add moving gradient mesh background
+  - Implement staggered fade-up animations for skill groups
+  - Ensure mobile responsiveness
+  - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8_
+
+- [ ] 6.1 Write property test for progress ring animation
+  - **Property 1: Progress ring animation initialization**
+  - **Validates: Requirements 3.1**
+
+- [ ] 6.2 Write property test for progress ring glow effect
+  - **Property 2: Progress ring glow effect on completion**
+  - **Validates: Requirements 3.2**
+
+- [ ] 6.3 Write property test for skill pill hover
+  - **Property 3: Skill pill hover interactions**
+  - **Validates: Requirements 3.5**
+
+- [ ] 7. Projects section with filtering
+  - Create Projects component with filter tabs (All, AI, Web, Mobile, Open Source)
+  - Implement Supabase query to fetch featured projects
+  - Create ProjectCard component with screenshot, title, description, tech badges
+  - Add hover effects (card lift, image zoom, glowing border)
+  - Implement filtering logic with Framer Motion transitions
+  - Add conditional rendering for "Live Demo" and "GitHub" buttons
+  - Ensure responsive grid layout for mobile
+  - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7_
+
+- [ ] 7.1 Write property test for project card rendering
+  - **Property 5: Project card required fields**
+  - **Validates: Requirements 4.2**
+
+- [ ] 7.2 Write property test for project card hover effects
+  - **Property 6: Project card hover effects**
+  - **Validates: Requirements 4.3**
+
+- [ ] 7.3 Write property test for project filtering
+  - **Property 7: Project filtering correctness**
+  - **Validates: Requirements 4.4**
+
+- [ ] 7.4 Write property test for conditional button rendering
+  - **Property 8: Conditional button rendering**
+  - **Validates: Requirements 4.6**
+
+- [ ] 8. Tools Hub with GitHub integration
+  - Create ToolsHub component with TanStack Query
+  - Implement GitHub API fetch for top 12 repositories
+  - Create API route proxy (/api/github) for rate limiting
+  - Add skeleton loading states during data fetch
+  - Implement error boundary with retry option
+  - Create empty state component for no repositories
+  - Display repository cards with name, description, language, stars, forks
+  - Configure TanStack Query caching (5 minutes staleTime)
+  - Add "Load more" or infinite scroll functionality
+  - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.8_
+
+- [ ] 8.1 Write property test for repository card rendering
+  - **Property 9: Repository card required fields**
+  - **Validates: Requirements 5.5**
+
+- [ ] 8.2 Write property test for query error handling
+  - **Property 14: Query error handling**
+  - **Validates: Requirements 7.3**
+
+- [ ] 8.3 Write unit tests for GitHub API integration
+  - Test API route with mock GitHub responses
+  - Test error handling for rate limiting
+  - Test empty repository list handling
+  - _Requirements: 5.2, 5.3, 5.4_
+
+- [ ] 9. Markdown processing utilities
+  - Install and configure next-mdx-remote and rehype plugins
+  - Implement processMarkdown function with rehype-shiki for syntax highlighting
+  - Create generateTOC function to extract headings from markdown
+  - Add rehype-slug and rehype-autolink-headings for heading links
+  - Configure Shiki theme (github-dark)
+  - _Requirements: 6.4, 6.5, 6.10_
+
+- [ ] 9.1 Write property test for table of contents generation
+  - **Property 12: Table of contents generation**
+  - **Validates: Requirements 6.10**
+
+- [ ] 9.2 Write unit tests for markdown processing
+  - Test code block syntax highlighting
+  - Test heading extraction for TOC
+  - Test edge cases (empty content, no headings)
+  - _Requirements: 6.4, 6.5, 6.10_
+
+- [ ] 10. Blog list page
+  - Create /blog page.tsx as Server Component
+  - Implement getPosts function to fetch from Supabase
+  - Create PostCard component displaying title, cover image, excerpt, date, reading time
+  - Add pagination component (Client Component)
+  - Implement responsive card grid layout
+  - Add metadata for SEO
+  - _Requirements: 6.1, 6.2, 14.1_
+
+- [ ] 10.1 Write property test for page metadata
+  - **Property 23: Page metadata completeness**
+  - **Validates: Requirements 14.1**
+
+- [ ] 11. Blog post dynamic page
+  - Create /blog/[slug]/page.tsx with generateStaticParams
+  - Configure ISR with revalidate: 60
+  - Implement getPostBySlug function
+  - Create PostLayout component with hero cover image
+  - Display title, metadata, reading time
+  - Render markdown content using MDXContent component
+  - Create sticky TableOfContents component with scroll spy
+  - Add previous/next post navigation
+  - Generate Open Graph and Twitter card metadata
+  - _Requirements: 6.3, 6.6, 6.7, 6.8, 6.9, 14.2_
+
+- [ ] 11.1 Write property test for blog post rendering
+  - **Property 10: Blog post required elements**
+  - **Validates: Requirements 6.3**
+
+- [ ] 11.2 Write property test for code block highlighting
+  - **Property 11: Code block syntax highlighting**
+  - **Validates: Requirements 6.5**
+
+- [ ] 11.3 Write property test for blog metadata
+  - **Property 13: Blog post metadata generation**
+  - **Validates: Requirements 6.9, 14.2**
+
+- [ ] 11.4 Write property test for structured data
+  - **Property 24: Structured data inclusion**
+  - **Validates: Requirements 14.5**
+
+- [ ] 12. Contact form with validation
+  - Create ContactForm component with React Hook Form
+  - Define Zod validation schema (name, email, message)
+  - Implement form field error display
+  - Add loading state during submission
+  - Create /api/contact route for form submission
+  - Display success message and clear form on success
+  - Add error handling with user feedback
+  - _Requirements: 11.1, 11.2, 11.3, 11.4, 11.5_
+
+- [ ] 12.1 Write property test for form error display
+  - **Property 21: Form field error display**
+  - **Validates: Requirements 11.3**
+
+- [ ] 12.2 Write unit tests for contact form
+  - Test form validation with invalid inputs
+  - Test successful form submission
+  - Test error handling on API failure
+  - _Requirements: 11.3, 11.4, 11.5_
+
+- [ ] 13. Animation system implementation
+  - Configure Framer Motion variants for common animations (fadeInUp, staggerContainer)
+  - Implement scroll-triggered animations using Intersection Observer
+  - Add smooth page transitions
+  - Implement staggered animations for grouped elements
+  - Add prefers-reduced-motion support across all animations
+  - Ensure hover feedback on all interactive elements
+  - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5_
+
+- [ ] 13.1 Write property test for viewport-triggered animations
+  - **Property 16: Viewport-triggered animations**
+  - **Validates: Requirements 8.1**
+
+- [ ] 13.2 Write property test for interactive hover feedback
+  - **Property 17: Interactive element hover feedback**
+  - **Validates: Requirements 8.3**
+
+- [ ] 13.3 Write property test for reduced motion
+  - **Property 18: Reduced motion accessibility**
+  - **Validates: Requirements 8.5**
+
+- [ ] 14. Theme system finalization
+  - Verify theme toggle functionality
+  - Test theme persistence across page reloads
+  - Ensure all shadcn/ui components use CSS variables
+  - Test theme switching smoothness
+  - Verify system theme detection on first load
+  - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
+
+- [ ] 14.1 Write property test for theme persistence
+  - **Property 19: Theme persistence**
+  - **Validates: Requirements 9.3**
+
+- [ ] 15. Image optimization and assets
+  - Replace all <img> tags with Next.js Image component
+  - Configure next.config.js for Supabase image domains
+  - Add proper alt text for accessibility
+  - Implement blur placeholders for images
+  - Optimize image formats (AVIF, WebP)
+  - _Requirements: 10.4_
+
+- [ ] 15.1 Write property test for image optimization
+  - **Property 20: Image optimization**
+  - **Validates: Requirements 10.4**
+
+- [ ] 16. Icon library integration
+  - Audit all icon usage to ensure Lucide-react consistency
+  - Replace any non-Lucide icons
+  - Create icon mapping/registry if needed
+  - Ensure proper icon sizing and accessibility
+  - _Requirements: 12.1, 12.2_
+
+- [ ] 16.1 Write property test for icon consistency
+  - **Property 22: Icon library consistency**
+  - **Validates: Requirements 12.2**
+
+- [ ] 17. SEO and metadata optimization
+  - Create sitemap.ts for automatic sitemap generation
+  - Add robots.txt file
+  - Implement JSON-LD structured data for blog posts and projects
+  - Verify all pages have complete metadata
+  - Add Open Graph images for social sharing
+  - Test metadata with social media debuggers
+  - _Requirements: 14.1, 14.2, 14.3, 14.4, 14.5_
+
+- [ ] 18. Home page assembly
+  - Create main page.tsx assembling all sections
+  - Implement smooth scroll navigation
+  - Add scroll-to-top button
+  - Ensure proper section spacing and layout
+  - Test complete user journey flow
+  - _Requirements: All sections integrated_
+
+- [ ] 19. Performance optimization
+  - Configure next.config.js for optimal builds
+  - Implement code splitting where beneficial
+  - Add loading.tsx files for streaming
+  - Optimize bundle size (check with bundle analyzer)
+  - Implement font optimization with next/font
+  - Minimize cumulative layout shift (CLS)
+  - Add priority loading for above-the-fold content
+  - _Requirements: 10.1, 10.3, 10.5, 10.6, 10.7_
+
+- [ ] 19.1 Run Lighthouse audit for performance
+  - Verify 100/100 performance score
+  - _Requirements: 10.1_
+
+- [ ] 19.2 Run Lighthouse audit for accessibility
+  - Verify 100/100 accessibility score
+  - _Requirements: 10.2_
+
+- [ ] 20. Accessibility audit and fixes
+  - Test keyboard navigation throughout site
+  - Verify ARIA labels on interactive elements
+  - Check color contrast ratios
+  - Test with screen reader
+  - Ensure focus visible indicators
+  - Verify semantic HTML usage
+  - _Requirements: 10.2, Accessibility section_
+
+- [ ] 21. Responsive design testing
+  - Test on mobile devices (320px - 768px)
+  - Test on tablets (768px - 1024px)
+  - Test on desktop (1024px+)
+  - Verify no horizontal scroll at any breakpoint
+  - Test touch interactions on mobile
+  - _Requirements: 2.4, 3.8, 4.7, 10.3_
+
+- [ ] 22. Sample content creation
+  - Write 2-3 sample blog posts with code examples
+  - Create sample project entries with screenshots
+  - Add sample GitHub repositories data
+  - Populate all sections with realistic content
+  - _Requirements: 6.1, 4.1_
+
+- [ ] 23. GitHub Actions workflow (optional)
+  - Create workflow to sync GitHub repos to Supabase
+  - Configure workflow to run daily
+  - Add error handling and notifications
+  - Test workflow execution
+  - _Requirements: 5.7_
+
+- [ ] 24. Documentation and deployment preparation
+  - Create comprehensive README.md
+  - Document environment variables setup
+  - Add deployment instructions for Vercel
+  - Create .env.local.example with all required variables
+  - Document Supabase setup steps
+  - Add contributing guidelines
+  - _Requirements: 15.4_
+
+- [ ] 25. Final checkpoint - Ensure all tests pass
+  - Run all unit tests and verify passing
+  - Run all property-based tests and verify passing
+  - Fix any failing tests
+  - Verify build succeeds without errors
+  - Ask the user if questions arise
