@@ -28,20 +28,24 @@ export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
     // If already intersected and frozen, don't observe
     if (freezeOnceVisible && isIntersecting) return;
 
-    const observer = new IntersectionObserver(
+    let observerInstance: IntersectionObserver | null = null;
+    
+    observerInstance = new IntersectionObserver(
       ([entry]) => {
         const isElementIntersecting = entry.isIntersecting;
         setIsIntersecting(isElementIntersecting);
 
         // Unobserve if frozen once visible
-        if (freezeOnceVisible && isElementIntersecting) {
-          observer.unobserve(element);
+        if (freezeOnceVisible && isElementIntersecting && observerInstance) {
+          observerInstance.unobserve(element);
         }
       },
       { threshold, root, rootMargin }
     );
 
-    observer.observe(element);
+    observerInstance.observe(element);
+    
+    const observer = observerInstance;
 
     return () => {
       observer.disconnect();
