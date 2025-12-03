@@ -1,6 +1,9 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeShiki from '@shikijs/rehype';
 import Image from 'next/image';
 import Link from 'next/link';
 import { postsQuery } from '@/lib/queries';
@@ -180,7 +183,31 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               className="prose prose-lg dark:prose-invert max-w-none"
               data-testid="post-content"
             >
-              <MDXRemote source={typedPost.content} />
+              <MDXRemote
+                source={typedPost.content}
+                options={{
+                  mdxOptions: {
+                    rehypePlugins: [
+                      rehypeSlug,
+                      [
+                        rehypeAutolinkHeadings,
+                        {
+                          behavior: 'wrap',
+                          properties: {
+                            className: ['anchor-link'],
+                          },
+                        },
+                      ],
+                      [
+                        rehypeShiki as any,
+                        {
+                          theme: 'github-dark',
+                        },
+                      ],
+                    ],
+                  },
+                }}
+              />
             </div>
 
             {/* Post Navigation */}

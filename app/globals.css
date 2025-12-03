@@ -53,6 +53,10 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* Adjust based on header height */
+  }
   body {
     @apply bg-background text-foreground;
   }
