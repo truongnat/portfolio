@@ -31,36 +31,36 @@ export function Navigation() {
 
           <div className="flex items-center gap-6">
             <div className="hidden md:flex items-center gap-6">
-              <a
-                href="#about"
+              <Link
+                href="/#about"
                 className="text-sm font-medium text-foreground/60 hover:text-foreground transition-colors"
               >
                 About
-              </a>
-              <a
-                href="#skills"
+              </Link>
+              <Link
+                href="/#skills"
                 className="text-sm font-medium text-foreground/60 hover:text-foreground transition-colors"
               >
                 Skills
-              </a>
-              <a
-                href="#projects"
+              </Link>
+              <Link
+                href="/#projects"
                 className="text-sm font-medium text-foreground/60 hover:text-foreground transition-colors"
               >
                 Projects
-              </a>
-              <a
-                href="#blog"
+              </Link>
+              <Link
+                href="/blog"
                 className="text-sm font-medium text-foreground/60 hover:text-foreground transition-colors"
               >
                 Blog
-              </a>
-              <a
-                href="#contact"
+              </Link>
+              <Link
+                href="/#contact"
                 className="text-sm font-medium text-foreground/60 hover:text-foreground transition-colors"
               >
                 Contact
-              </a>
+              </Link>
             </div>
 
             <button

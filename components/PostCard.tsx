@@ -42,8 +42,8 @@ export function PostCard({ post }: PostCardProps) {
         <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
           <div className="flex items-center gap-1.5" data-testid="post-date">
             <Calendar className="h-4 w-4" />
-            <time dateTime={post.published_at}>
-              {formatDate(post.published_at, {
+            <time dateTime={post.published_at || post.created_at || ''}>
+              {formatDate(post.published_at || post.created_at || new Date(), {
                 year: 'numeric',
                 month: 'short',
                 day: 'numeric',

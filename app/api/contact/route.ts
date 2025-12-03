@@ -28,22 +28,50 @@ export async function POST(request: Request) {
 
     const { name, email, message } = validationResult.data;
 
-    // TODO: Implement email sending logic here
-    // Options:
-    // 1. Use a service like Resend, SendGrid, or AWS SES
-    // 2. Store in database for later review
-    // 3. Send to a webhook
+    const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
+    const telegramChatId = process.env.TELEGRAM_CHAT_ID;
 
-    // For now, just log the submission
-    console.log('Contact form submission:', {
-      name,
-      email,
-      message,
-      timestamp: new Date().toISOString(),
+    if (!telegramBotToken || !telegramChatId) {
+      console.error('Telegram credentials not configured');
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Server configuration error: Telegram credentials missing',
+        },
+        { status: 500 }
+      );
+    }
+
+    const text = `
+📩 *New Contact Form Submission*
+
+👤 *Name:* ${name}
+📧 *Email:* ${email}
+
+📝 *Message:*
+${message}
+    `;
+
+    const telegramUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+
+    const telegramResponse = await fetch(telegramUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: telegramChatId,
+        text: text,
+        parse_mode: 'Markdown',
+      }),
     });
 
-    // Simulate processing delay
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    const telegramResult = await telegramResponse.json();
+
+    if (!telegramResponse.ok) {
+      console.error('Telegram API error:', telegramResult);
+      throw new Error('Failed to send message to Telegram');
+    }
 
     return NextResponse.json({
       success: true,

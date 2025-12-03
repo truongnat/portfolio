@@ -1,6 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
@@ -23,7 +24,7 @@ export function ToolsHub({ username, initialRepos = [] }: ToolsHubProps) {
     threshold: 0.1,
     freezeOnceVisible: true,
   });
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
 
   // Fetch repositories using TanStack Query
   const {
@@ -159,7 +160,7 @@ interface RepositoryCardProps {
  * Requirements: 5.5
  */
 export function RepositoryCard({ repo, variants }: RepositoryCardProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
 
   return (
     <motion.a
@@ -172,9 +173,9 @@ export function RepositoryCard({ repo, variants }: RepositoryCardProps) {
         shouldReduceMotion
           ? {}
           : {
-              y: -4,
-              boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-            }
+            y: -4,
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+          }
       }
       data-testid={`repo-card-${repo.id}`}
       data-repo-name={repo.name}

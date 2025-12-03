@@ -37,7 +37,7 @@ export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  let post = null;
+  let post: Post | null = null;
 
   try {
     post = await postsQuery.getBySlug(slug);
@@ -60,7 +60,7 @@ export async function generateMetadata({
       title: typedPost.title,
       description: typedPost.content.substring(0, 160),
       type: 'article',
-      publishedTime: typedPost.published_at,
+      publishedTime: typedPost.published_at || undefined,
       images: typedPost.cover_image ? [typedPost.cover_image] : [],
     },
     twitter: {
@@ -74,7 +74,7 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  let post = null;
+  let post: Post | null = null;
 
   try {
     post = await postsQuery.getBySlug(slug);
@@ -143,8 +143,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <div className="flex flex-wrap items-center gap-4 text-muted-foreground">
                 <div className="flex items-center gap-2" data-testid="post-date">
                   <Calendar className="h-4 w-4" />
-                  <time dateTime={typedPost.published_at}>
-                    {formatDate(typedPost.published_at, {
+                  <time dateTime={typedPost.published_at || typedPost.created_at || ''}>
+                    {formatDate(typedPost.published_at || typedPost.created_at || new Date(), {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric',

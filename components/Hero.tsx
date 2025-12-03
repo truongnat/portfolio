@@ -1,6 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -45,7 +46,7 @@ export function Hero({
   const [typingText, setTypingText] = useState('');
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
 
   // Typing animation effect
   useEffect(() => {
@@ -113,10 +114,10 @@ export function Hero({
             shouldReduceMotion
               ? {}
               : {
-                  scale: [1, 1.2, 1],
-                  x: [0, 50, 0],
-                  y: [0, 30, 0],
-                }
+                scale: [1, 1.2, 1],
+                x: [0, 50, 0],
+                y: [0, 30, 0],
+              }
           }
           transition={{
             duration: 8,
@@ -130,10 +131,10 @@ export function Hero({
             shouldReduceMotion
               ? {}
               : {
-                  scale: [1, 1.3, 1],
-                  x: [0, -50, 0],
-                  y: [0, -30, 0],
-                }
+                scale: [1, 1.3, 1],
+                x: [0, -50, 0],
+                y: [0, -30, 0],
+              }
           }
           transition={{
             duration: 10,
@@ -190,10 +191,9 @@ export function Hero({
               className={`
                 group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg
                 font-medium transition-all duration-200 min-w-[160px]
-                ${
-                  button.variant === 'primary'
-                    ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl'
-                    : 'bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border'
+                ${button.variant === 'primary'
+                  ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl'
+                  : 'bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border'
                 }
               `}
               whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}

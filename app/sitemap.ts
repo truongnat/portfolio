@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { postsQuery } from '@/lib/supabase';
+import { postsQuery } from '@/lib/queries';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
@@ -17,11 +17,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
     // Dynamic routes (Blog posts)
-    const { data: posts } = await postsQuery.getAll();
+    const posts = await postsQuery.getAll();
 
     const postRoutes = (posts || []).map((post) => ({
         url: `${baseUrl}/blog/${post.slug}`,
-        lastModified: new Date(post.updated_at || post.created_at),
+        lastModified: new Date(post.updated_at || post.created_at || Date.now()),
         changeFrequency: 'weekly' as const,
         priority: 0.6,
     }));

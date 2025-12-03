@@ -1,6 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
 import { useState, useEffect } from 'react';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { ExternalLink, Github } from 'lucide-react';
@@ -22,7 +23,7 @@ export function Projects({ initialProjects = [] }: ProjectsProps) {
     threshold: 0.1,
     freezeOnceVisible: true,
   });
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
 
   // Fetch projects on mount if not provided
   useEffect(() => {
@@ -153,7 +154,7 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, variants }: ProjectCardProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
 
   return (
     <motion.div
@@ -213,7 +214,7 @@ export function ProjectCard({ project, variants }: ProjectCardProps) {
 
         {/* Tech stack badges */}
         <div className="flex flex-wrap gap-2 mb-4" data-testid="project-tech-stack">
-          {project.tech_stack.map((tech, index) => (
+          {project?.tech_stack?.map((tech, index) => (
             <span
               key={index}
               className="px-3 py-1 text-xs font-medium bg-secondary text-secondary-foreground rounded-full"

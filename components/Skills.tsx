@@ -1,6 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { useRef, useState, useEffect } from 'react';
 import {
@@ -89,28 +90,28 @@ const defaultSkillPills: SkillPill[] = [
   { id: 'typescript', name: 'TypeScript', icon: Code2, category: 'Frontend' },
   { id: 'tailwind', name: 'Tailwind CSS', icon: Palette, category: 'Frontend' },
   { id: 'vue', name: 'Vue.js', icon: Code2, category: 'Frontend' },
-  
+
   // Backend
   { id: 'nodejs', name: 'Node.js', icon: Server, category: 'Backend' },
   { id: 'python', name: 'Python', icon: Terminal, category: 'Backend' },
   { id: 'graphql', name: 'GraphQL', icon: Database, category: 'Backend' },
   { id: 'postgresql', name: 'PostgreSQL', icon: Database, category: 'Backend' },
   { id: 'mongodb', name: 'MongoDB', icon: Database, category: 'Backend' },
-  
+
   // AI/ML
   { id: 'tensorflow', name: 'TensorFlow', icon: Brain, category: 'AI/ML' },
   { id: 'pytorch', name: 'PyTorch', icon: Brain, category: 'AI/ML' },
   { id: 'openai', name: 'OpenAI', icon: Sparkles, category: 'AI/ML' },
   { id: 'langchain', name: 'LangChain', icon: MessageSquare, category: 'AI/ML' },
   { id: 'huggingface', name: 'Hugging Face', icon: Brain, category: 'AI/ML' },
-  
+
   // DevOps
   { id: 'docker', name: 'Docker', icon: Package, category: 'DevOps' },
   { id: 'kubernetes', name: 'Kubernetes', icon: Cloud, category: 'DevOps' },
   { id: 'aws', name: 'AWS', icon: Cloud, category: 'DevOps' },
   { id: 'cicd', name: 'CI/CD', icon: GitBranch, category: 'DevOps' },
   { id: 'terraform', name: 'Terraform', icon: Layers, category: 'DevOps' },
-  
+
   // Tools
   { id: 'git', name: 'Git', icon: GitBranch, category: 'Tools' },
   { id: 'vscode', name: 'VS Code', icon: Code2, category: 'Tools' },
@@ -123,11 +124,11 @@ export function Skills({
   expertiseRings = defaultExpertiseRings,
   skillPills = defaultSkillPills,
 }: SkillsProps) {
-  const { ref: sectionRef, isIntersecting: isInView } = useIntersectionObserver<HTMLElement>({ 
+  const { ref: sectionRef, isIntersecting: isInView } = useIntersectionObserver<HTMLElement>({
     threshold: 0.2,
-    freezeOnceVisible: true 
+    freezeOnceVisible: true
   });
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
   const [animatedPercentages, setAnimatedPercentages] = useState<Record<string, number>>({});
 
   // Animate progress rings when in view
@@ -153,7 +154,7 @@ export function Skills({
     const interval = setInterval(() => {
       currentStep++;
       const currentPercentage = Math.min(increment * currentStep, targetPercentage);
-      
+
       setAnimatedPercentages((prev) => ({ ...prev, [id]: currentPercentage }));
 
       if (currentStep >= steps) {
@@ -214,8 +215,8 @@ export function Skills({
             shouldReduceMotion
               ? {}
               : {
-                  backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-                }
+                backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
+              }
           }
           transition={{
             duration: 20,
@@ -334,7 +335,7 @@ function ProgressRing({
           strokeWidth={strokeWidth}
           opacity={0.2}
         />
-        
+
         {/* Progress circle */}
         <circle
           cx={size / 2}
@@ -346,15 +347,14 @@ function ProgressRing({
           strokeDasharray={circumference}
           strokeDashoffset={offset}
           strokeLinecap="round"
-          className={`transition-all duration-300 ${
-            isComplete ? 'drop-shadow-[0_0_8px_currentColor]' : ''
-          }`}
+          className={`transition-all duration-300 ${isComplete ? 'drop-shadow-[0_0_8px_currentColor]' : ''
+            }`}
           style={{ color }}
           data-testid="progress-ring-circle"
           data-percentage={percentage}
         />
       </svg>
-      
+
       {/* Percentage text */}
       <div className="absolute inset-0 flex items-center justify-center">
         <span className="text-2xl font-bold" data-testid="progress-ring-percentage">
@@ -371,7 +371,7 @@ interface SkillPillComponentProps {
 
 function SkillPillComponent({ skill }: SkillPillComponentProps) {
   const Icon = skill.icon;
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
 
   return (
     <motion.div
@@ -380,9 +380,9 @@ function SkillPillComponent({ skill }: SkillPillComponentProps) {
         shouldReduceMotion
           ? {}
           : {
-              scale: 1.05,
-              backgroundImage: 'linear-gradient(135deg, hsl(var(--accent) / 0.1) 0%, hsl(var(--primary) / 0.1) 100%)',
-            }
+            scale: 1.05,
+            backgroundImage: 'linear-gradient(135deg, hsl(var(--accent) / 0.1) 0%, hsl(var(--primary) / 0.1) 100%)',
+          }
       }
       data-testid={`skill-pill-${skill.id}`}
       data-skill-name={skill.name}
