@@ -56,12 +56,31 @@ export type Database = {
         }
         Relationships: []
       }
+      page_views: {
+        Row: {
+          last_viewed: string | null
+          path: string
+          view_count: number | null
+        }
+        Insert: {
+          last_viewed?: string | null
+          path: string
+          view_count?: number | null
+        }
+        Update: {
+          last_viewed?: string | null
+          path?: string
+          view_count?: number | null
+        }
+        Relationships: []
+      }
       posts: {
         Row: {
           content: string
           cover_image: string | null
           created_at: string | null
           id: string
+          published: boolean | null
           published_at: string | null
           reading_time: number | null
           slug: string
@@ -74,6 +93,7 @@ export type Database = {
           cover_image?: string | null
           created_at?: string | null
           id?: string
+          published?: boolean | null
           published_at?: string | null
           reading_time?: number | null
           slug: string
@@ -86,6 +106,7 @@ export type Database = {
           cover_image?: string | null
           created_at?: string | null
           id?: string
+          published?: boolean | null
           published_at?: string | null
           reading_time?: number | null
           slug?: string
@@ -145,7 +166,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_page_view: { Args: { page_path: string }; Returns: undefined }
     }
     Enums: {
       [_ in never]: never

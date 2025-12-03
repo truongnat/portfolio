@@ -7,7 +7,7 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { ExternalLink, Github } from 'lucide-react';
 import Image from 'next/image';
 import type { Project, ProjectCategory } from '@/types';
-import { getFeaturedProjects } from '@/app/actions';
+import { getFeaturedProjects } from '@/app/(landing)/actions';
 
 interface ProjectsProps {
   initialProjects?: Project[];
