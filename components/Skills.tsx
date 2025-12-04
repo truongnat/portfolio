@@ -22,107 +22,18 @@ import {
   MessageSquare,
   type LucideIcon,
 } from 'lucide-react';
-
-export interface ExpertiseRing {
-  id: string;
-  label: string;
-  percentage: number;
-  color: string;
-}
-
-export interface SkillPill {
-  id: string;
-  name: string;
-  icon: LucideIcon;
-  category: SkillCategory;
-}
-
-export type SkillCategory = 'Frontend' | 'Backend' | 'AI/ML' | 'DevOps' | 'Tools';
+import { skillsConfig, type ExpertiseRing, type SkillPill, type SkillCategory } from '@/lib/config';
 
 interface SkillsProps {
   expertiseRings?: ExpertiseRing[];
   skillPills?: SkillPill[];
 }
 
-const defaultExpertiseRings: ExpertiseRing[] = [
-  {
-    id: 'ai-ml',
-    label: 'AI & Machine Learning',
-    percentage: 94,
-    color: 'hsl(var(--primary))',
-  },
-  {
-    id: 'fullstack-ts',
-    label: 'Full-Stack TypeScript',
-    percentage: 92,
-    color: 'hsl(var(--accent))',
-  },
-  {
-    id: 'system-design',
-    label: 'System Design & Architecture',
-    percentage: 90,
-    color: 'hsl(var(--primary))',
-  },
-  {
-    id: 'python-ds',
-    label: 'Python & Data Science',
-    percentage: 96,
-    color: 'hsl(var(--accent))',
-  },
-  {
-    id: 'devops-cloud',
-    label: 'DevOps & Cloud',
-    percentage: 85,
-    color: 'hsl(var(--primary))',
-  },
-  {
-    id: 'prompt-eng',
-    label: 'Prompt Engineering & LLMs',
-    percentage: 98,
-    color: 'hsl(var(--accent))',
-  },
-];
 
-const defaultSkillPills: SkillPill[] = [
-  // Frontend
-  { id: 'react', name: 'React', icon: Code2, category: 'Frontend' },
-  { id: 'nextjs', name: 'Next.js', icon: Rocket, category: 'Frontend' },
-  { id: 'typescript', name: 'TypeScript', icon: Code2, category: 'Frontend' },
-  { id: 'tailwind', name: 'Tailwind CSS', icon: Palette, category: 'Frontend' },
-  { id: 'vue', name: 'Vue.js', icon: Code2, category: 'Frontend' },
-
-  // Backend
-  { id: 'nodejs', name: 'Node.js', icon: Server, category: 'Backend' },
-  { id: 'python', name: 'Python', icon: Terminal, category: 'Backend' },
-  { id: 'graphql', name: 'GraphQL', icon: Database, category: 'Backend' },
-  { id: 'postgresql', name: 'PostgreSQL', icon: Database, category: 'Backend' },
-  { id: 'mongodb', name: 'MongoDB', icon: Database, category: 'Backend' },
-
-  // AI/ML
-  { id: 'tensorflow', name: 'TensorFlow', icon: Brain, category: 'AI/ML' },
-  { id: 'pytorch', name: 'PyTorch', icon: Brain, category: 'AI/ML' },
-  { id: 'openai', name: 'OpenAI', icon: Sparkles, category: 'AI/ML' },
-  { id: 'langchain', name: 'LangChain', icon: MessageSquare, category: 'AI/ML' },
-  { id: 'huggingface', name: 'Hugging Face', icon: Brain, category: 'AI/ML' },
-
-  // DevOps
-  { id: 'docker', name: 'Docker', icon: Package, category: 'DevOps' },
-  { id: 'kubernetes', name: 'Kubernetes', icon: Cloud, category: 'DevOps' },
-  { id: 'aws', name: 'AWS', icon: Cloud, category: 'DevOps' },
-  { id: 'cicd', name: 'CI/CD', icon: GitBranch, category: 'DevOps' },
-  { id: 'terraform', name: 'Terraform', icon: Layers, category: 'DevOps' },
-
-  // Tools
-  { id: 'git', name: 'Git', icon: GitBranch, category: 'Tools' },
-  { id: 'vscode', name: 'VS Code', icon: Code2, category: 'Tools' },
-  { id: 'figma', name: 'Figma', icon: Palette, category: 'Tools' },
-  { id: 'analytics', name: 'Analytics', icon: BarChart, category: 'Tools' },
-  { id: 'seo', name: 'SEO', icon: Search, category: 'Tools' },
-];
 
 export function Skills({
-  expertiseRings = defaultExpertiseRings,
-  skillPills = defaultSkillPills,
+  expertiseRings = skillsConfig.expertiseRings,
+  skillPills = skillsConfig.skillPills,
 }: SkillsProps) {
   const { ref: sectionRef, isIntersecting: isInView } = useIntersectionObserver<HTMLElement>({
     threshold: 0.2,

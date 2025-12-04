@@ -4,13 +4,15 @@ import { Projects } from '@/components/Projects';
 import { ToolsHub } from '@/components/ToolsHub';
 import { ContactForm } from '@/components/ContactForm';
 
+import { personalInfo } from '@/lib/config';
+
 export default function Home() {
   return (
     <main className="min-h-screen">
       <Hero />
       <Skills />
       <Projects />
-      <ToolsHub username={process.env.GITHUB_USERNAME || 'yourusername'} />
+      <ToolsHub username={personalInfo.githubUsername} />
 
       {/* Contact Section */}
       <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">

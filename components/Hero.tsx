@@ -5,6 +5,8 @@ import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+import { personalInfo } from '@/lib/config';
+
 interface CTAButton {
   label: string;
   href: string;
@@ -20,14 +22,9 @@ interface HeroProps {
 }
 
 export function Hero({
-  title = 'Full-Stack Developer',
-  subtitle = 'Building exceptional digital experiences',
-  typingPhrases = [
-    'AI & Machine Learning',
-    'Full-Stack TypeScript',
-    'System Design',
-    'Cloud Architecture',
-  ],
+  title = personalInfo.role,
+  subtitle = personalInfo.bio,
+  typingPhrases = personalInfo.typingPhrases,
   ctaButtons = [
     {
       label: 'View Projects',
@@ -214,31 +211,18 @@ export function Hero({
           className="mt-12 flex gap-6 justify-center items-center"
           variants={itemVariants}
         >
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="GitHub"
-          >
-            <Github className="h-6 w-6" />
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="LinkedIn"
-          >
-            <Linkedin className="h-6 w-6" />
-          </a>
-          <a
-            href="mailto:contact@example.com"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Email"
-          >
-            <Mail className="h-6 w-6" />
-          </a>
+          {personalInfo.socials.map((social) => (
+            <a
+              key={social.platform}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label={social.platform}
+            >
+              <social.icon className="h-6 w-6" />
+            </a>
+          ))}
         </motion.div>
       </motion.div>
 

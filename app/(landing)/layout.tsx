@@ -7,39 +7,29 @@ import { AnalyticsTracker } from '@/components/AnalyticsTracker';
 
 
 
+import { seo } from '@/lib/config';
+
 export const metadata: Metadata = {
   title: {
-    default: 'Portfolio | Full-Stack Developer',
-    template: '%s | Portfolio',
+    default: seo.title,
+    template: `%s | ${seo.title}`,
   },
-  description:
-    'Modern developer portfolio showcasing full-stack development, AI/ML projects, and technical expertise. Built with Next.js 16, TypeScript, and Tailwind CSS.',
-  keywords: [
-    'portfolio',
-    'developer',
-    'full-stack',
-    'TypeScript',
-    'React',
-    'Next.js',
-    'AI',
-    'Machine Learning',
-  ],
-  authors: [{ name: 'Portfolio Developer' }],
-  creator: 'Portfolio Developer',
+  description: seo.description,
+  keywords: seo.keywords,
+  authors: [{ name: 'Dao Quang Truong' }],
+  creator: 'Dao Quang Truong',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://portfolio.dev',
-    title: 'Portfolio | Full-Stack Developer',
-    description:
-      'Modern developer portfolio showcasing full-stack development, AI/ML projects, and technical expertise.',
+    url: seo.url,
+    title: seo.title,
+    description: seo.description,
     siteName: 'Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Portfolio | Full-Stack Developer',
-    description:
-      'Modern developer portfolio showcasing full-stack development, AI/ML projects, and technical expertise.',
+    title: seo.title,
+    description: seo.description,
   },
   robots: {
     index: true,
