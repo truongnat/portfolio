@@ -9,6 +9,8 @@ import Image from 'next/image';
 import type { Project, ProjectCategory } from '@/types';
 import { getFeaturedProjects } from '@/app/(landing)/actions';
 
+import { projectsConfig } from '@/lib/config';
+
 interface ProjectsProps {
   initialProjects?: Project[];
 }
@@ -28,17 +30,54 @@ export function Projects({ initialProjects = [] }: ProjectsProps) {
   // Fetch projects on mount if not provided
   useEffect(() => {
     if (initialProjects.length === 0) {
-      fetchProjects();
+      loadProjects();
     }
   }, []);
 
-  const fetchProjects = async () => {
+  const loadProjects = async () => {
     setIsLoading(true);
     try {
-      const data = await getFeaturedProjects();
-      setProjects(data || []);
+      // Try to fetch from DB first
+      const dbProjects = await getFeaturedProjects();
+
+      if (dbProjects && dbProjects.length > 0) {
+        setProjects(dbProjects);
+      } else {
+        // Fallback to config projects
+        const configProjects: Project[] = projectsConfig.map(p => ({
+          id: p.id,
+          title: p.title,
+          description: p.description, // You might want to append achievements here if needed
+          tech_stack: p.techStack,
+          category: p.techStack.some(t => t.includes('React Native') || t.includes('Mobile')) ? 'Mobile' : 'Web', // Simple heuristic
+          screenshot: null,
+          live_url: p.link || null,
+          github_url: null,
+          featured: true,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          display_order: 0,
+        }));
+        setProjects(configProjects);
+      }
     } catch (error) {
       console.error('Failed to fetch projects:', error);
+      // Fallback to config projects on error
+      const configProjects: Project[] = projectsConfig.map(p => ({
+        id: p.id,
+        title: p.title,
+        description: p.description,
+        tech_stack: p.techStack,
+        category: p.techStack.some(t => t.includes('React Native') || t.includes('Mobile')) ? 'Mobile' : 'Web',
+        screenshot: null,
+        live_url: p.link || null,
+        github_url: null,
+        featured: true,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        display_order: 0,
+      }));
+      setProjects(configProjects);
     } finally {
       setIsLoading(false);
     }

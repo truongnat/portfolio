@@ -44,6 +44,12 @@ export function Navigation() {
                 Skills
               </Link>
               <Link
+                href="/#experience"
+                className="text-sm font-medium text-foreground/60 hover:text-foreground transition-colors"
+              >
+                Experience
+              </Link>
+              <Link
                 href="/#projects"
                 className="text-sm font-medium text-foreground/60 hover:text-foreground transition-colors"
               >

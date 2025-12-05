@@ -1,5 +1,6 @@
 import { Hero } from '@/components/Hero';
 import { Skills } from '@/components/Skills';
+import { Experience } from '@/components/Experience';
 import { Projects } from '@/components/Projects';
 import { ToolsHub } from '@/components/ToolsHub';
 import { ContactForm } from '@/components/ContactForm';
@@ -11,6 +12,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Hero />
       <Skills />
+      <Experience />
       <Projects />
       <ToolsHub username={personalInfo.githubUsername} />
 
