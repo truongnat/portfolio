@@ -3,6 +3,12 @@ import { postsQuery } from '@/lib/queries';
 import { PostCard } from '@/components/PostCard';
 import type { Post } from '@/types';
 
+// Enable ISR with 60 second revalidation
+export const revalidate = 60;
+
+// Enable static generation
+export const dynamic = 'force-static';
+
 export const metadata: Metadata = {
   title: 'Blog',
   description:
@@ -17,13 +23,13 @@ export const metadata: Metadata = {
 
 export default async function BlogPage() {
   let posts: Post[] = [];
-  let error = null;
+  let error: Error | null = null;
 
   try {
     posts = await postsQuery.getAll();
   } catch (e) {
     console.error('Failed to fetch posts:', e);
-    error = e;
+    error = e as Error;
   }
 
   if (error) {

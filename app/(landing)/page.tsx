@@ -7,6 +7,12 @@ import { ContactForm } from '@/components/ContactForm';
 
 import { personalInfo } from '@/lib/config';
 
+// Enable ISR with 1 hour revalidation for the landing page
+export const revalidate = 3600;
+
+// Enable static generation
+export const dynamic = 'force-static';
+
 export default function Home() {
   return (
     <main className="min-h-screen">

@@ -1,11 +1,10 @@
-import { cache } from 'react';
 import { unstable_cache } from 'next/cache';
 import { supabase } from '@/lib/supabase';
 import type { Post, Project, GitHubProject } from '@/types';
 
-// Posts queries
+// Posts queries with Next.js caching
 export const postsQuery = {
-    getAll: cache(unstable_cache(
+    getAll: unstable_cache(
         async () => {
             const { data, error } = await supabase
                 .from('posts')
@@ -18,10 +17,10 @@ export const postsQuery = {
         },
         ['posts-get-all'],
         { tags: ['posts'], revalidate: 60 }
-    )),
+    ),
 
-    getBySlug: cache(unstable_cache(
-        async (slug: string) => {
+    getBySlug: (slug: string) => unstable_cache(
+        async () => {
             const { data, error } = await supabase
                 .from('posts')
                 .select('*')
@@ -32,12 +31,12 @@ export const postsQuery = {
             if (error) throw error;
             return data as Post;
         },
-        ['posts-get-by-slug'],
-        { tags: ['posts'], revalidate: 60 }
-    )),
+        ['posts-get-by-slug', slug],
+        { tags: ['posts', `post-${slug}`], revalidate: 60 }
+    )(),
 
-    getPaginated: cache(unstable_cache(
-        async (page: number = 1, pageSize: number = 10) => {
+    getPaginated: (page: number = 1, pageSize: number = 10) => unstable_cache(
+        async () => {
             const from = (page - 1) * pageSize;
             const to = from + pageSize - 1;
 
@@ -51,12 +50,12 @@ export const postsQuery = {
             if (error) throw error;
             return { data: data as Post[], count: count || 0 };
         },
-        ['posts-get-paginated'],
+        ['posts-get-paginated', `page-${page}`, `size-${pageSize}`],
         { tags: ['posts'], revalidate: 60 }
-    )),
+    )(),
 
-    getByTag: cache(unstable_cache(
-        async (tag: string) => {
+    getByTag: (tag: string) => unstable_cache(
+        async () => {
             const { data, error } = await supabase
                 .from('posts')
                 .select('*')
@@ -67,14 +66,14 @@ export const postsQuery = {
             if (error) throw error;
             return data as Post[];
         },
-        ['posts-get-by-tag'],
-        { tags: ['posts'], revalidate: 60 }
-    )),
+        ['posts-get-by-tag', tag],
+        { tags: ['posts', `tag-${tag}`], revalidate: 60 }
+    )(),
 };
 
-// Projects queries
+// Projects queries with Next.js caching
 export const projectsQuery = {
-    getAll: cache(unstable_cache(
+    getAll: unstable_cache(
         async () => {
             const { data, error } = await supabase
                 .from('projects')
@@ -87,9 +86,9 @@ export const projectsQuery = {
         },
         ['projects-get-all'],
         { tags: ['projects'], revalidate: 3600 }
-    )),
+    ),
 
-    getFeatured: cache(unstable_cache(
+    getFeatured: unstable_cache(
         async () => {
             const { data, error } = await supabase
                 .from('projects')
@@ -102,12 +101,19 @@ export const projectsQuery = {
         },
         ['projects-get-featured'],
         { tags: ['projects'], revalidate: 3600 }
-    )),
+    ),
 
-    getByCategory: cache(unstable_cache(
-        async (category: string) => {
+    getByCategory: (category: string) => unstable_cache(
+        async () => {
             if (category === 'All') {
-                return projectsQuery.getAll();
+                const { data, error } = await supabase
+                    .from('projects')
+                    .select('*')
+                    .order('display_order', { ascending: true })
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+                return data as Project[];
             }
             const { data, error } = await supabase
                 .from('projects')
@@ -118,14 +124,14 @@ export const projectsQuery = {
             if (error) throw error;
             return data as Project[];
         },
-        ['projects-get-by-category'],
-        { tags: ['projects'], revalidate: 3600 }
-    )),
+        ['projects-get-by-category', category],
+        { tags: ['projects', `category-${category}`], revalidate: 3600 }
+    )(),
 };
 
-// GitHub projects queries
+// GitHub projects queries with Next.js caching
 export const githubProjectsQuery = {
-    getAll: cache(unstable_cache(
+    getAll: unstable_cache(
         async () => {
             const { data, error } = await supabase
                 .from('github_projects')
@@ -137,10 +143,10 @@ export const githubProjectsQuery = {
         },
         ['github-projects-get-all'],
         { tags: ['github-projects'], revalidate: 3600 }
-    )),
+    ),
 
-    getTop: cache(unstable_cache(
-        async (limit: number = 12) => {
+    getTop: (limit: number = 12) => unstable_cache(
+        async () => {
             const { data, error } = await supabase
                 .from('github_projects')
                 .select('*')
@@ -150,9 +156,9 @@ export const githubProjectsQuery = {
             if (error) throw error;
             return data as GitHubProject[];
         },
-        ['github-projects-get-top'],
+        ['github-projects-get-top', `limit-${limit}`],
         { tags: ['github-projects'], revalidate: 3600 }
-    )),
+    )(),
 
     upsert: async (project: any) => {
         const { data, error } = await supabase

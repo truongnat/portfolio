@@ -16,6 +16,12 @@ import type { Post } from '@/types';
 // Enable ISR with 60 second revalidation
 export const revalidate = 60;
 
+// Generate static params at build time
+export const dynamicParams = true;
+
+// Enable static generation
+export const dynamic = 'force-static';
+
 interface BlogPostPageProps {
   params: Promise<{
     slug: string;

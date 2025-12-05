@@ -62,6 +62,16 @@ export default function AdminBlogPage() {
                 description: 'Error deleting post: ' + error.message,
             });
         } else {
+            // Revalidate cache after deleting a post
+            await fetch('/api/revalidate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    tags: ['posts', `post-${slug}`],
+                    paths: ['/blog', `/blog/${slug}`]
+                }),
+            });
+
             toast({
                 title: "Success",
                 description: "Post deleted successfully.",

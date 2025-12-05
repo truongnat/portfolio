@@ -99,6 +99,14 @@ export function PostEditor({ post, isNew = false }: PostEditorProps) {
             if (isNew) {
                 const { error } = await supabase.from('posts').insert([postData]);
                 if (error) throw error;
+
+                // Revalidate cache after creating a post
+                await fetch('/api/revalidate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ tags: ['posts'], paths: ['/blog'] }),
+                });
+
                 toast({
                     title: "Success",
                     description: "Post created successfully.",
@@ -113,6 +121,17 @@ export function PostEditor({ post, isNew = false }: PostEditorProps) {
                     .update(postData)
                     .eq('id', post.id);
                 if (error) throw error;
+
+                // Revalidate cache after updating a post
+                await fetch('/api/revalidate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        tags: ['posts', `post-${values.slug}`],
+                        paths: ['/blog', `/blog/${values.slug}`]
+                    }),
+                });
+
                 toast({
                     title: "Success",
                     description: "Post updated successfully.",
