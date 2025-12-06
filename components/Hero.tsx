@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
-import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, Mail, Download } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { personalInfo } from '@/lib/config';
@@ -31,6 +31,12 @@ export function Hero({
       href: '#projects',
       variant: 'primary' as const,
       icon: <ArrowRight className="h-4 w-4" />,
+    },
+    {
+      label: 'Download CV',
+      href: personalInfo.resumeUrl,
+      variant: 'secondary' as const,
+      icon: <Download className="h-4 w-4" />,
     },
     {
       label: 'Contact Me',

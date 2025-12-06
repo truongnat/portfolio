@@ -3,92 +3,24 @@
 import { motion } from 'framer-motion';
 import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { useRef, useState, useEffect } from 'react';
-import {
-  Code2,
-  Brain,
-  Layers,
-  Database,
-  Cloud,
-  Sparkles,
-  Rocket,
-  Terminal,
-  GitBranch,
-  Package,
-  Server,
-  Palette,
-  Search,
-  BarChart,
-  MessageSquare,
-  type LucideIcon,
-} from 'lucide-react';
-import { skillsConfig, type ExpertiseRing, type SkillPill, type SkillCategory } from '@/lib/config';
+import { skillsConfig } from '@/lib/config';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import React from 'react';
 
-interface SkillsProps {
-  expertiseRings?: ExpertiseRing[];
-  skillPills?: SkillPill[];
-}
-
-
-
-export function Skills({
-  expertiseRings = skillsConfig.expertiseRings,
-  skillPills = skillsConfig.skillPills,
-}: SkillsProps) {
+export function Skills() {
   const { ref: sectionRef, isIntersecting: isInView } = useIntersectionObserver<HTMLElement>({
-    threshold: 0.2,
+    threshold: 0.1,
     freezeOnceVisible: true
   });
   const shouldReduceMotion = useSafeReducedMotion();
-  const [animatedPercentages, setAnimatedPercentages] = useState<Record<string, number>>({});
-
-  // Animate progress rings when in view
-  useEffect(() => {
-    if (isInView && Object.keys(animatedPercentages).length === 0) {
-      expertiseRings.forEach((ring) => {
-        animateRing(ring.id, ring.percentage);
-      });
-    }
-  }, [isInView, expertiseRings, animatedPercentages]);
-
-  const animateRing = (id: string, targetPercentage: number) => {
-    if (shouldReduceMotion) {
-      setAnimatedPercentages((prev) => ({ ...prev, [id]: targetPercentage }));
-      return;
-    }
-
-    const duration = 1500; // 1.5 seconds
-    const steps = 60;
-    const increment = targetPercentage / steps;
-    let currentStep = 0;
-
-    const interval = setInterval(() => {
-      currentStep++;
-      const currentPercentage = Math.min(increment * currentStep, targetPercentage);
-
-      setAnimatedPercentages((prev) => ({ ...prev, [id]: currentPercentage }));
-
-      if (currentStep >= steps) {
-        clearInterval(interval);
-      }
-    }, duration / steps);
-  };
-
-  // Group skills by category
-  const skillsByCategory = skillPills.reduce((acc, skill) => {
-    if (!acc[skill.category]) {
-      acc[skill.category] = [];
-    }
-    acc[skill.category].push(skill);
-    return acc;
-  }, {} as Record<SkillCategory, SkillPill[]>);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: shouldReduceMotion ? 0 : 0.1,
+        staggerChildren: shouldReduceMotion ? 0 : 0.2,
       },
     },
   };
@@ -105,203 +37,99 @@ export function Skills({
     },
   };
 
+  const parseSkill = (skillStr: string) => {
+    const match = skillStr.match(/^(.*?)\s*(\(.*\))$/);
+    if (match) {
+      return {
+        tech: match[1],
+        desc: match[2]
+      };
+    }
+    return { tech: skillStr, desc: null };
+  };
+
   return (
     <section
       id="skills"
       ref={sectionRef}
-      className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-background/50"
     >
-      {/* Moving gradient mesh background */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <motion.div
-          className="absolute top-0 left-0 w-full h-full opacity-30"
-          style={{
-            background: `
-              radial-gradient(circle at 20% 50%, hsl(var(--primary) / 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, hsl(var(--accent) / 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 40% 20%, hsl(var(--primary) / 0.1) 0%, transparent 50%)
-            `,
-          }}
-          animate={
-            shouldReduceMotion
-              ? {}
-              : {
-                backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-              }
-          }
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-        />
-      </div>
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background" />
 
       <div className="max-w-7xl mx-auto">
-        {/* Section header */}
         <motion.div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            Skills & Expertise
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+            Technical Expertise
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A comprehensive overview of my technical capabilities and areas of expertise
+          <p className="text-lg text-muted-foreground/80 font-medium max-w-2xl mx-auto">
+            Senior Fullstack Engineer & Team Leader
           </p>
         </motion.div>
 
-        {/* Expertise Rings */}
-        <div className="mb-20">
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-6"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-          >
-            {expertiseRings.map((ring) => (
-              <motion.div
-                key={ring.id}
-                variants={itemVariants}
-                className="flex flex-col items-center"
-                data-testid={`expertise-ring-${ring.id}`}
-              >
-                <ProgressRing
-                  percentage={animatedPercentages[ring.id] || 0}
-                  targetPercentage={ring.percentage}
-                  color={ring.color}
-                  size={140}
-                  strokeWidth={8}
-                />
-                <p className="mt-4 text-sm text-center font-medium max-w-[140px]">
-                  {ring.label}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Skill Pills */}
         <motion.div
+          className="grid grid-cols-1 lg:grid-cols-3 gap-6"
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          className="space-y-8"
+          animate={isInView ? "visible" : "hidden"}
         >
-          {Object.entries(skillsByCategory).map(([category, skills]) => (
-            <motion.div key={category} variants={itemVariants}>
-              <h3 className="text-xl font-semibold mb-4 text-muted-foreground">
-                {category}
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {skills.map((skill) => (
-                  <SkillPillComponent key={skill.id} skill={skill} />
-                ))}
-              </div>
-            </motion.div>
-          ))}
+          {skillsConfig.cards.map((card) => {
+            const Icon = card.icon;
+            return (
+              <motion.div key={card.id} variants={itemVariants} className="h-full">
+                <Card className="h-full border-primary/10 bg-card/50 backdrop-blur-md hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
+                  <CardHeader className="pb-4 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                        <Icon size={24} />
+                      </div>
+                      {card.level && (
+                        <Badge variant="outline" className="text-xs font-semibold px-3 py-1 bg-background/50 backdrop-blur border-primary/20 text-primary">
+                          {card.level}
+                        </Badge>
+                      )}
+                    </div>
+                    <CardTitle className="text-xl font-bold leading-tight">{card.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    {card.subSections.map((section, idx) => (
+                      <div key={idx} className="space-y-3">
+                        {section.label && (
+                          <h4 className="text-xs uppercase tracking-wider font-bold text-muted-foreground/70 flex items-center gap-2">
+                            {section.label}
+                          </h4>
+                        )}
+                        <div className="flex flex-wrap items-center gap-2">
+                          {section.skills.map((skill, sIdx) => {
+                            const { tech, desc } = parseSkill(skill);
+                            return (
+                              <div key={sIdx} className="inline-flex items-center gap-1.5 bg-secondary/50 rounded-full px-3 py-1 border border-secondary transition-colors hover:bg-secondary">
+                                <span className="font-semibold text-sm text-secondary-foreground">{tech}</span>
+                                {desc && (
+                                  <span className="text-xs text-muted-foreground font-normal">{desc}</span>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                        {section.highlight && (
+                          <div className="text-xs text-muted-foreground border-l-2 border-primary/30 pl-3 py-1 italic bg-primary/5 rounded-r-md">
+                            {section.highlight}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>
-  );
-}
-
-interface ProgressRingProps {
-  percentage: number;
-  targetPercentage: number;
-  color: string;
-  size?: number;
-  strokeWidth?: number;
-}
-
-function ProgressRing({
-  percentage,
-  targetPercentage,
-  color,
-  size = 120,
-  strokeWidth = 8,
-}: ProgressRingProps) {
-  const radius = (size - strokeWidth) / 2;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (percentage / 100) * circumference;
-  const isComplete = Math.abs(percentage - targetPercentage) < 0.5;
-
-  return (
-    <div className="relative" style={{ width: size, height: size }}>
-      <svg
-        width={size}
-        height={size}
-        className="transform -rotate-90"
-        data-testid="progress-ring-svg"
-      >
-        {/* Background circle */}
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          fill="none"
-          stroke="hsl(var(--muted))"
-          strokeWidth={strokeWidth}
-          opacity={0.2}
-        />
-
-        {/* Progress circle */}
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          fill="none"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          strokeLinecap="round"
-          className={`transition-all duration-300 ${isComplete ? 'drop-shadow-[0_0_8px_currentColor]' : ''
-            }`}
-          style={{ color }}
-          data-testid="progress-ring-circle"
-          data-percentage={percentage}
-        />
-      </svg>
-
-      {/* Percentage text */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-2xl font-bold" data-testid="progress-ring-percentage">
-          {Math.round(percentage)}%
-        </span>
-      </div>
-    </div>
-  );
-}
-
-interface SkillPillComponentProps {
-  skill: SkillPill;
-}
-
-function SkillPillComponent({ skill }: SkillPillComponentProps) {
-  const Icon = skill.icon;
-  const shouldReduceMotion = useSafeReducedMotion();
-
-  return (
-    <motion.div
-      className="group relative px-4 py-2 rounded-full border border-border bg-card hover:bg-accent/10 transition-all duration-200 cursor-default"
-      whileHover={
-        shouldReduceMotion
-          ? {}
-          : {
-            scale: 1.05,
-            backgroundImage: 'linear-gradient(135deg, hsl(var(--accent) / 0.1) 0%, hsl(var(--primary) / 0.1) 100%)',
-          }
-      }
-      data-testid={`skill-pill-${skill.id}`}
-      data-skill-name={skill.name}
-    >
-      <div className="flex items-center gap-2">
-        <Icon className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-        <span className="text-sm font-medium">{skill.name}</span>
-      </div>
-    </motion.div>
   );
 }

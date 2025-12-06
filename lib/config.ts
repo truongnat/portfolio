@@ -23,6 +23,8 @@ import {
   Map,
   Video,
   FileText,
+  Users,
+  Cpu,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -60,7 +62,8 @@ export const personalInfo = {
     'React & React Native',
     'Cross-platform Solutions',
     'System Optimization',
-  ]
+  ],
+  resumeUrl: "/Dao_Quang_Truong_FE_CV.docx"
 };
 
 export const seo = {
@@ -97,60 +100,89 @@ export interface SkillPill {
   category: SkillCategory;
 }
 
+export interface SkillSubSection {
+  label: string;
+  skills: string[];
+  highlight?: string;
+}
+
+export interface SkillCardData {
+  id: string;
+  title: string;
+  level?: string;
+  icon: LucideIcon;
+  subSections: SkillSubSection[];
+}
+
 export const skillsConfig = {
-  expertiseRings: [
+  cards: [
     {
-      id: 'frontend',
-      label: 'Frontend Development',
-      percentage: 90,
-      color: 'hsl(var(--primary))',
-    },
-    {
-      id: 'mobile',
-      label: 'Mobile Development',
-      percentage: 90,
-      color: 'hsl(var(--accent))',
+      id: 'core-stack',
+      title: 'Core Stack & Cross-Platform',
+      level: 'Expert',
+      icon: Layers,
+      subSections: [
+        {
+          label: 'Languages',
+          skills: ['TypeScript (Advanced)', 'JavaScript (ES6+)']
+        },
+        {
+          label: 'Web Frontend',
+          skills: ['React.js Ecosystem (Next.js, Redux/Context)', 'Vue.js (Legacy migration experience)'],
+          highlight: 'Expert in building scalable/high-performance SPAs.'
+        },
+        {
+          label: 'Mobile & Desktop',
+          skills: ['React Native (OTA updates, Offline-first with Realm DB)', 'Electron.js'],
+          highlight: 'Proven ability to unify codebases across Web, Mobile, and Desktop.'
+        },
+        {
+          label: 'Visualization',
+          skills: ['D3.js', 'ChartJS (Complex geospatial data & KPI dashboards)']
+        }
+      ]
     },
     {
       id: 'backend',
-      label: 'Backend Development',
-      percentage: 80,
-      color: 'hsl(var(--primary))',
+      title: 'Backend & Infrastructure',
+      level: 'Proficient',
+      icon: Server,
+      subSections: [
+        {
+          label: 'Runtime & API',
+          skills: ['Node.js', 'Express/NestJS (designing RESTful APIs)']
+        },
+        {
+          label: 'DevOps & CI/CD',
+          skills: ['Docker', 'Jenkins', 'GitLab CI/CD', 'GitHub Actions'],
+          highlight: 'Experienced in setting up automated deployment pipelines from scratch on Linux VPS (Ubuntu/Nginx).'
+        },
+        {
+          label: 'Cloud',
+          skills: ['AWS (Basic resource management)']
+        }
+      ]
     },
     {
-      id: 'devops',
-      label: 'DevOps & Cloud',
-      percentage: 75,
-      color: 'hsl(var(--accent))',
-    },
-  ] as ExpertiseRing[],
-  skillPills: [
-    // Frontend
-    { id: 'react', name: 'React.js', icon: Code2, category: 'Frontend' },
-    { id: 'vue', name: 'Vue.js', icon: Code2, category: 'Frontend' },
-    { id: 'typescript', name: 'TypeScript', icon: Code2, category: 'Frontend' },
-    { id: 'javascript', name: 'JavaScript', icon: Code2, category: 'Frontend' },
-    { id: 'electron', name: 'ElectronJS', icon: Monitor, category: 'Frontend' },
-
-    // Mobile
-    { id: 'react-native', name: 'React Native', icon: Smartphone, category: 'Mobile' },
-
-    // Backend
-    { id: 'nodejs', name: 'Node.js', icon: Server, category: 'Backend' },
-    { id: 'realm', name: 'Realm DB', icon: Database, category: 'Backend' },
-
-    // DevOps
-    { id: 'aws', name: 'AWS', icon: Cloud, category: 'DevOps' },
-    { id: 'docker', name: 'Docker', icon: Package, category: 'DevOps' },
-    { id: 'jenkins', name: 'Jenkins', icon: GitBranch, category: 'DevOps' },
-    { id: 'gitlab-ci', name: 'Gitlab CI/CD', icon: GitBranch, category: 'DevOps' },
-    { id: 'ubuntu', name: 'Ubuntu Server', icon: Terminal, category: 'DevOps' },
-
-    // Tools
-    { id: 'git', name: 'Git', icon: GitBranch, category: 'Tools' },
-    { id: 'chartjs', name: 'ChartJS', icon: BarChart, category: 'Tools' },
-    { id: 'd3', name: 'D3 Charts', icon: BarChart, category: 'Tools' },
-  ] as SkillPill[],
+      id: 'leadership',
+      title: 'Engineering Leadership & Architecture',
+      icon: Brain,
+      subSections: [
+        {
+          label: 'System Optimization',
+          skills: ['Performance tuning (reduced API latency by 50%)', 'Media optimization for RTC/Video Conference']
+        },
+        {
+          label: 'Quality Assurance',
+          skills: ['Establishing Git Flow', 'Linting standards', 'TDD/Unit Testing integration']
+        },
+        {
+          label: 'Team Management',
+          skills: ['Technical Mentoring', 'Code Review', 'Recruitment (Technical Interviewer)']
+        }
+      ]
+    }
+  ] as SkillCardData[],
 };
 
 export interface Experience {
