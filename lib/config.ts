@@ -81,7 +81,8 @@ export const seo = {
     'Viettel',
     'Naver',
   ],
-  url: "https://portfolio.vercel.app",
+  url: "https://porfolio-truongdq.vercel.app",
+  image: '/avatar.jpg',
 };
 
 export type SkillCategory = 'Frontend' | 'Backend' | 'Mobile' | 'DevOps' | 'Tools';
