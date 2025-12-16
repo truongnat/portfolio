@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, User, MessageSquare, Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 // Zod validation schema
@@ -172,27 +173,45 @@ export function ContactForm() {
         )}
       </button>
 
-      {/* Success Message */}
-      {submitStatus === 'success' && (
-        <div
-          className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg flex items-center gap-3 text-green-600 dark:text-green-400"
-          data-testid="contact-success-message"
-        >
-          <CheckCircle className="h-5 w-5 flex-shrink-0" />
-          <p>Thank you! Your message has been sent successfully.</p>
-        </div>
-      )}
+      {/* Response Messages */}
+      <div className="min-h-[4rem]">
+        <AnimatePresence mode="wait">
+          {submitStatus === 'success' && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg flex items-center gap-3 text-green-600 dark:text-green-400 backdrop-blur-sm shadow-sm"
+              data-testid="contact-success-message"
+            >
+              <div className="p-1 bg-green-500/20 rounded-full">
+                <CheckCircle className="h-5 w-5 flex-shrink-0" />
+              </div>
+              <p className="font-medium text-sm sm:text-base">
+                Thank you! Your message has been sent successfully.
+              </p>
+            </motion.div>
+          )}
 
-      {/* Error Message */}
-      {submitStatus === 'error' && (
-        <div
-          className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg flex items-center gap-3 text-destructive"
-          data-testid="contact-error-message"
-        >
-          <AlertCircle className="h-5 w-5 flex-shrink-0" />
-          <p>{errorMessage || 'Failed to send message. Please try again.'}</p>
-        </div>
-      )}
+          {submitStatus === 'error' && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg flex items-center gap-3 text-destructive backdrop-blur-sm shadow-sm"
+              data-testid="contact-error-message"
+            >
+              <div className="p-1 bg-destructive/20 rounded-full">
+                <AlertCircle className="h-5 w-5 flex-shrink-0" />
+              </div>
+              <p className="font-medium text-sm sm:text-base">
+                {errorMessage || 'Failed to send message. Please try again.'}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </form>
   );
 }
+

@@ -107,7 +107,7 @@ export function Hero({
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pb-32 sm:pb-0 pt-24 sm:pt-16"
     >
       {/* Gradient blob background */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -170,7 +170,7 @@ export function Hero({
         >
           <span className="inline-block">
             {typingText}
-            <span className="inline-block w-0.5 h-6 sm:h-7 md:h-8 bg-primary ml-1 animate-pulse" />
+            <span className="inline-block w-0.5 h-6 sm:h-7 md:h-8 bg-primary ml-1 animate-pulse align-middle" />
           </span>
         </motion.div>
 
@@ -193,7 +193,7 @@ export function Hero({
               href={button.href}
               className={`
                 group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg
-                font-medium transition-all duration-200 min-w-[160px]
+                font-medium transition-all duration-200 min-w-[160px] w-full sm:w-auto
                 ${button.variant === 'primary'
                   ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl'
                   : 'bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border'
@@ -234,7 +234,7 @@ export function Hero({
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:block"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.5 }}
