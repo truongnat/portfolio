@@ -230,6 +230,21 @@ export function Hero({
             </a>
           ))}
         </motion.div>
+
+        {/* Quick Stats - Value Focus */}
+        <motion.div
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-border/50 pt-8"
+          variants={itemVariants}
+        >
+          {personalInfo.stats.map((stat, index) => (
+            <div key={index} className="flex flex-col items-center justify-center space-y-2">
+              <span className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+                {stat.value}
+              </span>
+              <span className="text-sm text-muted-foreground font-medium">{stat.label}</span>
+            </div>
+          ))}
+        </motion.div>
       </motion.div>
 
       {/* Scroll indicator */}

@@ -97,17 +97,22 @@ export function Experience({ experiences = workExperience }: ExperienceProps) {
                                     </div>
 
                                     {exp.description && (
-                                        <p className="text-muted-foreground mb-4">{exp.description}</p>
+                                        <p className="text-muted-foreground mb-6">{exp.description}</p>
                                     )}
 
-                                    <ul className="space-y-2">
-                                        {exp.achievements.map((achievement, i) => (
-                                            <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                                                <span>{achievement}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <div className="bg-secondary/30 rounded-lg p-4 border-l-4 border-primary">
+                                        <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
+                                            <span className="text-primary">⚡</span> Key Impact & Achievements
+                                        </h4>
+                                        <ul className="space-y-2.5">
+                                            {exp.achievements.map((achievement, i) => (
+                                                <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+                                                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                                                    <span>{achievement}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
 

@@ -63,7 +63,13 @@ export const personalInfo = {
     'Cross-platform Solutions',
     'System Optimization',
   ],
-  resumeUrl: "/Dao_Quang_Truong_FE_CV.docx"
+  resumeUrl: "/Dao_Quang_Truong_FE_CV.docx",
+  stats: [
+    { label: 'Years Experience', value: '3+' },
+    { label: 'Projects Completed', value: '15+' },
+    { label: 'Companies Helped', value: '5+' },
+    { label: 'Client Satisfaction', value: '100%' }
+  ]
 };
 
 export const seo = {
