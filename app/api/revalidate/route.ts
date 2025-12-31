@@ -25,12 +25,19 @@ export async function POST(request: NextRequest) {
             });
         }
 
-        return NextResponse.json({
-            revalidated: true,
-            tags: tags || [],
-            paths: paths || [],
-            now: Date.now()
-        });
+        return NextResponse.json(
+            {
+                revalidated: true,
+                tags: tags || [],
+                paths: paths || [],
+                now: Date.now()
+            },
+            {
+                headers: {
+                    'Cache-Control': 'no-store, no-cache, must-revalidate',
+                },
+            }
+        );
     } catch (error) {
         console.error('Revalidation error:', error);
         return NextResponse.json(
@@ -38,7 +45,12 @@ export async function POST(request: NextRequest) {
                 revalidated: false,
                 error: error instanceof Error ? error.message : 'Unknown error'
             },
-            { status: 500 }
+            { 
+                status: 500,
+                headers: {
+                    'Cache-Control': 'no-store, no-cache, must-revalidate',
+                },
+            }
         );
     }
 }

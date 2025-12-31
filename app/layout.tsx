@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
+import { WebVitals } from "@/components/WebVitals";
 import { Metadata } from "next";
 import { seo } from "@/lib/config";
 
@@ -7,6 +8,8 @@ const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
+  weight: ['400', '500', '600', '700'], // Load only required weights
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -63,7 +66,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
+      <head>
+        {/* Resource hints for external domains */}
+        <link rel="preconnect" href="https://api.github.com" />
+        <link rel="dns-prefetch" href="https://api.github.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        {/* Supabase domain will be added dynamically based on env var */}
+        {process.env.NEXT_PUBLIC_SUPABASE_URL && (
+          <>
+            <link rel="preconnect" href={new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).origin} />
+            <link rel="dns-prefetch" href={new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).origin} />
+          </>
+        )}
+      </head>
       <body className="bg-background text-foreground antialiased">
+        <WebVitals />
         {children}
         <Toaster />
       </body>

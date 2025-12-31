@@ -2,10 +2,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { formatDate } from '@/lib/utils';
 import { Clock, Calendar } from 'lucide-react';
-import type { Post } from '@/types';
+import type { BlogPostMetadata } from '@/lib/blog';
 
 interface PostCardProps {
-  post: Omit<Post, 'content'>;
+  post: BlogPostMetadata;
 }
 
 export function PostCard({ post }: PostCardProps) {
@@ -16,13 +16,16 @@ export function PostCard({ post }: PostCardProps) {
       data-testid={`post-card-${post.slug}`}
     >
       {/* Cover Image */}
-      {post.cover_image && (
+      {post.coverImage && (
         <div className="relative h-48 overflow-hidden bg-muted">
           <Image
-            src={post.cover_image}
+            src={post.coverImage}
             alt={`${post.title} cover image`}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            placeholder="blur"
+            blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQ3NSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
             data-testid="post-cover-image"
           />
         </div>
@@ -42,21 +45,14 @@ export function PostCard({ post }: PostCardProps) {
         <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
           <div className="flex items-center gap-1.5" data-testid="post-date">
             <Calendar className="h-4 w-4" />
-            <time dateTime={post.published_at || post.created_at || ''}>
-              {formatDate(post.published_at || post.created_at || new Date(), {
+            <time dateTime={post.date}>
+              {formatDate(post.date, {
                 year: 'numeric',
                 month: 'short',
                 day: 'numeric',
               })}
             </time>
           </div>
-
-          {post.reading_time && (
-            <div className="flex items-center gap-1.5" data-testid="post-reading-time">
-              <Clock className="h-4 w-4" />
-              <span>{post.reading_time} min read</span>
-            </div>
-          )}
         </div>
 
         {/* Tags */}

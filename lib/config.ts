@@ -37,8 +37,11 @@ export interface SocialLink {
 export const personalInfo = {
   name: "Dao Quang Truong",
   role: "Fullstack Developer",
-  bio: "Fullstack Developer with 3+ years of experience in building cross-platform solutions (Web, Mobile, Desktop). Proven track record of delivering high-scale projects for major enterprises like Viettel and Naver.",
+  bio: "Full-stack developer with 3+ years of experience specializing in cross-platform (Web, Mobile, Desktop) solution architecture. Proven track record of leading engineering teams and delivering high-scale projects for major clients like Viettel and Naver. Combines strong technical expertise in modern JavaScript stacks with leadership skills in mentoring, code quality, and establishing efficient CI/CD pipelines.",
+  location: "Hanoi, Vietnam",
+  phone: "(+84) 96 906 9035",
   email: "truongdq.dev@gmail.com",
+  website: "porfolio-truongdq.vercel.app",
   githubUsername: "truongnat",
   socials: [
     {
@@ -59,22 +62,23 @@ export const personalInfo = {
   ],
   typingPhrases: [
     'Fullstack Developer',
-    'React & React Native',
+    'Team Leader',
     'Cross-platform Solutions',
-    'System Optimization',
+    'Performance Optimization',
+    'CI/CD Expert',
   ],
   resumeUrl: "/Dao_Quang_Truong_FE_CV.docx",
   stats: [
     { label: 'Years Experience', value: '3+' },
     { label: 'Projects Completed', value: '15+' },
-    { label: 'Companies Helped', value: '5+' },
-    { label: 'Client Satisfaction', value: '100%' }
+    { label: 'Team Members Led', value: '8+' },
+    { label: 'API Latency Reduced', value: '50%' }
   ]
 };
 
 export const seo = {
   title: "Dao Quang Truong | Fullstack Developer",
-  description: "Fullstack Developer with 3+ years of experience in building cross-platform solutions (Web, Mobile, Desktop).",
+  description: "Full-stack developer with 3+ years of experience specializing in cross-platform solution architecture. Proven track record of leading engineering teams and delivering high-scale projects for Viettel and Naver.",
   keywords: [
     'portfolio',
     'developer',
@@ -84,8 +88,12 @@ export const seo = {
     'React Native',
     'Next.js',
     'Node.js',
+    'Team Leader',
+    'CI/CD',
+    'DevOps',
     'Viettel',
     'Naver',
+    'Performance Optimization',
   ],
   url: "https://porfolio-truongdq.vercel.app",
   image: '/avatar.jpg',
@@ -124,68 +132,64 @@ export interface SkillCardData {
 export const skillsConfig = {
   cards: [
     {
-      id: 'core-stack',
-      title: 'Core Stack & Cross-Platform',
+      id: 'frontend-crossplatform',
+      title: 'Frontend & Cross-Platform',
       level: 'Expert',
       icon: Layers,
       subSections: [
         {
-          label: 'Languages',
-          skills: ['TypeScript (Advanced)', 'JavaScript (ES6+)']
+          label: 'Core',
+          skills: ['TypeScript', 'Next.js', 'Nuxt.js', 'React Native', 'Electron.js'],
+          highlight: 'Expert in building unified cross-platform solutions across Web, Mobile, and Desktop.'
         },
         {
-          label: 'Web Frontend',
-          skills: ['React.js Ecosystem (Next.js, Redux/Context)', 'Vue.js (Legacy migration experience)'],
-          highlight: 'Expert in building scalable/high-performance SPAs.'
+          label: 'Data Visualization',
+          skills: ['D3.js', 'ChartJS'],
+          highlight: 'Complex geospatial data visualization and KPI dashboards.'
         },
         {
-          label: 'Mobile & Desktop',
-          skills: ['React Native (OTA updates, Offline-first with Realm DB)', 'Electron.js'],
-          highlight: 'Proven ability to unify codebases across Web, Mobile, and Desktop.'
-        },
-        {
-          label: 'Visualization',
-          skills: ['D3.js', 'ChartJS (Complex geospatial data & KPI dashboards)']
+          label: 'State Management',
+          skills: ['Redux', 'TanStack Query (React Query)']
         }
       ]
     },
     {
-      id: 'backend',
-      title: 'Backend & Infrastructure',
+      id: 'backend-devops',
+      title: 'Backend & DevOps',
       level: 'Proficient',
       icon: Server,
       subSections: [
         {
-          label: 'Runtime & API',
-          skills: ['Node.js', 'Express/NestJS (designing RESTful APIs)']
+          label: 'Backend',
+          skills: ['Node.js', 'Express', 'NestJS']
         },
         {
           label: 'DevOps & CI/CD',
-          skills: ['Docker', 'Jenkins', 'GitLab CI/CD', 'GitHub Actions'],
-          highlight: 'Experienced in setting up automated deployment pipelines from scratch on Linux VPS (Ubuntu/Nginx).'
+          skills: ['Docker', 'Jenkins', 'GitLab CI/CD', 'GitHub Actions', 'Linux/Ubuntu', 'Nginx'],
+          highlight: 'Built CI/CD pipelines from scratch, reducing deployment time significantly.'
         },
         {
           label: 'Cloud',
-          skills: ['AWS (Basic resource management)']
+          skills: ['AWS (Basic)']
         }
       ]
     },
     {
       id: 'leadership',
-      title: 'Engineering Leadership & Architecture',
+      title: 'Engineering & Leadership',
       icon: Brain,
       subSections: [
         {
-          label: 'System Optimization',
-          skills: ['Performance tuning (reduced API latency by 50%)', 'Media optimization for RTC/Video Conference']
+          label: 'Architecture',
+          skills: ['System Architecture', 'Performance Optimization', 'CI/CD Pipeline Setup']
         },
         {
-          label: 'Quality Assurance',
-          skills: ['Establishing Git Flow', 'Linting standards', 'TDD/Unit Testing integration']
+          label: 'Leadership',
+          skills: ['Technical Mentoring', 'Code Review', 'Agile/Scrum', 'Technical Interviews']
         },
         {
-          label: 'Team Management',
-          skills: ['Technical Mentoring', 'Code Review', 'Recruitment (Technical Interviewer)']
+          label: 'Modern Tools',
+          skills: ['AI-Powered Development (GitHub Copilot, Cursor)']
         }
       ]
     }
@@ -207,13 +211,11 @@ export const workExperience: Experience[] = [
     role: 'Software Engineer / Team Leader',
     company: 'Blameo (Outsourcing for Viettel Group)',
     period: 'Jun 2022 – Present',
+    description: 'Hanoi',
     achievements: [
-      'Led and mentored a cross-functional team of 8 engineers. Conducted technical interviews for Frontend candidates and supervised interns.',
-      'Developed a KPI Tracking Platform and Viettel Cloud features using React, TypeScript, Node.js, and React Native, D3 charts.',
-      'Established initial project structure and enforced coding standards (Linting, Git flow).',
-      'Optimized core features, contributing to a 50% reduction in API latency.',
-      'Established CI/CD pipelines using Jenkins, Gitlab Webhook, and Ubuntu Servers.',
-      'Configured OTA (Over-The-Air) distribution for iOS apps.',
+      'Leadership: Led and mentored a cross-functional team of 8 engineers. Conducted technical interviews for frontend candidates and supervised interns, improving overall team code quality.',
+      'Product Development: Architected and developed a KPI tracking platform and Viettel Cloud features using React, TypeScript, Node.js, and React Native. Established initial project structure, enforced coding standards (ESLint, Git flow), and implemented D3.js for complex data visualizations.',
+      'Performance & DevOps: Optimized core API features, reducing latency by 50%. Built CI/CD pipelines from scratch using Jenkins, GitLab Webhooks, and Ubuntu servers. Configured Over-The-Air (OTA) updates for iOS to streamline internal testing.',
     ],
   },
   {
@@ -221,10 +223,11 @@ export const workExperience: Experience[] = [
     role: 'Software Engineer',
     company: 'CMC Global',
     period: 'Oct 2021 – Jun 2022',
+    description: 'Hanoi',
     achievements: [
-      'Developed a comprehensive Video Conference solution working seamlessly across Web (Vue.js), Desktop (Electron.js), and Mobile (React Native).',
-      'Researched and implemented complex real-time communication solutions (RTC).',
-      'Active participant in code reviews, ensuring clean code architecture.',
+      'Cross-Platform Development: Engineered a unified video conference solution across Web (Vue.js), Desktop (Electron.js), and Mobile (React Native) platforms.',
+      'Real-Time Communication (RTC): Researched and implemented media synchronization algorithms to stabilize video quality and connection across different devices and bandwidths.',
+      'Code Quality: Actively participated in code reviews and architectural discussions to ensure clean code and minimize production bugs.',
     ],
   },
   {
@@ -232,9 +235,10 @@ export const workExperience: Experience[] = [
     role: 'Frontend Developer',
     company: 'NTQ Solution',
     period: 'Oct 2020 – Oct 2021',
+    description: 'Hanoi',
     achievements: [
-      'Built core features for a dynamic platform capable of automatically generating mobile applications using React Native.',
-      'Developed an Exam/E-learning mobile application, focusing on user experience and interactive testing interfaces.',
+      'Low-Code Platform Development: Built core features for a mobile app generation platform using React Native, focusing on automation and dynamic functionality.',
+      'E-Learning Application: Developed an exam and e-learning mobile app with a focus on intuitive user interfaces and smooth interactive flows.',
     ],
   },
 ];
@@ -253,17 +257,15 @@ export interface Project {
 export const projectsConfig: Project[] = [
   {
     id: 'netbi',
-    title: 'NetBI',
+    title: 'NetBI – KPI Management Platform',
     role: 'Software Engineer',
     period: 'Jan 2023 – Jan 2024',
-    description: 'A comprehensive KPI management platform.',
-    techStack: ['React', 'React Native', 'ChartJS', 'Gitlab CI/CD', 'Jenkins', 'VPS', 'Nginx', 'Telegram API'],
+    description: 'Build a unified web and mobile platform for enterprise KPI monitoring with complex data visualization needs.',
+    techStack: ['React', 'React Native', 'ChartJS', 'GitLab CI/CD', 'Jenkins', 'Linux VPS', 'Nginx'],
     achievements: [
-      'Led frontend development for both Web and Mobile applications.',
-      'Designed and implemented Geospatial Data Visualization (Vietnam Map) for monitoring regional KPIs.',
-      'Streamlined deployment with GitLab CI/CD and Jenkins on Linux servers.',
-      'Implemented CI/CD pipeline using GitHub Actions for Android APK generation.',
-      'Acted as technical mentor for junior members.',
+      'Challenge: Build a unified web and mobile platform for enterprise KPI monitoring with complex data visualization needs.',
+      'Action: Led frontend development, building the foundational React and React Native codebases. Designed and implemented an interactive geospatial data visualization feature (Vietnam Map) for mobile. Established the full CI/CD pipeline using GitLab CI/CD, Jenkins, and Linux VPS (Nginx).',
+      'Result: Enabled real-time regional KPI tracking on mobile devices. Automated the build and deployment process for iOS and Android, significantly reducing manual release time. Acted as a technical mentor for junior team members.',
     ],
   },
   {
@@ -271,25 +273,43 @@ export const projectsConfig: Project[] = [
     title: 'Naver Cloud Meeting',
     role: 'Software Engineer',
     period: 'Jun 2021 – Dec 2022',
-    description: 'Real-time video conferencing ecosystem.',
+    description: 'Develop a stable, multi-platform video conferencing solution with consistent user experience.',
     techStack: ['Vue.js', 'React Native', 'Electron.js', 'Jitsi Meet'],
     achievements: [
-      'Engineered real-time video conferencing features across Web, Desktop, and Mobile.',
-      'Implemented algorithms to sync and adapt media resolution between devices.',
-      'Developed custom Native Notification system for Electron Desktop App.',
+      'Challenge: Develop a stable, multi-platform video conferencing solution with consistent user experience.',
+      'Action: Engineered real-time video features for web (Vue.js), desktop (Electron), and mobile (React Native) using the Jitsi Meet core. Conducted R&D to implement custom media resolution adaptation algorithms. Built a native notification system for the Electron desktop app to overcome web API limitations.',
+      'Result: Delivered a seamless cross-platform conferencing tool that maintained stable video quality. Improved user engagement with a reliable desktop notification system.',
     ],
   },
   {
     id: 'gopass',
-    title: 'GoPass',
+    title: 'GoPass – Online Exam Platform',
     role: 'Mobile Developer',
     period: 'Oct 2020 – Jun 2021',
-    description: 'Online Examination Application for the Japanese market.',
-    techStack: ['React', 'React Native', 'Realm DB', 'PHP'],
+    description: 'Create a stable, user-friendly exam application for the Japanese market with offline functionality.',
+    techStack: ['React Native', 'Realm DB', 'PHP'],
     achievements: [
-      'Implemented offline-first mechanism using Realm DB.',
-      'Refactored legacy codebases and optimized application performance.',
-      'Conducted regular demos with Japanese clients.',
+      'Challenge: Create a stable, user-friendly exam application for the Japanese market with offline functionality.',
+      'Action: Developed the mobile app using React Native and implemented an offline-first architecture using Realm DB for local data caching and synchronization.',
+      'Result: Successfully launched the app, which handled complex exam flows smoothly. The offline capability ensured uninterrupted user experience, directly addressing client requirements.',
     ],
+  },
+];
+
+export interface Award {
+  id: string;
+  title: string;
+  organization: string;
+  date: string;
+  icon?: LucideIcon;
+}
+
+export const awards: Award[] = [
+  {
+    id: 'employee-of-year-2023',
+    title: 'Employee of the Year',
+    organization: 'Blameo Company',
+    date: 'May 2023',
+    icon: Sparkles,
   },
 ];

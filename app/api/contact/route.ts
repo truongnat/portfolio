@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { fetchWithRetry } from '@/lib/api-utils';
 
 // Validation schema matching the frontend
 const contactFormSchema = z.object({
@@ -22,7 +23,12 @@ export async function POST(request: Request) {
           error: 'Invalid form data',
           details: validationResult.error.errors,
         },
-        { status: 400 }
+        { 
+          status: 400,
+          headers: {
+            'Cache-Control': 'no-store, no-cache, must-revalidate',
+          },
+        }
       );
     }
 
@@ -38,7 +44,12 @@ export async function POST(request: Request) {
           success: false,
           error: 'Server configuration error: Telegram credentials missing',
         },
-        { status: 500 }
+        { 
+          status: 500,
+          headers: {
+            'Cache-Control': 'no-store, no-cache, must-revalidate',
+          },
+        }
       );
     }
 
@@ -54,17 +65,25 @@ ${message}
 
     const telegramUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
 
-    const telegramResponse = await fetch(telegramUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const telegramResponse = await fetchWithRetry(
+      telegramUrl,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: telegramChatId,
+          text: text,
+          parse_mode: 'Markdown',
+        }),
       },
-      body: JSON.stringify({
-        chat_id: telegramChatId,
-        text: text,
-        parse_mode: 'Markdown',
-      }),
-    });
+      {
+        maxRetries: 3,
+        initialDelay: 500,
+        backoffMultiplier: 2,
+      }
+    );
 
     const telegramResult = await telegramResponse.json();
 
@@ -73,10 +92,17 @@ ${message}
       throw new Error('Failed to send message to Telegram');
     }
 
-    return NextResponse.json({
-      success: true,
-      message: 'Message received successfully',
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Message received successfully',
+      },
+      {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      }
+    );
   } catch (error) {
     console.error('Contact form error:', error);
 
@@ -85,7 +111,12 @@ ${message}
         success: false,
         error: error instanceof Error ? error.message : 'Internal server error',
       },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      }
     );
   }
 }

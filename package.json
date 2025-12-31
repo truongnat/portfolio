@@ -10,7 +10,9 @@
     "format": "prettier --write .",
     "test": "vitest",
     "test:run": "vitest --run",
-    "gen:types": "npx supabase gen types typescript --project-id \"uzhbpgruwiuqcvocgrvg\" --schema public > ./types/database.ts"
+    "analyze": "ANALYZE=true next build",
+    "verify:caching": "npx tsx scripts/verify-caching-optimizations.ts",
+    "verify:performance": "npx tsx scripts/verify-performance.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -20,7 +22,6 @@
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-toast": "^1.2.15",
     "@shikijs/rehype": "^1.0.0",
-    "@supabase/supabase-js": "^2.39.0",
     "@tanstack/react-query": "^5.17.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -37,13 +38,17 @@
     "react-markdown": "^10.1.0",
     "recharts": "^3.5.1",
     "rehype-autolink-headings": "^7.1.0",
+    "rehype-highlight": "^7.0.2",
     "rehype-slug": "^6.0.0",
+    "rehype-stringify": "^10.0.1",
+    "remark": "^15.0.1",
     "remark-gfm": "^4.0.1",
-    "supabase": ">=1.8.1",
+    "remark-rehype": "^11.1.2",
     "tailwind-merge": "^3.4.0",
     "zod": "^4.1.13"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.1.1",
     "@tailwindcss/typography": "^0.5.10",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",

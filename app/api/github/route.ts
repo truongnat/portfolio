@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
+import { fetchWithRetry } from '@/lib/api-utils';
 
 /**
  * GitHub API proxy route
  * Handles fetching user repositories with rate limiting and error handling
- * Requirements: 5.2, 5.3, 5.4
+ * Requirements: 5.2, 5.3, 5.4, 10.5, 14.6
  */
 
 interface GitHubRepo {
@@ -76,11 +77,16 @@ export async function GET(request: Request) {
       headers.Authorization = `Bearer ${githubToken}`;
     }
 
-    const response = await fetch(
+    const response = await fetchWithRetry(
       `https://api.github.com/users/${username}/repos?sort=stars&direction=desc&per_page=${limit}`,
       {
         headers,
         next: { revalidate: 300 }, // Cache for 5 minutes
+      },
+      {
+        maxRetries: 3,
+        initialDelay: 1000,
+        backoffMultiplier: 2,
       }
     );
 
@@ -122,10 +128,17 @@ export async function GET(request: Request) {
       url: repo.html_url,
     }));
 
-    return NextResponse.json({
-      success: true,
-      data: transformedRepos,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        data: transformedRepos,
+      },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+        },
+      }
+    );
   } catch (error) {
     console.error('GitHub API proxy error:', error);
 
@@ -134,7 +147,12 @@ export async function GET(request: Request) {
         success: false,
         error: error instanceof Error ? error.message : 'Failed to fetch repositories',
       },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      }
     );
   }
 }

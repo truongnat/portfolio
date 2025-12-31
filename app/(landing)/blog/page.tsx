@@ -1,10 +1,7 @@
 import { Metadata } from 'next';
-import { postsQuery } from '@/lib/queries';
+import { Suspense } from 'react';
+import { getAllPosts } from '@/lib/blog';
 import { PostCard } from '@/components/PostCard';
-import type { Post } from '@/types';
-
-// Enable ISR with 60 second revalidation
-export const revalidate = 60;
 
 // Enable static generation
 export const dynamic = 'force-static';
@@ -21,30 +18,49 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function BlogPage() {
-  let posts: Post[] = [];
-  let error: Error | null = null;
-
-  try {
-    posts = await postsQuery.getAll();
-  } catch (e) {
-    console.error('Failed to fetch posts:', e);
-    error = e as Error;
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Failed to load blog posts</h1>
-          <p className="text-muted-foreground">Please try again later.</p>
+// Loading skeleton for blog posts
+function BlogPostsSkeleton() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div key={i} className="bg-card border border-border rounded-lg overflow-hidden animate-pulse">
+          <div className="h-48 bg-muted/20" />
+          <div className="p-6">
+            <div className="h-6 bg-muted/20 rounded mb-4" />
+            <div className="h-4 bg-muted/20 rounded mb-2" />
+            <div className="h-4 bg-muted/20 rounded w-2/3" />
+          </div>
         </div>
+      ))}
+    </div>
+  );
+}
+
+// Separate component for blog posts list
+async function BlogPostsList() {
+  // Get all published posts from markdown files
+  const posts = getAllPosts();
+
+  if (posts.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-muted-foreground text-lg">
+          No blog posts yet. Check back soon!
+        </p>
       </div>
     );
   }
 
-  const publishedPosts: Post[] = posts || [];
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {posts.map((post) => (
+        <PostCard key={post.slug} post={post} />
+      ))}
+    </div>
+  );
+}
 
+export default function BlogPage() {
   return (
     <main className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -56,20 +72,10 @@ export default async function BlogPage() {
           </p>
         </div>
 
-        {/* Posts Grid */}
-        {publishedPosts.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground text-lg">
-              No blog posts yet. Check back soon!
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {publishedPosts.map((post) => (
-              <PostCard key={post.id} post={post} />
-            ))}
-          </div>
-        )}
+        {/* Posts Grid with Suspense */}
+        <Suspense fallback={<BlogPostsSkeleton />}>
+          <BlogPostsList />
+        </Suspense>
       </div>
     </main>
   );

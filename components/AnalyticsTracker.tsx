@@ -2,22 +2,15 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
 
+// Analytics tracking has been disabled after Supabase removal
+// To re-enable, configure Supabase and restore the tracking logic
 export function AnalyticsTracker() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const trackView = async () => {
-      try {
-        // We use the RPC function we defined in the SQL setup
-        await supabase.rpc('increment_page_view', { page_path: pathname });
-      } catch (error) {
-        console.error('Error tracking page view:', error);
-      }
-    };
-
-    trackView();
+    // Analytics tracking disabled - Supabase removed
+    // To re-enable, configure Supabase and restore tracking logic
   }, [pathname]);
 
   return null;
