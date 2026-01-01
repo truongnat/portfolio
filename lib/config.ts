@@ -37,7 +37,7 @@ export interface SocialLink {
 export const personalInfo = {
   name: "Dao Quang Truong",
   role: "Fullstack Developer",
-  bio: "Full-stack developer with 3+ years of experience specializing in cross-platform (Web, Mobile, Desktop) solution architecture. Proven track record of leading engineering teams and delivering high-scale projects for major clients like Viettel and Naver. Combines strong technical expertise in modern JavaScript stacks with leadership skills in mentoring, code quality, and establishing efficient CI/CD pipelines.",
+  bio: "Fullstack Developer with 3+ years of experience in building cross-platform solutions (Web, Mobile, Desktop). Proven track record of delivering high-scale projects for major enterprises like Viettel and Naver. Combines strong technical expertise in modern JavaScript stacks with leadership skills in mentoring, code quality, and establishing efficient CI/CD pipelines.",
   location: "Hanoi, Vietnam",
   phone: "(+84) 96 906 9035",
   email: "truongdq.dev@gmail.com",
@@ -78,7 +78,7 @@ export const personalInfo = {
 
 export const seo = {
   title: "Dao Quang Truong | Fullstack Developer",
-  description: "Full-stack developer with 3+ years of experience specializing in cross-platform solution architecture. Proven track record of leading engineering teams and delivering high-scale projects for Viettel and Naver.",
+  description: "Fullstack Developer with 3+ years of experience in building cross-platform solutions (Web, Mobile, Desktop). Proven track record of delivering high-scale projects for major enterprises like Viettel and Naver.",
   keywords: [
     'portfolio',
     'developer',
@@ -133,7 +133,7 @@ export const skillsConfig = {
   cards: [
     {
       id: 'frontend-crossplatform',
-      title: 'Frontend & Cross-Platform',
+      title: 'Core Stack & Cross-Platform',
       level: 'Expert',
       icon: Layers,
       subSections: [
@@ -211,7 +211,6 @@ export const workExperience: Experience[] = [
     role: 'Software Engineer / Team Leader',
     company: 'Blameo (Outsourcing for Viettel Group)',
     period: 'Jun 2022 – Present',
-    description: 'Hanoi',
     achievements: [
       'Leadership: Led and mentored a cross-functional team of 8 engineers. Conducted technical interviews for frontend candidates and supervised interns, improving overall team code quality.',
       'Product Development: Architected and developed a KPI tracking platform and Viettel Cloud features using React, TypeScript, Node.js, and React Native. Established initial project structure, enforced coding standards (ESLint, Git flow), and implemented D3.js for complex data visualizations.',
@@ -223,7 +222,6 @@ export const workExperience: Experience[] = [
     role: 'Software Engineer',
     company: 'CMC Global',
     period: 'Oct 2021 – Jun 2022',
-    description: 'Hanoi',
     achievements: [
       'Cross-Platform Development: Engineered a unified video conference solution across Web (Vue.js), Desktop (Electron.js), and Mobile (React Native) platforms.',
       'Real-Time Communication (RTC): Researched and implemented media synchronization algorithms to stabilize video quality and connection across different devices and bandwidths.',
@@ -235,7 +233,6 @@ export const workExperience: Experience[] = [
     role: 'Frontend Developer',
     company: 'NTQ Solution',
     period: 'Oct 2020 – Oct 2021',
-    description: 'Hanoi',
     achievements: [
       'Low-Code Platform Development: Built core features for a mobile app generation platform using React Native, focusing on automation and dynamic functionality.',
       'E-Learning Application: Developed an exam and e-learning mobile app with a focus on intuitive user interfaces and smooth interactive flows.',
