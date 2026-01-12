@@ -63,7 +63,7 @@ export const personalInfo = {
   typingPhrases: [
     'Fullstack Developer',
     'Engineering Leader',
-    'Agentic AI Researcher',
+    'Agentic AI',
     'Cross-platform Architect',
     'AI-Powered SDLC Expert',
   ],
@@ -213,8 +213,8 @@ export interface Experience {
 
 export const workExperience: Experience[] = [
   {
-    id: 'ai-researcher',
-    role: 'Independent Researcher & Lead Developer',
+    id: 'ai',
+    role: 'Lead Developer',
     company: 'AI & Agentic Systems',
     period: 'Jan 2024 – Present',
     achievements: [
