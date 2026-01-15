@@ -61,3 +61,495 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ========================================
+   BLOG STYLING - Premium Design System
+   ======================================== */
+
+/* === Blog Post Card Enhancements === */
+.blog-card {
+  @apply relative overflow-hidden rounded-xl border border-border/50 bg-card/80 backdrop-blur-sm;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.blog-card::before {
+  content: '';
+  @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.05) 0%,
+    hsl(var(--accent) / 0.08) 50%,
+    hsl(var(--primary) / 0.05) 100%
+  );
+}
+
+.blog-card:hover {
+  @apply border-primary/30 shadow-2xl;
+  transform: translateY(-8px) scale(1.02);
+}
+
+.blog-card:hover::before {
+  @apply opacity-100;
+}
+
+/* === Code Block Premium Styling === */
+.prose pre,
+article pre {
+  @apply relative my-8 overflow-hidden rounded-xl border border-border/50;
+  background: linear-gradient(
+    145deg,
+    hsl(var(--muted) / 0.6) 0%,
+    hsl(var(--muted) / 0.9) 100%
+  ) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 4px 6px -1px hsl(var(--foreground) / 0.05),
+    0 2px 4px -1px hsl(var(--foreground) / 0.03),
+    inset 0 1px 0 hsl(var(--background) / 0.2);
+}
+
+.dark .prose pre,
+.dark article pre {
+  background: linear-gradient(
+    145deg,
+    hsl(217 33% 10%) 0%,
+    hsl(220 30% 8%) 100%
+  ) !important;
+  box-shadow: 
+    0 4px 20px -2px hsl(0 0% 0% / 0.4),
+    0 8px 16px -4px hsl(0 0% 0% / 0.3),
+    inset 0 1px 0 hsl(var(--foreground) / 0.05);
+}
+
+.prose pre code,
+article pre code {
+  @apply block overflow-x-auto p-5 text-sm leading-relaxed;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Menlo', monospace !important;
+  font-feature-settings: 'liga' 1, 'calt' 1;
+  tab-size: 2;
+  -moz-tab-size: 2;
+}
+
+/* Code block language label */
+.prose pre[data-language]::before,
+article pre[data-language]::before {
+  content: attr(data-language);
+  @apply absolute right-4 top-3 rounded-md px-2.5 py-1 text-xs font-medium uppercase tracking-wider;
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary) / 0.2);
+}
+
+/* Inline code styling */
+.prose code:not(pre code),
+article code:not(pre code) {
+  @apply relative rounded-md px-1.5 py-0.5 text-sm font-medium;
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary) / 0.15);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.prose code:not(pre code)::before,
+.prose code:not(pre code)::after,
+article code:not(pre code)::before,
+article code:not(pre code)::after {
+  content: '' !important;
+}
+
+/* === Syntax Highlighting Theme (Light) === */
+.prose .hljs,
+article .hljs {
+  background: transparent !important;
+}
+
+.hljs-keyword,
+.hljs-selector-tag {
+  color: #a855f7; /* Purple */
+  font-weight: 600;
+}
+
+.hljs-string,
+.hljs-template-variable,
+.hljs-addition {
+  color: #22c55e; /* Green */
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #64748b; /* Muted */
+  font-style: italic;
+}
+
+.hljs-number,
+.hljs-literal {
+  color: #f97316; /* Orange */
+}
+
+.hljs-function,
+.hljs-title {
+  color: #3b82f6; /* Blue */
+  font-weight: 500;
+}
+
+.hljs-variable,
+.hljs-attr {
+  color: #ec4899; /* Pink */
+}
+
+.hljs-type,
+.hljs-class {
+  color: #06b6d4; /* Cyan */
+  font-weight: 500;
+}
+
+.hljs-tag,
+.hljs-name {
+  color: #ef4444; /* Red */
+}
+
+.hljs-attribute {
+  color: #f59e0b; /* Amber */
+}
+
+.hljs-operator,
+.hljs-punctuation {
+  color: hsl(var(--foreground) / 0.7);
+}
+
+/* === Syntax Highlighting Theme (Dark) === */
+.dark .hljs-keyword,
+.dark .hljs-selector-tag {
+  color: #c084fc; /* Light Purple */
+}
+
+.dark .hljs-string,
+.dark .hljs-template-variable,
+.dark .hljs-addition {
+  color: #4ade80; /* Light Green */
+}
+
+.dark .hljs-comment,
+.dark .hljs-quote {
+  color: #94a3b8; /* Light muted */
+}
+
+.dark .hljs-number,
+.dark .hljs-literal {
+  color: #fb923c; /* Light Orange */
+}
+
+.dark .hljs-function,
+.dark .hljs-title {
+  color: #60a5fa; /* Light Blue */
+}
+
+.dark .hljs-variable,
+.dark .hljs-attr {
+  color: #f472b6; /* Light Pink */
+}
+
+.dark .hljs-type,
+.dark .hljs-class {
+  color: #22d3ee; /* Light Cyan */
+}
+
+.dark .hljs-tag,
+.dark .hljs-name {
+  color: #f87171; /* Light Red */
+}
+
+.dark .hljs-attribute {
+  color: #fbbf24; /* Light Amber */
+}
+
+/* === Premium Typography for Blog Content === */
+.prose {
+  --tw-prose-body: hsl(var(--foreground));
+  --tw-prose-headings: hsl(var(--foreground));
+  --tw-prose-lead: hsl(var(--muted-foreground));
+  --tw-prose-links: hsl(var(--primary));
+  --tw-prose-bold: hsl(var(--foreground));
+  --tw-prose-counters: hsl(var(--muted-foreground));
+  --tw-prose-bullets: hsl(var(--primary) / 0.6);
+  --tw-prose-hr: hsl(var(--border));
+  --tw-prose-quotes: hsl(var(--foreground));
+  --tw-prose-quote-borders: hsl(var(--primary));
+  --tw-prose-captions: hsl(var(--muted-foreground));
+}
+
+/* Headings with gradient accent */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  @apply font-bold tracking-tight;
+  letter-spacing: -0.02em;
+}
+
+.prose h1 {
+  @apply text-4xl mb-6 mt-10;
+  background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--foreground) / 0.8) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.prose h2 {
+  @apply relative text-3xl mb-4 mt-12 pb-3;
+}
+
+.prose h2::after {
+  content: '';
+  @apply absolute bottom-0 left-0 h-0.5 w-16 rounded-full;
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.3));
+}
+
+.prose h3 {
+  @apply text-2xl mb-3 mt-8;
+}
+
+.prose h4 {
+  @apply text-xl mb-2 mt-6;
+}
+
+/* Enhanced paragraphs */
+.prose p {
+  @apply leading-relaxed mb-6;
+  font-size: 1.1rem;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+}
+
+/* Beautiful links */
+.prose a {
+  @apply relative font-medium text-primary no-underline transition-all duration-200;
+}
+
+.prose a::after {
+  content: '';
+  @apply absolute -bottom-0.5 left-0 h-0.5 w-0 rounded-full transition-all duration-300;
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.5));
+}
+
+.prose a:hover::after {
+  @apply w-full;
+}
+
+/* Stylish blockquotes */
+.prose blockquote {
+  @apply relative my-8 rounded-r-xl border-l-4 border-primary bg-muted/30 py-4 pl-6 pr-4 italic;
+  font-size: 1.15rem;
+}
+
+.prose blockquote::before {
+  content: '"';
+  @apply absolute -left-2 -top-2 text-6xl text-primary/20 font-serif;
+}
+
+.prose blockquote p {
+  @apply mb-0;
+}
+
+/* Enhanced lists */
+.prose ul {
+  @apply space-y-2 my-6;
+}
+
+.prose ul li {
+  @apply relative pl-2;
+}
+
+.prose ul li::marker {
+  color: hsl(var(--primary));
+}
+
+.prose ol {
+  @apply space-y-2 my-6;
+}
+
+.prose ol li {
+  @apply pl-2;
+}
+
+.prose ol li::marker {
+  @apply font-bold text-primary;
+}
+
+/* Horizontal rules */
+.prose hr {
+  @apply my-12 border-t-0 h-px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--border)),
+    hsl(var(--primary) / 0.4),
+    hsl(var(--border)),
+    transparent
+  );
+}
+
+/* Tables */
+.prose table {
+  @apply my-8 w-full overflow-hidden rounded-lg border border-border/50;
+}
+
+.prose thead {
+  @apply bg-muted/50;
+}
+
+.prose th {
+  @apply border-b border-border/50 px-4 py-3 text-left font-semibold;
+}
+
+.prose td {
+  @apply border-b border-border/30 px-4 py-3;
+}
+
+.prose tbody tr:hover {
+  @apply bg-muted/20;
+}
+
+/* Images with shadow */
+.prose img {
+  @apply my-8 rounded-xl shadow-lg;
+  border: 1px solid hsl(var(--border) / 0.5);
+}
+
+/* Figure captions */
+.prose figcaption {
+  @apply mt-3 text-center text-sm italic text-muted-foreground;
+}
+
+/* === Blog Post Header Styling === */
+.blog-header {
+  @apply relative mb-12 pb-8;
+}
+
+.blog-header::after {
+  content: '';
+  @apply absolute bottom-0 left-0 h-px w-full;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--border)),
+    hsl(var(--primary) / 0.3),
+    hsl(var(--border)),
+    transparent
+  );
+}
+
+.blog-title {
+  @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--foreground)) 0%,
+    hsl(var(--foreground) / 0.85) 50%,
+    hsl(var(--primary)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+
+/* === Blog Tags Enhancement === */
+.blog-tag {
+  @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200;
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary) / 0.2);
+}
+
+.blog-tag:hover {
+  @apply scale-105;
+  background: hsl(var(--primary) / 0.15);
+  border-color: hsl(var(--primary) / 0.4);
+}
+
+/* === Reading Progress Bar === */
+.reading-progress {
+  @apply fixed left-0 top-0 z-50 h-1 w-full;
+  background: transparent;
+}
+
+.reading-progress::after {
+  content: '';
+  @apply absolute left-0 top-0 h-full;
+  width: var(--reading-progress, 0%);
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.7));
+  transition: width 0.1s linear;
+}
+
+/* === Scrollbar Styling for Code Blocks === */
+.prose pre::-webkit-scrollbar,
+article pre::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.prose pre::-webkit-scrollbar-track,
+article pre::-webkit-scrollbar-track {
+  @apply rounded-full;
+  background: hsl(var(--muted) / 0.3);
+}
+
+.prose pre::-webkit-scrollbar-thumb,
+article pre::-webkit-scrollbar-thumb {
+  @apply rounded-full;
+  background: hsl(var(--muted-foreground) / 0.3);
+}
+
+.prose pre::-webkit-scrollbar-thumb:hover,
+article pre::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* === Copy Button for Code Blocks === */
+.code-block-wrapper {
+  @apply relative;
+}
+
+.code-copy-btn {
+  @apply absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-lg opacity-0 transition-all duration-200;
+  background: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  border: 1px solid hsl(var(--border) / 0.5);
+}
+
+.code-block-wrapper:hover .code-copy-btn {
+  @apply opacity-100;
+}
+
+.code-copy-btn:hover {
+  @apply scale-110;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+/* === Animation for Blog Elements === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blog-animate {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.blog-animate-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.blog-animate-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.blog-animate-delay-3 {
+  animation-delay: 0.3s;
+}
