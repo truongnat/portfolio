@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { BlogContent } from '@/components/BlogContent';
+
+const posts = await getCollection('blog', ({ data }) => {
+	return data.published === true;
+});
+
+// Sort posts by date descending
+const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Map Astro collection to the metadata format expected by BlogContent
+const mappedPosts = sortedPosts.map(post => ({
+	slug: post.slug,
+	title: post.data.title,
+	date: post.data.date.toISOString(),
+	description: post.data.description,
+	published: post.data.published,
+	tags: post.data.tags,
+	author: post.data.author,
+	coverImage: post.data.coverImage,
+}));
+---
+
+<BaseLayout title="Blog" description="Technical articles, tutorials, and insights on full-stack development, AI/ML, and software engineering.">
+	<main class="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
+		<div class="max-w-7xl mx-auto">
+			{/* Header */}
+			<div class="text-center mb-16">
+				<h1 class="blog-title inline-block text-5xl sm:text-6xl md:text-7xl mb-6">
+					Blog
+				</h1>
+				<p class="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+					Technical articles, tutorials, and insights on software development,
+					<br class="hidden sm:block" />
+					<span class="text-primary font-medium">AI/ML</span>, and modern engineering practices
+				</p>
+
+				{/* Decorative line */}
+				<div class="mt-10 flex items-center justify-center gap-2">
+					<div class="h-px w-12 bg-gradient-to-r from-transparent to-border" />
+					<div class="h-1.5 w-1.5 rounded-full bg-primary" />
+					<div class="h-px w-24 bg-gradient-to-r from-primary/50 via-border to-transparent" />
+				</div>
+			</div>
+
+			{mappedPosts.length > 0 ? (
+				<BlogContent client:load initialPosts={mappedPosts} />
+			) : (
+				<div class="text-center py-20">
+					<div class="inline-flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-primary/10 to-accent/10 mb-6">
+						<svg
+							class="h-10 w-10 text-primary"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width={1.5}
+								d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+							/>
+						</svg>
+					</div>
+					<p class="text-xl text-muted-foreground">
+						No blog posts yet. Check back soon!
+					</p>
+					<p class="text-sm text-muted-foreground/60 mt-2">
+						New articles are coming soon
+					</p>
+				</div>
+			)}
+		</div>
+	</main>
+</BaseLayout>

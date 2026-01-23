@@ -1,0 +1,132 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Calendar, Clock, ArrowLeft, User } from 'lucide-react';
+import { formatDate } from '@/lib/utils';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+
+const post = Astro.props;
+const { Content, remarkPluginFrontmatter } = await post.render();
+
+// Calculate reading time (rough estimate: 200 words per minute if not provided by remark)
+const wordCount = post.body.split(/\s+/).length;
+const readingTime = Math.ceil(wordCount / 200);
+---
+
+<BaseLayout 
+	title={post.data.title} 
+	description={post.data.description}
+	image={post.data.coverImage}
+	article={true}
+>
+	<article class="min-h-screen">
+		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-24">
+			{/* Back to Blog */}
+			<a
+				href="/blog"
+				class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-200 mb-10 group"
+			>
+				<ArrowLeft class="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1" />
+				Back to Blog
+			</a>
+
+			{/* Post Header */}
+			<header class="blog-header blog-animate">
+				{/* Title with gradient */}
+				<h1 class="blog-title">
+					{post.data.title}
+				</h1>
+
+				{/* Description */}
+				{post.data.description && (
+					<p class="text-xl text-muted-foreground mb-8 leading-relaxed blog-animate blog-animate-delay-1">
+						{post.data.description}
+					</p>
+				)}
+
+				{/* Metadata Row */}
+				<div class="flex flex-wrap items-center gap-6 text-muted-foreground blog-animate blog-animate-delay-2">
+					{/* Author */}
+					{post.data.author && (
+						<div class="flex items-center gap-3">
+							<div class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-accent/20">
+								<User class="h-5 w-5 text-primary" />
+							</div>
+							<div>
+								<span class="text-sm text-foreground font-medium">
+									{post.data.author}
+								</span>
+							</div>
+						</div>
+					)}
+
+					{/* Divider */}
+					{post.data.author && (
+						<div class="h-6 w-px bg-border hidden sm:block" />
+					)}
+
+					{/* Date */}
+					<div class="flex items-center gap-2">
+						<Calendar class="h-4 w-4 text-primary/70" />
+						<time datetime={post.data.date.toISOString()} class="text-sm">
+							{formatDate(post.data.date)}
+						</time>
+					</div>
+
+					{/* Reading Time */}
+					<div class="flex items-center gap-2">
+						<Clock class="h-4 w-4 text-primary/70" />
+						<span class="text-sm">{readingTime} min read</span>
+					</div>
+				</div>
+
+				{/* Tags */}
+				{post.data.tags && post.data.tags.length > 0 && (
+					<div class="flex flex-wrap gap-2 mt-6 blog-animate blog-animate-delay-3">
+						{post.data.tags.map((tag: string) => (
+							<span class="blog-tag">
+								{tag}
+							</span>
+						))}
+					</div>
+				)}
+			</header>
+
+			{/* Post Content with Premium prose styling */}
+			<div class="prose prose-lg dark:prose-invert max-w-none">
+				<Content />
+			</div>
+
+			{/* Post Footer */}
+			<footer class="mt-16 pt-8 border-t border-border">
+				<div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+					<a
+						href="/blog"
+						class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-secondary hover:bg-secondary/80 text-secondary-foreground font-medium transition-all duration-200 hover:gap-3"
+					>
+						<ArrowLeft class="h-4 w-4" />
+						Back to all posts
+					</a>
+
+					{post.data.tags && post.data.tags.length > 0 && (
+						<div class="flex items-center gap-2 text-sm text-muted-foreground">
+							<span>Tagged:</span>
+							{post.data.tags.slice(0, 2).map((tag: string) => (
+								<span class="blog-tag">
+									{tag}
+								</span>
+							))}
+						</div>
+					)}
+				</div>
+			</footer>
+		</div>
+	</article>
+</BaseLayout>

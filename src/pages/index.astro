@@ -1,0 +1,33 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { HeroClient } from '@/components/Hero.client';
+import { SkillsClient } from '@/components/Skills.client';
+import { ExperienceClient } from '@/components/Experience.client';
+import { ProjectsClient } from '@/components/Projects.client';
+import { ContactFormClient } from '@/components/ContactForm.client';
+import { personalInfo } from '@/lib/config';
+---
+
+<BaseLayout>
+	<main class="min-h-screen">
+		<HeroClient client:load />
+		<SkillsClient client:visible />
+		<ExperienceClient client:visible />
+		<ProjectsClient client:visible />
+
+		<!-- Contact Section -->
+		<section id="contact" class="py-20 px-4 sm:px-6 lg:px-8">
+			<div class="max-w-7xl mx-auto">
+				<div class="text-center mb-12">
+					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+						Get In Touch
+					</h2>
+					<p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+						Have a question or want to work together? Feel free to reach out!
+					</p>
+				</div>
+				<ContactFormClient client:visible />
+			</div>
+		</section>
+	</main>
+</BaseLayout>

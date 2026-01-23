@@ -1,0 +1,57 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { ArrowUp } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { cn } from '@/lib/utils';
+import { useThrottle } from '@/hooks/useThrottle';
+
+export default function ScrollToTopClient() {
+    const [isVisible, setIsVisible] = useState(false);
+
+    // Throttle scroll event to improve performance
+    const handleScroll = useThrottle(() => {
+        if (window.scrollY > 300) {
+            setIsVisible(true);
+        } else {
+            setIsVisible(false);
+        }
+    }, 200); // Throttle to 200ms
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [handleScroll]);
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
+
+    return (
+        <AnimatePresence>
+            {isVisible && (
+                <motion.button
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    onClick={scrollToTop}
+                    className={cn(
+                        'fixed bottom-8 right-8 z-50 p-3 rounded-full',
+                        'bg-primary text-primary-foreground shadow-lg shadow-primary/30',
+                        'hover:bg-primary/90 hover:shadow-primary/50 hover:-translate-y-1 transition-all duration-300',
+                        'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'
+                    )}
+                    aria-label="Scroll to top"
+                >
+                    <ArrowUp className="h-6 w-6" />
+                </motion.button>
+            )}
+        </AnimatePresence>
+    );
+}
