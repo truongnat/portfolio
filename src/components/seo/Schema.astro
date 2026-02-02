@@ -1,0 +1,84 @@
+---
+import { seo, personalInfo } from '@/lib/config';
+
+interface Props {
+  type?: 'WebSite' | 'Article' | 'Profile' | 'Person';
+  title?: string;
+  description?: string;
+  image?: string;
+  publishDate?: Date;
+  author?: string;
+  tags?: string[];
+}
+
+const {
+  type = 'WebSite',
+  title = seo.title,
+  description = seo.description,
+  image = seo.image,
+  publishDate,
+  author = personalInfo.name,
+  tags,
+} = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.toString() : 'https://porfolio-truongdq.vercel.app/';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const imageUrl = new URL(image, siteUrl).toString();
+
+let schema: any = {
+  '@context': 'https://schema.org',
+  '@type': type,
+};
+
+if (type === 'WebSite') {
+  schema = {
+    ...schema,
+    name: seo.title,
+    url: siteUrl,
+    description: seo.description,
+    author: {
+      '@type': 'Person',
+      name: personalInfo.name,
+    },
+  };
+} else if (type === 'Person' || type === 'Profile') {
+  schema = {
+    ...schema,
+    '@type': 'Person',
+    name: personalInfo.name,
+    url: siteUrl,
+    image: imageUrl,
+    jobTitle: personalInfo.role,
+    description: personalInfo.bio,
+    sameAs: personalInfo.socials.map((s) => s.url),
+  };
+} else if (type === 'Article') {
+  schema = {
+    ...schema,
+    headline: title,
+    description: description,
+    image: imageUrl,
+    datePublished: publishDate ? new Date(publishDate).toISOString() : undefined,
+    author: {
+      '@type': 'Person',
+      name: author,
+      url: siteUrl,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: personalInfo.name,
+      logo: {
+        '@type': 'ImageObject',
+        url: new URL('/favicon.svg', siteUrl).toString(),
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
+    keywords: tags ? tags.join(', ') : undefined,
+  };
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

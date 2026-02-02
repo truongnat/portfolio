@@ -1,8 +1,8 @@
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
-  readonly TELEGRAM_BOT_TOKEN: string;
-  readonly TELEGRAM_CHAT_ID: string;
+  readonly PUBLIC_TELEGRAM_BOT_TOKEN: string;
+  readonly PUBLIC_TELEGRAM_CHAT_ID: string;
 }
 
 interface ImportMeta {

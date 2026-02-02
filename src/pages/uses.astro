@@ -1,0 +1,90 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Laptop, Terminal, Coffee, Layers, Monitor, Keyboard, Mouse, Code2 } from 'lucide-react';
+
+const uses = [
+  {
+    category: 'Workstation',
+    icon: Monitor,
+    items: [
+      { name: 'MacBook Pro 16"', desc: 'M3 Max, 64GB RAM. The beast that powers everything.' },
+      { name: 'LG 27" 4K Monitor', desc: 'Vertical setup for documentation and logs.' },
+      { name: 'Keychron Q1 Pro', desc: 'Mechanical keyboard with Gateron Brown switches.' },
+      { name: 'Logitech MX Master 3S', desc: 'The standard for productivity.' },
+    ]
+  },
+  {
+    category: 'Development',
+    icon: Terminal,
+    items: [
+      { name: 'VS Code', desc: 'With the "Vesper" theme and "JetBrains Mono" font.' },
+      { name: 'Warp', desc: 'Rust-based terminal. Blazing fast.' },
+      { name: 'Docker', desc: 'Containerization for everything.' },
+      { name: 'Postman', desc: 'API development and testing.' },
+    ]
+  },
+  {
+    category: 'Productivity',
+    icon: Layers,
+    items: [
+      { name: 'Raycast', desc: 'Spotlight replacement. It handles my clipboard, window management, and more.' },
+      { name: 'Notion', desc: 'Second brain for notes and project tracking.' },
+      { name: 'Figma', desc: 'For design systems and wireframing.' },
+    ]
+  },
+  {
+    category: 'Lifestyle',
+    icon: Coffee,
+    items: [
+      { name: 'Aeropress', desc: 'Fuel for coding sessions.' },
+      { name: 'Sony WH-1000XM5', desc: 'Noise cancelling for deep work.' },
+    ]
+  }
+];
+---
+
+<BaseLayout title="Uses | Gear & Software" description="A curated list of the hardware and software I use daily.">
+  <main class="min-h-screen py-24 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      {/* Header */}
+      <header class="mb-20 text-center">
+        <h1 class="text-4xl sm:text-5xl font-bold font-mono tracking-tight mb-6">/uses</h1>
+        <p class="text-muted-foreground font-mono text-sm uppercase tracking-widest max-w-xl mx-auto">
+          The hardware, software, and tools that power my workflow.
+        </p>
+      </header>
+
+      {/* Grid */}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        {uses.map((category) => (
+          <div class="space-y-8">
+            <div class="flex items-center gap-3 border-b border-border pb-4">
+              <category.icon class="h-5 w-5 text-foreground" />
+              <h2 class="text-lg font-bold font-mono uppercase tracking-widest">{category.category}</h2>
+            </div>
+            
+            <ul class="space-y-6">
+              {category.items.map((item) => (
+                <li class="group">
+                  <h3 class="font-bold text-foreground group-hover:text-primary transition-colors font-mono text-sm mb-1">
+                    {item.name}
+                  </h3>
+                  <p class="text-sm text-muted-foreground leading-relaxed">
+                    {item.desc}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      {/* Footer Note */}
+      <div class="mt-20 pt-12 border-t border-border text-center">
+        <p class="text-xs text-muted-foreground font-mono">
+          Updated: {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+        </p>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 /**
  * Custom hook for tracking which section is currently in view
  * Useful for table of contents highlighting
  * 
- * @param ids - Array of element IDs to track
+ * @param ids - Array of element IDs to track (in order)
  * @param options - IntersectionObserver options
  * @returns ID of the currently active section
  */
@@ -15,6 +15,7 @@ export function useScrollSpy(
   options: IntersectionObserverInit = {}
 ): string | null {
   const [activeId, setActiveId] = useState<string | null>(null);
+  const intersectingIds = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     // Check if window is available (client-side)
@@ -26,9 +27,22 @@ export function useScrollSpy(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
+            intersectingIds.current.add(entry.target.id);
+          } else {
+            intersectingIds.current.delete(entry.target.id);
           }
         });
+
+        // Find the first ID from the ordered list that is currently intersecting
+        const visibleId = ids.find((id) => intersectingIds.current.has(id));
+        
+        // If we found a visible ID, update state. 
+        // If not (e.g. scrolled past everything or between sections), we might keep the last one or clear it.
+        // For a smooth experience, we usually want to keep the last active one if nothing is strictly "intersecting" 
+        // but often 'rootMargin' ensures something is always intersecting.
+        if (visibleId) {
+          setActiveId(visibleId);
+        }
       },
       {
         rootMargin: '-20% 0px -35% 0px',
@@ -53,6 +67,7 @@ export function useScrollSpy(
           observer.unobserve(element);
         }
       });
+      intersectingIds.current.clear();
     };
   }, [ids, options]);
 

@@ -53,4 +53,4 @@ async function handleProcess() {
 Mastering **A Practical Case Study** in **Neo4j** is a journey, not a destination. Stay updated with the latest changes and always keep experimenting.
 
 ---
-*About the author: Dao Quang Truong is an Engineering Leader specializing in Agentic AI and Fullstack development.*
+*About the author: Dao Quang Truong is a Fullstack Developer specializing in Agentic AI and Fullstack development.*

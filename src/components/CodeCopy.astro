@@ -1,0 +1,47 @@
+<script>
+  function attachCopyButtons() {
+    const preBlocks = document.querySelectorAll('pre');
+
+    preBlocks.forEach((pre) => {
+      // Check if button already exists to avoid duplicates (though View Transitions usually replaces content)
+      if (pre.querySelector('.copy-code-btn')) return;
+
+      // Create container relative for positioning
+      pre.style.position = 'relative';
+
+      const button = document.createElement('button');
+      button.className = 'copy-code-btn absolute top-3 right-3 p-2 rounded-md bg-secondary/80 border border-border text-muted-foreground hover:text-foreground hover:bg-secondary transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 font-mono text-[10px] uppercase tracking-wider';
+      button.innerHTML = 'Copy';
+      button.setAttribute('aria-label', 'Copy code');
+
+      // Make the pre block a group for hover effect
+      pre.classList.add('group');
+
+      button.addEventListener('click', async () => {
+        const code = pre.querySelector('code')?.innerText || pre.innerText;
+        
+        try {
+          await navigator.clipboard.writeText(code);
+          button.innerText = 'Copied!';
+          button.classList.add('text-green-500', 'border-green-500/50');
+          
+          setTimeout(() => {
+            button.innerText = 'Copy';
+            button.classList.remove('text-green-500', 'border-green-500/50');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+          button.innerText = 'Error';
+        }
+      });
+
+      pre.appendChild(button);
+    });
+  }
+
+  // Run on initial load
+  attachCopyButtons();
+
+  // Run on view transitions navigation
+  document.addEventListener('astro:page-load', attachCopyButtons);
+</script>

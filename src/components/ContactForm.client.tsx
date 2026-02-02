@@ -6,11 +6,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, User, MessageSquare, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { uiStrings } from '@/lib/config';
+import { sendContactMessage } from '@/lib/telegram';
 
 // Zod validation schema
 const contactFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
+  email: z.email('Invalid email address'),
   message: z.string().min(10, 'Message must be at least 10 characters'),
 });
 
@@ -37,18 +39,9 @@ export function ContactFormClient() {
     setErrorMessage('');
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to send message');
+      const status = await sendContactMessage(data.name, data.email, data.message);
+      if (!status) {
+        throw new Error('Failed to send message');
       }
 
       setSubmitStatus('success');
@@ -59,6 +52,8 @@ export function ContactFormClient() {
         setSubmitStatus('idle');
       }, 5000);
     } catch (error) {
+      console.log(error);
+
       setSubmitStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'Failed to send message');
     } finally {
@@ -69,85 +64,85 @@ export function ContactFormClient() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-2xl mx-auto space-y-6"
+      className="max-w-2xl mx-auto space-y-8"
       data-testid="contact-form"
     >
       {/* Name Field */}
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium mb-2">
-          Name
+      <div className="space-y-2">
+        <label htmlFor="name" className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/50 font-mono">
+          {uiStrings.contact.form.nameLabel}
         </label>
-        <div className="relative">
-          <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+        <div className="relative group">
+          <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
           <input
             id="name"
             type="text"
             {...register('name')}
-            className="w-full pl-10 pr-4 py-3 bg-secondary/30 border border-white/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 shadow-inner backdrop-blur-sm transition-all"
-            placeholder="Your name"
+            className="w-full pl-12 pr-4 py-4 bg-secondary/20 border border-border rounded-lg focus:outline-none focus:border-foreground/30 transition-all font-mono text-sm"
+            placeholder={uiStrings.contact.form.namePlaceholder}
             data-testid="contact-name-input"
           />
         </div>
         {errors.name && (
           <p
-            className="mt-1 text-sm text-destructive flex items-center gap-1"
+            className="mt-1 text-[10px] font-mono text-destructive uppercase tracking-tight flex items-center gap-1"
             data-testid="contact-name-error"
           >
-            <AlertCircle className="h-4 w-4" />
+            <AlertCircle className="h-3 w-3" />
             {errors.name.message}
           </p>
         )}
       </div>
 
       {/* Email Field */}
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium mb-2">
-          Email
+      <div className="space-y-2">
+        <label htmlFor="email" className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/50 font-mono">
+          {uiStrings.contact.form.emailLabel}
         </label>
-        <div className="relative">
-          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+        <div className="relative group">
+          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
           <input
             id="email"
             type="email"
             {...register('email')}
-            className="w-full pl-10 pr-4 py-3 bg-secondary/30 border border-white/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 shadow-inner backdrop-blur-sm transition-all"
-            placeholder="your.email@example.com"
+            className="w-full pl-12 pr-4 py-4 bg-secondary/20 border border-border rounded-lg focus:outline-none focus:border-foreground/30 transition-all font-mono text-sm"
+            placeholder={uiStrings.contact.form.emailPlaceholder}
             data-testid="contact-email-input"
           />
         </div>
         {errors.email && (
           <p
-            className="mt-1 text-sm text-destructive flex items-center gap-1"
+            className="mt-1 text-[10px] font-mono text-destructive uppercase tracking-tight flex items-center gap-1"
             data-testid="contact-email-error"
           >
-            <AlertCircle className="h-4 w-4" />
+            <AlertCircle className="h-3 w-3" />
             {errors.email.message}
           </p>
         )}
       </div>
 
       {/* Message Field */}
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium mb-2">
-          Message
+      <div className="space-y-2">
+        <label htmlFor="message" className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/50 font-mono">
+          {uiStrings.contact.form.messageLabel}
         </label>
-        <div className="relative">
-          <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
+        <div className="relative group">
+          <MessageSquare className="absolute left-4 top-5 h-4 w-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
           <textarea
             id="message"
             {...register('message')}
             rows={6}
-            className="w-full pl-10 pr-4 py-3 bg-secondary/30 border border-white/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 shadow-inner backdrop-blur-sm transition-all resize-none"
-            placeholder="Your message..."
+            className="w-full pl-12 pr-4 py-4 bg-secondary/20 border border-border rounded-lg focus:outline-none focus:border-foreground/30 transition-all resize-none font-mono text-sm"
+            placeholder={uiStrings.contact.form.messagePlaceholder}
             data-testid="contact-message-input"
           />
         </div>
         {errors.message && (
           <p
-            className="mt-1 text-sm text-destructive flex items-center gap-1"
+            className="mt-1 text-[10px] font-mono text-destructive uppercase tracking-tight flex items-center gap-1"
             data-testid="contact-message-error"
           >
-            <AlertCircle className="h-4 w-4" />
+            <AlertCircle className="h-3 w-3" />
             {errors.message.message}
           </p>
         )}
@@ -157,18 +152,18 @@ export function ContactFormClient() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-xl font-bold shadow-lg shadow-primary/25 hover:bg-primary/90 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full px-6 py-4 bg-foreground text-background rounded-lg font-bold font-mono text-xs uppercase tracking-widest transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         data-testid="contact-submit-button"
       >
         {isSubmitting ? (
           <>
-            <div className="h-5 w-5 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
-            Sending...
+            <div className="h-4 w-4 border-2 border-background border-t-transparent rounded-full animate-spin" />
+            {uiStrings.contact.form.submittingButton}
           </>
         ) : (
           <>
-            <Send className="h-5 w-5" />
-            Send Message
+            <Send className="h-4 w-4" />
+            {uiStrings.contact.form.submitButton}
           </>
         )}
       </button>
@@ -188,7 +183,7 @@ export function ContactFormClient() {
                 <CheckCircle className="h-5 w-5 flex-shrink-0" />
               </div>
               <p className="font-medium text-sm sm:text-base">
-                Thank you! Your message has been sent successfully.
+                {uiStrings.contact.messages.success}
               </p>
             </motion.div>
           )}
@@ -205,7 +200,7 @@ export function ContactFormClient() {
                 <AlertCircle className="h-5 w-5 flex-shrink-0" />
               </div>
               <p className="font-medium text-sm sm:text-base">
-                {errorMessage || 'Failed to send message. Please try again.'}
+                {errorMessage || uiStrings.contact.messages.error}
               </p>
             </motion.div>
           )}

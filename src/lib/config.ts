@@ -1,32 +1,18 @@
 import {
-  Code2,
   Brain,
   Layers,
-  Database,
-  Cloud,
   Sparkles,
-  Rocket,
-  Terminal,
-  GitBranch,
-  Package,
   Server,
-  Palette,
-  Search,
-  BarChart,
-  MessageSquare,
-  Github,
   Linkedin,
   Mail,
-  Smartphone,
-  Monitor,
-  Globe,
-  Map,
-  Video,
-  FileText,
   Users,
-  Cpu,
   type LucideIcon,
 } from 'lucide-react';
+import type { ProjectCategory } from '@/types';
+
+export type SkillCategory = 'Frontend' | 'Backend' | 'Mobile' | 'DevOps' | 'Tools';
+
+export const projectCategories: ProjectCategory[] = ['All', 'AI', 'Web', 'Mobile', 'Open Source'];
 
 export interface SocialLink {
   platform: string;
@@ -36,8 +22,8 @@ export interface SocialLink {
 
 export const personalInfo = {
   name: "Dao Quang Truong",
-  role: "Fullstack Developer & Engineering Leader",
-  bio: "Fullstack Developer and Engineering Leader with over 3 years of professional experience and a strong focus on the next generation of software engineering via Agentic AI. Proven track record of leading cross-functional teams of 8+ engineers and delivering high-scale enterprise solutions for major clients like Viettel and Naver. Expert in cross-platform applications, and currently pioneering Agentic SDLC frameworks to automate and optimize the software development lifecycle.",
+  role: "Fullstack Developer",
+  bio: "Fullstack Developer specializing in cross-platform architecture and Agentic AI . Proven track record of leading engineering teams and delivering high-scale enterprise solutions for Viettel and Naver.",
   location: "Ninh Binh, Vietnam",
   phone: "(+84) 96 906 9035",
   email: "truongdq.dev@gmail.com",
@@ -45,7 +31,7 @@ export const personalInfo = {
   socials: [
     {
       platform: "LinkedIn",
-      url: "https://linkedin.com/in/truongdq",
+      url: "https://linkedin.com/in/truongdq01",
       icon: Linkedin,
     },
     {
@@ -56,23 +42,22 @@ export const personalInfo = {
   ],
   typingPhrases: [
     'Fullstack Developer',
-    'Engineering Leader',
     'Agentic AI',
     'Cross-platform Architect',
-    'AI-Powered SDLC Expert',
+    'AI-Powered SDLC',
   ],
   resumeUrl: "/Dao_Quang_Truong_CV.pdf",
   stats: [
     { label: 'Years Experience', value: '3+' },
     { label: 'Team Members Led', value: '8+' },
-    { label: 'AI Integration', value: 'Expert' },
+    { label: 'AI Integration', value: 'Advanced' },
     { label: 'API Optimization', value: '50%' }
   ]
 };
 
 export const seo = {
-  title: "Dao Quang Truong | Fullstack Developer & AI Engineer",
-  description: "Fullstack Developer and Engineering Leader with over 3 years of experience. Specializing in Agentic AI, cross-platform solutions, and building high-scale enterprise systems for Viettel and Naver.",
+  title: "Dao Quang Truong | Fullstack Developer",
+  description: "Fullstack Developer specializing in cross-platform solutions, Agentic AI, and high-scale enterprise systems.",
   keywords: [
     'portfolio',
     'developer',
@@ -94,8 +79,6 @@ export const seo = {
   url: "https://porfolio-truongdq.vercel.app",
   image: '/avatar.jpg',
 };
-
-export type SkillCategory = 'Frontend' | 'Backend' | 'Mobile' | 'DevOps' | 'Tools';
 
 export interface ExpertiseRing {
   id: string;
@@ -148,13 +131,13 @@ export const skillsConfig = {
     {
       id: 'frontend-crossplatform',
       title: 'Core Stack & Cross-Platform',
-      level: 'Expert',
+      level: 'Advanced',
       icon: Layers,
       subSections: [
         {
           label: 'Core',
           skills: ['TypeScript', 'React Native', 'Electron.js', 'Vue.js'],
-          highlight: 'Expert in building unified cross-platform solutions across Web, Mobile, and Desktop.'
+          highlight: 'Advanced in building unified cross-platform solutions across Web, Mobile, and Desktop.'
         },
         {
           label: 'Data Visualization',
@@ -166,12 +149,12 @@ export const skillsConfig = {
     {
       id: 'backend-devops',
       title: 'Backend & DevOps',
-      level: 'Expert',
+      level: 'Advanced',
       icon: Server,
       subSections: [
         {
           label: 'Backend',
-          skills: ['Node.js (NestJS/Express)', 'Python', 'Neo4j', 'PostgreSQL']
+          skills: ['Node.js (NestJS/Express)', 'Python', 'PostgreSQL']
         },
         {
           label: 'Infrastructure',
@@ -207,8 +190,8 @@ export interface Experience {
 export const workExperience: Experience[] = [
   {
     id: 'ai',
-    role: 'Lead Developer',
-    company: 'AI & Agentic Systems',
+    role: 'AI Engineer',
+    company: 'Self-employed',
     period: 'Jan 2024 – Present',
     achievements: [
       'Focus: Researching and developing autonomous AI agents to revolutionize the Software Development Life Cycle (SDLC).',
@@ -256,6 +239,7 @@ export interface Project {
   period: string;
   description: string;
   techStack: string[];
+  categories: ProjectCategory[];
   achievements: string[];
   link?: string;
 }
@@ -268,6 +252,7 @@ export const projectsConfig: Project[] = [
     period: 'Jan 2024 – Present',
     description: 'Engineered a Multi-agent system using LangGraph/CrewAI to coordinate AI agents for requirement analysis, code generation, and automated testing.',
     techStack: ['Python', 'LangChain', 'Antigravity', 'Gemini', 'Neo4j', 'Docker'],
+    categories: ['AI', 'Open Source'],
     achievements: [
       'Challenge: Reducing manual effort in repetitive coding tasks and system documentation.',
       'Action: Engineered a Multi-agent system using LangGraph/CrewAI to coordinate AI agents for requirement analysis, code generation, and automated testing.',
@@ -281,6 +266,7 @@ export const projectsConfig: Project[] = [
     period: 'Jan 2023 – Jan 2024',
     description: 'Build a unified web and mobile platform for enterprise KPI monitoring with complex data visualization needs.',
     techStack: ['React', 'React Native', 'ChartJS', 'GitLab CI/CD', 'Jenkins', 'Linux VPS', 'Nginx'],
+    categories: ['Web', 'Mobile'],
     achievements: [
       'Challenge: Build a unified web and mobile platform for enterprise KPI monitoring with complex data visualization needs.',
       'Action: Led frontend development, building the foundational React and React Native codebases. Designed and implemented an interactive geospatial data visualization feature (Vietnam Map) for mobile.',
@@ -294,6 +280,7 @@ export const projectsConfig: Project[] = [
     period: 'Jun 2021 – Dec 2022',
     description: 'Develop a stable, multi-platform video conferencing solution with consistent user experience.',
     techStack: ['Vue.js', 'React Native', 'Electron.js', 'Jitsi Meet'],
+    categories: ['Web', 'Mobile'],
     achievements: [
       'Challenge: Develop a stable, multi-platform video conferencing solution with consistent user experience.',
       'Action: Engineered real-time video features for web (Vue.js), desktop (Electron), and mobile (React Native) using the Jitsi Meet core.',
@@ -307,6 +294,7 @@ export const projectsConfig: Project[] = [
     period: 'Oct 2020 – Jun 2021',
     description: 'Create a stable, user-friendly exam application for the Japanese market with offline functionality.',
     techStack: ['React Native', 'Realm DB', 'PHP'],
+    categories: ['Mobile'],
     achievements: [
       'Challenge: Create a stable, user-friendly exam application for the Japanese market with offline functionality.',
       'Action: Developed the mobile app using React Native and implemented an offline-first architecture using Realm DB for local data caching and synchronization.',
@@ -332,3 +320,60 @@ export const awards: Award[] = [
     icon: Sparkles,
   },
 ];
+
+export const navLinks = [
+  { label: 'About', href: '/#about' },
+  { label: 'Now', href: '/now' },
+  { label: 'Skills', href: '/#skills' },
+  { label: 'Tech Radar', href: '/tech-radar' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/#contact' },
+];
+
+export const uiStrings = {
+  common: {
+    logo: 'TRUONG.DEV',
+  },
+  hero: {
+    cta: {
+      projects: 'View Projects',
+      cv: 'Download CV',
+      contact: 'Contact Me',
+    },
+  },
+  skills: {
+    title: 'Technical Stack',
+    subtitle: 'Fullstack Development & AI Systems',
+  },
+  experience: {
+    title: 'Experience',
+    subtitle: 'Professional Journey',
+    achievementsTitle: 'Major Achievements',
+  },
+  projects: {
+    title: 'Selected Works',
+    subtitle: 'Technical Case Studies & Products',
+    emptyMessage: 'NO_PROJECTS_FOUND',
+    viewLive: 'VIEW_LIVE',
+  },
+  contact: {
+    title: 'Get In Touch',
+    subtitle: 'Let\'s build something together',
+    form: {
+      nameLabel: '01 // Name',
+      namePlaceholder: 'ENTER_NAME',
+      emailLabel: '02 // Email',
+      emailPlaceholder: 'ENTER_EMAIL',
+      messageLabel: '03 // Message',
+      messagePlaceholder: 'TYPE_MESSAGE...',
+      submitButton: 'SEND_MESSAGE',
+      submittingButton: 'SENDING...',
+    },
+    messages: {
+      success: 'Thank you! Your message has been sent successfully.',
+      error: 'Failed to send message. Please try again.',
+    }
+  }
+};

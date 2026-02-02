@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import { Search, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { PostCard } from './PostCard';
-import type { BlogPostMetadata } from '@/lib/blog';
+import type { BlogPostMetadata } from '@/types';
 
 interface BlogContentProps {
     initialPosts: BlogPostMetadata[];
@@ -62,23 +62,23 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
     };
 
     return (
-        <div className="space-y-12">
+        <div className="space-y-16">
             {/* Search and Filters Section */}
-            <div className="flex flex-col md:flex-row gap-6 items-center justify-between sticky top-20 z-30 py-4 bg-white/10 dark:bg-black/20 backdrop-blur-xl px-4 rounded-2xl border border-white/20 shadow-sm">
+            <div className="flex flex-col md:flex-row gap-8 items-center justify-between py-8 border-b border-border">
                 {/* Search Input */}
-                <div className="relative w-full md:max-w-md group">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
+                <div className="relative w-full md:max-w-xs group">
+                    <Search className="absolute left-0 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground group-focus-within:text-foreground transition-colors" />
                     <input
                         type="text"
-                        placeholder="Search articles, skills, or tags..."
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border/50 bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                        placeholder="SEARCH_ARTICLES..."
+                        className="w-full pl-6 pr-4 py-2 border-b border-transparent focus:border-foreground/30 bg-transparent focus:outline-none transition-all font-mono text-xs uppercase tracking-widest"
                         value={searchQuery}
                         onChange={handleSearch}
                     />
                     {searchQuery && (
                         <button
                             onClick={() => setSearchQuery('')}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 flex items-center justify-center rounded-full hover:bg-muted transition-colors"
+                            className="absolute right-0 top-1/2 -translate-y-1/2 h-4 w-4 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
                         >
                             <X className="h-3 w-3" />
                         </button>
@@ -86,14 +86,14 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                 </div>
 
                 {/* Category Filters */}
-                <div className="flex flex-nowrap md:flex-wrap items-center justify-start md:justify-center gap-2 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0 scrollbar-hide w-full md:w-auto">
+                <div className="flex flex-nowrap md:flex-wrap items-center justify-start md:justify-end gap-2 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0 scrollbar-hide w-full md:w-auto">
                     {categories.map((category) => (
                         <button
                             key={category}
                             onClick={() => handleCategoryChange(category)}
-                            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap border ${selectedCategory === category
-                                ? 'bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20 scale-105'
-                                : 'bg-muted/40 text-muted-foreground border-transparent hover:bg-muted hover:border-border/50'
+                            className={`px-4 py-1 rounded-md text-[10px] font-mono font-bold uppercase tracking-tighter transition-all duration-200 border ${selectedCategory === category
+                                ? 'bg-foreground text-background border-foreground'
+                                : 'bg-secondary/30 text-muted-foreground border-border hover:border-muted-foreground/50'
                                 }`}
                         >
                             {category}
@@ -103,65 +103,64 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
             </div>
 
             {/* Results Count */}
-            <div className="flex items-center justify-between text-muted-foreground text-sm px-2">
+            <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground px-1">
                 <p>
-                    Showing {filteredPosts.length} {filteredPosts.length === 1 ? 'article' : 'articles'}
-                    {selectedCategory !== 'All' && <span> in <span className="text-foreground font-medium">{selectedCategory}</span></span>}
+                    RESULTS: {filteredPosts.length} {filteredPosts.length === 1 ? 'UNIT' : 'UNITS'}
+                    {selectedCategory !== 'All' && <span> // CATEGORY: {selectedCategory}</span>}
                 </p>
                 {searchQuery && (
                     <p>
-                        Results for "<span className="text-foreground font-medium">{searchQuery}</span>"
+                        QUERY: "{searchQuery}"
                     </p>
                 )}
             </div>
 
             {/* Grid */}
             {paginatedPosts.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 blog-animate">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     {paginatedPosts.map((post) => (
                         <PostCard key={post.slug} post={post} />
                     ))}
                 </div>
             ) : (
-                <div className="py-24 text-center">
-                    <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-muted mb-6">
-                        <Search className="h-10 w-10 text-muted-foreground" />
+                <div className="py-32 text-center border border-dashed border-border rounded-xl bg-muted/5">
+                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-muted mb-6">
+                        <Search className="h-6 w-6 text-muted-foreground opacity-50" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">No articles found</h3>
-                    <p className="text-muted-foreground max-w-md mx-auto">
-                        We couldn't find any articles matching your search or filter criteria. Try a different term or category.
+                    <h3 className="text-sm font-bold font-mono uppercase tracking-widest mb-2">Null result</h3>
+                    <p className="text-xs text-muted-foreground font-mono uppercase tracking-tight max-w-xs mx-auto">
+                        No articles matching current filter parameters found.
                     </p>
                     <button
                         onClick={() => {
                             setSearchQuery('');
                             setSelectedCategory('All');
                         }}
-                        className="mt-6 text-primary hover:underline font-medium"
+                        className="mt-8 text-[10px] font-bold font-mono uppercase tracking-[0.2em] text-primary hover:text-foreground transition-colors underline underline-offset-4 decoration-primary/30 hover:decoration-foreground"
                     >
-                        Clear all filters
+                        RESET_FILTERS
                     </button>
                 </div>
             )}
 
             {/* Pagination */}
             {totalPages > 1 && (
-                <div className="flex flex-wrap items-center justify-center gap-3 pt-12 border-t border-border/40">
+                <div className="flex flex-wrap items-center justify-center gap-4 pt-16 border-t border-border">
                     <button
                         onClick={() => {
                             setCurrentPage(p => Math.max(1, p - 1));
                             window.scrollTo({ top: 300, behavior: 'smooth' });
                         }}
                         disabled={currentPage === 1}
-                        className="flex items-center gap-1 px-4 py-2 rounded-lg border border-border/50 hover:bg-muted disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                        className="flex items-center gap-2 px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-widest border border-border rounded-md hover:bg-secondary disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                     >
-                        <ChevronLeft className="h-4 w-4" />
-                        Previous
+                        <ChevronLeft className="h-3 w-3" />
+                        PREV
                     </button>
 
                     <div className="flex items-center gap-2">
                         {Array.from({ length: totalPages }).map((_, i) => {
                             const pageNum = i + 1;
-                            // Simple pagination logic to show only neighbors for large page counts
                             if (
                                 pageNum === 1 ||
                                 pageNum === totalPages ||
@@ -174,9 +173,9 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                                             setCurrentPage(pageNum);
                                             window.scrollTo({ top: 300, behavior: 'smooth' });
                                         }}
-                                        className={`h-10 w-10 flex items-center justify-center rounded-lg border transition-all ${currentPage === pageNum
-                                            ? 'bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20'
-                                            : 'bg-background border-border/50 hover:bg-muted'
+                                        className={`h-8 w-8 flex items-center justify-center rounded-md border font-mono text-[10px] font-bold transition-all ${currentPage === pageNum
+                                            ? 'bg-foreground text-background border-foreground'
+                                            : 'bg-transparent border-border hover:border-muted-foreground/50 text-muted-foreground'
                                             }`}
                                     >
                                         {pageNum}
@@ -186,7 +185,7 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                                 (pageNum === 2 && currentPage > 3) ||
                                 (pageNum === totalPages - 1 && currentPage < totalPages - 2)
                             ) {
-                                return <span key={pageNum} className="text-muted-foreground px-1">...</span>;
+                                return <span key={pageNum} className="text-muted-foreground font-mono text-[10px]">...</span>;
                             }
                             return null;
                         })}
@@ -198,10 +197,10 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                             window.scrollTo({ top: 300, behavior: 'smooth' });
                         }}
                         disabled={currentPage === totalPages}
-                        className="flex items-center gap-1 px-4 py-2 rounded-lg border border-border/50 hover:bg-muted disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                        className="flex items-center gap-2 px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-widest border border-border rounded-md hover:bg-secondary disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                     >
-                        Next
-                        <ChevronRight className="h-4 w-4" />
+                        NEXT
+                        <ChevronRight className="h-3 w-3" />
                     </button>
                 </div>
             )}

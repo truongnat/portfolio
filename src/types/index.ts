@@ -1,18 +1,37 @@
 // Central export for all TypeScript types
-export * from './database';
-import { Tables, TablesInsert, TablesUpdate } from './database';
 
-// Application-level type aliases for convenience
-export type Post = Tables<'posts'>;
-export type PostInsert = TablesInsert<'posts'>;
-export type PostUpdate = TablesUpdate<'posts'>;
+export interface Post {
+    id: string;
+    title: string;
+    slug: string;
+    content: string;
+    description: string;
+    date: string;
+    published: boolean;
+    tags?: string[];
+    author?: string;
+    coverImage?: string;
+    reading_time?: number;
+    created_at?: string;
+    updated_at?: string;
+}
 
-export type Project = Tables<'projects'>;
-export type ProjectInsert = TablesInsert<'projects'>;
-export type ProjectUpdate = TablesUpdate<'projects'>;
+export interface BlogPostMetadata extends Omit<Post, 'id' | 'content'> { }
 
-// Utility types for common query patterns
-export type PostWithoutContent = Omit<Post, 'content'>;
-export type FeaturedProject = Project & { featured: true };
+export interface Project {
+    id: string;
+    title: string;
+    description: string;
+    tech_stack: string[];
+    categories: ProjectCategory[];
+    screenshot: string | null;
+    live_url: string | null;
+    github_url?: string | null;
+    featured: boolean;
+    display_order: number;
+    created_at: string;
+    updated_at: string;
+}
+
 export type ProjectCategory = 'All' | 'AI' | 'Web' | 'Mobile' | 'Open Source';
 

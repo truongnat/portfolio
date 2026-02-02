@@ -1,8 +1,12 @@
 ---
 import { seo } from '@/lib/config';
-import { Toaster } from "@/components/ui/toaster";
 import Navigation from "@/components/Navigation";
 import ScrollToTopClient from "@/components/ScrollToTop.client";
+import { CommandPalette } from "@/components/CommandPalette";
+import CodeCopy from "@/components/CodeCopy.astro";
+import Schema from "@/components/seo/Schema.astro";
+import GridBackground from "@/components/GridBackground.astro";
+import { ClientRouter } from 'astro:transitions';
 import '@/styles/global.css';
 
 interface Props {
@@ -10,13 +14,17 @@ interface Props {
 	description?: string;
 	image?: string;
 	article?: boolean;
+	publishDate?: Date;
+	tags?: string[];
 }
 
 const { 
 	title = seo.title, 
 	description = seo.description, 
 	image = seo.image,
-	article = false 
+	article = false,
+	publishDate,
+	tags
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://porfolio-truongdq.vercel.app');
@@ -52,19 +60,32 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://porfolio
 		<meta property="twitter:description" content={description} />
 		<meta property="twitter:image" content={new URL(image, Astro.url)} />
 
+		<!-- JSON-LD Structured Data -->
+		<Schema 
+			type={article ? 'Article' : 'WebSite'}
+			title={title}
+			description={description}
+			image={image}
+			publishDate={publishDate}
+			tags={tags}
+		/>
+
 		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 
+		<ClientRouter />
 		<!-- Resource hints -->
 	</head>
 	<body class="bg-background text-foreground antialiased min-h-screen">
-		<Navigation client:load />
+		<GridBackground />
+		<Navigation client:load transition:persist />
 		<main>
 			<slot />
 		</main>
-		<ScrollToTopClient client:load />
-		<Toaster client:load />
+		<ScrollToTopClient client:load transition:persist />
+		<CommandPalette client:idle transition:persist />
+		<CodeCopy />
 	</body>
 </html>

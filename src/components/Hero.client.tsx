@@ -1,11 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
-import { ArrowRight, Linkedin, Mail, Download } from 'lucide-react';
+import { ArrowRight, Mail, Download } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-import { personalInfo } from '@/lib/config';
+import { personalInfo, uiStrings } from '@/lib/config';
 
 interface CTAButton {
   label: string;
@@ -27,19 +27,19 @@ export function HeroClient({
   typingPhrases = personalInfo.typingPhrases,
   ctaButtons = [
     {
-      label: 'View Projects',
+      label: uiStrings.hero.cta.projects,
       href: '#projects',
       variant: 'primary' as const,
       icon: <ArrowRight className="h-4 w-4" />,
     },
     {
-      label: 'Download CV',
+      label: uiStrings.hero.cta.cv,
       href: personalInfo.resumeUrl,
       variant: 'secondary' as const,
       icon: <Download className="h-4 w-4" />,
     },
     {
-      label: 'Contact Me',
+      label: uiStrings.hero.cta.contact,
       href: '#contact',
       variant: 'secondary' as const,
       icon: <Mail className="h-4 w-4" />,
@@ -81,7 +81,7 @@ export function HeroClient({
   }, [typingText, isDeleting, phraseIndex, typingPhrases]);
 
   // Animation variants
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -92,7 +92,7 @@ export function HeroClient({
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
     visible: {
       opacity: 1,
@@ -109,44 +109,6 @@ export function HeroClient({
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pb-32 sm:pb-0 pt-24 sm:pt-16"
     >
-      {/* Gradient blob background */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
-          animate={
-            shouldReduceMotion
-              ? {}
-              : {
-                scale: [1, 1.2, 1],
-                x: [0, 50, 0],
-                y: [0, 30, 0],
-              }
-          }
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/30 rounded-full blur-3xl"
-          animate={
-            shouldReduceMotion
-              ? {}
-              : {
-                scale: [1, 1.3, 1],
-                x: [0, -50, 0],
-                y: [0, -30, 0],
-              }
-          }
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      </div>
-
       {/* Hero content */}
       <motion.div
         className="relative z-10 max-w-4xl mx-auto text-center"
@@ -156,7 +118,7 @@ export function HeroClient({
       >
         {/* Title */}
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground font-mono"
           variants={itemVariants}
         >
           {title}
@@ -164,7 +126,7 @@ export function HeroClient({
 
         {/* Typing animation */}
         <motion.div
-          className="mt-6 text-xl sm:text-2xl md:text-3xl text-muted-foreground min-h-[2.5rem]"
+          className="mt-6 text-xl sm:text-2xl md:text-3xl text-muted-foreground min-h-[2.5rem] font-mono"
           variants={itemVariants}
           data-testid="typing-animation"
         >
@@ -176,7 +138,7 @@ export function HeroClient({
 
         {/* Subtitle */}
         <motion.p
-          className="mt-6 text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+          className="mt-6 text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
           variants={itemVariants}
         >
           {subtitle}
@@ -193,14 +155,14 @@ export function HeroClient({
               href={button.href}
               className={`
                 group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg
-                font-medium transition-all duration-200 min-w-[160px] w-full sm:w-auto
+                font-semibold transition-all duration-200 min-w-[160px] w-full sm:w-auto
                 ${button.variant === 'primary'
-                  ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl'
+                  ? 'bg-primary text-primary-foreground hover:opacity-90'
                   : 'bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border'
                 }
               `}
-              whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
-              whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
+              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
             >
               {button.label}
               {button.icon && (
@@ -231,17 +193,17 @@ export function HeroClient({
           ))}
         </motion.div>
 
-        {/* Quick Stats - Value Focus */}
+        {/* Quick Stats - Technical Focus */}
         <motion.div
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-border/50 pt-8"
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-border pt-12"
           variants={itemVariants}
         >
           {personalInfo.stats.map((stat, index) => (
             <div key={index} className="flex flex-col items-center justify-center space-y-2">
-              <span className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+              <span className="text-3xl sm:text-4xl font-bold text-foreground font-mono">
                 {stat.value}
               </span>
-              <span className="text-sm text-muted-foreground font-medium">{stat.label}</span>
+              <span className="text-xs text-muted-foreground font-mono uppercase tracking-wider">{stat.label}</span>
             </div>
           ))}
         </motion.div>

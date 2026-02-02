@@ -1,0 +1,74 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { BookOpen, Target, Zap, Globe } from 'lucide-react';
+
+const updatedDate = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+const focusAreas = [
+  {
+    icon: Target,
+    title: 'Building Agentic Systems',
+    description: 'Deep diving into LangGraph and CrewAI to build autonomous coding agents. Currently working on a multi-agent framework that can self-correct test failures.',
+  },
+  {
+    icon: Zap,
+    title: 'Rust & Performance',
+    description: 'Learning Rust to rewrite critical Node.js tooling. Obsessed with Wasm and edge computing patterns.',
+  },
+  {
+    icon: BookOpen,
+    title: 'Reading',
+    description: 'Currently reading "Designing Data-Intensive Applications" by Martin Kleppmann (again). It never gets old.',
+  },
+  {
+    icon: Globe,
+    title: 'Community',
+    description: 'Preparing a talk on "Scaling Agile in Distributed Teams" for a local tech meetup.',
+  },
+];
+---
+
+<BaseLayout title="Now | What I'm Focused On" description="A snapshot of what I'm working on, learning, and interested in right now.">
+  <main class="min-h-screen py-24 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto">
+      <header class="mb-16">
+        <h1 class="text-4xl sm:text-5xl font-bold font-mono tracking-tight mb-6">/now</h1>
+        <div class="flex items-center gap-3 text-sm text-muted-foreground font-mono">
+          <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+          <span>Updated {updatedDate}</span>
+        </div>
+      </header>
+
+      <div class="space-y-12">
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+          <p class="lead">
+            This is a "now" page. It differs from an "about" page because it focuses on what's happening 
+            <em class="text-foreground not-italic font-bold">currently</em> rather than a history of what happened in the past.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {focusAreas.map((area) => (
+            <div class="bg-card/30 border border-border p-6 rounded-xl hover:border-foreground/20 transition-all duration-300">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="p-2 bg-secondary rounded-lg text-foreground">
+                  <area.icon class="h-5 w-5" />
+                </div>
+                <h2 class="text-lg font-bold font-mono">{area.title}</h2>
+              </div>
+              <p class="text-sm text-muted-foreground leading-relaxed">
+                {area.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div class="bg-secondary/10 border border-border p-8 rounded-xl mt-12 text-center">
+          <p class="text-sm text-muted-foreground font-mono mb-4">
+            Inspired by the <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-foreground">nownownow</a> movement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

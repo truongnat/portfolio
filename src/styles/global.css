@@ -25,41 +25,37 @@
   --radius-sm: calc(var(--radius) - 4px);
 }
 
-/* Deep 3D Theme - Permanent Dark Mode */
+/* Basic Developer Theme - High Contrast Zinc */
 :root {
-  /* Deep, rich dark background (Deep Space Blue/Black) */
-  --background: 230 35% 7%;
-  --foreground: 210 40% 98%;
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
 
-  /* Cards - slightly elevated, glass-like */
-  --card: 230 35% 10%;
-  --card-foreground: 210 40% 98%;
+  --card: 240 10% 6%;
+  --card-foreground: 0 0% 98%;
 
-  --popover: 230 35% 10%;
-  --popover-foreground: 210 40% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
 
-  /* Primary - Neon/Electric Violet for depth and glow */
-  --primary: 265 85% 65%;
-  --primary-foreground: 210 40% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
 
-  /* Secondary - Dark Slate */
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
 
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
 
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
 
   --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
+  --destructive-foreground: 0 0% 98%;
 
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 265 85% 65%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
   
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 }
 
 * {
@@ -68,282 +64,88 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 100px;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 body {
   @apply bg-background text-foreground antialiased;
-  /* Deep 3D Layered Background */
   background-image: 
-    radial-gradient(circle at 0% 0%, hsla(265, 85%, 20%, 0.4) 0, transparent 40%), 
-    radial-gradient(circle at 100% 100%, hsla(220, 90%, 20%, 0.4) 0, transparent 40%),
-    radial-gradient(circle at 50% 50%, hsla(230, 35%, 15%, 0.3) 0, transparent 60%);
+    radial-gradient(at 0% 0%, hsla(240, 10%, 15%, 0.15) 0, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(240, 10%, 10%, 0.1) 0, transparent 50%);
   background-attachment: fixed;
 }
 
-/* === Deep 3D Component Styles === */
+/* === Basic Developer Styles === */
 
-/* Blog Card with Deep Depth */
 .blog-card {
-  @apply relative overflow-hidden rounded-xl bg-card/50 backdrop-blur-md border border-white/5;
-  box-shadow: 
-    0 15px 35px -10px rgba(0, 0, 0, 0.6),
-    0 5px 15px -5px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.1), /* Top edge highlight */
-    inset 0 0 20px 0 rgba(0, 0, 0, 0.2); /* Inner depth */
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.blog-card::before {
-  content: '';
-  @apply absolute inset-0 opacity-0 transition-opacity duration-500;
-  background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 255, 255, 0.05),
-    transparent 40%
-  );
+  @apply relative overflow-hidden rounded-lg bg-card border border-border transition-all duration-200;
 }
 
 .blog-card:hover {
-  @apply border-primary/50;
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 
-    0 30px 60px -12px rgba(0, 0, 0, 0.8),
-    0 0 25px -5px hsl(var(--primary) / 0.4), /* Outer glow */
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+  @apply border-foreground/30 bg-muted/30;
+  transform: translateY(-2px);
 }
 
-.blog-card:hover::before {
-  @apply opacity-100;
+/* === Typography === */
+h1, h2, h3, h4, h5, h6, .font-mono {
+  font-family: 'JetBrains Mono', monospace !important;
+  letter-spacing: -0.02em;
 }
 
-/* === Code Block Deep 3D Styling === */
+/* === Code Block Styling === */
 .prose pre,
 article pre {
-  @apply relative my-8 overflow-hidden rounded-xl border border-white/5;
-  background: linear-gradient(
-    145deg,
-    hsl(230 35% 8%) 0%,
-    hsl(230 35% 5%) 100%
-  ) !important;
-  box-shadow: 
-    0 20px 40px -5px rgba(0,0,0,0.7),
-    inset 0 1px 0 rgba(255,255,255,0.05);
+  @apply my-6 overflow-hidden rounded-lg border border-border !bg-black/50;
 }
 
 .prose pre code,
 article pre code {
-  @apply block overflow-x-auto p-5 text-sm leading-relaxed;
-  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Menlo', monospace !important;
-  font-feature-settings: 'liga' 1, 'calt' 1;
-  tab-size: 2;
-  -moz-tab-size: 2;
+  @apply block p-4 text-sm leading-relaxed;
+  font-family: 'JetBrains Mono', monospace !important;
 }
 
-/* Code block language label - Floating Effect */
-.prose pre[data-language]::before,
-article pre[data-language]::before {
-  content: attr(data-language);
-  @apply absolute right-4 top-3 rounded-md px-3 py-1 text-xs font-bold uppercase tracking-wider shadow-lg;
-  background: linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--primary) / 0.05));
-  color: hsl(var(--primary));
-  border: 1px solid hsl(var(--primary) / 0.3);
-  backdrop-filter: blur(4px);
-}
-
-/* Inline code styling */
+/* Inline code */
 .prose code:not(pre code),
 article code:not(pre code) {
-  @apply relative rounded-md px-1.5 py-0.5 text-sm font-medium shadow-md;
-  background: hsl(var(--primary) / 0.15);
-  color: hsl(var(--primary));
-  border: 1px solid hsl(var(--primary) / 0.2);
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  box-shadow: inset 0 0 10px hsl(var(--primary) / 0.05);
+  @apply rounded bg-muted px-1.5 py-0.5 text-sm font-medium text-foreground;
+  font-family: 'JetBrains Mono', monospace !important;
 }
 
-.prose code:not(pre code)::before,
-.prose code:not(pre code)::after,
-article code:not(pre code)::before,
-article code:not(pre code)::after {
-  content: '' !important;
-}
-
-/* === Syntax Highlighting Theme (Neon/Dark) === */
-.hljs-keyword,
-.hljs-selector-tag {
-  color: #c084fc; /* Bright Purple */
-  text-shadow: 0 0 10px rgba(192, 132, 252, 0.4);
-}
-
-.hljs-string,
-.hljs-template-variable,
-.hljs-addition {
-  color: #4ade80; /* Neon Green */
-}
-
-.hljs-comment,
-.hljs-quote {
-  color: #94a3b8;
-  font-style: italic;
-}
-
-.hljs-number,
-.hljs-literal {
-  color: #fb923c; /* Neon Orange */
-}
-
-.hljs-function,
-.hljs-title {
-  color: #60a5fa; /* Neon Blue */
-}
-
-.hljs-variable,
-.hljs-attr {
-  color: #f472b6; /* Neon Pink */
-}
-
-.hljs-type,
-.hljs-class {
-  color: #22d3ee; /* Cyan */
-}
-
-.hljs-tag,
-.hljs-name {
-  color: #f87171; /* Red */
-}
-
-.hljs-attribute {
-  color: #fbbf24; /* Amber */
-}
-
-.hljs-operator,
-.hljs-punctuation {
-  color: hsl(var(--foreground) / 0.8);
-}
-
-/* === Premium Typography for Blog Content === */
+/* === Prose Refinement === */
 .prose {
   --tw-prose-body: hsl(var(--foreground));
   --tw-prose-headings: hsl(var(--foreground));
-  --tw-prose-lead: hsl(var(--muted-foreground));
-  --tw-prose-links: hsl(var(--primary));
+  --tw-prose-links: hsl(var(--foreground));
   --tw-prose-bold: hsl(var(--foreground));
   --tw-prose-counters: hsl(var(--muted-foreground));
-  --tw-prose-bullets: hsl(var(--primary) / 0.8);
-  --tw-prose-hr: hsl(var(--border));
-  --tw-prose-quotes: hsl(var(--foreground));
-  --tw-prose-quote-borders: hsl(var(--primary));
-  --tw-prose-captions: hsl(var(--muted-foreground));
-}
-
-.prose h1,
-.prose h2,
-.prose h3,
-.prose h4 {
-  @apply font-bold tracking-tight;
-  letter-spacing: -0.02em;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  --tw-prose-bullets: hsl(var(--muted-foreground));
 }
 
 .prose h1 {
-  @apply text-4xl mb-6 mt-10;
-  background: linear-gradient(135deg, #fff 0%, hsl(var(--foreground) / 0.7) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  @apply text-3xl font-bold mb-6 mt-10;
 }
 
 .prose h2 {
-  @apply relative text-3xl mb-4 mt-12 pb-3;
-}
-
-.prose h2::after {
-  content: '';
-  @apply absolute bottom-0 left-0 h-1 w-20 rounded-full;
-  background: linear-gradient(90deg, hsl(var(--primary)), transparent);
-  box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
-}
-
-.prose h3 {
-  @apply text-2xl mb-3 mt-8;
-}
-
-.prose h4 {
-  @apply text-xl mb-2 mt-6;
+  @apply text-2xl font-semibold mb-4 mt-12 border-b border-border pb-2;
 }
 
 .prose p {
-  @apply leading-relaxed mb-6;
-  font-size: 1.1rem;
-  line-height: 1.85;
-  letter-spacing: 0.01em;
+  @apply leading-7 mb-4 text-muted-foreground;
 }
 
 .prose a {
-  @apply relative font-medium text-primary no-underline transition-all duration-200;
-  text-shadow: 0 0 5px hsl(var(--primary) / 0.3);
-}
-
-.prose a::after {
-  content: '';
-  @apply absolute -bottom-0.5 left-0 h-0.5 w-0 rounded-full transition-all duration-300;
-  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.5));
-}
-
-.prose a:hover::after {
-  @apply w-full;
-}
-
-.prose blockquote {
-  @apply relative my-8 rounded-r-xl border-l-4 border-primary bg-muted/20 py-4 pl-6 pr-4 italic;
-  font-size: 1.15rem;
-  box-shadow: inset 10px 0 20px -10px rgba(0,0,0,0.5);
-}
-
-.prose blockquote::before {
-  content: '"';
-  @apply absolute -left-2 -top-2 text-6xl text-primary/30 font-serif;
-}
-
-.prose blockquote p {
-  @apply mb-0;
-}
-
-.prose img {
-  @apply my-8 rounded-xl;
-  box-shadow: 
-    0 20px 40px -10px rgba(0,0,0,0.8),
-    0 0 0 1px rgba(255,255,255,0.05);
+  @apply font-medium underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-foreground transition-colors;
 }
 
 .blog-title {
   @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6;
-  background: linear-gradient(
-    135deg,
-    #ffffff 0%,
-    hsl(var(--primary) / 0.8) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.1;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+  font-family: 'JetBrains Mono', monospace !important;
+  color: hsl(var(--foreground));
 }
 
 .blog-tag {
-  @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200;
-  background: hsl(var(--primary) / 0.1);
-  color: hsl(var(--primary));
-  border: 1px solid hsl(var(--primary) / 0.2);
-  box-shadow: 0 4px 10px -2px rgba(0,0,0,0.5);
-}
-
-.blog-tag:hover {
-  @apply scale-105;
-  background: hsl(var(--primary) / 0.2);
-  border-color: hsl(var(--primary) / 0.5);
-  box-shadow: 0 0 15px hsl(var(--primary) / 0.4);
+  @apply inline-flex items-center rounded-md px-2 py-1 text-xs font-medium border border-border bg-muted/50 text-muted-foreground transition-colors hover:text-foreground hover:border-foreground/30;
 }
 
 @layer utilities {

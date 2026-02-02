@@ -67,4 +67,4 @@ Antigravity is more than a name; it represents the "defying of friction" in soft
 The era of manual coding is ending. The era of Agentic Orchestration has begun.
 
 ---
-*Dao Quang Truong is an Engineering Leader and the lead architect of the Antigravity framework. He is pioneering the integration of Agentic AI into the global software development pipeline.*
+*Dao Quang Truong is a Fullstack Developer and the lead architect of the Antigravity framework. He is pioneering the integration of Agentic AI into the global software development pipeline.*

@@ -1,12 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { skillsConfig } from '@/lib/config';
+import { skillsConfig, uiStrings } from '@/lib/config';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import React from 'react';
 
 export function SkillsClient() {
   const { ref: sectionRef, isIntersecting: isInView } = useIntersectionObserver<HTMLElement>({
@@ -15,7 +14,7 @@ export function SkillsClient() {
   });
   const shouldReduceMotion = useSafeReducedMotion();
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -25,7 +24,7 @@ export function SkillsClient() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
     visible: {
       opacity: 1,
@@ -52,27 +51,25 @@ export function SkillsClient() {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-background/50"
+      className="relative py-24 px-4 sm:px-6 lg:px-8 border-t border-border"
     >
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background" />
-
       <div className="max-w-7xl mx-auto">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-            Technical Expertise
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight font-mono">
+            {uiStrings.skills.title}
           </h2>
-          <p className="text-lg text-muted-foreground/80 font-medium max-w-2xl mx-auto">
-            Senior Fullstack Engineer & Team Leader
+          <p className="text-base text-muted-foreground uppercase tracking-widest font-mono">
+            {uiStrings.skills.subtitle}
           </p>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -81,25 +78,25 @@ export function SkillsClient() {
             const Icon = card.icon;
             return (
               <motion.div key={card.id} variants={itemVariants} className="h-full">
-                <Card className="h-full hover:shadow-primary/10 group">
-                  <CardHeader className="pb-4 space-y-4">
+                <Card className="h-full bg-card/50 border-border hover:border-foreground/20 transition-all rounded-xl">
+                  <CardHeader className="pb-6 space-y-4">
                     <div className="flex items-center justify-between">
-                      <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
-                        <Icon size={24} />
+                      <div className="p-2.5 rounded-lg bg-secondary text-foreground">
+                        <Icon size={20} />
                       </div>
                       {card.level && (
-                        <Badge variant="outline" className="text-xs font-semibold px-3 py-1 bg-background/50 backdrop-blur border-primary/20 text-primary">
+                        <Badge variant="outline" className="text-[10px] font-mono uppercase tracking-tighter px-2 py-0 border-border text-muted-foreground">
                           {card.level}
                         </Badge>
                       )}
                     </div>
-                    <CardTitle className="text-xl font-bold leading-tight">{card.title}</CardTitle>
+                    <CardTitle className="text-lg font-bold font-mono tracking-tight">{card.title}</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6">
+                  <CardContent className="space-y-8">
                     {card.subSections.map((section, idx) => (
-                      <div key={idx} className="space-y-3">
+                      <div key={idx} className="space-y-4">
                         {section.label && (
-                          <h4 className="text-xs uppercase tracking-wider font-bold text-muted-foreground/70 flex items-center gap-2">
+                          <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/50 font-mono">
                             {section.label}
                           </h4>
                         )}
@@ -107,17 +104,17 @@ export function SkillsClient() {
                           {section.skills.map((skill, sIdx) => {
                             const { tech, desc } = parseSkill(skill);
                             return (
-                              <div key={sIdx} className="inline-flex items-center gap-1.5 bg-secondary/50 rounded-full px-3 py-1 border border-secondary transition-colors hover:bg-secondary">
-                                <span className="font-semibold text-sm text-secondary-foreground">{tech}</span>
+                              <div key={sIdx} className="inline-flex items-center gap-1.5 bg-secondary/30 rounded-md px-2.5 py-1 border border-border/50 hover:border-border transition-colors">
+                                <span className="font-medium text-xs text-foreground font-mono">{tech}</span>
                                 {desc && (
-                                  <span className="text-xs text-muted-foreground font-normal">{desc}</span>
+                                  <span className="text-[10px] text-muted-foreground font-mono opacity-70">{desc}</span>
                                 )}
                               </div>
                             );
                           })}
                         </div>
                         {section.highlight && (
-                          <div className="text-xs text-muted-foreground border-l-2 border-primary/30 pl-3 py-1 italic bg-primary/5 rounded-r-md">
+                          <div className="text-[11px] text-muted-foreground border-l border-border pl-4 py-1 font-mono leading-relaxed opacity-80">
                             {section.highlight}
                           </div>
                         )}

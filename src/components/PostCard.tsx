@@ -1,6 +1,6 @@
 import { formatDate } from '@/lib/utils';
 import { Calendar, ArrowUpRight } from 'lucide-react';
-import type { BlogPostMetadata } from '@/lib/blog';
+import type { BlogPostMetadata } from '@/types';
 
 interface PostCardProps {
   post: BlogPostMetadata;
@@ -10,54 +10,39 @@ export function PostCard({ post }: PostCardProps) {
   return (
     <a
       href={`/blog/${post.slug}`}
-      className="group block relative overflow-hidden rounded-2xl border border-white/20 bg-white/10 dark:bg-black/20 backdrop-blur-md shadow-lg hover:shadow-2xl hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-500 hover:-translate-y-2"
+      className="group block relative overflow-hidden rounded-xl border border-border bg-card/50 transition-all duration-300 hover:border-foreground/20 hover:-translate-y-1"
       data-testid={`post-card-${post.slug}`}
     >
-      {/* Gradient background overlay for the whole card */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-      {/* Cover Image or Gradient Placeholder */}
-      <div className="relative h-48 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
+      {/* Cover Image or Placeholder */}
+      <div className="relative h-48 overflow-hidden bg-secondary/30 border-b border-border">
         {post.coverImage ? (
           <img
             src={post.coverImage}
             alt={`${post.title} cover image`}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
             data-testid="post-cover-image"
           />
         ) : (
-          <>
-            {/* Decorative gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10" />
-
-            {/* Decorative circles */}
-            <div className="absolute top-6 left-6 h-20 w-20 rounded-full bg-blue-500/20 blur-2xl" />
-            <div className="absolute bottom-4 right-4 h-28 w-28 rounded-full bg-purple-500/20 blur-2xl" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-16 w-16 rounded-full bg-pink-500/20 blur-xl" />
-
-            {/* Code-like pattern */}
-            <div className="absolute bottom-6 left-6 right-6 space-y-2">
-              <div className="h-2 w-3/4 rounded-full bg-foreground/10" />
-              <div className="h-2 w-1/2 rounded-full bg-foreground/8" />
-              <div className="h-2 w-2/3 rounded-full bg-foreground/6" />
+          <div className="absolute inset-0 flex items-center justify-center bg-muted/20">
+            <div className="w-full px-8 space-y-3 opacity-30">
+              <div className="h-1.5 w-full rounded bg-foreground/20" />
+              <div className="h-1.5 w-3/4 rounded bg-foreground/20" />
+              <div className="h-1.5 w-5/6 rounded bg-foreground/20" />
             </div>
-          </>
+          </div>
         )}
 
-        {/* Overlay gradient on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-80" />
-
         {/* Arrow indicator */}
-        <div className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-background/90 backdrop-blur-sm shadow-lg opacity-0 -translate-y-2 translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0">
-          <ArrowUpRight className="h-5 w-5 text-primary" />
+        <div className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded bg-background border border-border shadow-sm opacity-0 -translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+          <ArrowUpRight className="h-4 w-4 text-foreground" />
         </div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 p-6">
+      <div className="p-6">
         {/* Title */}
         <h2
-          className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-300 group-hover:text-primary"
+          className="text-lg font-bold mb-3 line-clamp-2 font-mono tracking-tight text-foreground transition-colors group-hover:text-foreground/80"
           data-testid="post-title"
         >
           {post.title}
@@ -65,15 +50,15 @@ export function PostCard({ post }: PostCardProps) {
 
         {/* Description */}
         {post.description && (
-          <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
+          <p className="text-sm text-muted-foreground mb-6 line-clamp-2 leading-relaxed" data-testid="post-description">
             {post.description}
           </p>
         )}
 
         {/* Metadata */}
-        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-          <div className="flex items-center gap-1.5" data-testid="post-date">
-            <Calendar className="h-4 w-4 text-primary" />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground" data-testid="post-date">
+            <Calendar className="h-3 w-3" />
             <time dateTime={post.date}>
               {formatDate(post.date, {
                 year: 'numeric',
@@ -82,22 +67,18 @@ export function PostCard({ post }: PostCardProps) {
               })}
             </time>
           </div>
-        </div>
 
-        {/* Tags */}
-        {post.tags && post.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2" data-testid="post-tags">
-            {post.tags.slice(0, 3).map((tag) => (
+          {/* Tags */}
+          {post.tags && post.tags.length > 0 && (
+            <div className="flex gap-1.5" data-testid="post-tags">
               <span
-                key={tag}
-                className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-primary/10 text-primary border border-primary/20 transition-colors hover:bg-primary/20"
-                data-testid={`post-tag-${tag}`}
+                className="px-2 py-0.5 text-[10px] font-mono border border-border bg-secondary/50 text-muted-foreground rounded"
               >
-                {tag}
+                {post.tags[0]}
               </span>
-            ))}
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </div>
     </a>
   );

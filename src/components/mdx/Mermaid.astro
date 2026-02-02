@@ -1,0 +1,62 @@
+---
+interface Props {
+  code?: string;
+}
+
+const { code } = Astro.props;
+const content = code || await Astro.slots.render('default');
+---
+
+<div class="mermaid-diagram my-8 flex justify-center bg-card/30 p-6 rounded-xl border border-border">
+  <pre class="mermaid opacity-0 transition-opacity duration-500" data-content={content}>
+    {content}
+  </pre>
+</div>
+
+<script>
+  import mermaid from 'mermaid';
+
+  function initMermaid() {
+    mermaid.initialize({ 
+      startOnLoad: false, 
+      theme: 'dark',
+      fontFamily: 'JetBrains Mono',
+      themeVariables: {
+        primaryColor: '#fafafa', // zinc-50
+        primaryTextColor: '#09090b', // zinc-950
+        primaryBorderColor: '#3f3f46', // zinc-700
+        lineColor: '#71717a', // zinc-500
+        secondaryColor: '#18181b', // zinc-900
+        tertiaryColor: '#27272a', // zinc-800
+      }
+    });
+
+    const graphs = document.querySelectorAll('.mermaid');
+    
+    graphs.forEach(async (graph) => {
+      const content = graph.getAttribute('data-content');
+      if (content && !graph.classList.contains('processed')) {
+        try {
+          graph.classList.add('processed');
+          // Clear text content before rendering to avoid flash of text
+          graph.textContent = '';
+          const { svg } = await mermaid.render(`mermaid-${Math.random().toString(36).substr(2, 9)}`, content);
+          graph.innerHTML = svg;
+          graph.classList.remove('opacity-0');
+        } catch (error) {
+          console.error('Mermaid render error:', error);
+          graph.innerHTML = `<div class="text-red-500 text-xs font-mono p-4 border border-red-500/20 rounded bg-red-500/10">Failed to render diagram</div>`;
+          graph.classList.remove('opacity-0');
+        }
+      }
+    });
+  }
+
+  // Run on initial load
+  initMermaid();
+
+  // Run on view transitions
+  document.addEventListener('astro:page-load', () => {
+    initMermaid();
+  });
+</script>

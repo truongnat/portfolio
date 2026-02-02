@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ArrowLeft, Home } from 'lucide-react';
+---
+
+<BaseLayout title="404 - Page Not Found">
+	<main class="min-h-[80vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+		{/* Deep 3D Background effect */}
+		<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg aspect-square bg-primary/10 blur-[120px] rounded-full pointer-events-none animate-float" />
+		
+		<div class="max-w-md w-full text-center relative z-10">
+			<div class="mb-8">
+				<h1 class="text-9xl font-bold text-foreground/10 select-none tracking-tighter">
+					404
+				</h1>
+				<div class="relative -mt-20">
+					<h2 class="text-4xl sm:text-5xl font-bold text-foreground mb-4 text-deep-shadow">
+						Lost in Space?
+					</h2>
+					<p class="text-lg text-muted-foreground leading-relaxed">
+						The page you're looking for has drifted out of orbit or never existed in this dimension.
+					</p>
+				</div>
+			</div>
+
+			<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+				<a
+					href="/"
+					class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 rounded-xl bg-primary text-primary-foreground font-semibold shadow-lg shadow-primary/20 hover:scale-105 transition-all duration-300"
+				>
+					<Home class="h-5 w-5" />
+					Back to Base
+				</a>
+				<button
+					onclick="history.back()"
+					class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 rounded-xl bg-secondary text-secondary-foreground font-semibold hover:bg-secondary/80 transition-all duration-300"
+				>
+					<ArrowLeft class="h-5 w-5" />
+					Go Back
+				</button>
+			</div>
+
+			{/* Decorative floating dots */}
+			<div class="mt-12 flex justify-center gap-2 opacity-50">
+				<div class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+				<div class="h-1.5 w-1.5 rounded-full bg-primary/60 animate-pulse delay-150" />
+				<div class="h-1.5 w-1.5 rounded-full bg-primary/30 animate-pulse delay-300" />
+			</div>
+		</div>
+	</main>
+</BaseLayout>
