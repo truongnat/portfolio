@@ -1,16 +1,11 @@
-import { getCollection } from 'astro:content';
+import type { APIContext } from 'astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
 
-// Define font fetching (you might need to adjust paths or fetch from URL for production)
-// For local build, reading from node_modules or a local fonts folder is standard.
-// Here we'll try to fetch a font from a CDN or use a system fallback if possible,
-// but satori requires raw font data.
+type Props = CollectionEntry<'blog'>;
+
 const fetchFont = async () => {
-  // In a real production build, you'd want to bundle the font or fetch it.
-  // Using a CDN for simplicity in this example.
   const response = await fetch('https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-700-normal.woff');
   return await response.arrayBuffer();
 };
@@ -25,7 +20,7 @@ export async function getStaticPaths() {
   }));
 }
 
-export async function GET({ props }) {
+export async function GET({ props }: APIContext<Props>) {
   const { data } = props;
 
   const svg = await satori(
@@ -110,12 +105,12 @@ export async function GET({ props }) {
                     }),
                   },
                 },
-              ],
+              ].filter(Boolean),
             },
           },
         ],
       },
-    },
+    } as any,
     {
       width: 1200,
       height: 630,
@@ -139,7 +134,7 @@ export async function GET({ props }) {
 
   const image = resvg.render();
 
-  return new Response(image.asPng(), {
+  return new Response(image.asPng() as any, {
     headers: {
       'Content-Type': 'image/png',
     },
