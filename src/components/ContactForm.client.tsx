@@ -38,11 +38,29 @@ export function ContactFormClient() {
     setSubmitStatus('idle');
     setErrorMessage('');
 
+    // Rate limiting check
+    const RATE_LIMIT_DURATION = 60 * 1000; // 60 seconds
+    const lastSubmission = localStorage.getItem('lastContactSubmission');
+    
+    if (lastSubmission) {
+      const timeSinceLastSubmission = Date.now() - parseInt(lastSubmission, 10);
+      if (timeSinceLastSubmission < RATE_LIMIT_DURATION) {
+        const remainingSeconds = Math.ceil((RATE_LIMIT_DURATION - timeSinceLastSubmission) / 1000);
+        setSubmitStatus('error');
+        setErrorMessage(`Please wait ${remainingSeconds} seconds before sending another message.`);
+        setIsSubmitting(false);
+        return;
+      }
+    }
+
     try {
       const status = await sendContactMessage(data.name, data.email, data.message);
       if (!status) {
         throw new Error('Failed to send message');
       }
+
+      // Store submission time
+      localStorage.setItem('lastContactSubmission', Date.now().toString());
 
       setSubmitStatus('success');
       reset();
