@@ -8,6 +8,7 @@ import Schema from "@/components/seo/Schema.astro";
 import GridBackground from "@/components/GridBackground.astro";
 import { ClientRouter } from 'astro:transitions';
 import '@/styles/global.css';
+import { getCollection } from 'astro:content';
 
 interface Props {
 	title?: string;
@@ -26,6 +27,16 @@ const {
 	publishDate,
 	tags
 } = Astro.props;
+
+const posts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? data.published !== false : true;
+});
+
+const blogPosts = posts.map(post => ({
+  title: post.data.title,
+  slug: post.slug,
+  description: post.data.description,
+}));
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://porfolio-truongdq.vercel.app');
 ---
@@ -85,7 +96,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://porfolio
 			<slot />
 		</main>
 		<ScrollToTopClient client:load transition:persist />
-		<CommandPalette client:idle transition:persist />
+		<CommandPalette client:idle transition:persist posts={blogPosts} />
 		<CodeCopy />
 	</body>
 </html>

@@ -2,10 +2,11 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { TableOfContents } from '@/components/TableOfContents';
-import { Calendar, Clock, ArrowLeft, User, Tag } from 'lucide-react';
+import { Calendar, Clock, ArrowLeft, User, Tag, Share2, Twitter, Linkedin } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import Callout from '@/components/mdx/Callout.astro';
 import Mermaid from '@/components/mdx/Mermaid.astro';
+import { PostCard } from '@/components/PostCard';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -28,6 +29,29 @@ const tocItems = headings.map(h => ({
 	text: h.text,
 	level: h.depth
 }));
+
+// Fetch related posts
+const allPosts = await getCollection('blog', ({ data, slug }) => {
+    const isPublished = import.meta.env.PROD ? data.published !== false : true;
+    return isPublished && slug !== post.slug;
+});
+
+const relatedPosts = allPosts
+    .map(p => {
+        const commonTags = p.data.tags?.filter(tag => post.data.tags?.includes(tag)) || [];
+        return { post: p, score: commonTags.length };
+    })
+    .filter(p => p.score > 0)
+    .sort((a, b) => b.score - a.score || b.post.data.date.getTime() - a.post.data.date.getTime())
+    .slice(0, 3)
+    .map(p => ({
+        ...p.post.data,
+        slug: p.post.slug,
+        date: p.post.data.date.toISOString(), // PostCard expects string date
+    }));
+
+const shareUrl = new URL(Astro.url.pathname, Astro.site || 'https://porfolio-truongdq.vercel.app').toString();
+const shareTitle = post.data.title;
 ---
 
 <BaseLayout 
@@ -108,7 +132,7 @@ const tocItems = headings.map(h => ({
 
 					{/* Post Footer */}
 					<footer class="mt-16 pt-8 border-t border-border">
-						<div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+						<div class="flex flex-col sm:flex-row items-center justify-between gap-6">
 							<a
 								href="/blog"
 								class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary/50 hover:bg-secondary text-secondary-foreground text-sm font-medium transition-all"
@@ -117,11 +141,47 @@ const tocItems = headings.map(h => ({
 								View all articles
 							</a>
 							
-							<div class="flex gap-4">
-								{/* Share buttons could go here */}
+							<div class="flex items-center gap-4">
+								<span class="text-sm font-medium text-muted-foreground flex items-center gap-2">
+									<Share2 class="h-4 w-4" />
+									Share:
+								</span>
+								<div class="flex gap-2">
+									<a
+										href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareTitle)}`}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="p-2 rounded-full bg-secondary/50 hover:bg-primary/10 hover:text-primary transition-all duration-200"
+										aria-label="Share on Twitter"
+									>
+										<Twitter class="h-4 w-4" />
+									</a>
+									<a
+										href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="p-2 rounded-full bg-secondary/50 hover:bg-primary/10 hover:text-primary transition-all duration-200"
+										aria-label="Share on LinkedIn"
+									>
+										<Linkedin class="h-4 w-4" />
+									</a>
+								</div>
 							</div>
 						</div>
 					</footer>
+
+					{/* Related Posts Section */}
+					{relatedPosts.length > 0 && (
+						<section class="mt-24">
+							<h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+								<span class="h-8 w-1 bg-primary rounded-full"></span>
+								Related Articles
+							</h2>
+							<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+								{relatedPosts.map(p => <PostCard post={p} />)}
+							</div>
+						</section>
+					)}
 				</main>
 
 				{/* Sidebar (Table of Contents) */}
