@@ -4,6 +4,7 @@ import { Command } from 'cmdk';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, FileText, Home, User, Briefcase, Code, Mail, Radar, Clock } from 'lucide-react';
+import { navigate } from 'astro:transitions/client';
 
 interface BlogPost {
   title: string;
@@ -35,7 +36,7 @@ export function CommandPalette({ posts = [] }: CommandPaletteProps) {
 
   const handleSelect = (href: string) => {
     setOpen(false);
-    window.location.href = href;
+    navigate(href);
   };
 
   return (
