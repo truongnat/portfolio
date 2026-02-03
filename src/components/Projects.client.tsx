@@ -122,7 +122,7 @@ export function ProjectsClient() {
             animate={isInView ? 'visible' : 'hidden'}
             data-testid="projects-grid"
           >
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               {filteredProjects.map((project) => (
                 <ProjectCard key={project.id} project={project} variants={itemVariants} />
               ))}

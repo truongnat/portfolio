@@ -189,8 +189,9 @@ export function ContactFormClient() {
       {/* Response Messages */}
       <div className="min-h-[4rem]">
         <AnimatePresence mode="wait">
-          {submitStatus === 'success' && (
+          {submitStatus === 'success' ? (
             <motion.div
+              key="success"
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -204,10 +205,9 @@ export function ContactFormClient() {
                 {uiStrings.contact.messages.success}
               </p>
             </motion.div>
-          )}
-
-          {submitStatus === 'error' && (
+          ) : submitStatus === 'error' ? (
             <motion.div
+              key="error"
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -221,7 +221,7 @@ export function ContactFormClient() {
                 {errorMessage || uiStrings.contact.messages.error}
               </p>
             </motion.div>
-          )}
+          ) : null}
         </AnimatePresence>
       </div>
     </form>
