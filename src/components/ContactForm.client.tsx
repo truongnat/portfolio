@@ -87,26 +87,27 @@ export function ContactFormClient() {
     >
       {/* Name Field */}
       <div className="space-y-2">
-        <label htmlFor="name" className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/50 font-mono">
+        <label htmlFor="name" className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground/70 font-mono">
           {uiStrings.contact.form.nameLabel}
         </label>
         <div className="relative group">
-          <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
+          <User aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
           <input
             id="name"
             type="text"
+            autoComplete="name"
             {...register('name')}
-            className="w-full pl-12 pr-4 py-4 bg-secondary/20 border border-border rounded-lg focus:outline-none focus:border-foreground/30 transition-all font-mono text-sm"
+            className="w-full pl-12 pr-4 py-4 bg-secondary/20 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30 transition-all font-mono text-sm"
             placeholder={uiStrings.contact.form.namePlaceholder}
             data-testid="contact-name-input"
           />
         </div>
         {errors.name && (
           <p
-            className="mt-1 text-[10px] font-mono text-destructive uppercase tracking-tight flex items-center gap-1"
+            className="mt-1 text-xs font-mono text-destructive uppercase tracking-tight flex items-center gap-1"
             data-testid="contact-name-error"
           >
-            <AlertCircle className="h-3 w-3" />
+            <AlertCircle aria-hidden="true" className="h-3 w-3" />
             {errors.name.message}
           </p>
         )}
@@ -114,26 +115,27 @@ export function ContactFormClient() {
 
       {/* Email Field */}
       <div className="space-y-2">
-        <label htmlFor="email" className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/50 font-mono">
+        <label htmlFor="email" className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground/70 font-mono">
           {uiStrings.contact.form.emailLabel}
         </label>
         <div className="relative group">
-          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
+          <Mail aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
           <input
             id="email"
             type="email"
+            autoComplete="email"
             {...register('email')}
-            className="w-full pl-12 pr-4 py-4 bg-secondary/20 border border-border rounded-lg focus:outline-none focus:border-foreground/30 transition-all font-mono text-sm"
+            className="w-full pl-12 pr-4 py-4 bg-secondary/20 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30 transition-all font-mono text-sm"
             placeholder={uiStrings.contact.form.emailPlaceholder}
             data-testid="contact-email-input"
           />
         </div>
         {errors.email && (
           <p
-            className="mt-1 text-[10px] font-mono text-destructive uppercase tracking-tight flex items-center gap-1"
+            className="mt-1 text-xs font-mono text-destructive uppercase tracking-tight flex items-center gap-1"
             data-testid="contact-email-error"
           >
-            <AlertCircle className="h-3 w-3" />
+            <AlertCircle aria-hidden="true" className="h-3 w-3" />
             {errors.email.message}
           </p>
         )}
@@ -141,26 +143,26 @@ export function ContactFormClient() {
 
       {/* Message Field */}
       <div className="space-y-2">
-        <label htmlFor="message" className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/50 font-mono">
+        <label htmlFor="message" className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground/70 font-mono">
           {uiStrings.contact.form.messageLabel}
         </label>
         <div className="relative group">
-          <MessageSquare className="absolute left-4 top-5 h-4 w-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
+          <MessageSquare aria-hidden="true" className="absolute left-4 top-5 h-4 w-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
           <textarea
             id="message"
             {...register('message')}
             rows={6}
-            className="w-full pl-12 pr-4 py-4 bg-secondary/20 border border-border rounded-lg focus:outline-none focus:border-foreground/30 transition-all resize-none font-mono text-sm"
+            className="w-full pl-12 pr-4 py-4 bg-secondary/20 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30 transition-all resize-none font-mono text-sm"
             placeholder={uiStrings.contact.form.messagePlaceholder}
             data-testid="contact-message-input"
           />
         </div>
         {errors.message && (
           <p
-            className="mt-1 text-[10px] font-mono text-destructive uppercase tracking-tight flex items-center gap-1"
+            className="mt-1 text-xs font-mono text-destructive uppercase tracking-tight flex items-center gap-1"
             data-testid="contact-message-error"
           >
-            <AlertCircle className="h-3 w-3" />
+            <AlertCircle aria-hidden="true" className="h-3 w-3" />
             {errors.message.message}
           </p>
         )}
@@ -170,7 +172,7 @@ export function ContactFormClient() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full px-6 py-4 bg-foreground text-background rounded-lg font-bold font-mono text-xs uppercase tracking-widest transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full px-6 py-4 bg-foreground text-background rounded-lg font-bold font-mono text-xs uppercase tracking-widest transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         data-testid="contact-submit-button"
       >
         {isSubmitting ? (
@@ -180,14 +182,14 @@ export function ContactFormClient() {
           </>
         ) : (
           <>
-            <Send className="h-4 w-4" />
+            <Send aria-hidden="true" className="h-4 w-4" />
             {uiStrings.contact.form.submitButton}
           </>
         )}
       </button>
 
       {/* Response Messages */}
-      <div className="min-h-[4rem]">
+      <div className="min-h-[4rem]" aria-live="polite">
         <AnimatePresence mode="wait">
           {submitStatus === 'success' ? (
             <motion.div
@@ -199,7 +201,7 @@ export function ContactFormClient() {
               data-testid="contact-success-message"
             >
               <div className="p-1 bg-green-500/20 rounded-full">
-                <CheckCircle className="h-5 w-5 flex-shrink-0" />
+                <CheckCircle aria-hidden="true" className="h-5 w-5 flex-shrink-0" />
               </div>
               <p className="font-medium text-sm sm:text-base">
                 {uiStrings.contact.messages.success}
@@ -215,7 +217,7 @@ export function ContactFormClient() {
               data-testid="contact-error-message"
             >
               <div className="p-1 bg-destructive/20 rounded-full">
-                <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                <AlertCircle aria-hidden="true" className="h-5 w-5 flex-shrink-0" />
               </div>
               <p className="font-medium text-sm sm:text-base">
                 {errorMessage || uiStrings.contact.messages.error}

@@ -85,7 +85,7 @@ export function SkillsClient() {
                         <Icon size={20} />
                       </div>
                       {card.level && (
-                        <Badge variant="outline" className="text-[10px] font-mono uppercase tracking-tighter px-2 py-0 border-border text-muted-foreground">
+                        <Badge variant="outline" className="text-xs font-mono uppercase tracking-tighter px-2 py-0 border-border text-muted-foreground">
                           {card.level}
                         </Badge>
                       )}
@@ -96,7 +96,7 @@ export function SkillsClient() {
                     {card.subSections.map((section, idx) => (
                       <div key={idx} className="space-y-4">
                         {section.label && (
-                          <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/50 font-mono">
+                          <h4 className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground/50 font-mono">
                             {section.label}
                           </h4>
                         )}
@@ -105,16 +105,16 @@ export function SkillsClient() {
                             const { tech, desc } = parseSkill(skill);
                             return (
                               <div key={sIdx} className="inline-flex items-center gap-1.5 bg-secondary/30 rounded-md px-2.5 py-1 border border-border/50 hover:border-border transition-colors">
-                                <span className="font-medium text-xs text-foreground font-mono">{tech}</span>
+                                <span className="font-medium text-base text-foreground font-mono">{tech}</span>
                                 {desc && (
-                                  <span className="text-[10px] text-muted-foreground font-mono opacity-70">{desc}</span>
+                                  <span className="text-sm text-muted-foreground font-mono opacity-70">{desc}</span>
                                 )}
                               </div>
                             );
                           })}
                         </div>
                         {section.highlight && (
-                          <div className="text-[11px] text-muted-foreground border-l border-border pl-4 py-1 font-mono leading-relaxed opacity-80">
+                          <div className="text-sm text-muted-foreground border-l border-border pl-4 py-1 font-mono leading-relaxed opacity-80">
                             {section.highlight}
                           </div>
                         )}

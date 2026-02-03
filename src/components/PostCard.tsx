@@ -50,14 +50,14 @@ export function PostCard({ post }: PostCardProps) {
 
         {/* Description */}
         {post.description && (
-          <p className="text-sm text-muted-foreground mb-6 line-clamp-2 leading-relaxed" data-testid="post-description">
+          <p className="text-base text-muted-foreground mb-6 line-clamp-2 leading-relaxed" data-testid="post-description">
             {post.description}
           </p>
         )}
 
         {/* Metadata */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground" data-testid="post-date">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground" data-testid="post-date">
             <Calendar className="h-3 w-3" />
             <time dateTime={post.date}>
               {formatDate(post.date, {
@@ -72,7 +72,7 @@ export function PostCard({ post }: PostCardProps) {
           {post.tags && post.tags.length > 0 && (
             <div className="flex gap-1.5" data-testid="post-tags">
               <span
-                className="px-2 py-0.5 text-[10px] font-mono border border-border bg-secondary/50 text-muted-foreground rounded"
+                className="px-2 py-0.5 text-sm font-mono border border-border bg-secondary/50 text-muted-foreground rounded"
               >
                 {post.tags[0]}
               </span>

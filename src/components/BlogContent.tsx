@@ -71,7 +71,7 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                     <input
                         type="text"
                         placeholder="SEARCH_ARTICLES..."
-                        className="w-full pl-6 pr-4 py-2 border-b border-transparent focus:border-foreground/30 bg-transparent focus:outline-none transition-all font-mono text-xs uppercase tracking-widest"
+                        className="w-full pl-6 pr-4 py-2 border-b border-transparent focus:border-foreground/30 bg-transparent focus:outline-none transition-all font-mono text-sm uppercase tracking-widest"
                         value={searchQuery}
                         onChange={handleSearch}
                     />
@@ -91,7 +91,7 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                         <button
                             key={category}
                             onClick={() => handleCategoryChange(category)}
-                            className={`px-4 py-1 rounded-md text-[10px] font-mono font-bold uppercase tracking-tighter transition-all duration-200 border ${selectedCategory === category
+                            className={`px-4 py-1 rounded-md text-xs font-mono font-bold uppercase tracking-tighter transition-all duration-200 border ${selectedCategory === category
                                 ? 'bg-foreground text-background border-foreground'
                                 : 'bg-secondary/30 text-muted-foreground border-border hover:border-muted-foreground/50'
                                 }`}
@@ -103,7 +103,7 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
             </div>
 
             {/* Results Count */}
-            <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground px-1">
+            <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground px-1">
                 <p>
                     RESULTS: {filteredPosts.length} {filteredPosts.length === 1 ? 'UNIT' : 'UNITS'}
                     {selectedCategory !== 'All' && <span> // CATEGORY: {selectedCategory}</span>}
@@ -127,8 +127,8 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                     <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-muted mb-6">
                         <Search className="h-6 w-6 text-muted-foreground opacity-50" />
                     </div>
-                    <h3 className="text-sm font-bold font-mono uppercase tracking-widest mb-2">Null result</h3>
-                    <p className="text-xs text-muted-foreground font-mono uppercase tracking-tight max-w-xs mx-auto">
+                    <h3 className="text-base font-bold font-mono uppercase tracking-widest mb-2">Null result</h3>
+                    <p className="text-sm text-muted-foreground font-mono uppercase tracking-tight max-w-xs mx-auto">
                         No articles matching current filter parameters found.
                     </p>
                     <button
@@ -136,7 +136,7 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                             setSearchQuery('');
                             setSelectedCategory('All');
                         }}
-                        className="mt-8 text-[10px] font-bold font-mono uppercase tracking-[0.2em] text-primary hover:text-foreground transition-colors underline underline-offset-4 decoration-primary/30 hover:decoration-foreground"
+                        className="mt-8 text-xs font-bold font-mono uppercase tracking-[0.2em] text-primary hover:text-foreground transition-colors underline underline-offset-4 decoration-primary/30 hover:decoration-foreground"
                     >
                         RESET_FILTERS
                     </button>
@@ -152,7 +152,7 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                             window.scrollTo({ top: 300, behavior: 'smooth' });
                         }}
                         disabled={currentPage === 1}
-                        className="flex items-center gap-2 px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-widest border border-border rounded-md hover:bg-secondary disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                        className="flex items-center gap-2 px-4 py-2 font-mono text-xs font-bold uppercase tracking-widest border border-border rounded-md hover:bg-secondary disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                     >
                         <ChevronLeft className="h-3 w-3" />
                         PREV
@@ -173,7 +173,7 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                                             setCurrentPage(pageNum);
                                             window.scrollTo({ top: 300, behavior: 'smooth' });
                                         }}
-                                        className={`h-8 w-8 flex items-center justify-center rounded-md border font-mono text-[10px] font-bold transition-all ${currentPage === pageNum
+                                        className={`h-8 w-8 flex items-center justify-center rounded-md border font-mono text-xs font-bold transition-all ${currentPage === pageNum
                                             ? 'bg-foreground text-background border-foreground'
                                             : 'bg-transparent border-border hover:border-muted-foreground/50 text-muted-foreground'
                                             }`}
@@ -185,7 +185,7 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                                 (pageNum === 2 && currentPage > 3) ||
                                 (pageNum === totalPages - 1 && currentPage < totalPages - 2)
                             ) {
-                                return <span key={pageNum} className="text-muted-foreground font-mono text-[10px]">...</span>;
+                                return <span key={pageNum} className="text-muted-foreground font-mono text-xs">...</span>;
                             }
                             return null;
                         })}
@@ -197,7 +197,7 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                             window.scrollTo({ top: 300, behavior: 'smooth' });
                         }}
                         disabled={currentPage === totalPages}
-                        className="flex items-center gap-2 px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-widest border border-border rounded-md hover:bg-secondary disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                        className="flex items-center gap-2 px-4 py-2 font-mono text-xs font-bold uppercase tracking-widest border border-border rounded-md hover:bg-secondary disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                     >
                         NEXT
                         <ChevronRight className="h-3 w-3" />

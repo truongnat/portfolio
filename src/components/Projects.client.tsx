@@ -95,7 +95,7 @@ export function ProjectsClient() {
               key={category}
               onClick={() => setSelectedCategory(category)}
               className={`
-                px-5 py-1.5 rounded-md text-xs font-mono font-medium transition-all duration-200 border
+                px-5 py-1.5 rounded-md text-sm font-mono font-medium transition-all duration-200 border
                 ${selectedCategory === category
                   ? 'bg-foreground text-background border-foreground'
                   : 'bg-transparent text-muted-foreground border-border hover:border-muted-foreground/50'
@@ -187,7 +187,7 @@ export function ProjectCard({ project, variants }: ProjectCardProps) {
         </h3>
 
         {/* Description */}
-        <p className="text-sm text-muted-foreground mb-6 line-clamp-3 leading-relaxed" data-testid="project-description">
+        <p className="text-base text-muted-foreground mb-6 line-clamp-3 leading-relaxed" data-testid="project-description">
           {project.description}
         </p>
 
@@ -196,7 +196,7 @@ export function ProjectCard({ project, variants }: ProjectCardProps) {
           {project?.tech_stack?.map((tech, index) => (
             <span
               key={index}
-              className="px-2 py-0.5 text-[10px] font-mono border border-border bg-muted/30 text-muted-foreground rounded"
+              className="px-2 py-0.5 text-sm font-mono border border-border bg-muted/30 text-muted-foreground rounded"
               data-testid={`tech-badge-${tech}`}
             >
               {tech}
@@ -211,7 +211,7 @@ export function ProjectCard({ project, variants }: ProjectCardProps) {
               href={project.live_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-1.5 bg-foreground text-background rounded-md hover:opacity-90 transition-opacity text-xs font-bold font-mono"
+              className="inline-flex items-center gap-2 px-4 py-1.5 bg-foreground text-background rounded-md hover:opacity-90 transition-opacity text-sm font-bold font-mono"
               data-testid="live-demo-button"
             >
               <ExternalLink className="h-3 w-3" />

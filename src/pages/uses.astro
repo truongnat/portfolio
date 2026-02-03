@@ -49,7 +49,7 @@ const uses = [
       {/* Header */}
       <header class="mb-20 text-center">
         <h1 class="text-4xl sm:text-5xl font-bold font-mono tracking-tight mb-6">/uses</h1>
-        <p class="text-muted-foreground font-mono text-sm uppercase tracking-widest max-w-xl mx-auto">
+        <p class="text-muted-foreground font-mono text-base uppercase tracking-widest max-w-xl mx-auto">
           The hardware, software, and tools that power my workflow.
         </p>
       </header>
@@ -66,10 +66,10 @@ const uses = [
             <ul class="space-y-6">
               {category.items.map((item) => (
                 <li class="group">
-                  <h3 class="font-bold text-foreground group-hover:text-primary transition-colors font-mono text-sm mb-1">
+                  <h3 class="font-bold text-foreground group-hover:text-primary transition-colors font-mono text-base mb-1">
                     {item.name}
                   </h3>
-                  <p class="text-sm text-muted-foreground leading-relaxed">
+                  <p class="text-base text-muted-foreground leading-relaxed">
                     {item.desc}
                   </p>
                 </li>
@@ -81,7 +81,7 @@ const uses = [
 
       {/* Footer Note */}
       <div class="mt-20 pt-12 border-t border-border text-center">
-        <p class="text-xs text-muted-foreground font-mono">
+        <p class="text-sm text-muted-foreground font-mono">
           Updated: {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
         </p>
       </div>

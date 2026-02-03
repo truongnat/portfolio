@@ -35,12 +35,11 @@ export function TechRadarClient() {
         <div className="absolute top-0 bottom-0 left-1/2 w-px bg-border/50" />
         <div className="absolute left-0 right-0 top-1/2 h-px bg-border/50" />
 
-        {/* Quadrant Labels */}
-        <div className="absolute top-4 left-4 text-[10px] font-mono text-muted-foreground uppercase opacity-50">Languages</div>
-        <div className="absolute top-4 right-4 text-[10px] font-mono text-muted-foreground uppercase opacity-50">Tools</div>
-        <div className="absolute bottom-4 left-4 text-[10px] font-mono text-muted-foreground uppercase opacity-50">Platforms</div>
-        <div className="absolute bottom-4 right-4 text-[10px] font-mono text-muted-foreground uppercase opacity-50">Techniques</div>
-
+              {/* Quadrant Labels */}
+              <div className="absolute top-4 left-4 text-xs font-mono text-muted-foreground uppercase opacity-50">Languages</div>
+              <div className="absolute top-4 right-4 text-xs font-mono text-muted-foreground uppercase opacity-50">Tools</div>
+              <div className="absolute bottom-4 left-4 text-xs font-mono text-muted-foreground uppercase opacity-50">Platforms</div>
+              <div className="absolute bottom-4 right-4 text-xs font-mono text-muted-foreground uppercase opacity-50">Techniques</div>
         {/* Blips */}
         {radarData.map((blip, index) => {
           // Calculate pseudo-random position based on ring and quadrant
@@ -109,7 +108,7 @@ export function TechRadarClient() {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setSelectedQuadrant(null)}
-            className={`px-3 py-1 text-xs font-mono border rounded transition-all ${!selectedQuadrant ? 'bg-foreground text-background border-foreground' : 'text-muted-foreground border-border'}`}
+            className={`px-3 py-1 text-sm font-mono border rounded transition-all ${!selectedQuadrant ? 'bg-foreground text-background border-foreground' : 'text-muted-foreground border-border'}`}
           >
             ALL
           </button>
@@ -117,7 +116,7 @@ export function TechRadarClient() {
             <button
               key={q}
               onClick={() => setSelectedQuadrant(q === selectedQuadrant ? null : q as any)}
-              className={`px-3 py-1 text-xs font-mono border rounded transition-all ${selectedQuadrant === q ? 'bg-foreground text-background border-foreground' : 'text-muted-foreground border-border hover:border-foreground/50'}`}
+              className={`px-3 py-1 text-sm font-mono border rounded transition-all ${selectedQuadrant === q ? 'bg-foreground text-background border-foreground' : 'text-muted-foreground border-border hover:border-foreground/50'}`}
             >
               {q.toUpperCase()}
             </button>
@@ -131,7 +130,7 @@ export function TechRadarClient() {
 
             return (
               <div key={ring} className="space-y-2">
-                <h3 className={`text-sm font-bold font-mono uppercase tracking-widest border-b border-border pb-1 
+                <h3 className={`text-base font-bold font-mono uppercase tracking-widest border-b border-border pb-1 
                   ${ring === 'Adopt' ? 'text-green-500' :
                     ring === 'Trial' ? 'text-blue-500' :
                       ring === 'Assess' ? 'text-yellow-500' : 'text-red-500'}
@@ -147,7 +146,7 @@ export function TechRadarClient() {
                       className={`text-sm group flex items-center justify-between p-2 rounded cursor-pointer transition-colors ${hoveredBlip === item.name ? 'bg-secondary' : ''}`}
                     >
                       <span className="font-mono text-foreground/80 group-hover:text-foreground">{item.name}</span>
-                      <span className="text-[10px] text-muted-foreground font-mono opacity-50">{item.quadrant}</span>
+                      <span className="text-xs text-muted-foreground font-mono opacity-50">{item.quadrant}</span>
                     </li>
                   ))}
                 </ul>

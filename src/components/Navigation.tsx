@@ -44,7 +44,7 @@ export default function Navigation() {
               <a
                 key={label}
                 href={href}
-                className="relative text-[10px] font-mono font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors group"
+                className="relative text-sm font-mono font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors group"
               >
                 {label}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
@@ -87,7 +87,7 @@ export default function Navigation() {
                     onClick={() => setIsOpen(false)}
                     className="text-2xl font-mono font-bold uppercase tracking-widest text-foreground hover:text-primary transition-all duration-300 text-left flex items-baseline group"
                   >
-                    <span className="text-muted-foreground/20 mr-4 text-xs font-medium">0{index + 1} //</span>
+                    <span className="text-muted-foreground/20 mr-4 text-sm font-medium">0{index + 1} //</span>
                     <span className="relative">
                       {label}
                       <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
@@ -102,7 +102,7 @@ export default function Navigation() {
                 transition={{ delay: 0.5 }}
                 className="absolute bottom-12 left-0 right-0 text-center"
               >
-                <p className="text-[10px] font-mono text-muted-foreground/50 uppercase tracking-[0.2em]">
+                <p className="text-xs font-mono text-muted-foreground/50 uppercase tracking-[0.2em]">
                   {personalInfo.email}
                 </p>
               </motion.div>

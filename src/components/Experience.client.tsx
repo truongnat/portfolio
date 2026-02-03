@@ -91,23 +91,23 @@ export function ExperienceClient({ experiences = workExperience }: ExperiencePro
                                                 <span className="uppercase tracking-tight">{exp.company}</span>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-2 text-muted-foreground font-mono text-[10px] bg-secondary/50 px-3 py-1 rounded-full border border-border uppercase tracking-widest">
+                                        <div className="flex items-center gap-2 text-muted-foreground font-mono text-xs bg-secondary/50 px-3 py-1 rounded-full border border-border uppercase tracking-widest">
                                             <Calendar className="h-3 w-3" />
                                             <span>{exp.period}</span>
                                         </div>
                                     </div>
 
                                     {exp.description && (
-                                        <p className="text-sm text-muted-foreground mb-8 leading-relaxed">{exp.description}</p>
+                                        <p className="text-base text-muted-foreground mb-8 leading-relaxed">{exp.description}</p>
                                     )}
 
                                     <div className="space-y-4">
-                                        <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/50 font-mono flex items-center gap-2">
+                                        <h4 className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground/50 font-mono flex items-center gap-2">
                                             {uiStrings.experience.achievementsTitle}
                                         </h4>
                                         <ul className="space-y-3">
                                             {exp.achievements.map((achievement, i) => (
-                                                <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
+                                                <li key={i} className="flex items-start gap-3 text-base text-muted-foreground">
                                                     <span className="mt-2 w-1 h-[1px] bg-foreground/30 flex-shrink-0" />
                                                     <span className="leading-relaxed">{achievement}</span>
                                                 </li>

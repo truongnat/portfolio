@@ -203,7 +203,7 @@ export function HeroClient({
               <span className="text-3xl sm:text-4xl font-bold text-foreground font-mono">
                 {stat.value}
               </span>
-              <span className="text-xs text-muted-foreground font-mono uppercase tracking-wider">{stat.label}</span>
+              <span className="text-sm text-muted-foreground font-mono uppercase tracking-wider">{stat.label}</span>
             </div>
           ))}
         </motion.div>
