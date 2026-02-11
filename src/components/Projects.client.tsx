@@ -22,15 +22,13 @@ export function ProjectsClient() {
     return {
       id: p.id,
       title: p.title,
+      role: p.role,
+      period: p.period,
       description: p.description,
-      tech_stack: p.techStack,
+      techStack: p.techStack,
       categories: p.categories,
-      screenshot: null,
-      live_url: p.link || null,
-      featured: true,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-      display_order: 0,
+      achievements: p.achievements,
+      link: p.link,
     };
   });
 
@@ -161,24 +159,6 @@ export function ProjectCard({ project, variants }: ProjectCardProps) {
       data-project-title={project.title}
       data-project-categories={project.categories.join(' ')}
     >
-      {/* Screenshot */}
-      {project.screenshot && (
-        <div className="relative h-48 overflow-hidden bg-muted border-b border-border">
-          <motion.div
-            className="w-full h-full"
-            whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <img
-              src={project.screenshot}
-              alt={`${project.title} screenshot`}
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-              data-testid="project-screenshot"
-            />
-          </motion.div>
-        </div>
-      )}
-
       {/* Content */}
       <div className="p-6" data-testid="project-content">
         {/* Title */}
@@ -193,7 +173,7 @@ export function ProjectCard({ project, variants }: ProjectCardProps) {
 
         {/* Tech stack badges */}
         <div className="flex flex-wrap gap-2 mb-6" data-testid="project-tech-stack">
-          {project?.tech_stack?.map((tech, index) => (
+          {project?.techStack?.map((tech, index) => (
             <span
               key={index}
               className="px-2 py-0.5 text-sm font-mono border border-border bg-muted/30 text-muted-foreground rounded"
@@ -206,9 +186,9 @@ export function ProjectCard({ project, variants }: ProjectCardProps) {
 
         {/* Action buttons */}
         <div className="flex gap-3" data-testid="project-actions">
-          {project.live_url && (
+          {project.link && (
             <a
-              href={project.live_url}
+              href={project.link}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-1.5 bg-foreground text-background rounded-md hover:opacity-90 transition-opacity text-sm font-bold font-mono"

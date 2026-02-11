@@ -317,7 +317,7 @@ export const projectsConfig: Project[] = [
       'Challenge: Build a unified web and mobile platform for enterprise KPI monitoring with complex data visualization needs.',
       'Action: Led frontend development, building the foundational React and React Native codebases. Designed and implemented an interactive geospatial data visualization feature (Vietnam Map) for mobile.',
       'Result: Enabled real-time regional KPI tracking on mobile devices. Automated the build and deployment process for iOS and Android, significantly reducing manual release time.',
-    ],
+    ]
   },
   {
     id: 'naver-cloud',
@@ -331,7 +331,7 @@ export const projectsConfig: Project[] = [
       'Challenge: Develop a stable, multi-platform video conferencing solution with consistent user experience.',
       'Action: Engineered real-time video features for web (Vue.js), desktop (Electron), and mobile (React Native) using the Jitsi Meet core.',
       'Result: Delivered a seamless cross-platform conferencing tool that maintained stable video quality.',
-    ],
+    ]
   },
   {
     id: 'gopass',
@@ -345,7 +345,7 @@ export const projectsConfig: Project[] = [
       'Challenge: Create a stable, user-friendly exam application for the Japanese market with offline functionality.',
       'Action: Developed the mobile app using React Native and implemented an offline-first architecture using Realm DB for local data caching and synchronization.',
       'Result: Successfully launched the app, which handled complex exam flows smoothly.',
-    ],
+    ]
   },
 ];
 
@@ -356,6 +356,80 @@ export interface Award {
   date: string;
   icon?: LucideIcon;
 }
+
+export interface Certificate {
+  title: string;
+  issuer: string;
+  year: string;
+  description: string;
+  credentialId?: string;
+  credentialUrl?: string;
+}
+
+export const certificatesData: Certificate[] = [
+  {
+    title: 'Employee of the Year',
+    issuer: 'Blameo Company',
+    year: 'May 2023',
+    description: 'Recognized for exceptional performance and contributions to the company.',
+    credentialId: 'EOTY-2023-001'
+  }
+  /*
+  {
+    title: 'AWS Certified Solutions Architect',
+    issuer: 'Amazon Web Services',
+    year: '2022',
+    description: 'Demonstrated ability to design distributed systems on AWS platform with best practices for security and scalability.',
+    credentialId: 'AWS-SA-2022-12345',
+    credentialUrl: 'https://www.credly.com/badges/abc123'
+  },
+  {
+    title: 'Google Cloud Professional Data Engineer',
+    issuer: 'Google Cloud',
+    year: '2023',
+    description: 'Validated expertise in designing and implementing data processing systems on Google Cloud Platform.',
+    credentialId: 'GCP-DATA-2023-67890'
+  },
+  {
+    title: 'Microsoft Certified: Azure Developer Associate',
+    issuer: 'Microsoft',
+    year: '2023',
+    description: 'Demonstrated ability to design and build cloud applications using Microsoft Azure services.',
+    credentialId: 'AZURE-DEV-2023-54321'
+  },
+  {
+    title: 'AI & Machine Learning Specialization',
+    issuer: 'Coursera (DeepLearning.AI)',
+    year: '2023',
+    description: 'Completed specialization courses in AI, neural networks, and machine learning engineering with focus on practical applications.'
+  }
+  */
+];
+
+export interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+  avatar?: string;
+}
+
+export const testimonialsData: Testimonial[] = [
+  {
+    quote: "Truong is an exceptional engineer who brings both technical depth and leadership skills to every project. His ability to architect scalable solutions while mentoring junior developers is impressive.",
+    author: "Nguyen Van An",
+    role: "PM at Viettel Net"
+  },
+  {
+    quote: "Working with Truong on the AI automation project was transformative for our team. He not only delivered ahead of schedule but also elevated the entire team's technical capabilities.",
+    author: "Vu Thanh Dat",
+    role: "CTO at Blameo"
+  },
+  {
+    quote: "Truong's expertise in cross-platform development helped us deliver a seamless video conferencing solution across web, mobile, and desktop. His attention to detail and problem-solving skills are outstanding.",
+    author: "Vu Ba Huan",
+    role: "Director at CMC"
+  }
+];
 
 export const awards: Award[] = [
   {
@@ -373,6 +447,9 @@ export const navLinks = [
   { label: 'Skills', href: '/#skills' },
   { label: 'Tech Radar', href: '/tech-radar' },
   { label: 'Experience', href: '/#experience' },
+  { label: 'Certificates', href: '/#certificates' },
+  { label: 'GitHub Stats', href: '/#github-stats' },
+  { label: 'Testimonials', href: '/#testimonials' },
   { label: 'Projects', href: '/#projects' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/#contact' },

@@ -3,6 +3,9 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { HeroClient } from '@/components/Hero.client';
 import { SkillsClient } from '@/components/Skills.client';
 import { ExperienceClient } from '@/components/Experience.client';
+import { CertificatesClient } from '@/components/Certificates.client';
+import { GitHubStatsClient } from '@/components/GitHubStats.client';
+import { TestimonialsClient } from '@/components/Testimonials.client';
 import { ProjectsClient } from '@/components/Projects.client';
 import { ContactFormClient } from '@/components/ContactForm.client';
 import { personalInfo } from '@/lib/config';
@@ -13,6 +16,9 @@ import { personalInfo } from '@/lib/config';
 		<HeroClient client:load />
 		<SkillsClient client:visible />
 		<ExperienceClient client:visible />
+		<CertificatesClient client:visible />
+		<GitHubStatsClient client:visible />
+		<TestimonialsClient client:visible />
 		<ProjectsClient client:visible />
 
 		<!-- Contact Section -->

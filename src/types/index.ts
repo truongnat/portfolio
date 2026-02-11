@@ -21,16 +21,13 @@ export interface BlogPostMetadata extends Omit<Post, 'id' | 'content'> { }
 export interface Project {
     id: string;
     title: string;
+    role: string;
+    period: string;
     description: string;
-    tech_stack: string[];
+    techStack: string[];
     categories: ProjectCategory[];
-    screenshot: string | null;
-    live_url: string | null;
-    github_url?: string | null;
-    featured: boolean;
-    display_order: number;
-    created_at: string;
-    updated_at: string;
+    achievements: string[];
+    link?: string;
 }
 
 export type ProjectCategory = 'All' | 'AI' | 'Web' | 'Mobile' | 'Open Source' | 'Product';
