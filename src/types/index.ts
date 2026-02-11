@@ -33,5 +33,5 @@ export interface Project {
     updated_at: string;
 }
 
-export type ProjectCategory = 'All' | 'AI' | 'Web' | 'Mobile' | 'Open Source';
+export type ProjectCategory = 'All' | 'AI' | 'Web' | 'Mobile' | 'Open Source' | 'Product';
 

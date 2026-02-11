@@ -12,7 +12,7 @@ import type { ProjectCategory } from '@/types';
 
 export type SkillCategory = 'Frontend' | 'Backend' | 'Mobile' | 'DevOps' | 'Tools';
 
-export const projectCategories: ProjectCategory[] = ['All', 'AI', 'Web', 'Mobile', 'Open Source'];
+export const projectCategories: ProjectCategory[] = ['All', 'AI', 'Web', 'Mobile', 'Open Source', 'Product'];
 
 export interface SocialLink {
   platform: string;
@@ -246,18 +246,64 @@ export interface Project {
 
 export const projectsConfig: Project[] = [
   {
+    id: 'example-react',
+    title: 'MERN Stack Monorepo 2025',
+    role: 'Fullstack Developer',
+    period: 'Present',
+    description: 'Production-ready MERN stack monorepo featuring modern development practices, clean architecture, and comprehensive tooling. Built with TypeScript throughout, demonstrating best practices for full-stack development in 2025.',
+    techStack: ['React 19', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'TanStack Router', 'Tailwind CSS', 'Docker'],
+    categories: ['Web', 'Open Source'],
+    achievements: [
+      'Challenge: Creating a comprehensive full-stack application with modern development practices and clean architecture.',
+      'Action: Developed a sophisticated monorepo with authentication system, real-time chat, todo management, and comprehensive testing strategies.',
+      'Result: Delivered a production-ready application serving as a learning resource for modern full-stack development with features like JWT authentication, real-time communication, and clean architecture principles.',
+    ],
+    link: 'https://peanut-example-react.vercel.app/'
+  },
+  {
+    id: 'agentic-sdlc-product',
+    title: 'Agentic SDLC Framework',
+    role: 'AI Engineer',
+    period: 'Present',
+    description: 'Production-ready AI-powered Software Development Lifecycle framework that demonstrates comprehensive product development with clean architecture, extensibility, and real-world applicability.',
+    techStack: ['Python', 'LangChain', 'OpenAI', 'Anthropic', 'DSPy', 'Autogen', 'Neo4j', 'Docker', 'Pydantic', 'Streamlit'],
+    categories: ['AI', 'Product'],
+    achievements: [
+      'Challenge: Building a comprehensive AI-powered framework for automating the software development lifecycle with clean architecture and extensibility.',
+      'Action: Developed a production-ready Python SDK with configuration management, agent orchestration, workflow automation, intelligence features (learning, monitoring, reasoning), and a plugin system. Implemented CLI tools, comprehensive testing, and documentation.',
+      'Result: Created a 100%-complete framework with 15+ CLI commands, full test coverage, and production-ready code that enables AI agents to collaborate on software development tasks with learning and adaptation capabilities.',
+    ],
+    link: 'https://agentic-sdlc-sigma.vercel.app/'
+  },
+  {
     id: 'agentic-sdlc',
     title: 'Agentic SDLC (Personal R&D)',
     role: 'AI Engineer',
     period: 'Jan 2024 – Present',
-    description: 'Engineered a Multi-agent system using LangGraph/CrewAI to coordinate AI agents for requirement analysis, code generation, and automated testing.',
-    techStack: ['Python', 'LangChain', 'Antigravity', 'Gemini', 'Neo4j', 'Docker'],
+    description: 'AI-powered Software Development Lifecycle framework providing tools for orchestrating agents, managing workflows, and building intelligent automation systems. Features clean public API, modular architecture, and extensibility through plugins.',
+    techStack: ['Python', 'LangChain', 'OpenAI', 'Anthropic', 'DSPy', 'Autogen', 'Neo4j', 'Docker', 'Pydantic', 'Streamlit'],
     categories: ['AI', 'Open Source'],
     achievements: [
-      'Challenge: Reducing manual effort in repetitive coding tasks and system documentation.',
-      'Action: Engineered a Multi-agent system using LangGraph/CrewAI to coordinate AI agents for requirement analysis, code generation, and automated testing.',
-      'Result: Created a functional framework capable of generating production-ready boilerplate and self-correcting code through iterative AI feedback loops.',
+      'Challenge: Building a comprehensive AI-powered framework for automating the software development lifecycle with clean architecture and extensibility.',
+      'Action: Developed a production-ready Python SDK with configuration management, agent orchestration, workflow automation, intelligence features (learning, monitoring, reasoning), and a plugin system. Implemented CLI tools, comprehensive testing, and documentation.',
+      'Result: Created a 100%-complete framework with 15+ CLI commands, full test coverage, and production-ready code that enables AI agents to collaborate on software development tasks with learning and adaptation capabilities.',
     ],
+    link: 'https://agentic-sdlc-sigma.vercel.app/'
+  },
+  {
+    id: 'universal-music-downloader',
+    title: 'Universal Music Downloader',
+    role: 'Fullstack Developer',
+    period: 'Present',
+    description: 'Full-stack web application that allows users to download music and playlists from YouTube and SoundCloud as audio files, handling URL input, metadata extraction, audio streaming, and file downloading through backend APIs.',
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Bun', 'Vercel'],
+    categories: ['Web', 'Open Source'],
+    achievements: [
+      'Challenge: Building a practical tool that allows users to download music without installing additional software.',
+      'Action: Designed and implemented frontend UI/UX for a smooth download flow, built backend API endpoints to handle YouTube and SoundCloud downloads, and integrated client-server communication for streaming and file delivery.',
+      'Result: Delivered a user-friendly application that demonstrates strong full-stack development skills and experience integrating third-party platforms.',
+    ],
+    link: 'https://universal-music-downloader.vercel.app/'
   },
   {
     id: 'netbi',
