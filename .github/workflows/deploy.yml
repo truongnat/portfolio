@@ -18,14 +18,25 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Install deps
+      - name: Install dependencies
         run: bun install
 
       - name: Build
         run: bun run build
 
-      # 1️⃣ Upload vào home trước
-      - name: Upload files to EC2
+      # 1️⃣ Tạo thư mục tạm trên server
+      - name: Prepare deploy folder
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            rm -rf ~/deploy
+            mkdir -p ~/deploy
+
+      # 2️⃣ Upload nội dung dist (không tạo folder dist lồng)
+      - name: Upload dist content
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -33,9 +44,10 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "dist/*"
           target: "~/deploy"
+          strip_components: 1
 
-      # 2️⃣ Move bằng sudo
-      - name: Move to nginx folder
+      # 3️⃣ Move vào nginx root
+      - name: Deploy to nginx
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -46,4 +58,4 @@ jobs:
             sudo mv ~/deploy/* /var/www/html/
             sudo chown -R www-data:www-data /var/www/html
             rm -rf ~/deploy
-            sudo systemctl restart nginx
+            sudo systemctl reload nginx
