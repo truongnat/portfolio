@@ -55,6 +55,15 @@ export const personalInfo = {
   ]
 };
 
+export const appInfo = {
+  license: {
+    name: 'MIT License',
+    year: '2026',
+    copyright: 'Copyright © 2026 Dao Quang Truong',
+    fullText: 'MIT License - Copyright © 2026 Dao Quang Truong'
+  }
+};
+
 export const seo = {
   title: "Dao Quang Truong | Fullstack Developer",
   description: "Fullstack Developer specializing in cross-platform solutions, Agentic AI, and high-scale enterprise systems.",

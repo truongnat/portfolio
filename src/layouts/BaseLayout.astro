@@ -6,6 +6,7 @@ import { CommandPalette } from "@/components/CommandPalette";
 import CodeCopy from "@/components/CodeCopy.astro";
 import Schema from "@/components/seo/Schema.astro";
 import GridBackground from "@/components/GridBackground.astro";
+import Footer from "@/components/Footer.astro";
 import { ClientRouter } from 'astro:transitions';
 import '@/styles/global.css';
 import { getCollection } from 'astro:content';
@@ -89,14 +90,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://porfolio
 		<ClientRouter />
 		<!-- Resource hints -->
 	</head>
-	<body class="bg-background text-foreground antialiased min-h-screen">
+	<body class="bg-background text-foreground antialiased min-h-screen flex flex-col">
 		<GridBackground />
 		<Navigation client:load transition:persist />
-		<main>
+		<main class="flex-1">
 			<slot />
 		</main>
 		<ScrollToTopClient client:load transition:persist />
 		<CommandPalette client:idle transition:persist posts={blogPosts} />
 		<CodeCopy />
+		<Footer />
 	</body>
 </html>
