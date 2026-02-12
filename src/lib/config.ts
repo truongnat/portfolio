@@ -56,11 +56,13 @@ export const personalInfo = {
 };
 
 export const appInfo = {
+  version: import.meta.env.APP_VERSION || '0.0.1',
+  hash: import.meta.env.APP_HASH || 'unknown',
   license: {
-    name: 'MIT License',
-    year: '2026',
-    copyright: 'Copyright © 2026 Dao Quang Truong',
-    fullText: 'MIT License - Copyright © 2026 Dao Quang Truong'
+    name: import.meta.env.APP_LICENSE || 'MIT License',
+    year: new Date().getFullYear().toString(),
+    copyright: `Copyright © ${new Date().getFullYear()} Dao Quang Truong`,
+    fullText: `${import.meta.env.APP_LICENSE || 'MIT License'} - Copyright © ${new Date().getFullYear()} Dao Quang Truong`
   }
 };
 

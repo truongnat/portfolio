@@ -2,18 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, GitCommit, ShieldCheck } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { personalInfo, navLinks, uiStrings } from '@/lib/config';
-// License information for navigation
-const licenseInfo = {
-  name: 'MIT License'
-};
-
-// Version information
-const versionInfo = {
-  version: '0.0.1',
-  shortCommitHash: 'd72ac88'
-};
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,18 +51,7 @@ export default function Navigation() {
               </a>
             ))}
 
-            {/* Version and License Info for Desktop */}
-            <div className="flex items-center gap-4 ml-4 border-l border-white/10 pl-4">
-              <div className="flex items-center gap-1 text-xs font-mono text-muted-foreground/60 hover:text-muted-foreground/80 transition-colors">
-                <GitCommit className="h-3 w-3" />
-                <span className="uppercase tracking-wider">v{versionInfo.version}</span>
-                <span className="text-muted-foreground/40">({versionInfo.shortCommitHash})</span>
-              </div>
-              <div className="flex items-center gap-1 text-xs font-mono text-muted-foreground/60 hover:text-muted-foreground/80 transition-colors">
-                <ShieldCheck className="h-3 w-3" />
-                <span className="uppercase tracking-wider">{licenseInfo.name}</span>
-              </div>
-            </div>
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -130,24 +109,7 @@ export default function Navigation() {
                 </p>
               </motion.div>
 
-              {/* Version and License Info */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                className="absolute bottom-4 left-0 right-0 text-center"
-              >
-                <div className="flex items-center justify-center gap-4 text-xs font-mono text-muted-foreground/40">
-                  <div className="flex items-center gap-1">
-                    <GitCommit className="h-3 w-3" />
-                    <span>v{versionInfo.version} ({versionInfo.shortCommitHash})</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <ShieldCheck className="h-3 w-3" />
-                    <span>{licenseInfo.name}</span>
-                  </div>
-                </div>
-              </motion.div>
+
             </div>
           </motion.div>
         )}
