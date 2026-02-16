@@ -29,5 +29,6 @@ export default defineConfig({
       'import.meta.env.APP_HASH': JSON.stringify(commitHash),
       'import.meta.env.APP_LICENSE': JSON.stringify(pkg.license || 'MIT'),
     }
-  }
+  },
+  trailingSlash: "always"
 });

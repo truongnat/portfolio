@@ -73,63 +73,63 @@ export function CommandPalette({ posts = [] }: CommandPaletteProps) {
 
                 <Command.Group heading="Navigation" className="text-xs font-medium text-muted-foreground px-2 py-1.5 font-mono mb-2">
                   <Command.Item
-                    onSelect={() => handleSelect('/')}
+                    onSelect={() => handleSelect('/index.html')}
                     className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground font-mono data-[selected=true]:bg-secondary/50 data-[selected=true]:text-foreground"
                   >
                     <Home className="mr-2 h-4 w-4" />
                     <span>Home</span>
                   </Command.Item>
                   <Command.Item
-                    onSelect={() => handleSelect('/#about')}
+                    onSelect={() => handleSelect('/index.html#about')}
                     className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground font-mono data-[selected=true]:bg-secondary/50 data-[selected=true]:text-foreground"
                   >
                     <User className="mr-2 h-4 w-4" />
                     <span>About</span>
                   </Command.Item>
                   <Command.Item
-                    onSelect={() => handleSelect('/now')}
+                    onSelect={() => handleSelect('/now/index.html')}
                     className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground font-mono data-[selected=true]:bg-secondary/50 data-[selected=true]:text-foreground"
                   >
                     <Clock className="mr-2 h-4 w-4" />
                     <span>Now</span>
                   </Command.Item>
                   <Command.Item
-                    onSelect={() => handleSelect('/#skills')}
+                    onSelect={() => handleSelect('/index.html#skills')}
                     className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground font-mono data-[selected=true]:bg-secondary/50 data-[selected=true]:text-foreground"
                   >
                     <Code className="mr-2 h-4 w-4" />
                     <span>Skills</span>
                   </Command.Item>
                   <Command.Item
-                    onSelect={() => handleSelect('/tech-radar')}
+                    onSelect={() => handleSelect('/tech-radar/index.html')}
                     className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground font-mono data-[selected=true]:bg-secondary/50 data-[selected=true]:text-foreground"
                   >
                     <Radar className="mr-2 h-4 w-4" />
                     <span>Tech Radar</span>
                   </Command.Item>
                   <Command.Item
-                    onSelect={() => handleSelect('/#experience')}
+                    onSelect={() => handleSelect('/index.html#experience')}
                     className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground font-mono data-[selected=true]:bg-secondary/50 data-[selected=true]:text-foreground"
                   >
                     <Briefcase className="mr-2 h-4 w-4" />
                     <span>Experience</span>
                   </Command.Item>
                   <Command.Item
-                    onSelect={() => handleSelect('/#projects')}
+                    onSelect={() => handleSelect('/index.html#projects')}
                     className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground font-mono data-[selected=true]:bg-secondary/50 data-[selected=true]:text-foreground"
                   >
                     <Code className="mr-2 h-4 w-4" />
                     <span>Projects</span>
                   </Command.Item>
                   <Command.Item
-                    onSelect={() => handleSelect('/blog')}
+                    onSelect={() => handleSelect('/blog/index.html')}
                     className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground font-mono data-[selected=true]:bg-secondary/50 data-[selected=true]:text-foreground"
                   >
                     <FileText className="mr-2 h-4 w-4" />
                     <span>Blog</span>
                   </Command.Item>
                   <Command.Item
-                    onSelect={() => handleSelect('/#contact')}
+                    onSelect={() => handleSelect('/index.html#contact')}
                     className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground font-mono data-[selected=true]:bg-secondary/50 data-[selected=true]:text-foreground"
                   >
                     <Mail className="mr-2 h-4 w-4" />
@@ -142,7 +142,7 @@ export function CommandPalette({ posts = [] }: CommandPaletteProps) {
                     {posts.map((post) => (
                       <Command.Item
                         key={post.slug}
-                        onSelect={() => handleSelect(`/blog/${post.slug}`)}
+                        onSelect={() => handleSelect(`/blog/${post.slug}/index.html`)}
                         className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground font-mono data-[selected=true]:bg-secondary/50 data-[selected=true]:text-foreground"
                       >
                         <FileText className="mr-2 h-4 w-4" />

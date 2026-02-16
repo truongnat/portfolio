@@ -33,7 +33,7 @@ export default function Navigation() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <a href="/" className="text-xl font-bold font-mono tracking-tighter text-foreground hover:text-foreground/80 transition-all duration-300">
+            <a href="/index.html" className="text-xl font-bold font-mono tracking-tighter text-foreground hover:text-foreground/80 transition-all duration-300">
               {uiStrings.common.logo}
             </a>
           </div>

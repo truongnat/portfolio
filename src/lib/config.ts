@@ -453,17 +453,17 @@ export const awards: Award[] = [
 ];
 
 export const navLinks = [
-  { label: 'About', href: '/#about' },
-  { label: 'Now', href: '/now' },
-  { label: 'Skills', href: '/#skills' },
-  { label: 'Tech Radar', href: '/tech-radar' },
-  { label: 'Experience', href: '/#experience' },
-  { label: 'Certificates', href: '/#certificates' },
-  { label: 'GitHub Stats', href: '/#github-stats' },
-  { label: 'Testimonials', href: '/#testimonials' },
-  { label: 'Projects', href: '/#projects' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'About', href: '/index.html#about' },
+  { label: 'Now', href: '/now/index.html' },
+  { label: 'Skills', href: '/index.html#skills' },
+  { label: 'Tech Radar', href: '/tech-radar/index.html' },
+  { label: 'Experience', href: '/index.html#experience' },
+  { label: 'Certificates', href: '/index.html#certificates' },
+  { label: 'GitHub Stats', href: '/index.html#github-stats' },
+  { label: 'Testimonials', href: '/index.html#testimonials' },
+  { label: 'Projects', href: '/index.html#projects' },
+  { label: 'Blog', href: '/blog/index.html' },
+  { label: 'Contact', href: '/index.html#contact' },
 ];
 
 export const uiStrings = {
