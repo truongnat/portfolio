@@ -50,7 +50,7 @@ const relatedPosts = allPosts
         date: p.post.data.date.toISOString(), // PostCard expects string date
     }));
 
-const shareUrl = new URL(Astro.url.pathname, Astro.site || 'https://porfolio-truongdq.vercel.app').toString();
+const shareUrl = new URL(Astro.url.pathname, Astro.site || 'https://truongdq.com').toString();
 const shareTitle = post.data.title;
 ---
 

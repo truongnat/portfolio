@@ -21,7 +21,7 @@ const {
   tags,
 } = Astro.props;
 
-const siteUrl = Astro.site ? Astro.site.toString() : 'https://porfolio-truongdq.vercel.app/';
+const siteUrl = Astro.site ? Astro.site.toString() : 'https://truongdq.com/';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 const imageUrl = new URL(image, siteUrl).toString();
 

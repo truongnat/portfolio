@@ -19,7 +19,7 @@ const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf-8'));
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://porfolio-truongdq.vercel.app',
+  site: 'https://truongdq.com',
   integrations: [react(), mdx(), sitemap()],
 
   vite: {

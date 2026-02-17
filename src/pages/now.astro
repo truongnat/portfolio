@@ -1,19 +1,19 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { BookOpen, Target, Zap, Globe } from 'lucide-react';
+import { BookOpen, Target, Zap, Globe, Phone, Calendar } from 'lucide-react';
 
 const updatedDate = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
 const focusAreas = [
   {
-    icon: Target,
-    title: 'Building Agentic Systems',
-    description: 'Deep diving into LangGraph and CrewAI to build autonomous coding agents. Currently working on a multi-agent framework that can self-correct test failures.',
+    icon: Calendar,
+    title: 'Building Lunar App',
+    description: 'This is a personal productivity and event management app build by Flutter app and Python backend that helps users organize their schedule, create memos, take notes, and manage their profile. The app features calendar integration, event tracking, and authentication for personalized experiences.',
   },
   {
-    icon: Zap,
-    title: 'Rust & Performance',
-    description: 'Learning Rust to rewrite critical Node.js tooling. Obsessed with Wasm and edge computing patterns.',
+    icon: Target,
+    title: 'Leaning AWS and Associate SAA-C03',
+    description: 'Deep diving into AWS services, self host all my idea project to cloud with best practice and preparing for the AWS Certified Solutions Architect - Associate (SAA-C03) certification exam.',
   },
   {
     icon: BookOpen,
@@ -21,10 +21,15 @@ const focusAreas = [
     description: 'Currently reading "Designing Data-Intensive Applications" by Martin Kleppmann (again). It never gets old.',
   },
   {
-    icon: Globe,
-    title: 'Community',
-    description: 'Preparing a talk on "Scaling Agile in Distributed Teams" for a local tech meetup.',
+    icon: Zap,
+    title: 'Rust & Performance',
+    description: 'Learning Rust to rewrite critical Node.js tooling. Obsessed with Wasm and edge computing patterns.',
   },
+  // {
+  //   icon: Globe,
+  //   title: 'Community',
+  //   description: 'Preparing a talk on "Scaling Agile in Distributed Teams" for a local tech meetup.',
+  // },
 ];
 ---
 
@@ -52,7 +57,7 @@ const focusAreas = [
             <div class="bg-card/30 border border-border p-6 rounded-xl hover:border-foreground/20 transition-all duration-300">
               <div class="flex items-center gap-3 mb-4">
                 <div class="p-2 bg-secondary rounded-lg text-foreground">
-                  <area.icon class="h-5 w-5" />
+                  <area.icon className="h-5 w-5" />
                 </div>
                 <h2 class="text-lg font-bold font-mono">{area.title}</h2>
               </div>

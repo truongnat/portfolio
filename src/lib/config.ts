@@ -10,15 +10,7 @@ import {
 } from 'lucide-react';
 import type { ProjectCategory } from '@/types';
 
-export type SkillCategory = 'Frontend' | 'Backend' | 'Mobile' | 'DevOps' | 'Tools';
-
 export const projectCategories: ProjectCategory[] = ['All', 'AI', 'Web', 'Mobile', 'Open Source', 'Product'];
-
-export interface SocialLink {
-  platform: string;
-  url: string;
-  icon: LucideIcon;
-}
 
 export const personalInfo = {
   name: "Dao Quang Truong",
@@ -48,7 +40,7 @@ export const personalInfo = {
   ],
   resumeUrl: "/Dao_Quang_Truong_CV.pdf",
   stats: [
-    { label: 'Years Experience', value: '3+' },
+    { label: 'Years Experience', value: '4' },
     { label: 'Team Members Led', value: '8+' },
     { label: 'AI Integration', value: 'Advanced' },
     { label: 'API Optimization', value: '50%' }
@@ -87,23 +79,10 @@ export const seo = {
     'Multi-agent Systems',
     'Performance Optimization',
   ],
-  url: "https://porfolio-truongdq.vercel.app",
+  url: "https://truongdq.com",
   image: '/avatar.jpg',
 };
 
-export interface ExpertiseRing {
-  id: string;
-  label: string;
-  percentage: number;
-  color: string;
-}
-
-export interface SkillPill {
-  id: string;
-  name: string;
-  icon: LucideIcon;
-  category: SkillCategory;
-}
 
 export interface SkillSubSection {
   label: string;
@@ -129,7 +108,7 @@ export const skillsConfig = {
       subSections: [
         {
           label: 'Agentic AI',
-          skills: ['LLMs', 'LangGraph', 'CrewAI', 'Prompt Engineering', 'Multi-agent Orchestration'],
+          skills: ['LLMs', 'LangGraph', 'Neo4j', 'Prompt Engineering', 'Multi-agent Orchestration'],
           highlight: 'Pioneering Agentic SDLC frameworks to automate coding tasks and system design.'
         },
         {
@@ -147,12 +126,12 @@ export const skillsConfig = {
       subSections: [
         {
           label: 'Core',
-          skills: ['TypeScript', 'React Native', 'Electron.js', 'Vue.js'],
+          skills: ['TypeScript', 'React Native', 'Electron.js', 'Vue.js', 'Flutter', 'Nuxt.js', 'Next.js'],
           highlight: 'Advanced in building unified cross-platform solutions across Web, Mobile, and Desktop.'
         },
         {
           label: 'Data Visualization',
-          skills: ['D3.js', 'ChartJS'],
+          skills: ['D3.js', 'ChartJS', 'Leaflet.js'],
           highlight: 'Complex geospatial data visualization and KPI dashboards.'
         }
       ]
@@ -169,7 +148,7 @@ export const skillsConfig = {
         },
         {
           label: 'Infrastructure',
-          skills: ['Docker', 'Jenkins', 'GitLab CI/CD', 'GitHub Actions', 'Linux/Ubuntu', 'Nginx'],
+          skills: ['Docker', 'Jenkins', 'GitLab CI/CD', 'GitHub Actions', 'Linux/Ubuntu', 'Nginx', 'AWS'],
           highlight: 'Architecting high-scale enterprise solutions with robust CI/CD pipelines.'
         }
       ]
@@ -453,15 +432,16 @@ export const awards: Award[] = [
 ];
 
 export const navLinks = [
-  { label: 'About', href: '/index.html#about' },
+  //{ label: 'About', href: '/index.html#about' },
   { label: 'Now', href: '/now/index.html' },
-  { label: 'Skills', href: '/index.html#skills' },
+  { label: 'Uses', href: '/uses/index.html' },
+  //{ label: 'Skills', href: '/index.html#skills' },
   { label: 'Tech Radar', href: '/tech-radar/index.html' },
-  { label: 'Experience', href: '/index.html#experience' },
-  { label: 'Certificates', href: '/index.html#certificates' },
-  { label: 'GitHub Stats', href: '/index.html#github-stats' },
-  { label: 'Testimonials', href: '/index.html#testimonials' },
-  { label: 'Projects', href: '/index.html#projects' },
+  //{ label: 'Experience', href: '/index.html#experience' },
+  //{ label: 'Certificates', href: '/index.html#certificates' },
+  //{ label: 'GitHub Stats', href: '/index.html#github-stats' },
+  //{ label: 'Testimonials', href: '/index.html#testimonials' },
+  //{ label: 'Projects', href: '/index.html#projects' },
   { label: 'Blog', href: '/blog/index.html' },
   { label: 'Contact', href: '/index.html#contact' },
 ];

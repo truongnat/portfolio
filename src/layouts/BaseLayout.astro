@@ -30,7 +30,7 @@ const {
 } = Astro.props;
 
 const posts = await getCollection('blog', ({ data }) => {
-  return import.meta.env.PROD ? data.published !== false : true;
+  return import.meta.env.PROD ? data.published : true;
 });
 
 const blogPosts = posts.map(post => ({
@@ -39,7 +39,7 @@ const blogPosts = posts.map(post => ({
   description: post.data.description,
 }));
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://porfolio-truongdq.vercel.app');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://truongdq.com');
 ---
 
 <!doctype html>
