@@ -4,6 +4,7 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import cloudflare from '@astrojs/cloudflare';
 import { execSync } from 'child_process';
 import fs from 'fs';
 
@@ -20,6 +21,12 @@ const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf-8'));
 // https://astro.build/config
 export default defineConfig({
   site: 'https://truongdq.com',
+  output: 'server',
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true,
+    },
+  }),
   integrations: [react(), mdx(), sitemap()],
 
   vite: {
