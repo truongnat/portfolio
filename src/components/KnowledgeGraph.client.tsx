@@ -1,10 +1,8 @@
 'use client';
 
-import React, { useEffect, useRef, useState, useMemo } from 'react';
-import ForceGraph2D from 'react-force-graph-2d';
-import type { ForceGraphMethods } from 'react-force-graph-2d';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Maximize2, Minimize2, ZoomIn, ZoomOut, RefreshCw, X } from 'lucide-react';
+import { Maximize2, Minimize2, RefreshCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface Node {
@@ -30,11 +28,19 @@ interface KnowledgeGraphProps {
 }
 
 export function KnowledgeGraphClient({ data }: KnowledgeGraphProps) {
-  const fgRef = useRef<ForceGraphMethods>();
+  const fgRef = useRef<any>();
   const containerRef = useRef<HTMLDivElement>(null);
+  const [ForceGraph2D, setForceGraph2D] = useState<any>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 600 });
   const [hoverNode, setHoverNode] = useState<Node | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+
+  // Dynamic import on client side
+  useEffect(() => {
+    import('react-force-graph-2d').then(mod => {
+      setForceGraph2D(() => mod.default);
+    });
+  }, []);
 
   // Resize handler
   useEffect(() => {
@@ -64,11 +70,9 @@ export function KnowledgeGraphClient({ data }: KnowledgeGraphProps) {
     const label = n.name;
     const fontSize = 12 / globalScale;
     ctx.font = `${fontSize}px "JetBrains Mono"`;
-    const textWidth = ctx.measureText(label).width;
-    const bckgDimensions = [textWidth, fontSize].map(v => v + fontSize * 0.4) as [number, number];
-
-    // Draw circle
     const r = Math.sqrt(n.val || 1) * 2;
+    
+    // Draw circle
     ctx.beginPath();
     ctx.arc(n.x!, n.y!, r, 0, 2 * Math.PI, false);
     ctx.fillStyle = nodeColor(node);
@@ -76,7 +80,6 @@ export function KnowledgeGraphClient({ data }: KnowledgeGraphProps) {
 
     // Draw label on hover or if important
     if (hoverNode === n || n.type !== 'tag' || globalScale > 1.5) {
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = '#f4f4f5'; // zinc-100
@@ -136,27 +139,33 @@ export function KnowledgeGraphClient({ data }: KnowledgeGraphProps) {
         </div>
       </div>
 
-      <ForceGraph2D
-        ref={fgRef}
-        graphData={data}
-        width={dimensions.width}
-        height={dimensions.height}
-        backgroundColor="rgba(0,0,0,0)"
-        nodeRelSize={6}
-        nodeVal={(n: any) => n.val}
-        linkColor={() => 'rgba(255, 255, 255, 0.1)'}
-        linkWidth={1}
-        nodeCanvasObject={nodeCanvasObject}
-        onNodeHover={(node) => setHoverNode(node as Node)}
-        onNodeClick={(node: any) => {
-          if (node.type !== 'tag') {
-            const path = node.type === 'blog' ? `/blog/${node.id}/index.html` : `/journal/${node.id}/index.html`;
-            window.location.href = path;
-          }
-        }}
-        cooldownTicks={100}
-        d3VelocityDecay={0.3}
-      />
+      {ForceGraph2D ? (
+        <ForceGraph2D
+          ref={fgRef}
+          graphData={data}
+          width={dimensions.width}
+          height={dimensions.height}
+          backgroundColor="rgba(0,0,0,0)"
+          nodeRelSize={6}
+          nodeVal={(n: any) => n.val}
+          linkColor={() => 'rgba(255, 255, 255, 0.1)'}
+          linkWidth={1}
+          nodeCanvasObject={nodeCanvasObject}
+          onNodeHover={(node: any) => setHoverNode(node)}
+          onNodeClick={(node: any) => {
+            if (node.type !== 'tag') {
+              const path = node.type === 'blog' ? `/blog/${node.id}/index.html` : `/journal/${node.id}/index.html`;
+              window.location.href = path;
+            }
+          }}
+          cooldownTicks={100}
+          d3VelocityDecay={0.3}
+        />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center font-mono text-muted-foreground animate-pulse">
+          INITIALIZING_GRAPH_ENGINE...
+        </div>
+      )}
 
       {/* Hover Info Overlay */}
       <AnimatePresence>
