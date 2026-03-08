@@ -1,0 +1,88 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Clock, Tag, ArrowLeft, Target, Zap, BarChart3, Milestone, Infinity } from 'lucide-react';
+
+export async function getStaticPaths() {
+	const logs = await getCollection('journal');
+	return logs.map(log => ({
+		params: { slug: log.slug },
+		props: { log },
+	}));
+}
+
+const { log } = Astro.props;
+const { Content } = await log.render();
+
+const TYPE_CONFIG = {
+  day: { icon: Clock, color: 'text-blue-500', bg: 'bg-blue-500/10', border: 'border-blue-500/20', label: 'Daily' },
+  week: { icon: Target, color: 'text-emerald-500', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', label: 'Weekly' },
+  month: { icon: Zap, color: 'text-purple-500', bg: 'bg-purple-500/10', border: 'border-purple-500/20', label: 'Monthly' },
+  quarter: { icon: BarChart3, color: 'text-orange-500', bg: 'bg-orange-500/10', border: 'border-orange-500/20', label: 'Quarterly' },
+  year: { icon: Milestone, color: 'text-pink-500', bg: 'bg-pink-500/10', border: 'border-pink-500/20', label: 'Yearly' },
+  cycle: { icon: Infinity, color: 'text-amber-500', bg: 'bg-amber-500/10', border: 'border-amber-500/20', label: '5-Year Cycle' },
+};
+
+const config = TYPE_CONFIG[log.data.type];
+const Icon = config.icon;
+---
+
+<BaseLayout title={log.data.title} description={log.data.summary}>
+	<main class="min-h-screen py-24 px-4 sm:px-6 lg:px-8 relative">
+		<div class="max-w-3xl mx-auto">
+			{/* Back Button */}
+			<a 
+				href="/journal/index.html" 
+				class="inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-primary transition-colors mb-12 group"
+			>
+				<ArrowLeft class="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+				BACK_TO_LOGBOOK
+			</a>
+
+			{/* Header */}
+			<header class="mb-12">
+				<div class={`inline-flex items-center gap-2 px-3 py-1 rounded-full mb-6 text-xs font-mono uppercase tracking-widest border ${config.bg} ${config.color} ${config.border}`}>
+					<Icon class="w-3.5 h-3.5" />
+					{config.label}
+				</div>
+				
+				<h1 class="text-4xl md:text-5xl font-bold mb-6 text-foreground tracking-tight leading-tight">
+					{log.data.title}
+				</h1>
+
+				<div class="flex flex-wrap items-center gap-6 text-sm font-mono text-muted-foreground">
+					<div class="flex items-center gap-2">
+						<Clock class="w-4 h-4" />
+						{new Date(log.data.date).toLocaleDateString('en-US', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric'
+						})}
+					</div>
+					{log.data.tags && log.data.tags.length > 0 && (
+						<div class="flex items-center gap-2">
+							<Tag class="w-4 h-4" />
+							<div class="flex gap-2">
+								{log.data.tags.map(tag => (
+									<span class="hover:text-primary transition-colors cursor-default">#{tag}</span>
+								))}
+							</div>
+						</div>
+					)}
+				</div>
+			</header>
+
+			{/* Content */}
+			<div class="prose prose-invert prose-headings:font-mono prose-headings:font-bold prose-p:text-muted-foreground prose-p:leading-relaxed max-w-none border-t border-border/40 pt-12">
+				<Content />
+			</div>
+
+			{/* Footer Meta */}
+			<footer class="mt-24 pt-8 border-t border-border/40 text-center">
+				<p class="text-xs font-mono text-muted-foreground uppercase tracking-[0.2em]">
+					END_OF_LOG // {log.data.type}
+				</p>
+			</footer>
+		</div>
+	</main>
+</BaseLayout>
