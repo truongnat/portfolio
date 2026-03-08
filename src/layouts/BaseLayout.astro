@@ -7,6 +7,7 @@ import CodeCopy from "@/components/CodeCopy.astro";
 import Schema from "@/components/seo/Schema.astro";
 import GridBackground from "@/components/GridBackground.astro";
 import Footer from "@/components/Footer.astro";
+import { AIAssistant } from "@/components/AIAssistant";
 import { ClientRouter } from 'astro:transitions';
 import '@/styles/global.css';
 import { getCollection } from 'astro:content';
@@ -110,6 +111,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://truongdq
 		</main>
 		<ScrollToTopClient client:load transition:persist />
 		<CommandPalette client:idle transition:persist posts={allPosts} />
+		<AIAssistant client:load transition:persist />
 		<CodeCopy />
 		<Footer />
 	</body>

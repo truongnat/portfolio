@@ -436,6 +436,7 @@ export const navLinks = [
   { label: 'Now', href: '/now/index.html' },
   { label: 'Uses', href: '/uses/index.html' },
   { label: 'Journal', href: '/journal/index.html' },
+  { label: 'Graph', href: '/graph/index.html' },
   //{ label: 'Skills', href: '/index.html#skills' },
   { label: 'Tech Radar', href: '/tech-radar/index.html' },
   //{ label: 'Experience', href: '/index.html#experience' },
