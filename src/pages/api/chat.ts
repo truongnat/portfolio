@@ -1,13 +1,16 @@
-import { google } from '@ai-sdk/google';
+import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { streamText } from 'ai';
 import { getCollection } from 'astro:content';
 
 export const prerender = false;
 
+const google = createGoogleGenerativeAI({
+  apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+});
+
 export async function POST({ request }: { request: Request }) {
   const { messages } = await request.json();
 
-  // Fetch all content for RAG (Simple version for small site)
   const blogPosts = await getCollection('blog');
   const journalPosts = await getCollection('journal');
   
