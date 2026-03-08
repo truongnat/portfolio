@@ -23,7 +23,17 @@ const {
 
 const siteUrl = Astro.site ? Astro.site.toString() : 'https://truongdq.com/';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
-const imageUrl = new URL(image, siteUrl).toString();
+
+// Generate dynamic OG image for articles
+let imageUrl = new URL(image, siteUrl).toString();
+if (type === 'Article') {
+  const isJournal = Astro.url.pathname.startsWith('/journal');
+  const collection = isJournal ? 'journal' : 'blog';
+  const slug = Astro.url.pathname.split('/').filter(Boolean).pop();
+  if (slug && slug !== 'journal' && slug !== 'blog') {
+    imageUrl = new URL(`/og/${collection}/${slug}.png`, siteUrl).toString();
+  }
+}
 
 let schema: any = {
   '@context': 'https://schema.org',

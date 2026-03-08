@@ -3,7 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 
-type Props = CollectionEntry<'blog'>;
+type Post = CollectionEntry<'blog'> | CollectionEntry<'journal'>;
 
 const fetchFont = async () => {
   const response = await fetch('https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-700-normal.woff');
@@ -13,15 +13,24 @@ const fetchFont = async () => {
 const fontData = await fetchFont();
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post,
-  }));
+  const blogPosts = await getCollection('blog');
+  const journalPosts = await getCollection('journal');
+  
+  const allPosts = [
+    ...blogPosts.map(post => ({ params: { slug: `blog/${post.slug}` }, props: { post, type: 'blog' } })),
+    ...journalPosts.map(post => ({ params: { slug: `journal/${post.slug}` }, props: { post, type: 'journal' } }))
+  ];
+
+  return allPosts;
 }
 
-export async function GET({ props }: APIContext<Props>) {
-  const { data } = props;
+export async function GET({ props }: APIContext<{ post: Post, type: string }>) {
+  const { post, type } = props;
+  const { data } = post;
+
+  const isJournal = type === 'journal';
+  const label = isJournal ? 'ENGINEERING LOGBOOK' : 'TRUONG.DEV // BLOG';
+  const accentColor = isJournal ? '#10b981' : '#3b82f6'; // Emerald-500 for journal, Blue-500 for blog
 
   const svg = await satori(
     {
@@ -38,8 +47,24 @@ export async function GET({ props }: APIContext<Props>) {
           color: '#f4f4f5', // zinc-100
           padding: '80px',
           fontFamily: 'JetBrains Mono',
+          position: 'relative',
         },
         children: [
+          // Background accent
+          {
+            type: 'div',
+            props: {
+              style: {
+                position: 'absolute',
+                top: '-100px',
+                right: '-100px',
+                width: '400px',
+                height: '400px',
+                borderRadius: '200px',
+                background: `radial-gradient(circle, ${accentColor}20 0%, transparent 70%)`,
+              }
+            }
+          },
           {
             type: 'div',
             props: {
@@ -52,7 +77,7 @@ export async function GET({ props }: APIContext<Props>) {
                 textTransform: 'uppercase',
                 letterSpacing: '4px',
               },
-              children: 'TRUONG.DEV // BLOG',
+              children: label,
             },
           },
           {
@@ -78,8 +103,23 @@ export async function GET({ props }: APIContext<Props>) {
                 gap: '20px',
                 fontSize: '20px',
                 color: '#a1a1aa',
+                alignItems: 'center',
               },
               children: [
+                isJournal && (data as any).type && {
+                  type: 'div',
+                  props: {
+                    style: {
+                      padding: '8px 16px',
+                      border: `1px solid ${accentColor}40`,
+                      borderRadius: '8px',
+                      backgroundColor: `${accentColor}10`,
+                      color: accentColor,
+                      textTransform: 'uppercase',
+                    },
+                    children: (data as any).type,
+                  },
+                },
                 data.tags?.[0] && {
                   type: 'div',
                   props: {
@@ -89,7 +129,7 @@ export async function GET({ props }: APIContext<Props>) {
                       borderRadius: '8px',
                       backgroundColor: '#18181b', // zinc-900
                     },
-                    children: data.tags[0],
+                    children: `#${data.tags[0]}`,
                   },
                 },
                 {

@@ -33,11 +33,23 @@ const posts = await getCollection('blog', ({ data }) => {
   return import.meta.env.PROD ? data.published : true;
 });
 
+const journal = await getCollection('journal');
+
 const blogPosts = posts.map(post => ({
   title: post.data.title,
   slug: post.slug,
   description: post.data.description,
+  type: 'blog' as const,
 }));
+
+const journalPosts = journal.map(post => ({
+  title: post.data.title,
+  slug: post.slug,
+  description: post.data.summary || '',
+  type: 'journal' as const,
+}));
+
+const allPosts = [...blogPosts, ...journalPosts];
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://truongdq.com');
 ---
@@ -97,7 +109,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://truongdq
 			<slot />
 		</main>
 		<ScrollToTopClient client:load transition:persist />
-		<CommandPalette client:idle transition:persist posts={blogPosts} />
+		<CommandPalette client:idle transition:persist posts={allPosts} />
 		<CodeCopy />
 		<Footer />
 	</body>

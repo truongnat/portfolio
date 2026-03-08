@@ -6,18 +6,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, FileText, Home, User, Briefcase, Code, Mail, Radar, Clock } from 'lucide-react';
 import { navigate } from 'astro:transitions/client';
 
-interface BlogPost {
+interface Post {
   title: string;
   slug: string;
   description: string;
+  type: 'blog' | 'journal';
 }
 
 interface CommandPaletteProps {
-  posts?: BlogPost[];
+  posts?: Post[];
 }
 
 export function CommandPalette({ posts = [] }: CommandPaletteProps) {
   const [open, setOpen] = useState(false);
+
+  const blogPosts = posts.filter(p => p.type === 'blog');
+  const journalPosts = posts.filter(p => p.type === 'journal');
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -137,15 +141,30 @@ export function CommandPalette({ posts = [] }: CommandPaletteProps) {
                   </Command.Item>
                 </Command.Group>
 
-                {posts.length > 0 && (
+                {blogPosts.length > 0 && (
                   <Command.Group heading="Blog Posts" className="text-xs font-medium text-muted-foreground px-2 py-1.5 font-mono mb-2">
-                    {posts.map((post) => (
+                    {blogPosts.map((post) => (
                       <Command.Item
                         key={post.slug}
                         onSelect={() => handleSelect(`/blog/${post.slug}/index.html`)}
                         className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground font-mono data-[selected=true]:bg-secondary/50 data-[selected=true]:text-foreground"
                       >
                         <FileText className="mr-2 h-4 w-4" />
+                        <span className="truncate">{post.title}</span>
+                      </Command.Item>
+                    ))}
+                  </Command.Group>
+                )}
+
+                {journalPosts.length > 0 && (
+                  <Command.Group heading="Journal Logs" className="text-xs font-medium text-muted-foreground px-2 py-1.5 font-mono mb-2">
+                    {journalPosts.map((post) => (
+                      <Command.Item
+                        key={post.slug}
+                        onSelect={() => handleSelect(`/journal/${post.slug}/index.html`)}
+                        className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground font-mono data-[selected=true]:bg-secondary/50 data-[selected=true]:text-foreground"
+                      >
+                        <Clock className="mr-2 h-4 w-4" />
                         <span className="truncate">{post.title}</span>
                       </Command.Item>
                     ))}
