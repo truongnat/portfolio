@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
 import { cn } from '@/lib/utils';
 
@@ -15,14 +14,9 @@ interface TableOfContentsProps {
 }
 
 export function TableOfContents({ items }: TableOfContentsProps) {
-  const [mounted, setMounted] = useState(false);
   const activeId = useScrollSpy(items.map((item) => item.id));
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted || items.length === 0) {
+  if (items.length === 0) {
     return null;
   }
 

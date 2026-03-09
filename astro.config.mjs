@@ -12,7 +12,7 @@ import fs from 'fs';
 let commitHash = 'unknown';
 try {
   commitHash = execSync('git rev-parse --short HEAD').toString().trim();
-} catch (e) {
+} catch {
   console.warn('Could not get git commit hash, using "unknown"');
 }
 

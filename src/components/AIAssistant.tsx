@@ -3,15 +3,25 @@
 import { useChat } from '@ai-sdk/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send, Bot, User, Loader2 } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, type FormEvent } from 'react';
 import { cn } from '@/lib/utils';
 
 export function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
+  const [input, setInput] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-    api: '/api/chat',
-  });
+  const { messages, sendMessage, status } = useChat();
+  const isLoading = status === 'submitted' || status === 'streaming';
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const text = input.trim();
+    if (!text || isLoading) return;
+
+    setInput('');
+    await sendMessage({ text });
+  };
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -78,7 +88,10 @@ export function AIAssistant() {
                       ? "bg-primary text-primary-foreground" 
                       : "bg-muted/50 border border-border/50 text-foreground"
                   )}>
-                    {m.content}
+                    {m.parts
+                      .filter((part) => part.type === 'text')
+                      .map((part) => part.text)
+                      .join('')}
                   </div>
                 </div>
               ))}
@@ -99,7 +112,7 @@ export function AIAssistant() {
               <div className="relative">
                 <input
                   value={input}
-                  onChange={handleInputChange}
+                  onChange={(event) => setInput(event.target.value)}
                   placeholder="Ask a question..."
                   className="w-full bg-background border border-border rounded-xl px-4 py-2.5 pr-12 text-xs font-mono focus:ring-1 focus:ring-primary outline-none transition-all"
                 />

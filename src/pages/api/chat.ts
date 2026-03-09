@@ -1,5 +1,5 @@
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
-import { streamText } from 'ai';
+import { streamText, convertToModelMessages, type UIMessage } from 'ai';
 import { getCollection } from 'astro:content';
 
 export const prerender = false;
@@ -9,7 +9,7 @@ const google = createGoogleGenerativeAI({
 });
 
 export async function POST({ request }: { request: Request }) {
-  const { messages } = await request.json();
+  const { messages } = await request.json() as { messages: UIMessage[] };
 
   const blogPosts = await getCollection('blog');
   const journalPosts = await getCollection('journal');
@@ -31,9 +31,9 @@ export async function POST({ request }: { request: Request }) {
 
   const result = streamText({
     model: google('gemini-1.5-pro'),
-    messages,
+    messages: await convertToModelMessages(messages),
     system: systemPrompt,
   });
 
-  return result.toDataStreamResponse();
+  return result.toUIMessageStreamResponse();
 }

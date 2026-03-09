@@ -1,17 +1,20 @@
 ---
-import { getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Clock, Tag, ArrowLeft, Target, Zap, BarChart3, Milestone, Infinity } from 'lucide-react';
 
-export async function getStaticPaths() {
-	const logs = await getCollection('journal');
-	return logs.map(log => ({
-		params: { slug: log.slug },
-		props: { log },
-	}));
+const slug = Astro.params.slug;
+
+if (!slug || slug === 'index' || slug === 'index.html') {
+	return Astro.redirect('/journal/');
 }
 
-const { log } = Astro.props;
+const log = await getEntry('journal', slug);
+
+if (!log) {
+	return Astro.redirect('/journal/');
+}
+
 const { Content } = await log.render();
 
 const TYPE_CONFIG = {

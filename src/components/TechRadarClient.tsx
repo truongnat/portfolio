@@ -46,8 +46,7 @@ export function TechRadarClient() {
           // deterministic random based on name
           const seed = blip.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
-          let ringIndex = rings.indexOf(blip.ring);
-          let quadIndex = quadrants.indexOf(blip.quadrant);
+          const ringIndex = rings.indexOf(blip.ring);
 
           // Map quadrants to visual corners: 0:TL, 1:TR, 2:BL, 3:BR
           // 0 (Lang) -> TL (-x, -y)
@@ -60,9 +59,6 @@ export function TechRadarClient() {
           const baseDist = (ringIndex * 0.25) + 0.1; // start of ring
           const randomDist = (seed % 15) / 100; // small variation
           const distance = (baseDist + randomDist) * 50; // 0-50% from center
-
-          const angleBase = quadIndex * 90; // 0, 90, 180, 270
-          const randomAngle = (seed % 60) + 15; // 15-75 degrees inside quadrant
 
           // Adjust for visual quadrants
           let finalAngle = 0;
@@ -114,8 +110,8 @@ export function TechRadarClient() {
           </button>
           {quadrants.map(q => (
             <button
-              key={q}
-              onClick={() => setSelectedQuadrant(q === selectedQuadrant ? null : q as any)}
+                  key={q}
+                  onClick={() => setSelectedQuadrant(q === selectedQuadrant ? null : q)}
               className={`px-3 py-1 text-sm font-mono border rounded transition-all ${selectedQuadrant === q ? 'bg-foreground text-background border-foreground' : 'text-muted-foreground border-border hover:border-foreground/50'}`}
             >
               {q.toUpperCase()}

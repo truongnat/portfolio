@@ -16,7 +16,7 @@ export interface Post {
     updated_at?: string;
 }
 
-export interface BlogPostMetadata extends Omit<Post, 'id' | 'content'> { }
+export type BlogPostMetadata = Omit<Post, 'id' | 'content'>;
 
 export interface Project {
     id: string;
@@ -31,4 +31,3 @@ export interface Project {
 }
 
 export type ProjectCategory = 'All' | 'AI' | 'Web' | 'Mobile' | 'Open Source' | 'Product';
-

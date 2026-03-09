@@ -28,7 +28,7 @@ interface KnowledgeGraphProps {
 }
 
 export function KnowledgeGraphClient({ data }: KnowledgeGraphProps) {
-  const fgRef = useRef<any>();
+  const fgRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [ForceGraph2D, setForceGraph2D] = useState<any>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 600 });

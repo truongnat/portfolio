@@ -18,6 +18,8 @@ export function useScrollSpy(
   const intersectingIds = useRef<Set<string>>(new Set());
 
   useEffect(() => {
+    const visibleIds = intersectingIds.current;
+
     // Check if window is available (client-side)
     if (typeof window === 'undefined') {
       return;
@@ -27,14 +29,14 @@ export function useScrollSpy(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            intersectingIds.current.add(entry.target.id);
+            visibleIds.add(entry.target.id);
           } else {
-            intersectingIds.current.delete(entry.target.id);
+            visibleIds.delete(entry.target.id);
           }
         });
 
         // Find the first ID from the ordered list that is currently intersecting
-        const visibleId = ids.find((id) => intersectingIds.current.has(id));
+        const visibleId = ids.find((id) => visibleIds.has(id));
         
         // If we found a visible ID, update state. 
         // If not (e.g. scrolled past everything or between sections), we might keep the last one or clear it.
@@ -67,7 +69,7 @@ export function useScrollSpy(
           observer.unobserve(element);
         }
       });
-      intersectingIds.current.clear();
+      visibleIds.clear();
     };
   }, [ids, options]);
 

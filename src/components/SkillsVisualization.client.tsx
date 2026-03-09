@@ -1,9 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { Brain, Layers, Server, Linkedin, Mail, Users, type LucideIcon } from 'lucide-react';
+import { Brain, Layers, Server, type LucideIcon } from 'lucide-react';
 
 interface SkillLevel {
   name: string;
@@ -66,7 +66,7 @@ export function SkillsVisualizationClient() {
     }
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -76,7 +76,7 @@ export function SkillsVisualizationClient() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
     visible: {
       opacity: 1,
@@ -117,7 +117,7 @@ export function SkillsVisualizationClient() {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
         >
-          {skillsData.map((category, categoryIndex) => (
+          {skillsData.map((category) => (
             <motion.div
               key={category.id}
               variants={itemVariants}

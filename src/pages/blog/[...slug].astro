@@ -7,6 +7,7 @@ import { formatDate } from '@/lib/utils';
 import Callout from '@/components/mdx/Callout.astro';
 import Mermaid from '@/components/mdx/Mermaid.astro';
 import { PostCard } from '@/components/PostCard';
+import { seo } from '@/lib/config';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -57,7 +58,7 @@ const shareTitle = post.data.title;
 <BaseLayout 
 	title={post.data.title} 
 	description={post.data.description}
-	image={`/og/${post.slug}.png`}
+	image={post.data.coverImage || seo.image}
 	article={true}
 	publishDate={post.data.date}
 	tags={post.data.tags}

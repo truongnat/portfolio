@@ -14,15 +14,15 @@ export function useThrottle<T extends (...args: any[]) => any>(
   callback: T,
   delay: number = 100
 ): (...args: Parameters<T>) => void {
-  const lastRun = useRef(Date.now());
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastRun = useRef(0);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   return useCallback(
     (...args: Parameters<T>) => {
       const now = Date.now();
       const timeSinceLastRun = now - lastRun.current;
 
-      if (timeSinceLastRun >= delay) {
+      if (lastRun.current === 0 || timeSinceLastRun >= delay) {
         callback(...args);
         lastRun.current = now;
       } else {

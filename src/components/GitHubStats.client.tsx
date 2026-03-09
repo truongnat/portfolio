@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { Github, Calendar, Star, GitBranch, Users } from 'lucide-react';
@@ -81,7 +81,7 @@ export function GitHubStatsClient() {
     { label: 'Followers', value: stats?.followers || 0, icon: Users },
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -91,7 +91,7 @@ export function GitHubStatsClient() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
     visible: {
       opacity: 1,

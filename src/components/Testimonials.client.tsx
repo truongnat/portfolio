@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { Quote } from 'lucide-react';
@@ -13,7 +13,7 @@ export function TestimonialsClient() {
   });
   const shouldReduceMotion = useSafeReducedMotion();
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -23,7 +23,7 @@ export function TestimonialsClient() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
     visible: {
       opacity: 1,

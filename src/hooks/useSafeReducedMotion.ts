@@ -1,5 +1,4 @@
 import { useReducedMotion } from 'framer-motion';
-import { useState, useEffect } from 'react';
 
 /**
  * A wrapper around framer-motion's useReducedMotion that ensures
@@ -10,15 +9,5 @@ import { useState, useEffect } from 'react';
  */
 export function useSafeReducedMotion() {
   const shouldReduceMotion = useReducedMotion();
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return false;
-  }
-
-  return shouldReduceMotion;
+  return shouldReduceMotion ?? false;
 }

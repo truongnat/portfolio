@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, Tag, ChevronRight, Filter, Target, Zap, TrendingUp, BarChart3, Milestone, Infinity } from 'lucide-react';
+import { Clock, Target, Zap, BarChart3, Milestone, Infinity as InfinityIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 
 interface Log {
@@ -26,24 +25,38 @@ const TYPE_CONFIG = {
   month: { icon: Zap, color: 'text-purple-500', bg: 'bg-purple-500/10', border: 'border-purple-500/20', label: 'Monthly' },
   quarter: { icon: BarChart3, color: 'text-orange-500', bg: 'bg-orange-500/10', border: 'border-orange-500/20', label: 'Quarterly' },
   year: { icon: Milestone, color: 'text-pink-500', bg: 'bg-pink-500/10', border: 'border-pink-500/20', label: 'Yearly' },
-  cycle: { icon: Infinity, color: 'text-amber-500', bg: 'bg-amber-500/10', border: 'border-amber-500/20', label: '5-Year Cycle' },
+  cycle: { icon: InfinityIcon, color: 'text-amber-500', bg: 'bg-amber-500/10', border: 'border-amber-500/20', label: '5-Year Cycle' },
 };
 
 export function JournalContent({ initialLogs }: JournalContentProps) {
   const [activeFilter, setActiveFilter] = useState<string>('all');
 
-  const filteredLogs = useMemo(() => {
-    if (activeFilter === 'all') return initialLogs;
-    return initialLogs.filter(log => log.type === activeFilter);
-  }, [activeFilter, initialLogs]);
+  const availableTypes = useMemo(() => {
+    const presentTypes = new Set(initialLogs.map((log) => log.type));
+    return Object.entries(TYPE_CONFIG).filter(([key]) => presentTypes.has(key as Log['type']));
+  }, [initialLogs]);
 
-  const filterOptions = [
-    { id: 'all', label: 'All Logs' },
-    ...Object.entries(TYPE_CONFIG).map(([key, config]) => ({
-      id: key,
-      label: config.label,
-    })),
-  ];
+  const effectiveFilter = useMemo(() => {
+    if (activeFilter === 'all') return 'all';
+    const stillAvailable = availableTypes.some(([type]) => type === activeFilter);
+    return stillAvailable ? activeFilter : 'all';
+  }, [activeFilter, availableTypes]);
+
+  const filteredLogs = useMemo(() => {
+    if (effectiveFilter === 'all') return initialLogs;
+    return initialLogs.filter((log) => log.type === effectiveFilter);
+  }, [effectiveFilter, initialLogs]);
+
+  const filterOptions = useMemo(
+    () => [
+      { id: 'all', label: 'All Logs' },
+      ...availableTypes.map(([key, config]) => ({
+        id: key,
+        label: config.label,
+      })),
+    ],
+    [availableTypes]
+  );
 
   return (
     <div className="space-y-12">
@@ -55,7 +68,7 @@ export function JournalContent({ initialLogs }: JournalContentProps) {
             onClick={() => setActiveFilter(option.id)}
             className={cn(
               "px-4 py-2 rounded-full text-xs font-mono font-medium transition-all duration-300",
-              activeFilter === option.id
+              effectiveFilter === option.id
                 ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                 : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
             )}
