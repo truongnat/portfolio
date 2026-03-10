@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 export const prerender = true;
 import { HeroClient } from '@/components/Hero.client';
+import { LiveWorkFloatClient } from '@/components/LiveWorkFloat.client';
 import { SkillsClient } from '@/components/Skills.client';
 import { ExperienceClient } from '@/components/Experience.client';
 import { CertificatesClient } from '@/components/Certificates.client';
@@ -12,10 +13,11 @@ import { ContactFormClient } from '@/components/ContactForm.client';
 import { personalInfo } from '@/lib/config';
 ---
 
-<BaseLayout>
-	<main class="min-h-screen">
-		<HeroClient client:load />
-		<SkillsClient client:visible />
+	<BaseLayout>
+		<main class="min-h-screen relative">
+			<HeroClient client:load />
+			<LiveWorkFloatClient client:load />
+			<SkillsClient client:visible />
 		<ExperienceClient client:visible />
 		<CertificatesClient client:visible />
 		<GitHubStatsClient client:visible />

@@ -47,6 +47,13 @@ export const personalInfo = {
   ]
 };
 
+export const liveWork = {
+  company: 'Viet IS',
+  url: 'https://vietis.com.vn/en/',
+  location: 'Vietnam',
+  label: 'Current Workplace',
+} as const;
+
 export const appInfo = {
   version: import.meta.env.APP_VERSION || '0.0.1',
   hash: import.meta.env.APP_HASH || 'unknown',

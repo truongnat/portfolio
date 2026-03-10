@@ -6,30 +6,39 @@ summary: "Deep dive into RLS for granular data access control and multi-tenant s
 tags: ["Database", "Security", "PostgreSQL", "RLS"]
 ---
 
-Hôm nay mình dành thời gian nghiên cứu sâu về **Row Level Security (RLS)** - một tính năng cực kỳ quan trọng để bảo mật dữ liệu ở tầng Database, thay vì chỉ dựa vào Logic ở tầng Application.
+Today I spent focused time studying **Row Level Security (RLS)**, a critical capability for protecting data at the database layer instead of relying only on application logic.
 
-### Những gì mình đã học được:
+## What I learned
 
-1.  **Khái niệm cơ bản:** RLS cho phép kiểm soát quyền truy cập đến từng dòng (row) cụ thể trong bảng dựa trên user đang đăng nhập. Điều này giúp ngăn chặn triệt để việc truy cập trái phép dữ liệu của người dùng khác (IdOR).
-2.  **Cơ chế hoạt động:** 
-    *   Sử dụng lệnh `ALTER TABLE ... ENABLE ROW LEVEL SECURITY`.
-    *   Định nghĩa các **Policies** (chính sách) bằng ngôn ngữ SQL để quyết định dòng nào user được phép `SELECT`, `INSERT`, `UPDATE`, hay `DELETE`.
-3.  **Ứng dụng trong Multi-tenancy:** RLS là "vũ khí" tối thượng khi xây dựng ứng dụng SaaS. Thay vì phải thêm điều kiện `WHERE user_id = ...` ở mọi câu query trong code, mình có thể cấu hình RLS để Database tự động lọc dữ liệu.
+1. **Core concept**
+- RLS controls access to individual rows based on the authenticated user.
+- This prevents unauthorized access to other users' data (IdOR) at the source.
 
-### Ví dụ thực tế (PostgreSQL):
+2. **How it works**
+- Enable RLS with `ALTER TABLE ... ENABLE ROW LEVEL SECURITY`.
+- Define **policies** in SQL to decide which rows a user can `SELECT`, `INSERT`, `UPDATE`, or `DELETE`.
+
+3. **Multi-tenancy use case**
+- RLS is a strong foundation for SaaS systems.
+- Instead of adding `WHERE user_id = ...` in every query, the database enforces filtering automatically.
+
+## Practical example (PostgreSQL)
+
 ```sql
--- Kích hoạt RLS cho bảng profiles
+-- Enable RLS for the profiles table
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 
--- Tạo chính sách: User chỉ được xem profile của chính mình
+-- Policy: users can only read their own profile
 CREATE POLICY user_sel_own_profile ON profiles
     FOR SELECT
     USING (auth.uid() = user_id);
 ```
 
-### Cảm nhận:
-Việc đưa bảo mật xuống tầng Database giúp hệ thống trở nên "Robust" hơn rất nhiều. Ngay cả khi code Application có bug, dữ liệu của User vẫn được bảo vệ bởi lớp "giáp" cuối cùng này.
+## Reflection
 
-### Mục tiêu tiếp theo:
-- Thử nghiệm RLS với Supabase auth.
-- Đánh giá ảnh hưởng của RLS đến Performance khi bảng có hàng triệu record.
+Pushing security down into the database makes the system far more robust. Even if application code has a bug, user data remains protected by this final guardrail.
+
+## Next goals
+
+- Try RLS with Supabase auth.
+- Evaluate performance impact on tables with millions of records.
