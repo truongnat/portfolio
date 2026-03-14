@@ -1,21 +1,18 @@
 ---
-import { getEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Clock, Tag, ArrowLeft, Target, Zap, BarChart3, Milestone, Infinity } from 'lucide-react';
 
-const slug = Astro.params.slug;
-
-if (!slug || slug === 'index' || slug === 'index.html') {
-	return Astro.redirect('/journal/');
+export async function getStaticPaths() {
+	const logs = await getCollection('journal');
+	return logs.map((log) => ({
+		params: { slug: log.id },
+		props: { log },
+	}));
 }
 
-const log = await getEntry('journal', slug);
-
-if (!log) {
-	return Astro.redirect('/journal/');
-}
-
-const { Content } = await log.render();
+const { log } = Astro.props;
+const { Content } = await render(log);
 
 const TYPE_CONFIG = {
   day: { icon: Clock, color: 'text-blue-500', bg: 'bg-blue-500/10', border: 'border-blue-500/20', label: 'Daily' },
@@ -35,7 +32,7 @@ const Icon = config.icon;
 		<div class="max-w-3xl mx-auto">
 			{/* Back Button */}
 			<a 
-				href="/journal/index.html" 
+				href="/journal/" 
 				class="inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-primary transition-colors mb-12 group"
 			>
 				<ArrowLeft class="w-4 h-4 transition-transform group-hover:-translate-x-1" />

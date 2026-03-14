@@ -3,7 +3,6 @@
 export interface Post {
     id: string;
     title: string;
-    slug: string;
     content: string;
     description: string;
     date: string;
@@ -16,7 +15,9 @@ export interface Post {
     updated_at?: string;
 }
 
-export type BlogPostMetadata = Omit<Post, 'id' | 'content'>;
+export type BlogPostMetadata = Omit<Post, 'content'> & {
+    slug: string; // We map id to slug in pages/index.astro
+};
 
 export interface Project {
     id: string;

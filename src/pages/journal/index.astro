@@ -10,7 +10,7 @@ const logs = await getCollection('journal');
 const sortedLogs = logs.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const mappedLogs = sortedLogs.map(log => ({
-	slug: log.slug,
+	slug: log.id,
 	title: log.data.title,
 	date: log.data.date.toISOString(),
 	type: log.data.type,

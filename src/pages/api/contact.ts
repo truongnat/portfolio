@@ -33,8 +33,8 @@ export const POST: APIRoute = async ({ request }) => {
 
     const { name, email, message } = validationResult.data;
 
-    const telegramBotToken = import.meta.env.TELEGRAM_BOT_TOKEN;
-    const telegramChatId = import.meta.env.TELEGRAM_CHAT_ID;
+    const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
+    const telegramChatId = process.env.TELEGRAM_CHAT_ID;
 
     if (!telegramBotToken || !telegramChatId) {
       console.error('Telegram credentials not configured');

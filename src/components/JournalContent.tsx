@@ -94,7 +94,7 @@ export function JournalContent({ initialLogs }: JournalContentProps) {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
               >
-                <a href={`/journal/${log.slug}/index.html`} className="block h-full">
+                <a href={`/journal/${log.slug}/`} className="block h-full">
                   <Card className={cn(
                     "group relative h-full p-6 bg-muted/30 border-border/40 hover:bg-muted/50 hover:border-border/80 transition-all duration-500 overflow-hidden cursor-pointer",
                     log.type !== 'day' && "md:col-span-2 lg:col-span-1 ring-1 ring-border/50 shadow-xl"

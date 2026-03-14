@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { TableOfContents } from '@/components/TableOfContents';
 import { Calendar, Clock, ArrowLeft, User, Tag, Share2, Twitter, Linkedin } from 'lucide-react';
@@ -12,17 +12,17 @@ import { seo } from '@/lib/config';
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
 	return posts.map((post) => ({
-		params: { slug: post.slug },
+		params: { slug: post.id },
 		props: post,
 	}));
 }
 
 const post = Astro.props;
-const { Content, headings } = await post.render();
+const { Content, headings } = await render(post);
 
 // Calculate reading time
-const wordCount = post.body.split(/\s+/).length;
-const readingTime = Math.ceil(wordCount / 200);
+const wordCount = post.body ? post.body.split(/\s+/).length : 0;
+const readingTime = Math.ceil(wordCount / 200) || 1;
 
 // Map headings for TOC
 const tocItems = headings.map(h => ({
@@ -32,9 +32,9 @@ const tocItems = headings.map(h => ({
 }));
 
 // Fetch related posts
-const allPosts = await getCollection('blog', ({ data, slug }) => {
+const allPosts = await getCollection('blog', ({ data, id }) => {
     const isPublished = import.meta.env.PROD ? data.published !== false : true;
-    return isPublished && slug !== post.slug;
+    return isPublished && id !== post.id;
 });
 
 const relatedPosts = allPosts
@@ -47,7 +47,7 @@ const relatedPosts = allPosts
     .slice(0, 3)
     .map(p => ({
         ...p.post.data,
-        slug: p.post.slug,
+        slug: p.post.id,
         date: p.post.data.date.toISOString(), // PostCard expects string date
     }));
 
@@ -70,7 +70,7 @@ const shareTitle = post.data.title;
 			{/* Back Link */}
 			<div class="mb-8">
 				<a
-					href="/blog/index.html"
+					href="/blog/"
 					class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-200 group"
 				>
 					<ArrowLeft class="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1" />
@@ -135,7 +135,7 @@ const shareTitle = post.data.title;
 					<footer class="mt-16 pt-8 border-t border-border">
 						<div class="flex flex-col sm:flex-row items-center justify-between gap-6">
 							<a
-								href="/blog/index.html"
+								href="/blog/"
 								class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary/50 hover:bg-secondary text-secondary-foreground text-sm font-medium transition-all"
 							>
 								<ArrowLeft class="h-4 w-4" />

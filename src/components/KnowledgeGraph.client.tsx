@@ -154,7 +154,7 @@ export function KnowledgeGraphClient({ data }: KnowledgeGraphProps) {
           onNodeHover={(node: any) => setHoverNode(node)}
           onNodeClick={(node: any) => {
             if (node.type !== 'tag') {
-              const path = node.type === 'blog' ? `/blog/${node.id}/index.html` : `/journal/${node.id}/index.html`;
+              const path = node.type === 'blog' ? `/blog/${node.id}/` : `/journal/${node.id}/`;
               window.location.href = path;
             }
           }}
