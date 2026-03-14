@@ -216,7 +216,10 @@ const buildSummaryMarkdown = (window: PeriodWindow, logs: JournalEntry[]): strin
 
   const summaryTags = [capitalize(window.period), 'Summary', ...topTags].slice(0, 6);
   const periodTitle = `${capitalize(window.period)} Summary (${window.label})`;
-  const shortSummary = `Tổng hợp ${window.period} với ${sortedLogs.length} daily logs trong giai đoạn ${toIsoDate(window.start)} đến ${toIsoDate(window.end)}.`;
+  const isWeekly = window.period === 'week';
+  const shortSummary = isWeekly
+    ? `Weekly summary covering ${sortedLogs.length} daily logs from ${toIsoDate(window.start)} to ${toIsoDate(window.end)}.`
+    : `${capitalize(window.period)} summary covering ${sortedLogs.length} daily logs from ${toIsoDate(window.start)} to ${toIsoDate(window.end)}.`;
 
   const highlights = sortedLogs
     .map((log) => `- **${toIsoDate(log.date)}**: ${log.title}`)
@@ -291,7 +294,24 @@ const runAutoMode = (entries: JournalEntry[]): void => {
   const now = new Date();
 
   for (const period of PERIODS) {
-    const window = getAutoWindow(period, now);
+    let window = getAutoWindow(period, now);
+    
+    // Special case: First weekly summary covers from first journal entry to current week end
+    if (period === 'week') {
+      const existingWeekSummaries = entries.filter((e) => e.type === 'week');
+      if (existingWeekSummaries.length === 0 && dayLogs.length > 0) {
+        // This is the first weekly summary - cover from first log to current week end
+        const firstLogDate = dayLogs[0].date;
+        const currentWeekEnd = addDays(startOfIsoWeek(now), 6); // Sunday
+        window = {
+          period: 'week',
+          start: firstLogDate,
+          end: currentWeekEnd,
+          label: `${toIsoDate(firstLogDate)} -> ${toIsoDate(currentWeekEnd)}`,
+        };
+      }
+    }
+    
     const scopedLogs = dayLogs.filter((entry) => inRange(entry.date, window.start, window.end));
     const minLogsRequired = period === 'week' ? 7 : 1;
     generateSummaryFile(window, scopedLogs, minLogsRequired);
