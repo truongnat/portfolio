@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'src/content/journal/**'
+      - '.github/workflows/weekly-summary.yml'
+      - 'JOURNAL_RULES.md'
+      - 'TEMPLATES_*.md'
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
