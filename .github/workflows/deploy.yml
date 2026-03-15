@@ -48,6 +48,7 @@ jobs:
         run: |
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          # Chạy PM2 từ thư mục gốc của project để nó tìm thấy dist/server/entry.mjs
           pm2 delete portfolio || true
-          HOST=127.0.0.1 PORT=4321 pm2 start dist/server/entry.mjs --name portfolio
+          HOST=127.0.0.1 PORT=4321 pm2 start dist/server/entry.mjs --name portfolio --update-env
           sudo systemctl reload nginx
