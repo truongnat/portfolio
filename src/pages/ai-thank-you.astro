@@ -1,0 +1,10 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { AIThankYouClient } from '@/components/AIThankYou.client';
+---
+
+<BaseLayout title="AI-Powered Thank You" description="Every donation receives a unique, AI-generated thank you message. Choose your style: fortune cookies, code art, SSH banners, and more.">
+  <main class="min-h-screen">
+    <AIThankYouClient client:load />
+  </main>
+</BaseLayout>
