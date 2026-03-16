@@ -1,0 +1,10 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SkillTreeClient } from '@/components/SkillTree.client';
+---
+
+<BaseLayout title="Skill Tree" description="Unlock my learning path through donations.">
+  <main class="min-h-screen">
+    <SkillTreeClient client:load />
+  </main>
+</BaseLayout>
