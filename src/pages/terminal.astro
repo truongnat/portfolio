@@ -1,0 +1,10 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { TerminalTakeoverClient } from '@/components/TerminalTakeover.client';
+---
+
+<BaseLayout title="Terminal Takeover" description="Take control of my terminal! Unlock commands through donations and discover hidden easter eggs.">
+  <main class="min-h-screen">
+    <TerminalTakeoverClient client:load />
+  </main>
+</BaseLayout>

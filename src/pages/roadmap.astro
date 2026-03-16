@@ -1,0 +1,10 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { RoadmapVotingClient } from '@/components/RoadmapVoting.client';
+---
+
+<BaseLayout title="Roadmap Voting" description="Vote on features you want to see. Your donations directly fund development. Every vote shapes the future of this portfolio.">
+  <main class="min-h-screen">
+    <RoadmapVotingClient client:load />
+  </main>
+</BaseLayout>
