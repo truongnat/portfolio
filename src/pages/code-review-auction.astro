@@ -1,0 +1,10 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { CodeReviewAuctionClient } from '@/components/CodeReviewAuction.client';
+---
+
+<BaseLayout title="Code Review Auction" description="Bid for exclusive code review slots. Get expert feedback on your code and architecture.">
+  <main class="min-h-screen">
+    <CodeReviewAuctionClient client:load />
+  </main>
+</BaseLayout>
