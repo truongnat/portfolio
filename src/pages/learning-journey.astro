@@ -1,0 +1,10 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { LearningJourneyClient } from '@/components/LearningJourney.client';
+---
+
+<BaseLayout title="Learning Journey Sponsor" description="Sponsor my learning in real-time. Pay per hour, get exclusive updates, and watch me master new skills live.">
+  <main class="min-h-screen">
+    <LearningJourneyClient client:load />
+  </main>
+</BaseLayout>
