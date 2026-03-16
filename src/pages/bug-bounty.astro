@@ -1,0 +1,10 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { BugBountyClient } from '@/components/BugBounty.client';
+---
+
+<BaseLayout title="Bug Bounty Program" description="Help me find bugs and security vulnerabilities. Earn bounties up to $1000 and get recognized in the Hall of Fame.">
+  <main class="min-h-screen">
+    <BugBountyClient client:load />
+  </main>
+</BaseLayout>
