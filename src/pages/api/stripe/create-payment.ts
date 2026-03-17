@@ -91,7 +91,7 @@ export const POST: APIRoute = async ({ request }) => {
     
     if (error instanceof z.ZodError) {
       return new Response(
-        JSON.stringify({ success: false, error: 'Invalid input', details: error.errors }),
+        JSON.stringify({ success: false, error: 'Invalid input', details: 'Please check your payment details' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -99,7 +99,7 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: error instanceof Error ? error.message : 'Payment failed' 
+        error: 'An unexpected error occurred during payment processing'
       }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );

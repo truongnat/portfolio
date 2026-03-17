@@ -20,7 +20,7 @@ export const POST: APIRoute = async ({ request }) => {
         JSON.stringify({
           success: false,
           error: 'Invalid form data',
-          details: validationResult.error.message,
+          details: 'Please check your input and try again',
         }),
         {
           status: 400,
@@ -104,7 +104,7 @@ ${message}
     return new Response(
       JSON.stringify({
         success: false,
-        error: error instanceof Error ? error.message : 'Internal server error',
+        error: 'An internal server error occurred while processing your request',
       }),
       {
         status: 500,
