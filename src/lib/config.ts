@@ -300,7 +300,7 @@ export const projectsConfig: Project[] = [
       'Action: Designed and implemented frontend UI/UX for a smooth download flow, built backend API endpoints to handle YouTube and SoundCloud downloads, and integrated client-server communication for streaming and file delivery.',
       'Result: Delivered a user-friendly application that demonstrates strong full-stack development skills and experience integrating third-party platforms.',
     ],
-    link: 'https://universal-music-downloader.vercel.app/'
+    link: 'https://universal-music-downloader-truongdqdev-9126s-projects.vercel.app'
   },
   {
     id: 'netbi',
