@@ -292,13 +292,13 @@ export const projectsConfig: Project[] = [
     title: 'Universal Music Downloader',
     role: 'Fullstack Developer',
     period: 'Present',
-    description: 'Full-stack web application that allows users to download music and playlists from YouTube and SoundCloud as audio files, handling URL input, metadata extraction, audio streaming, and file downloading through backend APIs.',
-    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Bun', 'Vercel'],
+    description: 'Web app for downloading music and playlists from YouTube and SoundCloud as MP3 files. Runs entirely in the browser — audio conversion powered by ffmpeg.wasm (no server-side binaries). Clean developer-aesthetic UI aligned with portfolio design system.',
+    techStack: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'ffmpeg.wasm', '@ffmpeg/ffmpeg', 'TanStack Query', 'yt-dlp', 'Bun', 'Vercel'],
     categories: ['Web', 'Open Source'],
     achievements: [
-      'Challenge: Building a practical tool that allows users to download music without installing additional software.',
-      'Action: Designed and implemented frontend UI/UX for a smooth download flow, built backend API endpoints to handle YouTube and SoundCloud downloads, and integrated client-server communication for streaming and file delivery.',
-      'Result: Delivered a user-friendly application that demonstrates strong full-stack development skills and experience integrating third-party platforms.',
+      'Challenge: Building a practical music downloader that works without server-side binaries, deployable on serverless platforms like Vercel.',
+      'Action: Replaced server-side ffmpeg-static with ffmpeg.wasm for client-side audio conversion; built unified input that auto-detects SoundCloud vs YouTube URLs; redesigned UI to match portfolio dark zinc aesthetic with JetBrains Mono typography.',
+      'Result: A fully serverless music downloader supporting single tracks, playlists, and MP3 quality selection — deployed on Vercel with zero native dependencies.',
     ],
     link: 'https://universal-music-downloader-truongdqdev-9126s-projects.vercel.app'
   },
