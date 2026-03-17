@@ -270,7 +270,7 @@ export const projectsConfig: Project[] = [
       'Action: Developed a production-ready Python SDK with configuration management, agent orchestration, workflow automation, intelligence features (learning, monitoring, reasoning), and a plugin system. Implemented CLI tools, comprehensive testing, and documentation.',
       'Result: Created a 100%-complete framework with 15+ CLI commands, full test coverage, and production-ready code that enables AI agents to collaborate on software development tasks with learning and adaptation capabilities.',
     ],
-    link: 'https://agentic-sdlc-sigma.vercel.app/'
+    link: 'https://agentic-sdlc-truongdqdev-9126s-projects.vercel.app'
   },
   {
     id: 'agentic-sdlc',
@@ -285,7 +285,7 @@ export const projectsConfig: Project[] = [
       'Action: Developed a production-ready Python SDK with configuration management, agent orchestration, workflow automation, intelligence features (learning, monitoring, reasoning), and a plugin system. Implemented CLI tools, comprehensive testing, and documentation.',
       'Result: Created a 100%-complete framework with 15+ CLI commands, full test coverage, and production-ready code that enables AI agents to collaborate on software development tasks with learning and adaptation capabilities.',
     ],
-    link: 'https://agentic-sdlc-sigma.vercel.app/'
+    link: 'https://agentic-sdlc-truongdqdev-9126s-projects.vercel.app'
   },
   {
     id: 'universal-music-downloader',
