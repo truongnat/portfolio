@@ -18,13 +18,15 @@ export async function getGraphData() {
   const journalPosts = await getCollection('journal');
   
   const nodes: GraphNode[] = [];
+  const nodeIds = new Set<string>();
   const links: GraphLink[] = [];
   const tagSet = new Set<string>();
 
   // Helper to add nodes
   const addNode = (id: string, name: string, type: 'blog' | 'journal' | 'tag', val: number, group: number) => {
-    if (!nodes.find(n => n.id === id)) {
+    if (!nodeIds.has(id)) {
       nodes.push({ id, name, type, val, group });
+      nodeIds.add(id);
     }
   };
 
