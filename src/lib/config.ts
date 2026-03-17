@@ -244,18 +244,18 @@ export interface Project {
 export const projectsConfig: Project[] = [
   {
     id: 'example-react',
-    title: 'MERN Stack Monorepo 2025',
+    title: 'TanStack Full Demo',
     role: 'Fullstack Developer',
     period: 'Present',
-    description: 'Production-ready MERN stack monorepo featuring modern development practices, clean architecture, and comprehensive tooling. Built with TypeScript throughout, demonstrating best practices for full-stack development in 2025.',
-    techStack: ['React 19', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'TanStack Router', 'Tailwind CSS', 'Docker'],
+    description: 'A beginner-friendly dashboard showcasing all major TanStack libraries working together in a real app — Query, Table, Virtual, Form, Store, and Router. Built with TanStack Start (SSR), shadcn/ui, and Tailwind CSS v4, deployed on Vercel.',
+    techStack: ['React 19', 'TypeScript', 'TanStack Start', 'TanStack Query', 'TanStack Table', 'TanStack Virtual', 'TanStack Form', 'TanStack Store', 'TanStack Router', 'shadcn/ui', 'Tailwind CSS v4', 'Vite', 'Nitro', 'Vercel'],
     categories: ['Web', 'Open Source'],
     achievements: [
-      'Challenge: Creating a comprehensive full-stack application with modern development practices and clean architecture.',
-      'Action: Developed a sophisticated monorepo with authentication system, real-time chat, todo management, and comprehensive testing strategies.',
-      'Result: Delivered a production-ready application serving as a learning resource for modern full-stack development with features like JWT authentication, real-time communication, and clean architecture principles.',
+      'Challenge: Demonstrating all major TanStack libraries in a single cohesive app that beginners can learn from.',
+      'Action: Built a 3-page dashboard — Todos (Query + Form + Store with optimistic updates), Posts (Table with sort/filter/pagination + Virtual list for 100 rows), Users (Table + Form dialog with mutations).',
+      'Result: A production-ready SSR app on Vercel showcasing real-world patterns: optimistic updates, cache invalidation, virtualization, headless UI, and SSR-safe global state.',
     ],
-    link: 'https://peanut-example-react.vercel.app/'
+    link: 'https://example-react-brown.vercel.app'
   },
   {
     id: 'agentic-sdlc-product',
