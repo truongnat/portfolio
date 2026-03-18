@@ -18,7 +18,7 @@ jobs:
   # ─── PRODUCTION deploy (main branch only) ───────────────────────────────────
   deploy-production:
     if: github.ref == 'refs/heads/main'
-    runs-on: self-hosted
+    runs-on: [self-hosted, linux]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -37,6 +37,7 @@ jobs:
       - name: Build
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
+          SITE: "https://truongdq.com"
         run: |
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -59,7 +60,7 @@ jobs:
   # ─── PREVIEW deploy (preview branch only) ───────────────────────────────────
   deploy-preview:
     if: github.ref == 'refs/heads/preview'
-    runs-on: self-hosted
+    runs-on: [self-hosted, linux]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -75,9 +76,10 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: Build (preview base path)
+      - name: Build (preview site)
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
+          SITE: "https://preview.truongdq.com"
         run: |
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
