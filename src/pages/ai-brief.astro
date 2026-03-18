@@ -1,0 +1,146 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Brain, Download, FileText, Code2, Palette, Briefcase, BookOpen, FolderTree, Terminal } from 'lucide-react';
+
+const sections = [
+  {
+    icon: FileText,
+    title: 'Personal Info',
+    description: 'Bio, contact, social links, and professional summary',
+  },
+  {
+    icon: Code2,
+    title: 'Tech Stack',
+    description: 'Complete skills inventory with proficiency levels',
+  },
+  {
+    icon: Briefcase,
+    title: 'Experience',
+    description: 'Work history, achievements, and career progression',
+  },
+  {
+    icon: FolderTree,
+    title: 'Projects',
+    description: 'Detailed project portfolio with tech stacks',
+  },
+  {
+    icon: Palette,
+    title: 'Design System',
+    description: 'Color palette, typography, and UI guidelines',
+  },
+  {
+    icon: BookOpen,
+    title: 'Content',
+    description: 'Blog posts and journal entries catalog',
+  },
+];
+---
+
+<BaseLayout 
+  title="AI Brief | Complete Portfolio Context" 
+  description="A comprehensive markdown document containing all portfolio information for AI agents to understand the complete context."
+>
+  <main class="min-h-screen py-24 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      {/* Header */}
+      <header class="mb-20 text-center">
+        <div class="flex items-center justify-center gap-3 mb-6">
+          <Brain class="h-8 w-8 text-foreground" />
+          <h1 class="text-4xl sm:text-5xl font-bold font-mono tracking-tight">/ai-brief</h1>
+        </div>
+        <p class="text-muted-foreground font-mono text-base uppercase tracking-widest max-w-xl mx-auto">
+          Complete Portfolio Context for AI Agents
+        </p>
+      </header>
+
+      {/* Description */}
+      <div class="prose prose-invert max-w-none mb-16">
+        <p class="text-lg text-muted-foreground leading-relaxed text-center">
+          This route generates a comprehensive markdown file containing all portfolio information. 
+          AI agents can read this file to understand the complete context including tech stack, 
+          projects, design system, work experience, and content structure.
+        </p>
+      </div>
+
+      {/* Download Card */}
+      <div class="bg-card border border-border rounded-lg p-8 mb-16 hover:border-foreground/30 transition-colors">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-4">
+            <div class="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <FileText class="h-6 w-6 text-foreground" />
+            </div>
+            <div>
+              <h3 class="font-bold text-foreground font-mono text-lg">portfolio.md</h3>
+              <p class="text-sm text-muted-foreground">Complete portfolio brief in markdown format</p>
+            </div>
+          </div>
+          <a
+            href="/api/portfolio.md"
+            download="portfolio.md"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background font-mono text-sm font-bold rounded-md hover:bg-primary transition-colors"
+          >
+            <Download class="h-4 w-4" />
+            Download
+          </a>
+        </div>
+      </div>
+
+      {/* Sections Grid */}
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16">
+        {sections.map((section) => (
+          <div class="group p-6 bg-card border border-border rounded-lg hover:border-foreground/30 transition-all">
+            <div class="flex items-start gap-4">
+              <div class="h-10 w-10 rounded-md bg-muted/50 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
+                <section.icon class="h-5 w-5 text-foreground" />
+              </div>
+              <div>
+                <h4 class="font-bold text-foreground font-mono text-sm mb-2">{section.title}</h4>
+                <p class="text-sm text-muted-foreground leading-relaxed">{section.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Usage Instructions */}
+      <div class="border border-border rounded-lg p-8 bg-muted/20">
+        <h2 class="text-xl font-bold font-mono mb-6 flex items-center gap-3">
+          <Terminal class="h-5 w-5" />
+          Usage
+        </h2>
+        
+        <div class="space-y-6">
+          <div>
+            <h3 class="font-mono text-sm font-bold text-foreground mb-3">For AI Agents</h3>
+            <p class="text-muted-foreground text-sm leading-relaxed mb-4">
+              Read the <code class="text-xs bg-muted px-1.5 py-0.5 rounded">/api/portfolio.md</code> endpoint to get complete context about this portfolio.
+              This includes all technical information, design preferences, and content structure.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="font-mono text-sm font-bold text-foreground mb-3">Direct Download</h3>
+            <p class="text-muted-foreground text-sm leading-relaxed mb-4">
+              Use the download button above to get a local copy of the portfolio brief.
+              The file is auto-generated from the portfolio configuration.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="font-mono text-sm font-bold text-foreground mb-3">API Endpoint</h3>
+            <div class="bg-black/50 border border-border rounded p-4 font-mono text-sm text-foreground overflow-x-auto">
+              GET /api/portfolio.md
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Note */}
+      <div class="mt-16 pt-8 border-t border-border text-center">
+        <p class="text-xs text-muted-foreground font-mono">
+          Generated dynamically from portfolio configuration
+        </p>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
