@@ -35,6 +35,8 @@ jobs:
         run: bun install
 
       - name: Build
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
         run: |
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -74,6 +76,8 @@ jobs:
         run: bun install
 
       - name: Build (preview base path)
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
         run: |
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
