@@ -442,6 +442,7 @@ export const navLinks = [
   //{ label: 'About', href: '/#about' },
   { label: 'Now', href: '/now/' },
   { label: 'Uses', href: '/uses/' },
+  { label: 'AI Brief', href: '/ai-brief/' },
   { label: 'Journal', href: '/journal/' },
   { label: 'Graph', href: '/graph/' },
   //{ label: 'Skills', href: '/#skills' },
