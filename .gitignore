@@ -23,4 +23,4 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-LightsailDefaultKey-ap-southeast-1.pem
+LightsailDefaultKey-ap-southeast-1.pem\n# local data\ndata/

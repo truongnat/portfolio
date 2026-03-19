@@ -1,19 +1,17 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   BookOpen,
   Clock,
   Users,
   DollarSign,
-  TrendingUp,
   Zap,
   Coffee,
   Target,
   CheckCircle,
   Play,
-  Pause,
   MessageCircle,
   Heart,
   Award,
@@ -27,7 +25,6 @@ import {
 } from 'lucide-react';
 import {
   currentSessions,
-  completedSessions,
   topSponsors,
   learningStats,
   sessionMilestones,
@@ -37,7 +34,6 @@ import {
 } from '@/lib/learning-journey-data';
 
 export function LearningJourneyClient() {
-  const [selectedSession, setSelectedSession] = useState<string | null>(null);
   const [showSponsorModal, setShowSponsorModal] = useState(false);
   const [liveTime, setLiveTime] = useState(0);
 

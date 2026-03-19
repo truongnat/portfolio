@@ -1,13 +1,13 @@
 ---
 import { seo } from '@/lib/config';
 import Navigation from "@/components/Navigation";
+import { ReadingProgress } from "@/components/ReadingProgress";
 import ScrollToTopClient from "@/components/ScrollToTop.client";
 import { CommandPalette } from "@/components/CommandPalette";
 import CodeCopy from "@/components/CodeCopy.astro";
 import Schema from "@/components/seo/Schema.astro";
 import GridBackground from "@/components/GridBackground.astro";
 import Footer from "@/components/Footer.astro";
-import { AIAssistant } from "@/components/AIAssistant";
 import { ClientRouter } from 'astro:transitions';
 import '@/styles/global.css';
 import { getCollection } from 'astro:content';
@@ -24,11 +24,20 @@ interface Props {
 const { 
 	title = seo.title, 
 	description = seo.description, 
-	image = seo.image,
+	image: propImage,
 	article = false,
 	publishDate,
 	tags
 } = Astro.props;
+
+// Calculate dynamic OG image for articles
+let ogImage = propImage || seo.image;
+if (article) {
+    const path = Astro.url.pathname.replace(/^\/|\/$/g, '');
+    if (path.startsWith('blog/') || path.startsWith('journal/')) {
+        ogImage = `/og/${path}.png`;
+    }
+}
 
 const posts = await getCollection('blog', ({ data }) => {
   return import.meta.env.PROD ? data.published : true;
@@ -38,14 +47,14 @@ const journal = await getCollection('journal');
 
 const blogPosts = posts.map(post => ({
   title: post.data.title,
-  slug: post.slug,
+  slug: post.id,
   description: post.data.description,
   type: 'blog' as const,
 }));
 
 const journalPosts = journal.map(post => ({
   title: post.data.title,
-  slug: post.slug,
+  slug: post.id,
   description: post.data.summary || '',
   type: 'journal' as const,
 }));
@@ -76,21 +85,21 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://truongdq
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content={new URL(image, Astro.url)} />
+		<meta property="og:image" content={new URL(ogImage, Astro.url)} />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content={Astro.url} />
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content={new URL(image, Astro.url)} />
+		<meta property="twitter:image" content={new URL(ogImage, Astro.url)} />
 
 		<!-- JSON-LD Structured Data -->
 		<Schema 
 			type={article ? 'Article' : 'WebSite'}
 			title={title}
 			description={description}
-			image={image}
+			image={ogImage}
 			publishDate={publishDate}
 			tags={tags}
 		/>
@@ -104,6 +113,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://truongdq
 		<!-- Resource hints -->
 	</head>
 	<body class="bg-background text-foreground antialiased min-h-screen flex flex-col">
+		<ReadingProgress client:load />
 		<GridBackground />
 		<Navigation client:load transition:persist />
 		<main class="flex-1">
@@ -111,7 +121,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://truongdq
 		</main>
 		<ScrollToTopClient client:load transition:persist />
 		<CommandPalette client:idle transition:persist posts={allPosts} />
-		<AIAssistant client:load transition:persist />
 		<CodeCopy />
 		<Footer />
 	</body>

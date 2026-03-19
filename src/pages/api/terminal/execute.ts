@@ -12,7 +12,7 @@ const executeCommandSchema = z.object({
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
-    const validatedData = executeCommandSchema.parse(body);
+    executeCommandSchema.parse(body);
 
     // TODO: Execute command and return output
     // For now, return mock response
@@ -28,7 +28,7 @@ export const POST: APIRoute = async ({ request }) => {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(
-        JSON.stringify({ success: false, error: 'Invalid input', details: error.errors }),
+        JSON.stringify({ success: false, error: 'Invalid input', details: error.issues }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }

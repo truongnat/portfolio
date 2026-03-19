@@ -13,7 +13,7 @@ const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.val
 
 // Map Astro collection to the metadata format expected by BlogContent
 const mappedPosts = sortedPosts.map(post => ({
-	slug: post.id,
+	id: post.id,
 	title: post.data.title,
 	date: post.data.date.toISOString(),
 	description: post.data.description,

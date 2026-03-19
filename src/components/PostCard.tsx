@@ -9,9 +9,9 @@ interface PostCardProps {
 export function PostCard({ post }: PostCardProps) {
   return (
     <a
-      href={`/blog/${post.slug}/`}
+      href={`/blog/${post.id}/`}
       className="group block relative overflow-hidden rounded-xl border border-border bg-card/50 transition-all duration-300 hover:border-foreground/20 hover:-translate-y-1"
-      data-testid={`post-card-${post.slug}`}
+      data-testid={`post-card-${post.id}`}
     >
       {/* Cover Image or Placeholder */}
       <div className="relative h-48 overflow-hidden bg-secondary/30 border-b border-border">

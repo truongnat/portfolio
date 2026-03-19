@@ -1,11 +1,9 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type KeyboardEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Terminal,
-  Send,
-  HelpCircle,
   DollarSign,
   Award,
   Users,
@@ -15,11 +13,8 @@ import {
   Palette,
   Maximize2,
   Minimize2,
-  X,
   ChevronRight,
   Sparkles,
-  TrendingUp,
-  Clock,
 } from 'lucide-react';
 import {
   terminalCommands,
@@ -35,8 +30,8 @@ export function TerminalTakeoverClient() {
   const [history, setHistory] = useState<Array<{ command: string; output: string }>>([]);
   const [currentTheme, setCurrentTheme] = useState(terminalThemes[0]);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [unlockedCommands, setUnlockedCommands] = useState<string[]>(['help', 'echo', 'clear', 'whoami', 'date', 'donate']);
-  const [totalDonated, setTotalDonated] = useState(0);
+  const [unlockedCommands] = useState<string[]>(['help', 'echo', 'clear', 'whoami', 'date', 'donate']);
+  const [totalDonated] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -97,15 +92,9 @@ export function TerminalTakeoverClient() {
     setInput('');
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
       handleCommand(input);
-    }
-  };
-
-  const unlockCommand = (commandId: string, cost: number) => {
-    if (totalDonated >= cost && !unlockedCommands.includes(commandId)) {
-      setUnlockedCommands(prev => [...prev, commandId]);
     }
   };
 

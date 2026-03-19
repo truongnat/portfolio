@@ -1,11 +1,11 @@
 import {
-  Brain,
-  Layers,
-  Sparkles,
-  Server,
-  Linkedin,
-  Mail,
-  Users,
+  Brain as BrainIcon,
+  Layers as LayersIcon,
+  Sparkles as SparklesIcon,
+  Server as ServerIcon,
+  LinkedinIcon,
+  Mail as MailIcon,
+  Users as UsersIcon,
   type LucideIcon,
 } from 'lucide-react';
 import type { ProjectCategory } from '@/types';
@@ -24,12 +24,12 @@ export const personalInfo = {
     {
       platform: "LinkedIn",
       url: "https://linkedin.com/in/truongdq01",
-      icon: Linkedin,
+      icon: LinkedinIcon,
     },
     {
       platform: "Email",
       url: "mailto:truongdq.dev@gmail.com",
-      icon: Mail,
+      icon: MailIcon,
     },
   ],
   typingPhrases: [
@@ -55,13 +55,13 @@ export const liveWork = {
 } as const;
 
 export const appInfo = {
-  version: import.meta.env.APP_VERSION || '0.0.1',
-  hash: import.meta.env.APP_HASH || 'unknown',
+  version: '0.0.1',
+  hash: 'unknown',
   license: {
-    name: import.meta.env.APP_LICENSE || 'MIT License',
+    name: 'MIT License',
     year: new Date().getFullYear().toString(),
     copyright: `Copyright © ${new Date().getFullYear()} Dao Quang Truong`,
-    fullText: `${import.meta.env.APP_LICENSE || 'MIT License'} - Copyright © ${new Date().getFullYear()} Dao Quang Truong`
+    fullText: `MIT License - Copyright © ${new Date().getFullYear()} Dao Quang Truong`
   }
 };
 
@@ -111,7 +111,7 @@ export const skillsConfig = {
       id: 'ai-agentic',
       title: 'AI & Agentic Systems',
       level: 'Advanced',
-      icon: Brain,
+      icon: BrainIcon,
       subSections: [
         {
           label: 'Agentic AI',
@@ -129,7 +129,7 @@ export const skillsConfig = {
       id: 'frontend-crossplatform',
       title: 'Core Stack & Cross-Platform',
       level: 'Advanced',
-      icon: Layers,
+      icon: LayersIcon,
       subSections: [
         {
           label: 'Core',
@@ -147,7 +147,7 @@ export const skillsConfig = {
       id: 'backend-devops',
       title: 'Backend & DevOps',
       level: 'Advanced',
-      icon: Server,
+      icon: ServerIcon,
       subSections: [
         {
           label: 'Backend',
@@ -163,7 +163,7 @@ export const skillsConfig = {
     {
       id: 'leadership',
       title: 'Engineering Leadership',
-      icon: Users,
+      icon: UsersIcon,
       subSections: [
         {
           label: 'Management',
@@ -182,6 +182,18 @@ export interface Experience {
   period: string;
   description?: string;
   achievements: string[];
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  role: string;
+  period: string;
+  description: string;
+  techStack: string[];
+  categories: ProjectCategory[];
+  achievements: string[];
+  link?: string;
 }
 
 export const workExperience: Experience[] = [
@@ -228,18 +240,6 @@ export const workExperience: Experience[] = [
     ],
   },
 ];
-
-export interface Project {
-  id: string;
-  title: string;
-  role: string;
-  period: string;
-  description: string;
-  techStack: string[];
-  categories: ProjectCategory[];
-  achievements: string[];
-  link?: string;
-}
 
 export const projectsConfig: Project[] = [
   {
@@ -434,7 +434,7 @@ export const awards: Award[] = [
     title: 'Employee of the Year',
     organization: 'Blameo Company',
     date: 'May 2023',
-    icon: Sparkles,
+    icon: SparklesIcon,
   },
 ];
 
@@ -442,7 +442,6 @@ export const navLinks = [
   //{ label: 'About', href: '/#about' },
   { label: 'Now', href: '/now/' },
   { label: 'Uses', href: '/uses/' },
-  { label: 'AI Brief', href: '/ai-brief/' },
   { label: 'Journal', href: '/journal/' },
   { label: 'Graph', href: '/graph/' },
   //{ label: 'Skills', href: '/#skills' },

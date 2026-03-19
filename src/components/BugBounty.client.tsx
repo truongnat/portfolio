@@ -1,24 +1,17 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Bug,
   Shield,
   Trophy,
   DollarSign,
-  Clock,
   Users,
   CheckCircle,
-  AlertTriangle,
-  Info,
   ArrowRight,
-  ExternalLink,
   ThumbsUp,
-  FileText,
   Lock,
-  Github,
-  Mail,
   X,
   Target,
   BookOpen,

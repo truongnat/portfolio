@@ -1,24 +1,19 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Heart,
   Sparkles,
-  Code2,
   FileText,
   Terminal,
   Palette,
-  Scroll,
-  Quote,
   Copy,
   RefreshCw,
   Download,
   Share2,
-  Star,
   Zap,
   ArrowRight,
-  X,
   Check,
   Eye,
   Clock,
@@ -33,6 +28,12 @@ import {
   aiStats,
   messageTypes,
 } from '@/lib/ai-thank-you-data';
+import type { 
+  FortuneCookie, 
+  SSHMessage, 
+  GeneratedCode, 
+  ASCIIArt
+} from '@/types/ai-thank-you';
 
 export function AIThankYouClient() {
   const [selectedType, setSelectedType] = useState<string>('fortune');

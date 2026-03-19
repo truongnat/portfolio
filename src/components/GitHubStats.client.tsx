@@ -3,7 +3,7 @@
 import { motion, type Variants } from 'framer-motion';
 import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { Github, Calendar, Star, GitBranch, Users } from 'lucide-react';
+import { GithubIcon, Calendar, Star, GitBranch, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface GitHubStats {
@@ -118,7 +118,7 @@ export function GitHubStatsClient() {
           transition={{ duration: 0.6 }}
         >
           <div className="flex items-center justify-center mb-4">
-            <Github className="h-8 w-8 text-foreground mr-3" />
+            <GithubIcon className="h-8 w-8 text-foreground mr-3" />
             <h2 className="text-3xl sm:text-4xl font-bold font-mono">
               GitHub Activity
             </h2>
@@ -175,7 +175,7 @@ export function GitHubStatsClient() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 bg-foreground text-background rounded-md hover:opacity-90 transition-opacity text-sm font-bold font-mono"
             >
-              <Github className="h-4 w-4" />
+              <GithubIcon className="h-4 w-4" />
               View GitHub Profile
             </a>
           </div>

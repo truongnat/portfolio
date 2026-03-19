@@ -15,9 +15,7 @@ export interface Post {
     updated_at?: string;
 }
 
-export type BlogPostMetadata = Omit<Post, 'content'> & {
-    slug: string; // We map id to slug in pages/index.astro
-};
+export type BlogPostMetadata = Omit<Post, 'content'>;
 
 export interface Project {
     id: string;

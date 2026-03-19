@@ -158,7 +158,7 @@ export const topSponsors: Sponsor[] = [
   {
     id: 'sponsor_3',
     name: 'Anonymous',
-    avatarUrl: null,
+    avatarUrl: undefined,
     totalSponsored: 800,
     totalHours: 8,
     sessionsSponsored: ['session_completed_1'],
@@ -182,7 +182,7 @@ export const topSponsors: Sponsor[] = [
   {
     id: 'sponsor_5',
     name: 'DevTeam Labs',
-    avatarUrl: null,
+    avatarUrl: undefined,
     totalSponsored: 350,
     totalHours: 3.5,
     sessionsSponsored: ['session_2'],

@@ -11,6 +11,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "baseUrl": ".",
+    "types": ["bun-types"],
     "paths": {
       "@/*": ["src/*"]
     }

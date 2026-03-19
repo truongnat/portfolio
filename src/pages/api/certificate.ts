@@ -23,7 +23,7 @@ export const GET: APIRoute = async ({ url }) => {
       certificateId: validatedData.certificateId,
     });
 
-    return new Response(pngBuffer, {
+    return new Response(new Uint8Array(pngBuffer), {
       status: 200,
       headers: {
         'Content-Type': 'image/png',

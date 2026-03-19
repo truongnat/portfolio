@@ -1,21 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Gavel,
-  Clock,
   Users,
-  TrendingUp,
   CheckCircle,
   ArrowRight,
-  Star,
   Code2,
-  Video,
   FileText,
-  Shield,
-  Zap,
-  Trophy,
   Calendar,
   DollarSign,
   Info,
@@ -292,7 +285,7 @@ export function CodeReviewAuctionClient() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-800">
-                  {leaderboardData.map((entry, idx) => (
+                  {leaderboardData.map((entry) => (
                     <tr key={entry.bidderId} className="hover:bg-gray-800/30 transition-colors">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center gap-2">

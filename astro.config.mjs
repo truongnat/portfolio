@@ -22,14 +22,17 @@ import node from '@astrojs/node';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://truongdq.com',
-  output: 'static',
+  output: 'hybrid',
   adapter: node({
     mode: 'standalone'
   }),
   integrations: [react(), mdx(), sitemap()],
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [/** @type {any} */ (tailwindcss())],
+    ssr: {
+      noExternal: ['lucide-react'],
+    },
     define: {
       'import.meta.env.APP_VERSION': JSON.stringify(pkg.version),
       'import.meta.env.APP_HASH': JSON.stringify(commitHash),

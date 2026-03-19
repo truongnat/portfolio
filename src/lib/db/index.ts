@@ -15,7 +15,7 @@ export interface Database {
 
 export interface PreparedStatement {
   bind(...params: any[]): PreparedStatement;
-  first<T>(): Promise<T | null>;
+  first<T>(...params: any[]): Promise<T | null>;
   all<T>(): Promise<{ results: T[] }>;
   run(): Promise<{ success: boolean }>;
 }
@@ -229,9 +229,9 @@ export const certificateQueries = {
  */
 export const statsQueries = {
   getOverview: async (db: Database) => {
-    const skills = await db.prepare('SELECT COUNT(*) as count, SUM(total_donated) as total FROM skills').first();
-    const donations = await db.prepare('SELECT COUNT(*) as count FROM donations WHERE status = ?', 'completed').first();
-    const donators = await db.prepare('SELECT COUNT(*) as count FROM donators').first();
+    const skills = await db.prepare('SELECT COUNT(*) as count, SUM(total_donated) as total FROM skills').first<{ count: number, total: number }>();
+    const donations = await db.prepare('SELECT COUNT(*) as count FROM donations WHERE status = ?').first<{ count: number }>('completed');
+    const donators = await db.prepare('SELECT COUNT(*) as count FROM donators').first<{ count: number }>();
 
     return {
       totalSkills: skills?.count || 0,

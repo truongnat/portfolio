@@ -57,15 +57,16 @@ ${personalInfo.bio}
 
 ### Typing Phrases
 
-${personalInfo.typingPhrases.map(phrase => `- ${phrase}`).join('\n')}
+${personalInfo.typingPhrases.map((phrase: string) => `- ${phrase}`).join('\n')}
 
 ### Stats
 
-${personalInfo.stats.map(stat => `- **${stat.label}**: ${stat.value}`).join('\n')}
+${personalInfo.stats.map((stat: any) => `- **${stat.label}**: ${stat.value}`).join('\n')}
 
 ### Social Links
 
-${personalInfo.socials.map(social => `- [${social.platform}](${social.url})`).join('\n')}
+${personalInfo.socials.map((social: any) => `- [${social.platform}](${social.url})`).join('\n')}
+
 
 ### Current Work
 
@@ -126,7 +127,7 @@ ${project.description}
 **Tech Stack**: ${project.techStack.join(', ')}
 
 **Achievements**:
-${project.achievements.map(achievement => `- ${achievement}`).join('\n')}
+${project.achievements.map((achievement: string) => `- ${achievement}`).join('\n')}
 `).join('\n---\n\n')}
 
 ---

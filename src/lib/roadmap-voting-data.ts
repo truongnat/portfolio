@@ -303,7 +303,7 @@ export const topBackers: Backer[] = [
   {
     id: 'backer_4',
     name: 'DevTeam Labs',
-    avatarUrl: null,
+    avatarUrl: undefined,
     totalBacked: 600,
     featuresBacked: ['feature_4'],
     votes: 1,

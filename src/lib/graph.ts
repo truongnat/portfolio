@@ -32,19 +32,19 @@ export async function getGraphData() {
 
   // Process Blog Posts
   blogPosts.forEach(post => {
-    addNode(post.slug, post.data.title, 'blog', 15, 1);
+    addNode(post.id, post.data.title, 'blog', 15, 1);
     post.data.tags?.forEach(tag => {
       tagSet.add(tag);
-      links.push({ source: post.slug, target: `tag-${tag}` });
+      links.push({ source: post.id, target: `tag-${tag}` });
     });
   });
 
   // Process Journal Posts
   journalPosts.forEach(post => {
-    addNode(post.slug, post.data.title, 'journal', 10, 2);
+    addNode(post.id, post.data.title, 'journal', 10, 2);
     post.data.tags?.forEach(tag => {
       tagSet.add(tag);
-      links.push({ source: post.slug, target: `tag-${tag}` });
+      links.push({ source: post.id, target: `tag-${tag}` });
     });
   });
 

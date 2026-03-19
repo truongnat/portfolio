@@ -20,6 +20,7 @@ export async function generateCertificateSvg(params: {
   ).then((res) => res.arrayBuffer());
 
   const svg = await satori(
+    // @ts-ignore
     {
       type: 'div',
       props: {

@@ -96,7 +96,7 @@ export const hallOfFameData: HallOfFameEntry[] = [
   {
     id: 'researcher_3',
     reporterName: 'DevTeam Inc.',
-    reporterAvatar: null,
+    reporterAvatar: undefined,
     totalBugs: 3,
     totalBounty: 600,
     rank: 3,
@@ -109,7 +109,7 @@ export const hallOfFameData: HallOfFameEntry[] = [
   {
     id: 'researcher_4',
     reporterName: 'John Doe',
-    reporterAvatar: null,
+    reporterAvatar: undefined,
     totalBugs: 2,
     totalBounty: 120,
     rank: 4,

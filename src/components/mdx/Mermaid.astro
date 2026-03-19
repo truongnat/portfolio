@@ -40,7 +40,7 @@ const content = code || await Astro.slots.render('default');
           graph.classList.add('processed');
           // Clear text content before rendering to avoid flash of text
           graph.textContent = '';
-          const { svg } = await mermaid.render(`mermaid-${Math.random().toString(36).substr(2, 9)}`, content);
+          const { svg } = await mermaid.render(`mermaid-${Math.random().toString(36).substring(2, 11)}`, content);
           graph.innerHTML = svg;
           graph.classList.remove('opacity-0');
         } catch (error) {

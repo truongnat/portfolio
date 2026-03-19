@@ -85,7 +85,7 @@ export const POST: APIRoute = async ({ request }) => {
     
     if (error instanceof z.ZodError) {
       return new Response(
-        JSON.stringify({ success: false, error: 'Invalid input', details: error.errors }),
+        JSON.stringify({ success: false, error: 'Invalid input', details: error.issues }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
