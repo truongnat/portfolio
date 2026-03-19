@@ -1,49 +1,24 @@
 name: Deploy Astro to Lightsail (Self-hosted)
-
 on:
   push:
     branches:
       - main
-      - preview
-
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   deploy:
     runs-on: [self-hosted, linux]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
-
       - name: Install dependencies
         run: bun install
-
-      - name: Set Environment Variables
-        id: vars
-        run: |
-          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "SITE=https://truongdq.com" >> $GITHUB_ENV
-            echo "DEPLOY_DIR=/var/www/html" >> $GITHUB_ENV
-            echo "PM2_NAME=portfolio" >> $GITHUB_ENV
-            echo "PORT=4321" >> $GITHUB_ENV
-            echo "IS_PREVIEW=false" >> $GITHUB_OUTPUT
-          else
-            echo "SITE=https://preview.truongdq.com" >> $GITHUB_ENV
-            echo "DEPLOY_DIR=/var/www/preview" >> $GITHUB_ENV
-            echo "PM2_NAME=portfolio-preview" >> $GITHUB_ENV
-            echo "PORT=4322" >> $GITHUB_ENV
-            echo "IS_PREVIEW=true" >> $GITHUB_OUTPUT
-          fi
-
       - name: Build
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
@@ -51,23 +26,16 @@ jobs:
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           bun run build
-
       - name: Deploy Static to Nginx
         run: |
-          sudo mkdir -p ${{ env.DEPLOY_DIR }}
-          sudo rm -rf ${{ env.DEPLOY_DIR }}/*
-          sudo cp -r dist/client/* ${{ env.DEPLOY_DIR }}/
-          sudo chown -R www-data:www-data ${{ env.DEPLOY_DIR }}
-
+          sudo mkdir -p /var/www/html
+          sudo rm -rf /var/www/html/*
+          sudo cp -r dist/client/* /var/www/html/
+          sudo chown -R www-data:www-data /var/www/html
       - name: Restart Astro Server (PM2)
         run: |
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          pm2 delete ${{ env.PM2_NAME }} || true
-          HOST=127.0.0.1 PORT=${{ env.PORT }} pm2 start dist/server/entry.mjs --name ${{ env.PM2_NAME }} --update-env
+          pm2 delete portfolio || true
+          HOST=127.0.0.1 PORT=4321 pm2 start dist/server/entry.mjs --name portfolio --update-env
           sudo systemctl reload nginx
-
-      - name: Comment preview URL
-        if: steps.vars.outputs.IS_PREVIEW == 'true'
-        run: |
-          echo "✅ Preview deployed: https://preview.truongdq.com"
