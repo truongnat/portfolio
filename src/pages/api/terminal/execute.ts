@@ -12,7 +12,7 @@ const executeCommandSchema = z.object({
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
-    const validatedData = executeCommandSchema.parse(body);
+    const _validatedData = executeCommandSchema.parse(body);
 
     // TODO: Execute command and return output
     // For now, return mock response
