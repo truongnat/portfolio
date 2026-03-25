@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { ArrowLeft, Clock, BookOpen, Tag } from 'lucide-react';
+import { ArrowLeft, Clock, BookOpen, Tag, Play } from 'lucide-react';
 import { seo } from '@/lib/config';
 export const prerender = true;
 
@@ -26,6 +26,8 @@ const levelLabel: Record<string, string> = {
   intermediate: 'Intermediate',
   advanced: 'Advanced',
 };
+
+const videos = course.data.videos || [];
 ---
 
 <BaseLayout
@@ -100,6 +102,38 @@ const levelLabel: Record<string, string> = {
             <div class="mb-12 rounded-2xl overflow-hidden shadow-xl">
               <img src={course.data.coverImage} alt={course.data.title} class="w-full h-64 object-cover" />
             </div>
+          )}
+
+          {/* Video Lessons */}
+          {videos.length > 0 && (
+            <section class="mb-12">
+              <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                <span class="h-8 w-1 bg-primary rounded-full"></span>
+                Video Lessons
+              </h2>
+              <div class="space-y-6">
+                {videos.map((video: { title: string; url: string; lesson?: number }, i: number) => (
+                  <div class="rounded-xl border border-border/40 bg-card/30 overflow-hidden">
+                    <div class="px-4 py-3 border-b border-border/40 flex items-center gap-3">
+                      <div class="flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 border border-primary/20">
+                        <Play className="h-3 w-3 text-primary fill-primary" />
+                      </div>
+                      <span class="text-sm font-medium text-foreground">
+                        Lesson {video.lesson ?? i + 1} — {video.title}
+                      </span>
+                    </div>
+                    <video
+                      controls
+                      preload="metadata"
+                      class="w-full aspect-video bg-black"
+                      src={video.url}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                ))}
+              </div>
+            </section>
           )}
 
           <article class="prose prose-lg dark:prose-invert max-w-none prose-headings:scroll-mt-24 prose-img:rounded-xl">
