@@ -93,7 +93,7 @@ export function RoadmapVotingClient() {
               Community-Driven Development
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
               Roadmap Voting
             </h1>
 
@@ -172,8 +172,8 @@ export function RoadmapVotingClient() {
       {/* Filters */}
       <section className="container mx-auto px-4 py-8">
         <div className="flex flex-wrap gap-4 items-center justify-between max-w-5xl mx-auto">
-          <div className="flex flex-wrap gap-2">
-            <div className="relative">
+          <div className="flex flex-nowrap overflow-x-auto pb-2 scrollbar-hide md:flex-wrap md:overflow-visible gap-2">
+            <div className="relative flex-shrink-0">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
               <input
                 type="text"
@@ -186,7 +186,7 @@ export function RoadmapVotingClient() {
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-shrink-0 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">All Categories</option>
               {roadmapCategories.map((cat) => (
@@ -196,7 +196,7 @@ export function RoadmapVotingClient() {
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
-              className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-shrink-0 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">All Statuses</option>
               <option value="proposed">Proposed</option>
@@ -491,11 +491,11 @@ function StatCard({ icon: Icon, label, value, color }: {
     >
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-gray-400 text-sm">{label}</p>
-          <p className="text-2xl font-bold text-white mt-1">{value}</p>
+          <p className="text-gray-400 text-xs sm:text-sm">{label}</p>
+          <p className="text-xl sm:text-2xl font-bold text-white mt-1">{value}</p>
         </div>
-        <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${colorClasses[color as keyof typeof colorClasses]} flex items-center justify-center`}>
-          <Icon className="w-6 h-6 text-white" />
+        <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br ${colorClasses[color as keyof typeof colorClasses]} flex items-center justify-center`}>
+          <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
         </div>
       </div>
     </motion.div>
@@ -512,7 +512,7 @@ function VoteModal({ featureId, onClose }: { featureId: string | null; onClose: 
       onClick={onClose}
     >
       <motion.div
-        className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-700 max-w-lg w-full p-8"
+        className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-700 max-w-lg w-full p-8 max-h-[90vh] overflow-y-auto"
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
