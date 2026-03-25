@@ -50,7 +50,7 @@ export function KnowledgeGraphClient({ data }: KnowledgeGraphProps) {
       if (containerRef.current) {
         setDimensions({
           width: containerRef.current.offsetWidth,
-          height: isFullscreen ? window.innerHeight - 100 : 600
+          height: isFullscreen ? window.innerHeight - 100 : (typeof window !== 'undefined' && window.innerWidth < 768 ? 350 : 600)
         });
       }
     };
@@ -115,6 +115,10 @@ export function KnowledgeGraphClient({ data }: KnowledgeGraphProps) {
         isFullscreen ? "fixed inset-0 z-[200] m-4 h-[calc(100vh-2rem)]" : "w-full h-[600px]"
       )}
     >
+      {/* Mobile warning */}
+      <div className="sm:hidden mb-4 px-4 py-3 bg-muted/30 border border-border/40 rounded-xl text-xs font-mono text-muted-foreground text-center">
+        💡 Best viewed on desktop — rotate device or use a larger screen for the full 3D experience
+      </div>
       {/* Controls */}
       <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
         <button 
@@ -203,3 +207,4 @@ export function KnowledgeGraphClient({ data }: KnowledgeGraphProps) {
     </div>
   );
 }
+
