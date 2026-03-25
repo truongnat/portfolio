@@ -83,7 +83,7 @@ export function ProjectsClient() {
 
         {/* Filter tabs */}
         <motion.div
-          className="flex flex-wrap justify-center gap-2 mb-16"
+          className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-2 mb-16 overflow-x-auto pb-2 md:pb-0 scrollbar-hide md:scrollbar-auto"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2, duration: 0.4 }}
@@ -93,7 +93,7 @@ export function ProjectsClient() {
               key={category}
               onClick={() => setSelectedCategory(category)}
               className={`
-                px-5 py-1.5 rounded-md text-sm font-mono font-medium transition-all duration-200 border
+                flex-shrink-0 px-5 py-1.5 rounded-md text-sm font-mono font-medium transition-all duration-200 border
                 ${selectedCategory === category
                   ? 'bg-foreground text-background border-foreground'
                   : 'bg-transparent text-muted-foreground border-border hover:border-muted-foreground/50'
