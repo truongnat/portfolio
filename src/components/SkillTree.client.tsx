@@ -64,7 +64,7 @@ function SkillNodeComponent({ skill, onClick }: SkillNodeProps) {
       
       {/* Node circle */}
       <motion.div
-        className={`relative w-20 h-20 rounded-full border-3 flex items-center justify-center ${
+        className={`relative w-14 h-14 sm:w-20 sm:h-20 rounded-full border-3 flex items-center justify-center ${
           statusColors[skill.status]
         } ${isClickable ? 'hover:shadow-lg hover:shadow-current/20' : ''}`}
         initial={{ scale: 0, opacity: 0 }}
@@ -135,7 +135,7 @@ function SkillNodeComponent({ skill, onClick }: SkillNodeProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
-        <p className="text-xs font-semibold text-gray-300 drop-shadow-lg">
+        <p className="text-xs font-semibold text-gray-300 drop-shadow-lg hidden sm:block">
           {skill.name}
         </p>
         {skill.progress > 0 && skill.progress < 100 && (
@@ -374,6 +374,9 @@ export function SkillTreeClient() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 relative overflow-hidden">
+      <div className="sm:hidden relative z-10 mx-4 mt-4 px-4 py-3 bg-muted/30 border border-border/40 rounded-xl text-xs font-mono text-muted-foreground text-center">
+        💡 Scroll horizontally to explore the full skill tree
+      </div>
       {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute w-[500px] h-[500px] bg-violet-500/10 rounded-full blur-3xl -top-1/2 -left-1/4" />
@@ -445,7 +448,7 @@ export function SkillTreeClient() {
         </div>
 
         {/* Skill tree visualization */}
-        <div className="relative aspect-[4/3] max-h-[600px] bg-gray-900/30 backdrop-blur rounded-2xl border border-gray-800 overflow-hidden">
+        <div className="relative aspect-[4/3] max-h-[600px] bg-gray-900/30 backdrop-blur rounded-2xl border border-gray-800 overflow-hidden overflow-x-auto">
           {/* Connection lines (simplified - in production use d3 or similar) */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none">
             {skillTreeData.skills.map((skill) =>
@@ -540,3 +543,4 @@ export function SkillTreeClient() {
     </div>
   );
 }
+
