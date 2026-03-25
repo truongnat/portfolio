@@ -84,7 +84,7 @@ export function CommandPalette({ posts = [] }: CommandPaletteProps) {
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh] px-4">
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-[10vh] sm:pt-[20vh] px-4">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -110,7 +110,7 @@ export function CommandPalette({ posts = [] }: CommandPaletteProps) {
                   className="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground font-mono"
                 />
               </div>
-              <Command.List className="max-h-[400px] overflow-y-auto overflow-x-hidden p-2">
+              <Command.List className="max-h-[300px] sm:max-h-[400px] overflow-y-auto overflow-x-hidden p-2">
                 <Command.Empty className="py-6 text-center text-sm text-muted-foreground font-mono">
                   {isSearching ? 'AI is thinking...' : 'No results found.'}
                 </Command.Empty>
