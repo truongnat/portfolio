@@ -86,19 +86,23 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                 </div>
 
                 {/* Category Filters */}
-                <div className="flex flex-nowrap md:flex-wrap items-center justify-start md:justify-end gap-2 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0 scrollbar-hide w-full md:w-auto">
-                    {categories.map((category) => (
-                        <button
-                            key={category}
-                            onClick={() => handleCategoryChange(category)}
-                            className={`px-4 py-1 rounded-md text-xs font-mono font-bold uppercase tracking-tighter transition-all duration-200 border ${selectedCategory === category
-                                ? 'bg-foreground text-background border-foreground'
-                                : 'bg-secondary/30 text-muted-foreground border-border hover:border-muted-foreground/50'
-                                }`}
-                        >
-                            {category}
-                        </button>
-                    ))}
+                <div className="relative w-full md:w-auto">
+                    {/* Fade-right gradient overlay — indicates more scrollable content on mobile */}
+                    <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none z-10 md:hidden" />
+                    <div className="flex flex-nowrap md:flex-wrap items-center justify-start md:justify-end gap-2 overflow-x-auto md:overflow-x-visible pb-3 md:pb-0 w-full md:w-auto">
+                        {categories.map((category) => (
+                            <button
+                                key={category}
+                                onClick={() => handleCategoryChange(category)}
+                                className={`flex-shrink-0 px-4 py-1 rounded-md text-xs font-mono font-bold uppercase tracking-tighter transition-all duration-200 border ${selectedCategory === category
+                                    ? 'bg-foreground text-background border-foreground'
+                                    : 'bg-secondary/30 text-muted-foreground border-border hover:border-muted-foreground/50'
+                                    }`}
+                            >
+                                {category}
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
 
