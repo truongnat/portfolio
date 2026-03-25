@@ -77,7 +77,7 @@ export function LearningJourneyClient() {
               {learningStats.currentSession?.status === 'live' ? '🔴 Live Learning Session' : 'Next Session Starting Soon'}
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
               Learning Journey Sponsor
             </h1>
 
@@ -87,7 +87,7 @@ export function LearningJourneyClient() {
             </p>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto mb-8">
               <StatCard
                 icon={BookOpen}
                 label="Sessions"
@@ -591,7 +591,7 @@ function StatCard({ icon: Icon, label, value, color }: {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-gray-400 text-sm">{label}</p>
-          <p className="text-2xl font-bold text-white mt-1">{value}</p>
+          <p className="text-xl sm:text-2xl font-bold text-white mt-1">{value}</p>
         </div>
         <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${colorClasses[color as keyof typeof colorClasses]} flex items-center justify-center`}>
           <Icon className="w-6 h-6 text-white" />
@@ -651,3 +651,4 @@ function SponsorModal({ onClose }: { onClose: () => void }) {
     </motion.div>
   );
 }
+
