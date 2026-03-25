@@ -179,7 +179,7 @@ export function JournalContent({ initialLogs }: JournalContentProps) {
         </div>
       ) : (
         /* Timeline View */
-        <div className="relative pl-8 md:pl-0">
+        <div className="relative pl-6 md:pl-0">
           {/* Vertical Line */}
           <div className="absolute left-[11px] md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-border to-transparent md:-translate-x-1/2" />
           
@@ -203,7 +203,7 @@ export function JournalContent({ initialLogs }: JournalContentProps) {
                     )}
                   >
                     {/* Timeline Node */}
-                    <div className="absolute left-[-21px] md:left-1/2 w-6 h-6 rounded-full border-4 border-background bg-primary z-10 md:-translate-x-1/2 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
+                    <div className="absolute left-[-9px] md:left-1/2 w-6 h-6 rounded-full border-4 border-background bg-primary z-10 md:-translate-x-1/2 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
                     
                     {/* Date Bubble */}
                     <div className={cn(
