@@ -10,6 +10,16 @@ level: "beginner"
 duration: "6 hours · 20 lessons"
 status: "coming-soon"
 price: "Free"
+videos:
+  - title: "SEO là gì và tại sao quan trọng"
+    url: "https://pub-7100c0ef5f884f36a36a4c201596bc90.r2.dev/courses/seo-beginner/lesson-01.mp4"
+    lesson: 1
+  - title: "Google crawl và index trang web như thế nào"
+    url: "https://pub-7100c0ef5f884f36a36a4c201596bc90.r2.dev/courses/seo-beginner/lesson-02.mp4"
+    lesson: 2
+  - title: "Hiểu Search Intent"
+    url: "https://pub-7100c0ef5f884f36a36a4c201596bc90.r2.dev/courses/seo-beginner/lesson-03.mp4"
+    lesson: 3
 modules:
   - title: "How Search Engines Work"
     lessons:
