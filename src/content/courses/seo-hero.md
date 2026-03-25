@@ -10,6 +10,10 @@ level: "advanced"
 duration: "14 hours · 20 lessons"
 status: "coming-soon"
 price: "Free"
+videos:
+  - title: "Programmatic SEO"
+    url: "https://pub-7100c0ef5f884f36a36a4c201596bc90.r2.dev/courses/seo-hero/lesson-01.mp4"
+    lesson: 1
 modules:
   - title: "Advanced Technical SEO"
     lessons:
