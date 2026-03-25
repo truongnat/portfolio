@@ -243,6 +243,21 @@ export const workExperience: Experience[] = [
 
 export const projectsConfig: Project[] = [
   {
+    id: 'rnui',
+    title: 'RNUI — React Native UI Framework',
+    role: 'Author & Maintainer',
+    period: 'Mar 2026 – Present',
+    description: 'A high-performance, dual-layer UI design system for React Native (iOS + Android). 62+ components, 120+ icons, New Architecture ready. Published on npm as a monorepo with headless primitives, design tokens, styled components, and multi-brand themes.',
+    techStack: ['React Native', 'TypeScript', 'Reanimated 3', 'Gesture Handler', 'Turbo', 'Bun', 'Changesets', 'npm'],
+    categories: ['Mobile', 'Open Source'],
+    achievements: [
+      'Challenge: Build a production-grade React Native UI library that works for both design-system consumers (styled) and custom-style users (headless).',
+      'Action: Designed dual-layer architecture — @truongdq01/headless (logic/state/a11y, zero styles) + @truongdq01/ui (styled, wraps headless). Added @truongdq01/tokens (design tokens) and @truongdq01/themes (multi-brand presets). Managed as Turborepo monorepo with Changesets for versioning.',
+      'Result: Published v1.0.1 to npm with 62+ components, 120+ icons, full TypeScript support, and React Native New Architecture compatibility. Zero-config theming with brand plugin system.',
+    ],
+    link: 'https://www.npmjs.com/package/@truongdq01/ui'
+  },
+  {
     id: 'example-react',
     title: 'TanStack Full Demo',
     role: 'Fullstack Developer',
