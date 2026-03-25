@@ -16,87 +16,132 @@ export function TechRadarClient() {
     : radarData;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <div className="space-y-8 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-12 lg:items-start">
+      {/* Mobile List View - visible on mobile/tablet only */}
+      <div className="lg:hidden space-y-6">
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={() => setSelectedQuadrant(null)}
+            className={`px-3 py-1.5 text-xs font-mono border rounded-md transition-all flex-shrink-0 ${!selectedQuadrant ? 'bg-foreground text-background border-foreground' : 'text-muted-foreground border-border'}`}
+          >
+            ALL
+          </button>
+          {quadrants.map(q => (
+            <button
+              key={q}
+              onClick={() => setSelectedQuadrant(q === selectedQuadrant ? null : q)}
+              className={`px-3 py-1.5 text-xs font-mono border rounded-md transition-all flex-shrink-0 ${selectedQuadrant === q ? 'bg-foreground text-background border-foreground' : 'text-muted-foreground border-border hover:border-foreground/50'}`}
+            >
+              {q.split(' ')[0].toUpperCase()}
+            </button>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 gap-4">
+          {rings.map(ring => {
+            const items = filteredData.filter(d => d.ring === ring);
+            if (items.length === 0) return null;
+            const ringColorClass = ring === 'Adopt' ? 'text-green-500 bg-green-500/10 border-green-500/20' :
+              ring === 'Trial' ? 'text-blue-500 bg-blue-500/10 border-blue-500/20' :
+              ring === 'Assess' ? 'text-yellow-500 bg-yellow-500/10 border-yellow-500/20' :
+              'text-red-500 bg-red-500/10 border-red-500/20';
+            return (
+              <div key={ring} className={`rounded-xl border p-4 ${ringColorClass}`}>
+                <h3 className="text-sm font-bold font-mono uppercase tracking-widest mb-3">{ring}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {items.map(item => (
+                    <span key={item.name} className="text-xs font-mono bg-background/50 rounded px-2 py-1 text-foreground/80">
+                      {item.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Radar Visualization */}
-      <div className="relative aspect-square w-full max-w-lg mx-auto bg-card/20 rounded-full border border-border overflow-hidden">
-        {/* Rings */}
-        {[0, 1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="absolute inset-0 rounded-full border border-border/30"
-            style={{
-              margin: `${i * 12.5}%`,
-              zIndex: 0,
-            }}
-          />
-        ))}
-
-        {/* Crosshair */}
-        <div className="absolute top-0 bottom-0 left-1/2 w-px bg-border/50" />
-        <div className="absolute left-0 right-0 top-1/2 h-px bg-border/50" />
-
-              {/* Quadrant Labels */}
-              <div className="absolute top-4 left-4 text-xs font-mono text-muted-foreground uppercase opacity-50">Languages</div>
-              <div className="absolute top-4 right-4 text-xs font-mono text-muted-foreground uppercase opacity-50">Tools</div>
-              <div className="absolute bottom-4 left-4 text-xs font-mono text-muted-foreground uppercase opacity-50">Platforms</div>
-              <div className="absolute bottom-4 right-4 text-xs font-mono text-muted-foreground uppercase opacity-50">Techniques</div>
-        {/* Blips */}
-        {radarData.map((blip, index) => {
-          // Calculate pseudo-random position based on ring and quadrant
-          // deterministic random based on name
-          const seed = blip.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-
-          const ringIndex = rings.indexOf(blip.ring);
-
-          // Map quadrants to visual corners: 0:TL, 1:TR, 2:BL, 3:BR
-          // 0 (Lang) -> TL (-x, -y)
-          // 1 (Tools) -> TR (+x, -y)
-          // 2 (Plat) -> BL (-x, +y)
-          // 3 (Tech) -> BR (+x, +y)
-
-          // Ring offset: Adopt (center) -> Hold (outer)
-          // Adopt: 0-25%, Trial: 25-50%, Assess: 50-75%, Hold: 75-100%
-          const baseDist = (ringIndex * 0.25) + 0.1; // start of ring
-          const randomDist = (seed % 15) / 100; // small variation
-          const distance = (baseDist + randomDist) * 50; // 0-50% from center
-
-          // Adjust for visual quadrants
-          let finalAngle = 0;
-          if (blip.quadrant === 'Languages & Frameworks') finalAngle = 270 + (seed % 80); // Top Left-ish
-          if (blip.quadrant === 'Tools') finalAngle = 0 + (seed % 80); // Top Right
-          if (blip.quadrant === 'Platforms') finalAngle = 180 + (seed % 80); // Bottom Left
-          if (blip.quadrant === 'Techniques') finalAngle = 90 + (seed % 80); // Bottom Right
-
-          // Convert polar to cartesian (percentage)
-          const rad = (finalAngle * Math.PI) / 180;
-          const x = 50 + (Math.cos(rad) * distance); // %
-          const y = 50 + (Math.sin(rad) * distance); // %
-
-          const isHovered = hoveredBlip === blip.name;
-          const isSelected = selectedQuadrant === null || selectedQuadrant === blip.quadrant;
-
-          return (
-            <motion.div
-              key={blip.name}
-              className={`absolute w-3 h-3 rounded-full border border-background shadow-sm cursor-pointer z-10 transition-all duration-300
-                ${blip.ring === 'Adopt' ? 'bg-green-500' :
-                  blip.ring === 'Trial' ? 'bg-blue-500' :
-                    blip.ring === 'Assess' ? 'bg-yellow-500' : 'bg-red-500'}
-              `}
+      <div className="hidden lg:block">
+        <div className="relative aspect-square w-full max-w-lg mx-auto bg-card/20 rounded-full border border-border overflow-hidden">
+          {/* Rings */}
+          {[0, 1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="absolute inset-0 rounded-full border border-border/30"
               style={{
-                left: `${x}%`,
-                top: `${y}%`,
-                opacity: isSelected ? 1 : 0.2,
-                scale: isHovered ? 1.5 : 1
+                margin: `${i * 12.5}%`,
+                zIndex: 0,
               }}
-              onMouseEnter={() => setHoveredBlip(blip.name)}
-              onMouseLeave={() => setHoveredBlip(null)}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: isHovered ? 1.5 : 1, opacity: isSelected ? 1 : 0.2 }}
-              transition={{ delay: index * 0.05 }}
             />
-          );
-        })}
+          ))}
+
+          {/* Crosshair */}
+          <div className="absolute top-0 bottom-0 left-1/2 w-px bg-border/50" />
+          <div className="absolute left-0 right-0 top-1/2 h-px bg-border/50" />
+
+                {/* Quadrant Labels */}
+                <div className="absolute top-4 left-4 text-xs font-mono text-muted-foreground uppercase opacity-50">Languages</div>
+                <div className="absolute top-4 right-4 text-xs font-mono text-muted-foreground uppercase opacity-50">Tools</div>
+                <div className="absolute bottom-4 left-4 text-xs font-mono text-muted-foreground uppercase opacity-50">Platforms</div>
+                <div className="absolute bottom-4 right-4 text-xs font-mono text-muted-foreground uppercase opacity-50">Techniques</div>
+          {/* Blips */}
+          {radarData.map((blip, index) => {
+            // Calculate pseudo-random position based on ring and quadrant
+            // deterministic random based on name
+            const seed = blip.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+
+            const ringIndex = rings.indexOf(blip.ring);
+
+            // Map quadrants to visual corners: 0:TL, 1:TR, 2:BL, 3:BR
+            // 0 (Lang) -> TL (-x, -y)
+            // 1 (Tools) -> TR (+x, -y)
+            // 2 (Plat) -> BL (-x, +y)
+            // 3 (Tech) -> BR (+x, +y)
+
+            // Ring offset: Adopt (center) -> Hold (outer)
+            // Adopt: 0-25%, Trial: 25-50%, Assess: 50-75%, Hold: 75-100%
+            const baseDist = (ringIndex * 0.25) + 0.1; // start of ring
+            const randomDist = (seed % 15) / 100; // small variation
+            const distance = (baseDist + randomDist) * 50; // 0-50% from center
+
+            // Adjust for visual quadrants
+            let finalAngle = 0;
+            if (blip.quadrant === 'Languages & Frameworks') finalAngle = 270 + (seed % 80); // Top Left-ish
+            if (blip.quadrant === 'Tools') finalAngle = 0 + (seed % 80); // Top Right
+            if (blip.quadrant === 'Platforms') finalAngle = 180 + (seed % 80); // Bottom Left
+            if (blip.quadrant === 'Techniques') finalAngle = 90 + (seed % 80); // Bottom Right
+
+            // Convert polar to cartesian (percentage)
+            const rad = (finalAngle * Math.PI) / 180;
+            const x = 50 + (Math.cos(rad) * distance); // %
+            const y = 50 + (Math.sin(rad) * distance); // %
+
+            const isHovered = hoveredBlip === blip.name;
+            const isSelected = selectedQuadrant === null || selectedQuadrant === blip.quadrant;
+
+            return (
+              <motion.div
+                key={blip.name}
+                className={`absolute w-3 h-3 rounded-full border border-background shadow-sm cursor-pointer z-10 transition-all duration-300
+                  ${blip.ring === 'Adopt' ? 'bg-green-500' :
+                    blip.ring === 'Trial' ? 'bg-blue-500' :
+                      blip.ring === 'Assess' ? 'bg-yellow-500' : 'bg-red-500'}
+                `}
+                style={{
+                  left: `${x}%`,
+                  top: `${y}%`,
+                  opacity: isSelected ? 1 : 0.2,
+                  scale: isHovered ? 1.5 : 1
+                }}
+                onMouseEnter={() => setHoveredBlip(blip.name)}
+                onMouseLeave={() => setHoveredBlip(null)}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: isHovered ? 1.5 : 1, opacity: isSelected ? 1 : 0.2 }}
+                transition={{ delay: index * 0.05 }}
+              />
+            );
+          })}
+        </div>
       </div>
 
       {/* List / Controls */}
