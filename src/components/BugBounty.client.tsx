@@ -48,7 +48,7 @@ export function BugBountyClient() {
               Active Bounty Program
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent mb-6">
               Bug Bounty Program
             </h1>
 
@@ -58,7 +58,7 @@ export function BugBountyClient() {
             </p>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto mb-8">
               <StatCard
                 icon={Bug}
                 label="Reports"
@@ -539,3 +539,4 @@ function SubmitBugModal({ onClose }: { onClose: () => void }) {
     </motion.div>
   );
 }
+
