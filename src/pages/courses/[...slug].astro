@@ -136,6 +136,32 @@ const videos = course.data.videos || [];
             </section>
           )}
 
+          {/* Mobile Curriculum - shown below video, above article, on mobile/tablet only */}
+          {course.data.modules && course.data.modules.length > 0 && (
+            <details class="lg:hidden mb-8 rounded-xl border border-border/40 bg-card/30 backdrop-blur-sm overflow-hidden">
+              <summary class="flex items-center gap-2 p-4 cursor-pointer font-semibold text-foreground select-none">
+                <BookOpen className="h-4 w-4 text-primary" />
+                Course Curriculum ({course.data.modules.reduce((acc: number, m: any) => acc + m.lessons.length, 0)} lessons)
+                <span class="ml-auto text-xs text-muted-foreground">tap to expand</span>
+              </summary>
+              <div class="px-4 pb-4 space-y-4">
+                {course.data.modules.map((mod: { title: string; lessons: string[] }, i: number) => (
+                  <div>
+                    <h4 class="text-sm font-semibold text-foreground mb-2">{i + 1}. {mod.title}</h4>
+                    <ul class="space-y-1">
+                      {mod.lessons.map((lesson: string, j: number) => (
+                        <li class="text-xs text-muted-foreground flex items-start gap-2 py-1 border-b border-border/20 last:border-0">
+                          <span class="text-primary/50 shrink-0 mt-0.5">{i+1}.{j+1}</span>
+                          <span>{lesson}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </details>
+          )}
+
           <article class="prose prose-lg dark:prose-invert max-w-none prose-headings:scroll-mt-24 prose-img:rounded-xl">
             <Content />
           </article>
