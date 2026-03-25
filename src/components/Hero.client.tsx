@@ -195,15 +195,15 @@ export function HeroClient({
 
         {/* Quick Stats - Technical Focus */}
         <motion.div
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-border pt-12"
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 md:gap-12 border-t border-border pt-12"
           variants={itemVariants}
         >
           {personalInfo.stats.map((stat, index) => (
             <div key={index} className="flex flex-col items-center justify-center space-y-2">
-              <span className="text-3xl sm:text-4xl font-bold text-foreground font-mono">
+              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground font-mono">
                 {stat.value}
               </span>
-              <span className="text-sm text-muted-foreground font-mono uppercase tracking-wider">{stat.label}</span>
+              <span className="text-xs sm:text-sm text-muted-foreground font-mono uppercase tracking-wider">{stat.label}</span>
             </div>
           ))}
         </motion.div>
