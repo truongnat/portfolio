@@ -126,6 +126,29 @@ const shareTitle = post.data.title;
 						</div>
 					</header>
 
+					{/* Mobile TOC - visible on mobile/tablet only */}
+					{tocItems.length > 0 && (
+					  <details class="lg:hidden mb-8 rounded-xl border border-border/40 bg-card/30 backdrop-blur-sm overflow-hidden">
+					    <summary class="flex items-center gap-2 p-4 cursor-pointer font-semibold text-foreground select-none text-sm">
+					      <span class="h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0"></span>
+					      On this page
+					      <span class="ml-auto text-xs text-muted-foreground font-normal">tap to expand</span>
+					    </summary>
+					    <div class="px-4 pb-4">
+					      <nav class="space-y-1">
+					        {tocItems.map((item: { id: string; text: string; level: number }) => (
+					          <a
+					            href={`#${item.id}`}
+					            class={`block text-sm text-muted-foreground hover:text-primary transition-colors py-1 ${item.level === 3 ? 'pl-4' : item.level === 4 ? 'pl-8' : ''}`}
+					          >
+					            {item.text}
+					          </a>
+					        ))}
+					      </nav>
+					    </div>
+					  </details>
+					)}
+
 					{/* Article Content */}
 					<article class="prose prose-lg dark:prose-invert max-w-none prose-headings:scroll-mt-24 prose-img:rounded-xl prose-img:shadow-lg">
 						<Content components={{ Callout, Mermaid }} />
@@ -133,7 +156,7 @@ const shareTitle = post.data.title;
 
 					{/* Post Footer */}
 					<footer class="mt-16 pt-8 border-t border-border">
-						<div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+						<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
 							<a
 								href="/blog/"
 								class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary/50 hover:bg-secondary text-secondary-foreground text-sm font-medium transition-all"
