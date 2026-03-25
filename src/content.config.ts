@@ -45,6 +45,11 @@ const courses = defineCollection({
 			title: z.string(),
 			lessons: z.array(z.string()),
 		})).optional(),
+		videos: z.array(z.object({
+			title: z.string(),
+			url: z.string(),
+			lesson: z.number().optional(),
+		})).optional(),
 	}),
 });
 
