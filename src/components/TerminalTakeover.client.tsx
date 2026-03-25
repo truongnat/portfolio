@@ -122,7 +122,7 @@ export function TerminalTakeoverClient() {
               Interactive Terminal
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent mb-6">
               Terminal Takeover
             </h1>
 
@@ -132,7 +132,7 @@ export function TerminalTakeoverClient() {
             </p>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto mb-8">
               <StatCard
                 icon={Users}
                 label="Total Users"
@@ -170,8 +170,13 @@ export function TerminalTakeoverClient() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
+          {/* Mobile tip */}
+          <div className="sm:hidden mb-4 px-4 py-2 bg-green-900/20 border border-green-800/30 rounded-lg text-xs text-green-400/70 font-mono text-center">
+            💡 Tip: Rotate to landscape for better terminal experience
+          </div>
+
           {/* Terminal Window */}
-          <div className={`bg-gray-900 rounded-xl overflow-hidden border border-gray-800 shadow-2xl ${isFullscreen ? 'fixed inset-4 z-50' : ''}`}>
+          <div className={`bg-gray-900 rounded-xl overflow-hidden border border-gray-800 shadow-2xl ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
             {/* Terminal Header */}
             <div className="bg-gray-800 px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -207,7 +212,7 @@ export function TerminalTakeoverClient() {
             {/* Terminal Body */}
             <div
               ref={terminalRef}
-              className="h-96 overflow-y-auto p-4 font-mono text-sm"
+              className="h-72 sm:h-96 overflow-y-auto p-4 font-mono text-sm"
               style={{
                 backgroundColor: currentTheme.background,
                 color: currentTheme.foreground,
@@ -326,7 +331,7 @@ export function TerminalTakeoverClient() {
         <h2 className="text-3xl font-bold text-white mb-4 text-center">Donation Ranks</h2>
         <p className="text-gray-400 text-center mb-12">Unlock higher ranks with more donations.</p>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
           {ranks.map((rank, idx) => (
             <motion.div
               key={rank.id}
