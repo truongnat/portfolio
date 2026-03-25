@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+export const prerender = true;
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const allCourses = await getCollection('courses', ({ data }) => data.published === true);
+
+const sortedCourses = allCourses.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const levelOrder = { beginner: 0, intermediate: 1, advanced: 2 };
+const levelColors = {
+  beginner: 'bg-green-500/10 text-green-400 border-green-500/20',
+  intermediate: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+  advanced: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+};
+const levelLabel = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' };
+---
+
+<BaseLayout title="Courses | Free Dev Courses" description="Free courses on software engineering, SEO, AI, and modern web development.">
+  <main class="min-h-screen py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
+
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="mb-20 pt-8 max-w-3xl">
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-foreground">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/70">Free</span>
+          <br />
+          <span class="text-primary">Courses</span>
+        </h1>
+        <p class="text-xl text-muted-foreground leading-relaxed">
+          Practical courses on <span class="text-foreground font-medium">engineering, SEO, and AI</span> — all free, all hands-on.
+        </p>
+      </div>
+
+      {sortedCourses.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {sortedCourses.map((course) => (
+            <a
+              href={`/courses/${course.id}/`}
+              class="group relative flex flex-col rounded-2xl border border-border/40 bg-card/30 backdrop-blur-sm overflow-hidden hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
+            >
+              {course.data.coverImage && (
+                <div class="relative h-48 overflow-hidden">
+                  <img
+                    src={course.data.coverImage}
+                    alt={course.data.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
+                  {course.data.price && (
+                    <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary text-primary-foreground">
+                      {course.data.price}
+                    </span>
+                  )}
+                </div>
+              )}
+
+              <div class="flex flex-col flex-1 p-6">
+                <div class="flex items-center gap-2 mb-3 flex-wrap">
+                  {course.data.level && (
+                    <span class={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium border ${levelColors[course.data.level] || 'bg-muted text-muted-foreground border-border'}`}>
+                      {levelLabel[course.data.level] || course.data.level}
+                    </span>
+                  )}
+                  {course.data.status === 'coming-soon' && (
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+                      Coming Soon
+                    </span>
+                  )}
+                </div>
+
+                <h2 class="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                  {course.data.title}
+                </h2>
+
+                <p class="text-sm text-muted-foreground mb-4 line-clamp-3 flex-1">
+                  {course.data.description}
+                </p>
+
+                <div class="flex items-center justify-between text-xs text-muted-foreground mt-auto pt-4 border-t border-border/40">
+                  {course.data.duration && <span>⏱ {course.data.duration}</span>}
+                  {course.data.tags && course.data.tags.length > 0 && (
+                    <span class="text-primary/70">{course.data.tags[0]}</span>
+                  )}
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-24 border border-dashed border-border rounded-2xl bg-muted/5">
+          <h3 class="text-xl font-medium text-foreground mb-2">No courses yet</h3>
+          <p class="text-muted-foreground">Check back soon.</p>
+        </div>
+      )}
+    </div>
+  </main>
+</BaseLayout>
