@@ -1,12 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { liveWork } from '@/lib/config';
 
 export function LiveWorkFloatClient() {
-  const boundsRef = useRef<HTMLDivElement | null>(null);
+  const constraintsRef = useRef<HTMLDivElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const floatAnimation = isDragging
     ? {}
@@ -15,23 +20,38 @@ export function LiveWorkFloatClient() {
         rotate: [0, 1.5, 0],
       };
 
+  if (!mounted) return null;
+
   return (
-    <div ref={boundsRef} className="absolute inset-0 pointer-events-none z-[9999]">
+    <>
+      {/* Fixed full-viewport constraint layer */}
+      <div
+        ref={constraintsRef}
+        className="fixed inset-0 pointer-events-none z-[9999]"
+      />
+
       <motion.div
         drag
-        dragConstraints={boundsRef}
-        dragElastic={0.2}
+        dragConstraints={constraintsRef}
+        dragElastic={0.1}
         dragMomentum={false}
         onDragStart={() => setIsDragging(true)}
         onDragEnd={() => setIsDragging(false)}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className="pointer-events-auto absolute right-6 top-24 sm:right-12 sm:top-28 cursor-grab active:cursor-grabbing"
+        // Desktop: bottom-right corner | Mobile: bottom-left, smaller
+        className="fixed z-[9999] pointer-events-auto cursor-grab active:cursor-grabbing
+          bottom-6 right-6
+          sm:bottom-8 sm:right-8"
+        style={{ touchAction: 'none' }}
       >
         <motion.div
           animate={floatAnimation}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex items-center gap-4 rounded-2xl border border-border bg-card/70 px-5 py-4 shadow-xl backdrop-blur"
+          className="flex items-center gap-3 sm:gap-4 rounded-2xl border border-border bg-card/80 
+            px-3 py-3 sm:px-5 sm:py-4 
+            shadow-xl backdrop-blur-sm
+            max-w-[200px] sm:max-w-none"
         >
           <motion.div
             animate={{
@@ -44,7 +64,7 @@ export function LiveWorkFloatClient() {
             transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
             className="absolute inset-0 rounded-2xl pointer-events-none"
           />
-          <div className="h-12 w-12 rounded-xl border border-border bg-background/80 p-2">
+          <div className="h-9 w-9 sm:h-12 sm:w-12 rounded-xl border border-border bg-background/80 p-1.5 sm:p-2 flex-shrink-0">
             <img
               src="/livework/vietis-icon.png"
               alt="Viet IS"
@@ -52,22 +72,24 @@ export function LiveWorkFloatClient() {
               loading="lazy"
             />
           </div>
-          <div className="space-y-1">
-            <p className="text-xs uppercase tracking-[0.2em] font-mono text-muted-foreground/70">
+          <div className="space-y-0.5 sm:space-y-1 min-w-0">
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-mono text-muted-foreground/70 truncate">
               {liveWork.label}
             </p>
             <a
               href={liveWork.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-lg sm:text-xl font-bold font-mono text-foreground hover:text-primary transition-colors"
+              className="block text-sm sm:text-lg font-bold font-mono text-foreground hover:text-primary transition-colors truncate"
             >
               {liveWork.company}
             </a>
-            <p className="text-sm font-mono text-muted-foreground">{liveWork.location}</p>
+            <p className="text-xs sm:text-sm font-mono text-muted-foreground truncate hidden sm:block">
+              {liveWork.location}
+            </p>
           </div>
         </motion.div>
       </motion.div>
-    </div>
+    </>
   );
 }
