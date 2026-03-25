@@ -1,10 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 export const prerender = true;
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import { JournalContent } from '@/components/JournalContent';
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { JournalContent } from "@/components/JournalContent";
 
-const logs = await getCollection('journal');
+const logs = await getCollection("journal");
 
 // Sort logs by date descending
 const sortedLogs = logs.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -27,7 +27,7 @@ const mappedLogs = sortedLogs.map(log => ({
 		<div class="max-w-7xl mx-auto relative z-10">
 			{/* Header */}
 			<div class="mb-20 pt-8 max-w-3xl">
-				<h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-foreground text-deep-shadow">
+				<h1 class="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6 text-foreground text-deep-shadow">
 					<span class="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/70 text-deep-shadow">
 						Engineering
 					</span>
