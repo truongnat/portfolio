@@ -71,10 +71,10 @@
 - Recommendations: Edge or server rate limits, CAPTCHA on sensitive forms, and request size limits.
 
 **Search API error bodies:**
-- Risk: On failure, `src/pages/api/search.ts` returns `(error as Error).message` to the client, which can leak internal paths or implementation details.
-- Files: `src/pages/api/search.ts`
-- Current mitigation: Generic logging in production depends on deployment.
-- Recommendations: Return a generic message to clients; log details server-side only.
+- Risk: On failure, `src/pages/api/search.ts` previously returned `(error as Error).message` to the client (paths / stack leakage).
+- Files: `src/pages/api/search.ts`, `src/lib/api-error-response.ts`
+- Current mitigation (2026-04-12, Phase 3): Generic JSON body (`Search is temporarily unavailable`); `logApiError` for server-side detail.
+- Recommendations: Keep pattern for any new API routes that catch unexpected errors.
 
 **Crypto payment flow uses placeholder wallet data:**
 - Risk: Hard-coded example addresses and static exchange rates in `src/pages/api/crypto/create-payment.ts` are unsuitable for production; misdirected funds if deployed as-is.

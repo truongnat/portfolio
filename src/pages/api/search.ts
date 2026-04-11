@@ -1,4 +1,9 @@
 import * as lancedb from '@lancedb/lancedb';
+import {
+  jsonErrorResponse,
+  logApiError,
+  SEARCH_UNAVAILABLE_BODY,
+} from '@/lib/api-error-response';
 import { pipeline } from '@xenova/transformers';
 import path from 'path';
 
@@ -54,10 +59,7 @@ export async function GET({ url }: { url: URL }) {
       headers: { 'Content-Type': 'application/json' }
     });
   } catch (error) {
-    console.error('[Search API] Error:', error);
-    return new Response(JSON.stringify({ error: (error as Error).message }), { 
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    logApiError('[Search API]', error);
+    return jsonErrorResponse(500, { ...SEARCH_UNAVAILABLE_BODY });
   }
 }

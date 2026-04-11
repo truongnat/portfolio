@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Build & quality baseline** — Green `bun run build`, CI deploy, lint and Astro check on touched files (completed 2026-04-12)
 - [x] **Phase 2: Trust boundaries (Stripe & certificates)** — Webhook signature verification and non-forgeable certificate issuance (completed 2026-04-12)
-- [ ] **Phase 3: Safe API error surfaces** — Generic client errors and server-only diagnostics for search and peers
+- [x] **Phase 3: Safe API error surfaces** — Generic client errors and server-only diagnostics for search and peers (completed 2026-04-12)
 - [ ] **Phase 4: Data layer & payment honesty** — Real persistence or explicit prod disable; resolve `src/lib/db` drift
 - [ ] **Phase 5: Publishing & contact** — Content collections stable; Telegram contact delivery when configured
 - [ ] **Phase 6: Domain cutover** — Canonical truongsoftware.com across config, SEO fallbacks, OG, and deployment docs; migration note for legacy domain references
@@ -62,8 +62,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] `03-01-PLAN.md` — Shared API error helpers + generic `GET /api/search` failures (SEC-03)
-- [ ] `03-02-PLAN.md` — Generic errors for `POST /api/certificate-issue` and peer leak scan (SEC-03)
+- [x] `03-01-PLAN.md` — Shared API error helpers + generic `GET /api/search` failures (SEC-03)
+- [x] `03-02-PLAN.md` — Generic errors for `POST /api/certificate-issue` and peer leak scan (SEC-03)
 
 ### Phase 4: Data layer & payment honesty
 **Goal**: Payment-adjacent and donation-related behavior matches reality in production; database helpers are either real or gone—no silent stubs or dead modules.

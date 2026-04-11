@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { jsonErrorResponse, logApiError } from '@/lib/api-error-response';
 import { computeCertificateSignatureHex } from '@/lib/certificate-signature';
 import { z } from 'zod';
 
@@ -21,10 +22,11 @@ export const POST: APIRoute = async ({ request }) => {
 
   const secret = import.meta.env.CERTIFICATE_SIGNING_SECRET;
   if (!secret?.trim()) {
-    return new Response(JSON.stringify({ error: 'CERTIFICATE_SIGNING_SECRET not set' }), {
-      status: 503,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    logApiError(
+      '[certificate-issue]',
+      new Error('Certificate signing secret not configured')
+    );
+    return jsonErrorResponse(503, { error: 'Service unavailable' });
   }
 
   try {
@@ -46,6 +48,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (error instanceof z.ZodError) {
       return new Response('Invalid parameters', { status: 400 });
     }
-    throw error;
+    logApiError('[certificate-issue]', error);
+    return jsonErrorResponse(500, { error: 'An unexpected error occurred' });
   }
 };

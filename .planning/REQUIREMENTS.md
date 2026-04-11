@@ -39,7 +39,7 @@
 
 - [x] **SEC-01**: Stripe webhook verifies signatures using `STRIPE_WEBHOOK_SECRET` before processing events (`src/pages/api/stripe/webhook.ts`)
 - [x] **SEC-02**: Certificate issuance does not allow unauthenticated forgery of arbitrary donor/skill data (`src/pages/api/certificate.ts` + `src/lib/certificate-generator.ts`)
-- [ ] **SEC-03**: Search and other sensitive API routes return generic errors to clients; details logged server-side only (`src/pages/api/search.ts` and peers)
+- [x] **SEC-03**: Search and other sensitive API routes return generic errors to clients; details logged server-side only (`src/pages/api/search.ts` and peers)
 
 ### Data & API integrity
 
