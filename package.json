@@ -11,7 +11,9 @@
     "journal:summary:force-week": "bun scripts/generate-journal-summaries.ts --force --period week",
     "journal:index": "bun scripts/index-content.ts",
     "lint": "eslint . --ext .js,.mjs,.cjs,.ts,.tsx --max-warnings 0",
-    "lint:fix": "eslint . --ext .js,.mjs,.cjs,.ts,.tsx --fix"
+    "lint:fix": "eslint . --ext .js,.mjs,.cjs,.ts,.tsx --fix",
+    "check": "astro check",
+    "verify": "bun run lint && bun run check && bun run build"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.43",

@@ -1,3 +1,19 @@
+---
+gsd_state_version: 1.0
+milestone: v1.1
+milestone_name: milestone
+status: executing
+stopped_at: v1.1 roadmap appended (Phases 6–8); traceability updated for DOM/HK/DOC
+last_updated: "2026-04-11T18:34:12.253Z"
+last_activity: 2026-04-11 -- Phase 1 execution started
+progress:
+  total_phases: 8
+  completed_phases: 0
+  total_plans: 2
+  completed_plans: 0
+  percent: 0
+---
+
 # Project State
 
 ## Project Reference
@@ -6,20 +22,21 @@ See: `.planning/PROJECT.md` (updated 2026-04-12)
 
 **Core value:** Visitors can reliably read your writing, understand your background, and reach you—while the site stays fast, maintainable, and honest to how you build software.
 
-**Current focus:** Milestone v1.1 — Domain, housekeeping & feature documentation
+**Current focus:** Phase 1 — Build & quality baseline
 
 ## Current Position
 
-Phase: 6 — Domain cutover (v1.1)
-Plan: — of TBD in current phase
-Status: Roadmap defined; ready to plan Phase 6
-Last activity: 2026-04-12 — ROADMAP updated with Phases 6–8 (v1.1)
+Phase: 1 (Build & quality baseline) — EXECUTING
+Plan: 1 of 2
+Status: Executing Phase 1
+Last activity: 2026-04-11 -- Phase 1 execution started
 
 Progress: [░░░░░░░░░░] 0%
 
 ## Performance Metrics
 
 **Velocity:**
+
 - Total plans completed: 0
 - Average duration: —
 - Total execution time: —
