@@ -1,4 +1,4 @@
-import type { SkillTreeData, SkillNode } from '@/types/skill-tree';
+import type { SkillTreeData } from '@/types/skill-tree';
 
 /**
  * Initial Skill Tree Data

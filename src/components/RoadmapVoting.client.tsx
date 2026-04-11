@@ -4,25 +4,18 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Vote,
-  TrendingUp,
   DollarSign,
   Users,
-  Award,
   Target,
   CheckCircle,
   Clock,
-  Zap,
   ArrowRight,
-  Plus,
   MessageSquare,
   Share2,
-  Filter,
   Search,
   X,
-  Heart,
   Star,
   Trophy,
-  GitPullRequest,
 } from 'lucide-react';
 import {
   roadmapFeatures,

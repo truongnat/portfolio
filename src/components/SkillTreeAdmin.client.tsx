@@ -47,7 +47,7 @@ export function SkillTreeAdmin() {
   });
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+  const [_isLoading, setIsLoading] = useState(true);
 
   // Mock data fetch - replace with actual API call
   useEffect(() => {

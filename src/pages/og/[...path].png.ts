@@ -32,7 +32,7 @@ export const GET: APIRoute = async ({ props }) => {
   ).then((res) => res.arrayBuffer());
 
   const svg = await satori(
-    // @ts-ignore
+    // @ts-expect-error Satori intrinsic element object
     {
       type: 'div',
       props: {

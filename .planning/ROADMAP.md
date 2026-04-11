@@ -14,7 +14,7 @@ Brownfield hardening: establish a green build and quality gate, close high-risk 
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Build & quality baseline** — Green `bun run build`, CI deploy, lint and Astro check on touched files
+- [x] **Phase 1: Build & quality baseline** — Green `bun run build`, CI deploy, lint and Astro check on touched files (completed 2026-04-12)
 - [ ] **Phase 2: Trust boundaries (Stripe & certificates)** — Webhook signature verification and non-forgeable certificate issuance
 - [ ] **Phase 3: Safe API error surfaces** — Generic client errors and server-only diagnostics for search and peers
 - [ ] **Phase 4: Data layer & payment honesty** — Real persistence or explicit prod disable; resolve `src/lib/db` drift
@@ -36,8 +36,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 2 plans
 
 Plans:
-- [ ] `01-01-PLAN.md` — Add `check` / `verify` scripts and gate deploy workflow with lint + Astro check before build (OPS-01, OPS-02 pipeline)
-- [ ] `01-02-PLAN.md` — Fix all ESLint errors (16) for green `bun run lint` and full `verify` (OPS-02)
+- [x] `01-01-PLAN.md` — Add `check` / `verify` scripts and gate deploy workflow with lint + Astro check before build (OPS-01, OPS-02 pipeline)
+- [x] `01-02-PLAN.md` — Fix all ESLint errors (16) for green `bun run lint` and full `verify` (OPS-02)
 
 ### Phase 2: Trust boundaries (Stripe & certificates)
 **Goal**: Money- and identity-adjacent endpoints reject forgery: Stripe events are authentic, and certificates cannot be minted for arbitrary unverified claims.
@@ -116,7 +116,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Build & quality baseline | 0/2 | Not started | - |
+| 1. Build & quality baseline | 2/2 | Complete   | 2026-04-12 |
 | 2. Trust boundaries (Stripe & certificates) | 0/TBD | Not started | - |
 | 3. Safe API error surfaces | 0/TBD | Not started | - |
 | 4. Data layer & payment honesty | 0/TBD | Not started | - |

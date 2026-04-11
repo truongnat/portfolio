@@ -24,7 +24,7 @@ async function main() {
         if (entry.isDirectory()) {
             const indexFile = path.join(BLOG_DIR, entry.name, 'index.md');
             const mdxFile = path.join(BLOG_DIR, entry.name, 'index.mdx');
-            let filePath = fs.existsSync(indexFile) ? indexFile : (fs.existsSync(mdxFile) ? mdxFile : null);
+            const filePath = fs.existsSync(indexFile) ? indexFile : (fs.existsSync(mdxFile) ? mdxFile : null);
             
             if (filePath) {
                 const content = fs.readFileSync(filePath, 'utf-8');
@@ -72,7 +72,6 @@ async function main() {
     const chunks = chunkText(entry.content, 800);
     for (let i = 0; i < chunks.length; i++) {
       const text = `Title: ${entry.title}\nType: ${entry.type}\nContent: ${chunks[i]}`;
-      // @ts-ignore
       const output = await embedder(text, { pooling: 'mean', normalize: true });
       const vector = Array.from(output.data);
       
@@ -93,7 +92,7 @@ async function main() {
         await db.dropTable('content');
     }
     await db.createTable('content', dataToInsert);
-  } catch (e) {
+  } catch {
     await db.createTable('content', dataToInsert, { mode: 'overwrite' });
   }
   
