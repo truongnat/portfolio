@@ -10,10 +10,10 @@ See: `.planning/PROJECT.md` (updated 2026-04-12)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 6 — Domain cutover (v1.1)
 Plan: — of TBD in current phase
-Status: Defining requirements
-Last activity: 2026-04-12 — Milestone v1.1 started (truongsoftware.com, housekeeping, PlantUML docs)
+Status: Roadmap defined; ready to plan Phase 6
+Last activity: 2026-04-12 — ROADMAP updated with Phases 6–8 (v1.1)
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -42,6 +42,7 @@ Decisions are logged in `PROJECT.md` Key Decisions table.
 Recent decisions affecting current work:
 
 - Roadmap (2026-04-12): Five phases; security split into Stripe/certificates (Phase 2) then generic API errors (Phase 3) per CONCERNS risk ordering.
+- Roadmap v1.1 (2026-04-12): Phases 6–8 — domain cutover (DOM), housekeeping (HK), PlantUML feature docs (DOC).
 
 ### Pending Todos
 
@@ -54,5 +55,5 @@ See `.planning/codebase/CONCERNS.md` for stub routes, LanceDB deploy path, and v
 ## Session Continuity
 
 Last session: 2026-04-12
-Stopped at: Roadmap + STATE initialized; traceability updated in REQUIREMENTS.md
+Stopped at: v1.1 roadmap appended (Phases 6–8); traceability updated for DOM/HK/DOC
 Resume file: None

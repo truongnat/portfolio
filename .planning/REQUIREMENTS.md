@@ -82,15 +82,15 @@
 | DATA-02 | Phase 4 | Pending |
 | CONT-01 | Phase 5 | Pending |
 | CONT-02 | Phase 5 | Pending |
-| DOM-01 | — | Pending |
-| DOM-02 | — | Pending |
-| HK-01 | — | Pending |
-| HK-02 | — | Pending |
-| DOC-01 | — | Pending |
-| DOC-02 | — | Pending |
+| DOM-01 | Phase 6 | Pending |
+| DOM-02 | Phase 6 | Pending |
+| HK-01 | Phase 7 | Pending |
+| HK-02 | Phase 7 | Pending |
+| DOC-01 | Phase 8 | Pending |
+| DOC-02 | Phase 8 | Pending |
 
 **Coverage — v1.0:** 9/9 mapped to Phases 1–5 ✓  
-**Coverage — v1.1:** pending roadmap (Phases 6+)
+**Coverage — v1.1:** 6/6 mapped to Phases 6–8 ✓
 
 ---
 *Requirements defined: 2026-04-12*  

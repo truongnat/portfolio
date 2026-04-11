@@ -1,9 +1,9 @@
 <!-- gsd-project-start source:PROJECT.md -->
 ## Project
 
-**Portfolio (truongdq.com)**
+**Portfolio (truongsoftware.com)**
 
-A personal developer portfolio and publishing site: Astro-driven hybrid static site with React islands, Markdown/MDX content collections (blog, journal, courses), API routes for contact and interactive features, and optional LanceDB-backed semantic search. It showcases work, writing, and tooling experiments in one cohesive experience.
+A personal developer portfolio and publishing site: Astro-driven hybrid static site with React islands, Markdown/MDX content collections (blog, journal, courses), API routes for contact and interactive features, and optional LanceDB-backed semantic search. It showcases work, writing, and tooling experiments in one cohesive experience. The public domain is **truongsoftware.com** (migrated from truongdq.com in milestone v1.1).
 
 **Core Value:** Visitors can reliably read your writing, understand your background, and reach you—while the site stays fast, maintainable, and honest to how you build software.
 

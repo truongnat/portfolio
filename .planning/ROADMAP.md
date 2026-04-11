@@ -1,8 +1,10 @@
-# Roadmap: Portfolio (truongdq.com)
+# Roadmap: Portfolio (truongsoftware.com)
 
 ## Overview
 
 Brownfield hardening: establish a green build and quality gate, close high-risk API security gaps (Stripe, certificates, error leakage), make payment-adjacent data paths honest, then verify content collections and the contact path—aligned with CONCERNS ordering (build first, then trust boundaries, then persistence, then reader-facing UX).
+
+**Milestone v1.1 (Phases 6–8)** continues after v1.0: cut over canonical URLs and branding to **truongsoftware.com**, tidy dependencies and repository hygiene, and add **PlantUML-based feature documentation** under `docs/` (indexed from the root README). Phases 1–5 remain the v1.0 brownfield roadmap; new work is appended from Phase 6.
 
 ## Phases
 
@@ -17,6 +19,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 3: Safe API error surfaces** — Generic client errors and server-only diagnostics for search and peers
 - [ ] **Phase 4: Data layer & payment honesty** — Real persistence or explicit prod disable; resolve `src/lib/db` drift
 - [ ] **Phase 5: Publishing & contact** — Content collections stable; Telegram contact delivery when configured
+- [ ] **Phase 6: Domain cutover** — Canonical truongsoftware.com across config, SEO fallbacks, OG, and deployment docs; migration note for legacy domain references
+- [ ] **Phase 7: Housekeeping** — Dependencies/scripts audit, `.gitignore` clarity, dead routes removed or documented
+- [ ] **Phase 8: Feature documentation (PlantUML)** — `docs/` index, README link, one diagram + companion per major feature area
 
 ## Phase Details
 
@@ -67,10 +72,43 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: TBD
 **UI hint**: yes
 
+### Phase 6: Domain cutover
+**Goal**: The live site and repo-facing URLs consistently use **truongsoftware.com** as canonical for SEO and sharing, with no stray legacy domain in application source or deployment docs except intentionally documented historical mentions.
+**Depends on**: Nothing (can run in parallel with v1.0 Phases 1–5 if you prioritize branding/DNS first)
+**Requirements**: DOM-01, DOM-02
+**Success Criteria** (what must be TRUE):
+  1. `astro.config.mjs` `site`, `src/lib/config.ts`, layout/SEO fallbacks (`BaseLayout`, `Schema`), and OG-related branding reflect `https://truongsoftware.com` where they define canonical or sharing identity.
+  2. Nginx `server_name`, `PREVIEW_SETUP.md` (and related preview hostname notes), and content examples that referenced the old domain are updated or explicitly migrated in docs.
+  3. A short migration note exists where archived content or intentional historical mentions still reference the previous domain.
+  4. No remaining hard-coded `truongdq.com` in application source or deployment documentation except those intentional historical mentions called out in that note.
+**Plans**: TBD
+
+### Phase 7: Housekeeping
+**Goal**: The repository matches what ships: dependencies and scripts are deliberate, local-only data and secrets are ignored and documented, and obsolete routes or experiments are removed or explained.
+**Depends on**: Phase 6
+**Requirements**: HK-01, HK-02
+**Success Criteria** (what must be TRUE):
+  1. `bun run build` and `bun run lint` succeed after dependency and script review.
+  2. Unused packages are removed or explicitly documented with rationale if kept.
+  3. `.gitignore` (and related docs) clearly exclude non-committed paths such as `data/lancedb`, keys, and pem material.
+  4. Obvious dead or `.disabled` routes are either removed or listed in `docs/` with rationale.
+**Plans**: TBD
+
+### Phase 8: Feature documentation (PlantUML)
+**Goal**: Major feature areas are documented under `docs/` with PlantUML diagrams and short companions, and visitors/contributors can find them from the root README.
+**Depends on**: Phase 7
+**Requirements**: DOC-01, DOC-02
+**Success Criteria** (what must be TRUE):
+  1. `docs/README.md` is the entry point and links every feature doc in the catalog.
+  2. Root `README.md` includes a **Feature architecture** section pointing to `docs/`.
+  3. For each catalogued feature area (content collections; page shell & navigation / command palette; public API routes; semantic search; contact/Telegram; payments & certificates), a `.puml` file exists under `docs/features/` with at least one diagram (component, sequence, or deployment) and a short markdown companion describing behavior and boundaries.
+**Plans**: TBD
+**UI hint**: yes
+
 ## Progress
 
-**Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
+**Execution Order (v1.0):** 1 → 2 → 3 → 4 → 5  
+**Execution Order (v1.1):** 6 → 7 → 8 (Phase 6 is independent of v1.0 phases; Phases 7–8 follow 6)
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -79,6 +117,10 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 3. Safe API error surfaces | 0/TBD | Not started | - |
 | 4. Data layer & payment honesty | 0/TBD | Not started | - |
 | 5. Publishing & contact | 0/TBD | Not started | - |
+| 6. Domain cutover | 0/TBD | Not started | - |
+| 7. Housekeeping | 0/TBD | Not started | - |
+| 8. Feature documentation (PlantUML) | 0/TBD | Not started | - |
 
 ---
-*Roadmap created: 2026-04-12 — brownfield v1 requirements*
+*Roadmap created: 2026-04-12 — brownfield v1 requirements*  
+*v1.1 milestone (domain, housekeeping, PlantUML docs): 2026-04-12 — Phases 6–8 appended*
