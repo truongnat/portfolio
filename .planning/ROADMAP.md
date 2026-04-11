@@ -46,7 +46,11 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. The Stripe webhook handler verifies signatures using `STRIPE_WEBHOOK_SECRET` before treating the body as a Stripe event.
   2. Certificate images cannot be obtained for arbitrary donor/skill data without a verified issuance path (or the route is disabled in a way that prevents public forgery).
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] `02-01-PLAN.md` — Add `stripe` SDK; verify Stripe webhooks with `constructEvent`, raw body, and `STRIPE_WEBHOOK_SECRET` (SEC-01)
+- [ ] `02-02-PLAN.md` — HMAC `sig` gate on `/api/certificate` with `CERTIFICATE_SIGNING_SECRET`; 401 on invalid/missing signature (SEC-02)
 
 ### Phase 3: Safe API error surfaces
 **Goal**: Clients never receive implementation-sensitive error details from sensitive APIs; operators can still diagnose issues from server-side logs.
@@ -117,7 +121,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Build & quality baseline | 2/2 | Complete   | 2026-04-12 |
-| 2. Trust boundaries (Stripe & certificates) | 0/TBD | Not started | - |
+| 2. Trust boundaries (Stripe & certificates) | 0/2 | Not started | - |
 | 3. Safe API error surfaces | 0/TBD | Not started | - |
 | 4. Data layer & payment honesty | 0/TBD | Not started | - |
 | 5. Publishing & contact | 0/TBD | Not started | - |
