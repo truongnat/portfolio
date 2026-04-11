@@ -1,9 +1,34 @@
-# Requirements: Portfolio (truongdq.com)
+# Requirements: Portfolio (truongsoftware.com)
 
 **Defined:** 2026-04-12  
 **Core Value:** Visitors can reliably read your writing, understand your background, and reach you—while the site stays fast, maintainable, and honest to how you build software.
 
-## v1 Requirements
+## Milestone v1.1 (current)
+
+### Domain & URLs
+
+- [ ] **DOM-01**: Production canonical URL is `https://truongsoftware.com` everywhere it matters for SEO and sharing — `astro.config.mjs` `site`, `src/lib/config.ts`, `BaseLayout.astro` / `Schema.astro` / blog slug fallbacks, OG image branding text, and nginx `server_name` (plus preview hostname notes in `PREVIEW_SETUP.md`).
+- [ ] **DOM-02**: No remaining hard-coded `truongdq.com` in application source or deployment docs except intentional historical mentions in archived content (if any), called out in a short migration note.
+
+### Housekeeping
+
+- [ ] **HK-01**: Dependencies and scripts reviewed: unused packages removed or explicitly documented; `bun run build` and `bun run lint` still pass.
+- [ ] **HK-02**: Repository hygiene: `.gitignore` (and docs) clarify non-committed paths (`data/lancedb`, keys, pem); obvious dead or `.disabled` routes are either removed or listed in `docs/` with rationale.
+
+### Documentation (PlantUML)
+
+- [ ] **DOC-01**: `docs/README.md` is the entry point and links every feature doc; root `README.md` has a **Feature architecture** section pointing to `docs/`.
+- [ ] **DOC-02**: For each catalogued feature area below, a `.puml` file exists under `docs/features/` with at least one diagram (component, sequence, or deployment) and a short markdown companion describing the feature:
+  - Content (blog & journal collections)
+  - Page shell & navigation / command palette
+  - Public API routes (grouped)
+  - Semantic search (LanceDB + embeddings)
+  - Contact / Telegram pipeline
+  - Payments & certificates (Stripe, crypto stubs as documented)
+
+---
+
+## Milestone v1.0 (prior — roadmap phases 1–5)
 
 ### Operations & quality
 
@@ -26,7 +51,7 @@
 - [ ] **CONT-01**: Blog, journal, and course pages render from Content Collections without schema or build regressions
 - [ ] **CONT-02**: Contact form delivers messages via configured Telegram credentials when env is present
 
-## v2 Requirements
+## v2 (backlog)
 
 ### Hardening
 
@@ -46,8 +71,6 @@
 
 ## Traceability
 
-Which phases cover which requirements. Updated during roadmap creation.
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | OPS-01 | Phase 1 | Pending |
@@ -59,12 +82,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DATA-02 | Phase 4 | Pending |
 | CONT-01 | Phase 5 | Pending |
 | CONT-02 | Phase 5 | Pending |
+| DOM-01 | — | Pending |
+| DOM-02 | — | Pending |
+| HK-01 | — | Pending |
+| HK-02 | — | Pending |
+| DOC-01 | — | Pending |
+| DOC-02 | — | Pending |
 
-**Coverage:**
-- v1 requirements: 9 total
-- Mapped to phases: 9
-- Unmapped: 0 ✓
+**Coverage — v1.0:** 9/9 mapped to Phases 1–5 ✓  
+**Coverage — v1.1:** pending roadmap (Phases 6+)
 
 ---
 *Requirements defined: 2026-04-12*  
-*Last updated: 2026-04-12 — roadmap created (brownfield v1)*
+*Last updated: 2026-04-12 — milestone v1.1 scope added*

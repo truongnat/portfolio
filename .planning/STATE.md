@@ -6,14 +6,14 @@ See: `.planning/PROJECT.md` (updated 2026-04-12)
 
 **Core value:** Visitors can reliably read your writing, understand your background, and reach you—while the site stays fast, maintainable, and honest to how you build software.
 
-**Current focus:** Phase 1 — Build & quality baseline
+**Current focus:** Milestone v1.1 — Domain, housekeeping & feature documentation
 
 ## Current Position
 
-Phase: 1 of 5 (Build & quality baseline)
+Phase: Not started (defining requirements)
 Plan: — of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-04-12 — Roadmap created from v1 requirements + CONCERNS ordering
+Status: Defining requirements
+Last activity: 2026-04-12 — Milestone v1.1 started (truongsoftware.com, housekeeping, PlantUML docs)
 
 Progress: [░░░░░░░░░░] 0%
 
