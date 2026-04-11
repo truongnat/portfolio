@@ -33,7 +33,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. `bun run build` completes successfully on the current stack.
   2. The CI deploy workflow succeeds for the repository’s intended pipeline.
   3. ESLint and `@astrojs/check` pass with no new errors on touched files in the project’s standard check workflow.
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] `01-01-PLAN.md` — Add `check` / `verify` scripts and gate deploy workflow with lint + Astro check before build (OPS-01, OPS-02 pipeline)
+- [ ] `01-02-PLAN.md` — Fix all ESLint errors (16) for green `bun run lint` and full `verify` (OPS-02)
 
 ### Phase 2: Trust boundaries (Stripe & certificates)
 **Goal**: Money- and identity-adjacent endpoints reject forgery: Stripe events are authentic, and certificates cannot be minted for arbitrary unverified claims.
@@ -112,7 +116,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Build & quality baseline | 0/TBD | Not started | - |
+| 1. Build & quality baseline | 0/2 | Not started | - |
 | 2. Trust boundaries (Stripe & certificates) | 0/TBD | Not started | - |
 | 3. Safe API error surfaces | 0/TBD | Not started | - |
 | 4. Data layer & payment honesty | 0/TBD | Not started | - |
