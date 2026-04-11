@@ -50,21 +50,21 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| OPS-01 | — | Pending |
-| OPS-02 | — | Pending |
-| SEC-01 | — | Pending |
-| SEC-02 | — | Pending |
-| SEC-03 | — | Pending |
-| DATA-01 | — | Pending |
-| DATA-02 | — | Pending |
-| CONT-01 | — | Pending |
-| CONT-02 | — | Pending |
+| OPS-01 | Phase 1 | Pending |
+| OPS-02 | Phase 1 | Pending |
+| SEC-01 | Phase 2 | Pending |
+| SEC-02 | Phase 2 | Pending |
+| SEC-03 | Phase 3 | Pending |
+| DATA-01 | Phase 4 | Pending |
+| DATA-02 | Phase 4 | Pending |
+| CONT-01 | Phase 5 | Pending |
+| CONT-02 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 9 total
-- Mapped to phases: 0
-- Unmapped: 9 ⚠️
+- Mapped to phases: 9
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-12*  
-*Last updated: 2026-04-12 after brownfield init (codebase map + GitNexus re-index)*
+*Last updated: 2026-04-12 — roadmap created (brownfield v1)*
