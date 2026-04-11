@@ -1,8 +1,18 @@
-# Portfolio (truongdq.com)
+# Portfolio (truongsoftware.com)
+
+## Current Milestone: v1.1 Domain, housekeeping & feature documentation
+
+**Goal:** Cut over the live site and repo branding to **truongsoftware.com**, tidy the codebase and dependencies, and add **PlantUML-based feature documentation** under `docs/` (linked from the root README).
+
+**Target features:**
+
+- **Domain migration** — Single canonical site URL (`https://truongsoftware.com`), updated Astro `site`, `src/lib/config.ts`, layout/SEO fallbacks, OG assets, nginx/DNS/preview docs, and content examples that reference the old domain.
+- **Housekeeping** — Audit dependencies and scripts, `.gitignore`/local data patterns, and remove or clearly document dead routes and experimental folders so the repo matches what ships.
+- **Feature docs** — A `docs/` index plus one PlantUML diagram (component or sequence — your choice per feature) per major feature area, describing behavior and boundaries.
 
 ## What This Is
 
-A personal developer portfolio and publishing site: Astro-driven hybrid static site with React islands, Markdown/MDX content collections (blog, journal, courses), API routes for contact and interactive features, and optional LanceDB-backed semantic search. It showcases work, writing, and tooling experiments in one cohesive experience.
+A personal developer portfolio and publishing site: Astro-driven hybrid static site with React islands, Markdown/MDX content collections (blog, journal, courses), API routes for contact and interactive features, and optional LanceDB-backed semantic search. It showcases work, writing, and tooling experiments in one cohesive experience. The public domain is **truongsoftware.com** (migrated from truongdq.com in milestone v1.1).
 
 ## Core Value
 
@@ -38,6 +48,7 @@ Visitors can reliably read your writing, understand your background, and reach y
 - **Architecture:** File-based routes, content collections, domain logic in `src/lib/`; see `.planning/codebase/ARCHITECTURE.md`.
 - **Indexing:** GitNexus graph index refreshed (`npx gitnexus analyze --force`); GSD codebase map in `.planning/codebase/`.
 - **Data:** LanceDB under `data/` for local semantic search; treat env and bindings as deployment-specific.
+- **Domain:** Production site **https://truongsoftware.com**; preview hostnames documented in `PREVIEW_SETUP.md` / nginx as migrated in v1.1.
 
 ## Constraints
 
@@ -52,6 +63,8 @@ Visitors can reliably read your writing, understand your background, and reach y
 | Astro + React islands | Content-first with interactive pockets | ✓ Good — matches current codebase |
 | GSD brownfield init after codebase map | Accurate Validated requirements from existing code | — Pending |
 | Skip ecosystem research pass for init | Codebase map + GitNexus already capture stack and structure | — Pending |
+| v1.1 domain cutover to truongsoftware.com | Brand and canonical URLs align with new domain | — Pending |
+| v1.1 PlantUML feature docs | Each major feature described with a diagram under `docs/` | — Pending |
 
 ## Evolution
 
@@ -71,4 +84,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-12 after initialization with codebase map*
+*Last updated: 2026-04-12 after milestone v1.1 kickoff (domain, housekeeping, PlantUML docs)*
