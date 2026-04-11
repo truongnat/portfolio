@@ -59,7 +59,11 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. The search API returns generic error responses to clients; detailed errors are logged server-side only.
   2. Other sensitive API routes addressed in this phase follow the same pattern (generic outward, detailed inward).
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] `03-01-PLAN.md` — Shared API error helpers + generic `GET /api/search` failures (SEC-03)
+- [ ] `03-02-PLAN.md` — Generic errors for `POST /api/certificate-issue` and peer leak scan (SEC-03)
 
 ### Phase 4: Data layer & payment honesty
 **Goal**: Payment-adjacent and donation-related behavior matches reality in production; database helpers are either real or gone—no silent stubs or dead modules.
