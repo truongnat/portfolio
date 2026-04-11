@@ -59,6 +59,7 @@
     "recharts": "^3.7.0",
     "satori": "^0.19.1",
     "simple-icons": "^16.9.0",
+    "stripe": "^22.0.1",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18",
     "three": "^0.183.2",

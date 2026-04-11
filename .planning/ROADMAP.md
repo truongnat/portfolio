@@ -15,7 +15,7 @@ Brownfield hardening: establish a green build and quality gate, close high-risk 
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Build & quality baseline** — Green `bun run build`, CI deploy, lint and Astro check on touched files (completed 2026-04-12)
-- [ ] **Phase 2: Trust boundaries (Stripe & certificates)** — Webhook signature verification and non-forgeable certificate issuance
+- [x] **Phase 2: Trust boundaries (Stripe & certificates)** — Webhook signature verification and non-forgeable certificate issuance (completed 2026-04-12)
 - [ ] **Phase 3: Safe API error surfaces** — Generic client errors and server-only diagnostics for search and peers
 - [ ] **Phase 4: Data layer & payment honesty** — Real persistence or explicit prod disable; resolve `src/lib/db` drift
 - [ ] **Phase 5: Publishing & contact** — Content collections stable; Telegram contact delivery when configured
@@ -49,8 +49,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] `02-01-PLAN.md` — Add `stripe` SDK; verify Stripe webhooks with `constructEvent`, raw body, and `STRIPE_WEBHOOK_SECRET` (SEC-01)
-- [ ] `02-02-PLAN.md` — HMAC `sig` gate on `/api/certificate` with `CERTIFICATE_SIGNING_SECRET`; 401 on invalid/missing signature (SEC-02)
+- [x] `02-01-PLAN.md` — Add `stripe` SDK; verify Stripe webhooks with `constructEvent`, raw body, and `STRIPE_WEBHOOK_SECRET` (SEC-01)
+- [x] `02-02-PLAN.md` — HMAC `sig` gate on `/api/certificate` with `CERTIFICATE_SIGNING_SECRET`; 401 on invalid/missing signature (SEC-02)
 
 ### Phase 3: Safe API error surfaces
 **Goal**: Clients never receive implementation-sensitive error details from sensitive APIs; operators can still diagnose issues from server-side logs.

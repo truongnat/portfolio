@@ -123,15 +123,32 @@ export function SkillTreeAdmin() {
   };
 
   const handleGenerateCertificate = async (donation: Donation) => {
-    const params = new URLSearchParams({
+    const body = {
       donatorName: donation.donatorName,
       skillName: donation.skillName,
       amount: donation.amount.toString(),
       date: new Date(donation.createdAt).toLocaleDateString(),
       certificateId: donation.id,
-    });
+    };
 
-    window.open(`/api/certificate?${params}`, '_blank');
+    if (import.meta.env.PROD) {
+      console.warn(
+        'Certificate URLs must use a server-issued HMAC (sig). Use a trusted issuance path in production.'
+      );
+      return;
+    }
+
+    const res = await fetch('/api/certificate-issue', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      console.error('Certificate sign failed:', res.status);
+      return;
+    }
+    const data = (await res.json()) as { url: string };
+    window.open(data.url, '_blank');
   };
 
   const filteredDonations = donations.filter(d => {
