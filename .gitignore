@@ -23,4 +23,11 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-LightsailDefaultKey-ap-southeast-1.pem\n# local data\ndata/
+# SSH keys / secrets (never commit)
+LightsailDefaultKey-ap-southeast-1.pem
+
+# local data (e.g. LanceDB index)
+data/
+
+# GitNexus graph index (regenerate with npx gitnexus analyze)
+.gitnexus
