@@ -7,7 +7,7 @@ import { formatDate } from '@/lib/utils';
 import Callout from '@/components/mdx/Callout.astro';
 import Mermaid from '@/components/mdx/Mermaid.astro';
 import { PostCard } from '@/components/PostCard';
-import { seo } from '@/lib/config';
+import { CANONICAL_SITE_URL, seo } from '@/lib/config';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -51,7 +51,7 @@ const relatedPosts = allPosts
         date: p.post.data.date.toISOString(), // PostCard expects string date
     }));
 
-const shareUrl = new URL(Astro.url.pathname, Astro.site || 'https://truongdq.com').toString();
+const shareUrl = new URL(Astro.url.pathname, Astro.site || CANONICAL_SITE_URL).toString();
 const shareTitle = post.data.title;
 ---
 

@@ -2,6 +2,9 @@ import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
+import { CANONICAL_SITE_URL } from '@/lib/config';
+
+const OG_SITE_LABEL = new URL(CANONICAL_SITE_URL).hostname;
 
 export const prerender = false;
 
@@ -161,7 +164,7 @@ export const GET: APIRoute = async ({ props }) => {
                             color: '#71717a',
                             fontSize: '20px',
                           },
-                          children: 'truongdq.com',
+                          children: OG_SITE_LABEL,
                         }
                       }
                     ]

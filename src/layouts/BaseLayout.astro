@@ -1,5 +1,5 @@
 ---
-import { seo } from '@/lib/config';
+import { CANONICAL_SITE_URL, seo } from '@/lib/config';
 import Navigation from "@/components/Navigation";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import ScrollToTopClient from "@/components/ScrollToTop.client";
@@ -61,7 +61,7 @@ const journalPosts = journal.map(post => ({
 
 const allPosts = [...blogPosts, ...journalPosts];
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://truongdq.com');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || CANONICAL_SITE_URL);
 ---
 
 <!doctype html>

@@ -50,7 +50,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendWelcomeEmail(to: string, name: string) {
   await resend.emails.send({
-    from: 'noreply@truongdq.com',
+    from: 'noreply@truongsoftware.com',
     to,
     subject: `Welcome, ${name}!`,
     html: `<p>Hi ${name}, welcome aboard!</p>`,

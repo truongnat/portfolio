@@ -12,6 +12,9 @@ import type { ProjectCategory } from '@/types';
 
 export const projectCategories: ProjectCategory[] = ['All', 'AI', 'Web', 'Mobile', 'Open Source', 'Product'];
 
+/** Production canonical origin — must match `site` in `astro.config.mjs`. */
+export const CANONICAL_SITE_URL = 'https://truongsoftware.com' as const;
+
 export const personalInfo = {
   name: "Dao Quang Truong",
   role: "Fullstack Developer",
@@ -86,7 +89,7 @@ export const seo = {
     'Multi-agent Systems',
     'Performance Optimization',
   ],
-  url: "https://truongdq.com",
+  url: CANONICAL_SITE_URL,
   image: '/avatar.jpg',
 };
 

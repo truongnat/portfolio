@@ -27,7 +27,7 @@ A personal developer portfolio and publishing site: Astro-driven hybrid static s
 - Bun — primary package install and script runner (`bun install`, `bun run build`, `bun scripts/...` per `package.json` and workflows)
 - Bun — lockfile present: `bun.lock`
 ## Frameworks
-- Astro `^6.0.4` — static + server hybrid; site `https://truongdq.com`; `output: 'static'` with `@astrojs/node` adapter `mode: 'standalone'` (`astro.config.mjs`)
+- Astro `^6.0.4` — static + server hybrid; site `https://truongsoftware.com`; `output: 'static'` with `@astrojs/node` adapter `mode: 'standalone'` (`astro.config.mjs`)
 - React `^19.2.3` — islands via `@astrojs/react` (`astro.config.mjs`, `tsconfig.json` `jsx`: `react-jsx`)
 - Vite — bundler inside Astro; Tailwind CSS v4 via `@tailwindcss/vite` plugin (`astro.config.mjs`)
 - `@astrojs/mdx` — MDX pages

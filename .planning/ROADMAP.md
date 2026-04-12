@@ -19,7 +19,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Safe API error surfaces** — Generic client errors and server-only diagnostics for search and peers (completed 2026-04-12)
 - [x] **Phase 4: Data layer & payment honesty** — Real persistence or explicit prod disable; resolve `src/lib/db` drift (completed 2026-04-12)
 - [x] **Phase 5: Publishing & contact** — Content collections stable; Telegram contact delivery when configured (completed 2026-04-12)
-- [ ] **Phase 6: Domain cutover** — Canonical truongsoftware.com across config, SEO fallbacks, OG, and deployment docs; migration note for legacy domain references
+- [x] **Phase 6: Domain cutover** — Canonical truongsoftware.com across config, SEO fallbacks, OG, and deployment docs; migration note for legacy domain references (completed 2026-04-12)
 - [ ] **Phase 7: Housekeeping** — Dependencies/scripts audit, `.gitignore` clarity, dead routes removed or documented
 - [ ] **Phase 8: Feature documentation (PlantUML)** — `docs/` index, README link, one diagram + companion per major feature area
 
@@ -101,7 +101,11 @@ Plans:
   2. Nginx `server_name`, `PREVIEW_SETUP.md` (and related preview hostname notes), and content examples that referenced the old domain are updated or explicitly migrated in docs.
   3. A short migration note exists where archived content or intentional historical mentions still reference the previous domain.
   4. No remaining hard-coded `truongdq.com` in application source or deployment documentation except those intentional historical mentions called out in that note.
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [x] `06-01-PLAN.md` — Astro `site`, `seo.url`, shared canonical constant, BaseLayout/Schema/blog/OG (DOM-01 app source)
+- [x] `06-02-PLAN.md` — `nginx.conf`, `PREVIEW_SETUP.md`, `docs/DOMAIN_MIGRATION.md`, planning doc URLs, journal exception (DOM-02 + DOM-01 deploy/docs)
 
 ### Phase 7: Housekeeping
 **Goal**: The repository matches what ships: dependencies and scripts are deliberate, local-only data and secrets are ignored and documented, and obsolete routes or experiments are removed or explained.
@@ -137,7 +141,7 @@ Plans:
 | 3. Safe API error surfaces | 2/2 | Complete | 2026-04-12 |
 | 4. Data layer & payment honesty | 2/2 | Complete | 2026-04-12 |
 | 5. Publishing & contact | 2/2 | Complete | 2026-04-12 |
-| 6. Domain cutover | 0/TBD | Not started | - |
+| 6. Domain cutover | 2/2 | Complete | 2026-04-12 |
 | 7. Housekeeping | 0/TBD | Not started | - |
 | 8. Feature documentation (PlantUML) | 0/TBD | Not started | - |
 

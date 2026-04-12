@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: milestone
 status: phase_complete
-stopped_at: Phase 5 execution complete — verify or start Phase 6
-last_updated: "2026-04-12T13:00:00.000Z"
-last_activity: 2026-04-12 — Phase 5 CONT-01/02; content schemas + validate script; contact form → API; remove client telegram; bun run verify green
+stopped_at: Phase 6 execution complete — verify or start Phase 7
+last_updated: "2026-04-12T14:00:00.000Z"
+last_activity: 2026-04-12 — Phase 6 DOM-01/02; CANONICAL_SITE_URL; nginx/PREVIEW/docs migration; bun run verify green
 progress:
   total_phases: 8
-  completed_phases: 5
-  total_plans: 10
-  completed_plans: 10
-  percent: 63
+  completed_phases: 6
+  total_plans: 12
+  completed_plans: 12
+  percent: 75
 ---
 
 # Project State
@@ -22,22 +22,22 @@ See: `.planning/PROJECT.md` (updated 2026-04-12)
 
 **Core value:** Visitors can reliably read your writing, understand your background, and reach you—while the site stays fast, maintainable, and honest to how you build software.
 
-**Current focus:** Phase 6 — Domain cutover (DOM-01, DOM-02)
+**Current focus:** Phase 7 — Housekeeping (HK-01, HK-02)
 
 ## Current Position
 
-Phase: 5 complete — **Publishing & contact** (CONT-01, CONT-02)  
-Plan: 2 of 2 plans done (`05-01`, `05-02`)  
-Status: Phase complete — ready for Phase 6  
-Last activity: 2026-04-12 — `src/content/schemas.ts` + `content:validate`; `ContactForm` → `POST /api/contact`; deleted `src/lib/telegram.ts`; `bun run verify` passes  
+Phase: 6 complete — **Domain cutover** (DOM-01, DOM-02)  
+Plan: 2 of 2 plans done (`06-01`, `06-02`)  
+Status: Phase complete — ready for Phase 7  
+Last activity: 2026-04-12 — `CANONICAL_SITE_URL`; `nginx.conf` / `PREVIEW_SETUP.md`; `docs/DOMAIN_MIGRATION.md`; `bun run verify` passes  
 
-Progress: [█████░░░░░] 63% (5 of 8 roadmap phases complete)
+Progress: [██████░░░░] 75% (6 of 8 roadmap phases complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 10
+- Total plans completed: 12
 - Average duration: —
 - Total execution time: —
 
@@ -50,6 +50,7 @@ Progress: [█████░░░░░] 63% (5 of 8 roadmap phases complete)
 | 3 | 2 | 2 | — |
 | 4 | 2 | 2 | — |
 | 5 | 2 | 2 | — |
+| 6 | 2 | 2 | — |
 
 **Recent Trend:** —
 
@@ -69,6 +70,7 @@ Recent decisions affecting current work:
 - Phase 3 (2026-04-12): `src/lib/api-error-response.ts` for generic JSON errors + `logApiError`; `GET /api/search` and `POST /api/certificate-issue` no longer expose raw exception messages or env names to clients.
 - Phase 4 (2026-04-12): `stubUnavailableInProduction` on demo POST routes; Stripe create-payment mock only when `STRIPE_SECRET_KEY` set or non-prod; removed unused `src/lib/db/index.ts`; `src/lib/db/README.md` + `schema.sql` reference.
 - Phase 5 (2026-04-12): Shared Zod schemas for collections; `scripts/validate-content.ts` in `verify`; contact form uses server `POST /api/contact` with `TELEGRAM_*`; removed client `telegram.ts` and `PUBLIC_TELEGRAM_*` from `env.d.ts`.
+- Phase 6 (2026-04-12): `CANONICAL_SITE_URL` + `astro.config` `site`; nginx/preview docs; `docs/DOMAIN_MIGRATION.md`; no `truongdq.com` under `src/`.
 
 ### Pending Todos
 
@@ -81,5 +83,5 @@ See `.planning/codebase/CONCERNS.md` for stub routes, LanceDB deploy path, and v
 ## Session Continuity
 
 Last session: 2026-04-12
-Stopped at: Phase 5 execution complete
+Stopped at: Phase 6 execution complete
 Resume file: None

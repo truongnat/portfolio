@@ -63,7 +63,7 @@ Visitors can reliably read your writing, understand your background, and reach y
 | Astro + React islands | Content-first with interactive pockets | ✓ Good — matches current codebase |
 | GSD brownfield init after codebase map | Accurate Validated requirements from existing code | — Pending |
 | Skip ecosystem research pass for init | Codebase map + GitNexus already capture stack and structure | — Pending |
-| v1.1 domain cutover to truongsoftware.com | Brand and canonical URLs align with new domain | — Pending |
+| v1.1 domain cutover to truongsoftware.com | Brand and canonical URLs align with new domain | ✓ Done — Phase 6 (`CANONICAL_SITE_URL`, nginx, `docs/DOMAIN_MIGRATION.md`) |
 | v1.1 PlantUML feature docs | Each major feature described with a diagram under `docs/` | — Pending |
 
 ## Evolution

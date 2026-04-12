@@ -1,5 +1,5 @@
 ---
-import { seo, personalInfo } from '@/lib/config';
+import { CANONICAL_SITE_URL, seo, personalInfo } from '@/lib/config';
 
 interface Props {
   type?: 'WebSite' | 'Article' | 'Profile' | 'Person';
@@ -21,7 +21,7 @@ const {
   tags,
 } = Astro.props;
 
-const siteUrl = Astro.site ? Astro.site.toString() : 'https://truongdq.com/';
+const siteUrl = (Astro.site ?? new URL(CANONICAL_SITE_URL)).toString();
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 
 const imageUrl = new URL(image, siteUrl).toString();

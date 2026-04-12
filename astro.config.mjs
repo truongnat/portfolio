@@ -21,7 +21,8 @@ import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://truongdq.com',
+  // Keep in sync with CANONICAL_SITE_URL in src/lib/config.ts
+  site: 'https://truongsoftware.com',
   output: 'static',
   adapter: node({
     mode: 'standalone'

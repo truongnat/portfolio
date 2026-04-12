@@ -7,8 +7,8 @@
 
 ### Domain & URLs
 
-- [ ] **DOM-01**: Production canonical URL is `https://truongsoftware.com` everywhere it matters for SEO and sharing — `astro.config.mjs` `site`, `src/lib/config.ts`, `BaseLayout.astro` / `Schema.astro` / blog slug fallbacks, OG image branding text, and nginx `server_name` (plus preview hostname notes in `PREVIEW_SETUP.md`).
-- [ ] **DOM-02**: No remaining hard-coded `truongdq.com` in application source or deployment docs except intentional historical mentions in archived content (if any), called out in a short migration note.
+- [x] **DOM-01**: Production canonical URL is `https://truongsoftware.com` everywhere it matters for SEO and sharing — `astro.config.mjs` `site`, `src/lib/config.ts`, `BaseLayout.astro` / `Schema.astro` / blog slug fallbacks, OG image branding text, and nginx `server_name` (plus preview hostname notes in `PREVIEW_SETUP.md`).
+- [x] **DOM-02**: No remaining hard-coded `truongdq.com` in application source or deployment docs except intentional historical mentions in archived content (if any), called out in a short migration note.
 
 ### Housekeeping
 
@@ -32,8 +32,8 @@
 
 ### Operations & quality
 
-- [ ] **OPS-01**: `bun run build` and CI deploy workflow succeed on the current Astro/React/Tailwind stack
-- [ ] **OPS-02**: Lint and Astro check pass without new errors on touched files (`eslint`, `@astrojs/check`)
+- [x] **OPS-01**: `bun run build` and CI deploy workflow succeed on the current Astro/React/Tailwind stack
+- [x] **OPS-02**: Lint and Astro check pass without new errors on touched files (`eslint`, `@astrojs/check`)
 
 ### Security & correctness (high priority)
 
@@ -75,15 +75,15 @@
 |-------------|-------|--------|
 | OPS-01 | Phase 1 | Complete |
 | OPS-02 | Phase 1 | Complete |
-| SEC-01 | Phase 2 | Pending |
-| SEC-02 | Phase 2 | Pending |
-| SEC-03 | Phase 3 | Pending |
-| DATA-01 | Phase 4 | Pending |
-| DATA-02 | Phase 4 | Pending |
+| SEC-01 | Phase 2 | Complete |
+| SEC-02 | Phase 2 | Complete |
+| SEC-03 | Phase 3 | Complete |
+| DATA-01 | Phase 4 | Complete |
+| DATA-02 | Phase 4 | Complete |
 | CONT-01 | Phase 5 | Complete |
 | CONT-02 | Phase 5 | Complete |
-| DOM-01 | Phase 6 | Pending |
-| DOM-02 | Phase 6 | Pending |
+| DOM-01 | Phase 6 | Complete |
+| DOM-02 | Phase 6 | Complete |
 | HK-01 | Phase 7 | Pending |
 | HK-02 | Phase 7 | Pending |
 | DOC-01 | Phase 8 | Pending |
