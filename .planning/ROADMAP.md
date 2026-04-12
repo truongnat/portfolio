@@ -130,7 +130,12 @@ Plans:
   1. `docs/README.md` is the entry point and links every feature doc in the catalog.
   2. Root `README.md` includes a **Feature architecture** section pointing to `docs/`.
   3. For each catalogued feature area (content collections; page shell & navigation / command palette; public API routes; semantic search; contact/Telegram; payments & certificates), a `.puml` file exists under `docs/features/` with at least one diagram (component, sequence, or deployment) and a short markdown companion describing behavior and boundaries.
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] `08-01-PLAN.md` — Six `docs/features/` PlantUML + markdown pairs (DOC-02)
+- [ ] `08-02-PLAN.md` — `docs/README.md` catalog + root README **Feature architecture** (DOC-01)
+
 **UI hint**: yes
 
 ## Progress
@@ -147,7 +152,7 @@ Plans:
 | 5. Publishing & contact | 2/2 | Complete | 2026-04-12 |
 | 6. Domain cutover | 2/2 | Complete | 2026-04-12 |
 | 7. Housekeeping | 2/2 | Complete | 2026-04-12 |
-| 8. Feature documentation (PlantUML) | 0/TBD | Not started | - |
+| 8. Feature documentation (PlantUML) | 0/2 | Planned | - |
 
 ---
 *Roadmap created: 2026-04-12 — brownfield v1 requirements*  
