@@ -27,13 +27,13 @@
 **Placeholder / mock APIs:**
 - `src/pages/api/ai-thank-you/generate.ts` — TODO for AI provider; returns mock payload
 - `src/pages/api/crypto/create-payment.ts` — mock wallets and rates; comments reference Coinbase Commerce, BitPay, etc.
-- `src/pages/api/donations.ts` — mock record; DB integration TODO
+- `src/pages/api/donations.ts` — dev: mock response; **production:** 503 (no persistence) per Phase 4
 
 ## Data Storage
 
 **Databases:**
 - LanceDB (embedded, filesystem) — path `data/lancedb/` relative to project root; table `content` built by `scripts/index-content.ts`, queried by `src/pages/api/search.ts`
-- Cloudflare D1-shaped SQL API — `src/lib/db/index.ts` and `src/lib/db/schema.sql` define a D1-compatible client (`prepare`, `bind`, etc.) for donations/skills; not wired to Astro `env` in-repo; current deploy uses `@astrojs/node`, not Cloudflare Workers bindings
+- Cloudflare D1 **reference DDL** — `src/lib/db/schema.sql` only (see `src/lib/db/README.md`). TypeScript D1 helpers were removed so the repo does not imply a bound database; current deploy uses `@astrojs/node`, not Cloudflare Workers bindings
 
 **File Storage:**
 - Local filesystem — content under `src/content/`, generated LanceDB under `data/lancedb/`, build output under `dist/`

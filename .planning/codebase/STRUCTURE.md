@@ -109,7 +109,7 @@ portfolio/
 **Core Logic:**
 - `src/lib/graph.ts`: Knowledge graph data from collections
 - `src/lib/api-utils.ts`: HTTP retry/compression helpers for API routes
-- `src/lib/db/index.ts`: D1-shaped database helpers (used when Cloudflare bindings available)
+- `src/lib/db/schema.sql` + `README.md`: reference DDL for a possible future D1 deployment (no runtime TS client in-repo)
 
 **Testing:**
 - Example unit test: `src/lib/utils.test.ts` — co-located with `src/lib/utils.ts`

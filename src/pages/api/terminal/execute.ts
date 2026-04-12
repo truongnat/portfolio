@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { stubUnavailableInProduction } from '@/lib/production-stub-guard';
 import { z } from 'zod';
 
 export const prerender = false;
@@ -11,6 +12,8 @@ const executeCommandSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const blocked = stubUnavailableInProduction('/api/terminal/execute');
+    if (blocked) return blocked;
     const body = await request.json();
     executeCommandSchema.parse(body);
 

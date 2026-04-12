@@ -1,7 +1,7 @@
 ---
 phase: 4
 slug: data-layer-payment-honesty
-status: draft
+status: complete
 nyquist_compliant: true
 created: 2026-04-12
 ---
@@ -24,7 +24,7 @@ created: 2026-04-12
 
 ## Sign-off
 
-- [ ] Plans trace DATA-01 / DATA-02
-- [ ] Execute-phase completes with green verify
+- [x] Plans trace DATA-01 / DATA-02
+- [x] Execute-phase completes with green verify
 
-**Approval:** pending
+**Approval:** 2026-04-12 — `bun run verify` green; manual spot-check: prod build would 503 stub POSTs (guard + Stripe branch).

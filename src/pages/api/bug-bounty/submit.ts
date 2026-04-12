@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { stubUnavailableInProduction } from '@/lib/production-stub-guard';
 import { z } from 'zod';
 
 export const prerender = false;
@@ -20,6 +21,8 @@ const submitBugSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const blocked = stubUnavailableInProduction('/api/bug-bounty/submit');
+    if (blocked) return blocked;
     const body = await request.json();
     const validatedData = submitBugSchema.parse(body);
 

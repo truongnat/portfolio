@@ -44,8 +44,8 @@
 
 **Persistence & external IO (API routes):**
 - Purpose: Contact, Telegram, Stripe, search, LanceDB-backed features, etc.
-- Location: `src/pages/api/*`, `src/lib/db/` (D1-oriented types and SQL helpers for Cloudflare-style bindings), `data/` (LanceDB index — not committed as stable artifact in all environments).
-- Contains: `APIRoute` handlers, optional DB query helpers in `src/lib/db/index.ts`.
+- Location: `src/pages/api/*`, `src/lib/db/` (reference `schema.sql` only — see `README.md` there), `data/` (LanceDB index — not committed as stable artifact in all environments).
+- Contains: `APIRoute` handlers; no live SQL client module in-repo (Phase 4 / DATA-02).
 - Depends on: `process.env` (never commit secrets); see deployment docs for bindings.
 
 **Types:**
@@ -130,7 +130,7 @@
 **Patterns:**
 - `safeParse` / validation failure → 400 with JSON body (`src/pages/api/contact.ts`).
 - Missing env configuration → 500 without leaking secrets (`src/pages/api/contact.ts`).
-- DB init in `src/lib/db/index.ts` logs errors and continues when idempotent DDL fails.
+- Reference DDL for a future D1-style deployment lives in `src/lib/db/schema.sql`; application code does not run DB initialization at startup.
 
 ## Cross-Cutting Concerns
 

@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { stubUnavailableInProduction } from '@/lib/production-stub-guard';
 import { z } from 'zod';
 
 export const prerender = false;
@@ -13,6 +14,8 @@ const generateMessageSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const blocked = stubUnavailableInProduction('/api/ai-thank-you/generate');
+    if (blocked) return blocked;
     const body = await request.json();
     const validatedData = generateMessageSchema.parse(body);
 

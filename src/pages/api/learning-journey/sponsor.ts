@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { stubUnavailableInProduction } from '@/lib/production-stub-guard';
 import { z } from 'zod';
 
 export const prerender = false;
@@ -16,6 +17,8 @@ const sponsorSessionSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const blocked = stubUnavailableInProduction('/api/learning-journey/sponsor');
+    if (blocked) return blocked;
     const body = await request.json();
     const validatedData = sponsorSessionSchema.parse(body);
 

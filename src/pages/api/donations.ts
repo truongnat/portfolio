@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { stubUnavailableInProduction } from '@/lib/production-stub-guard';
 import { z } from 'zod';
 
 const donationSchema = z.object({
@@ -14,6 +15,8 @@ const donationSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const blocked = stubUnavailableInProduction('/api/donations');
+    if (blocked) return blocked;
     const body = await request.json();
     const validatedData = donationSchema.parse(body);
 

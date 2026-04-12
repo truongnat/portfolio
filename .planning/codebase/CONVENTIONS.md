@@ -95,7 +95,7 @@ bun run lint:fix      # same with --fix
 
 **Exports:** Named exports are standard for libraries (`src/lib/utils.ts`); Astro `APIRoute` handlers export named `GET`/`POST`/etc.
 
-**Barrel Files:** Used sparingly — for example `src/types/index.ts` re-exports shared interfaces; `src/lib/db/index.ts` centralizes DB access. Prefer explicit imports unless a barrel already exists for the area.
+**Barrel Files:** Used sparingly — for example `src/types/index.ts` re-exports shared interfaces. There is no DB access barrel; reference DDL lives under `src/lib/db/` without a TS entrypoint.
 
 ---
 

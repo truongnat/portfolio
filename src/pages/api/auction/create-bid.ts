@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { stubUnavailableInProduction } from '@/lib/production-stub-guard';
 import { z } from 'zod';
 
 // Disable prerendering for API routes
@@ -19,6 +20,8 @@ const createBidSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const blocked = stubUnavailableInProduction('/api/auction/create-bid');
+    if (blocked) return blocked;
     const body = await request.json();
     const validatedData = createBidSchema.parse(body);
 

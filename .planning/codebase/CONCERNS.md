@@ -5,16 +5,16 @@
 ## Tech Debt
 
 **Stub and mock API routes (no persistence):**
-- Issue: Many `POST` handlers validate with Zod then return synthetic IDs and success messages without persisting data or triggering real side effects. Users can get false positives for donations, votes, bids, sponsorships, and bug reports.
+- Issue: Historically, many `POST` handlers returned synthetic success without persistence.
 - Files: `src/pages/api/donations.ts`, `src/pages/api/roadmap/vote.ts`, `src/pages/api/learning-journey/sponsor.ts`, `src/pages/api/bug-bounty/submit.ts`, `src/pages/api/auction/create-bid.ts`, `src/pages/api/crypto/create-payment.ts`, `src/pages/api/terminal/execute.ts`, `src/pages/api/ai-thank-you/generate.ts`
-- Impact: Operational data loss, misleading UX, and no audit trail for money-adjacent flows.
-- Fix approach: Choose a single persistence layer (see `src/lib/db/index.ts` or another store), wire each route to create/update records, and align webhook handlers with the same schema.
+- Current mitigation (Phase 4 / DATA-01): In **`import.meta.env.PROD`**, these routes return **503** via `stubUnavailableInProduction` (`src/lib/production-stub-guard.ts`) instead of fake 200 success. Development behavior unchanged.
+- Remaining gap: No real persistence or audit trail until a store is chosen and wired.
 
-**Orphaned D1-style database module:**
-- Issue: `src/lib/db/index.ts` defines `skillQueries`, `donationQueries`, `donatorQueries`, `certificateQueries`, and `statsQueries` for a Cloudflare D1-style `Database` interface, but no application TypeScript imports this module (only example snippets in blog markdown under `src/content/blog/`).
-- Files: `src/lib/db/index.ts`, `src/lib/db/schema.sql` (if present)
-- Impact: Duplicated mental model and dead code; future work may reimplement the same queries elsewhere.
-- Fix approach: Either import and use these helpers from API routes with a real `Database` binding, or remove/replace the module to avoid drift.
+**D1 reference DDL (no TS module):**
+- Issue: Previously `src/lib/db/index.ts` implied a bound D1 client without imports.
+- Files: `src/lib/db/schema.sql`, `src/lib/db/README.md`
+- Current mitigation (Phase 4 / DATA-02): TypeScript helpers **removed**; `schema.sql` kept as reference only (see README).
+- Fix approach for production data: Add a real binding + migrations, then implement routes against that store.
 
 **Skill Tree admin dashboard is mock-only:**
 - Issue: `SkillTreeAdmin` loads hard-coded stats and donations, and approve/reject handlers only update local React state.

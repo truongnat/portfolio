@@ -43,8 +43,8 @@
 
 ### Data & API integrity
 
-- [ ] **DATA-01**: Payment-adjacent and donation flows either persist to a real store with auditable records or are clearly disabled in production (routes listed in `.planning/codebase/CONCERNS.md`)
-- [ ] **DATA-02**: `src/lib/db/index.ts` is either wired to real bindings or removed to avoid dead-code drift
+- [x] **DATA-01**: Payment-adjacent and donation flows either persist to a real store with auditable records or are clearly disabled in production (routes listed in `.planning/codebase/CONCERNS.md`)
+- [x] **DATA-02**: `src/lib/db/index.ts` is either wired to real bindings or removed to avoid dead-code drift
 
 ### Content & UX
 

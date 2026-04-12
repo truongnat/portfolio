@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { stubUnavailableInProduction } from '@/lib/production-stub-guard';
 import { z } from 'zod';
 
 export const prerender = false;
@@ -15,6 +16,8 @@ const voteSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const blocked = stubUnavailableInProduction('/api/roadmap/vote');
+    if (blocked) return blocked;
     const body = await request.json();
     const validatedData = voteSchema.parse(body);
 

@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { jsonErrorResponse } from '@/lib/api-error-response';
 import { z } from 'zod';
 
 const createPaymentSchema = z.object({
@@ -28,7 +29,13 @@ export const POST: APIRoute = async ({ request }) => {
     const stripeSecretKey = import.meta.env.STRIPE_SECRET_KEY;
     
     if (!stripeSecretKey) {
-      // Return mock payment intent for development
+      if (import.meta.env.PROD) {
+        return jsonErrorResponse(503, {
+          success: false,
+          error: 'This feature is not enabled in production.',
+        });
+      }
+      // Mock payment intent for local development only
       return new Response(
         JSON.stringify({
           success: true,
