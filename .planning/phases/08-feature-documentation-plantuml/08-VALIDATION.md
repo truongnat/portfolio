@@ -5,6 +5,7 @@ status: draft
 nyquist_compliant: true
 wave_0_complete: true
 created: 2026-04-12
+research_refresh: 2026-04-12
 ---
 
 # Phase 8 — Validation Strategy
