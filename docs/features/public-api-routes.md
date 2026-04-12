@@ -19,4 +19,6 @@ Server routes live under `src/pages/api/` as **one file per HTTP handler** (Astr
 
 ## Diagram
 
-PlantUML source: [`./public-api-routes.puml`](./public-api-routes.puml)
+![Public API routes map](./public-api-routes.svg)
+
+Source: [`public-api-routes.puml`](./public-api-routes.puml)

@@ -14,7 +14,8 @@
     "lint:fix": "eslint . --ext .js,.mjs,.cjs,.ts,.tsx --fix",
     "check": "astro check",
     "content:validate": "bun scripts/validate-content.ts",
-    "verify": "bun run lint && bun run check && bun run content:validate && bun run build"
+    "verify": "bun run lint && bun run check && bun run content:validate && bun run build",
+    "docs:diagrams": "bash scripts/render-plantuml.sh"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.0",

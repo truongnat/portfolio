@@ -14,6 +14,8 @@ The site can answer semantic queries over blog and journal content using **local
 
 ## Diagram
 
-PlantUML source: [`./semantic-search.puml`](./semantic-search.puml)
+![Semantic search pipeline](./semantic-search.svg)
+
+Source: [`semantic-search.puml`](./semantic-search.puml)
 
 Regenerate if `index-content.ts`, embedding model, or API contract changes.

@@ -2,9 +2,11 @@
 
 This folder holds **operational** and **architecture** docs for the portfolio. Start here for domain migration, repo hygiene, and **feature-level** diagrams (PlantUML) with short markdown companions.
 
+**Viewing diagrams:** GitHub and most Markdown viewers do **not** render `.puml` files. Each feature page embeds a **pre-rendered SVG** next to the `.puml` source. After editing a `.puml`, run `bun run docs:diagrams` (requires [PlantUML](https://plantuml.com/) locally, e.g. `brew install plantuml`) to refresh the SVGs.
+
 ## Feature architecture
 
-Each item links to a companion markdown file and a sibling `.puml` diagram under `docs/features/`.
+Each item links to a companion markdown file; under `docs/features/` you also have `.puml` sources and matching `.svg` previews.
 
 - [Content collections](./features/content-collections.md) — blog, journal, courses via Astro Content Collections
 - [Page shell & command palette](./features/page-shell-navigation.md) — `BaseLayout`, `CommandPalette`

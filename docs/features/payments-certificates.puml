@@ -21,7 +21,6 @@ cloud "Stripe servers" as stripe
 cloud "Donor browser" as donor
 
 stripe --> wh : signed webhook events
-wh --> wh : verify signature\n(STRIPE_WEBHOOK_SECRET)
 
 donor --> getcert : HMAC sig query
 getcert --> gen : render PDF/HTML
@@ -33,6 +32,7 @@ cryptocp ..> qr : optional QR
 
 note right of wh
   SEC-01: constructEvent
+  verify signature with STRIPE_WEBHOOK_SECRET
 end note
 
 note right of getcert

@@ -9,7 +9,7 @@ package "Astro Content Collections" {
 }
 
 package "Loaders" {
-  [glob loaders\n(content.config)] as loaders
+  [glob loaders\ncontent.config.ts] as loaders
 }
 
 package "Validation" {
@@ -17,7 +17,7 @@ package "Validation" {
 }
 
 package "Consumers" {
-  [MD/MDX pages\nsrc/pages/**] as pages
+  [MD and MDX pages\nsrc/pages] as pages
 }
 
 blog --> loaders

@@ -13,6 +13,8 @@ Using `client:idle` defers JS for the palette until the browser is idle, which k
 
 ## Diagram
 
-PlantUML source: [`./page-shell-navigation.puml`](./page-shell-navigation.puml)
+![Page shell and command palette](./page-shell-navigation.svg)
+
+Source: [`page-shell-navigation.puml`](./page-shell-navigation.puml)
 
 Regenerate if layout composition or palette props change materially.

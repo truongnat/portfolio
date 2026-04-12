@@ -18,4 +18,6 @@ This area covers **Stripe** webhooks and payment creation, **certificate** gener
 
 ## Diagram
 
-PlantUML source: [`./payments-certificates.puml`](./payments-certificates.puml)
+![Payments and certificates](./payments-certificates.svg)
+
+Source: [`payments-certificates.puml`](./payments-certificates.puml)

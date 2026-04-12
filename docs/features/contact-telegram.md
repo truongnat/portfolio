@@ -16,4 +16,6 @@ If either is missing, the handler logs server-side and returns a **generic** JSO
 
 ## Diagram
 
-PlantUML source: [`./contact-telegram.puml`](./contact-telegram.puml)
+![Contact to Telegram sequence](./contact-telegram.svg)
+
+Source: [`contact-telegram.puml`](./contact-telegram.puml)

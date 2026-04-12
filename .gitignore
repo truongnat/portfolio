@@ -33,3 +33,6 @@ data/
 
 # GitNexus graph index (regenerate with npx gitnexus analyze)
 .gitnexus
+
+# PlantUML local PNG output (we commit SVG from docs:diagrams)
+docs/features/*.png

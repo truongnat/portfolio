@@ -10,6 +10,8 @@ Markdown and MDX for the blog, journal, and course sections are loaded through *
 
 ## Diagram
 
-PlantUML source: [`./content-collections.puml`](./content-collections.puml)
+![Content collections overview](./content-collections.svg)
+
+Source (edit, then run `bun run docs:diagrams`): [`content-collections.puml`](./content-collections.puml)
 
 Regenerate the diagram if collection names, loaders, or schema entry points change.
