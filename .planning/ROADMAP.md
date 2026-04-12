@@ -21,7 +21,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 5: Publishing & contact** — Content collections stable; Telegram contact delivery when configured (completed 2026-04-12)
 - [x] **Phase 6: Domain cutover** — Canonical truongsoftware.com across config, SEO fallbacks, OG, and deployment docs; migration note for legacy domain references (completed 2026-04-12)
 - [x] **Phase 7: Housekeeping** — Dependencies/scripts audit, `.gitignore` clarity, dead routes removed or documented (completed 2026-04-12)
-- [ ] **Phase 8: Feature documentation (PlantUML)** — `docs/` index, README link, one diagram + companion per major feature area
+- [x] **Phase 8: Feature documentation (PlantUML)** — `docs/` index, README link, one diagram + companion per major feature area (completed 2026-04-12)
 
 ## Phase Details
 
@@ -133,8 +133,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] `08-01-PLAN.md` — Six `docs/features/` PlantUML + markdown pairs (DOC-02)
-- [ ] `08-02-PLAN.md` — `docs/README.md` catalog + root README **Feature architecture** (DOC-01)
+- [x] `08-01-PLAN.md` — Six `docs/features/` PlantUML + markdown pairs (DOC-02)
+- [x] `08-02-PLAN.md` — `docs/README.md` catalog + root README **Feature architecture** (DOC-01)
 
 **UI hint**: yes
 
@@ -152,7 +152,7 @@ Plans:
 | 5. Publishing & contact | 2/2 | Complete | 2026-04-12 |
 | 6. Domain cutover | 2/2 | Complete | 2026-04-12 |
 | 7. Housekeeping | 2/2 | Complete | 2026-04-12 |
-| 8. Feature documentation (PlantUML) | 0/2 | Planned | - |
+| 8. Feature documentation (PlantUML) | 2/2 | Complete | 2026-04-12 |
 
 ---
 *Roadmap created: 2026-04-12 — brownfield v1 requirements*  

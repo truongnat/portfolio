@@ -1,0 +1,20 @@
+@startuml contact-telegram
+skinparam sequenceMessageAlign center
+
+actor User
+participant "Contact form\n(client)" as form
+participant "POST /api/contact" as api
+participant "Telegram Bot API\nhttps://api.telegram.org" as tg
+
+User -> form : submit name, email, message
+form -> api : JSON body
+api -> api : Zod validate
+alt TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID
+  api -> tg : sendMessage
+  tg --> api : ok
+  api --> form : 200 success
+else missing env
+  api --> form : 500 generic error
+end
+
+@enduml

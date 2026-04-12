@@ -1,7 +1,7 @@
 ---
 phase: 8
 slug: feature-documentation-plantuml
-status: draft
+status: complete
 nyquist_compliant: true
 wave_0_complete: true
 created: 2026-04-12
@@ -32,10 +32,10 @@ research_refresh: 2026-04-12
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 8-01-01 | 01 | 1 | DOC-02 | grep / read | `test -f docs/features/content-collections.puml` | ✅ | ⬜ |
-| 8-01-02 | 01 | 1 | DOC-02 | grep / read | companions for all six slugs | ✅ | ⬜ |
-| 8-02-01 | 02 | 2 | DOC-01 | grep | `README.md` contains `## Feature architecture` | ✅ | ⬜ |
-| 8-02-02 | 02 | 2 | DOC-01 | read | `docs/README.md` links all companions | ✅ | ⬜ |
+| 8-01-01 | 01 | 1 | DOC-02 | grep / read | `test -f docs/features/content-collections.puml` | ✅ | ✅ |
+| 8-01-02 | 01 | 1 | DOC-02 | grep / read | companions for all six slugs | ✅ | ✅ |
+| 8-02-01 | 02 | 2 | DOC-01 | grep | `README.md` contains `## Feature architecture` | ✅ | ✅ |
+| 8-02-02 | 02 | 2 | DOC-01 | read | `docs/README.md` links all companions | ✅ | ✅ |
 
 ## Wave 0 Requirements
 
@@ -53,4 +53,4 @@ research_refresh: 2026-04-12
 - [x] Wave 0 not required for new test framework
 - [x] `nyquist_compliant: true` set in frontmatter
 
-**Approval:** pending execution
+**Approval:** approved 2026-04-12 — `bun run verify` green; DOC-01/DOC-02 satisfied

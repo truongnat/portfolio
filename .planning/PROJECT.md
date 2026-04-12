@@ -65,7 +65,7 @@ Visitors can reliably read your writing, understand your background, and reach y
 | Skip ecosystem research pass for init | Codebase map + GitNexus already capture stack and structure | — Pending |
 | v1.1 domain cutover to truongsoftware.com | Brand and canonical URLs align with new domain | ✓ Done — Phase 6 (`CANONICAL_SITE_URL`, nginx, `docs/DOMAIN_MIGRATION.md`) |
 | v1.1 housekeeping (deps, ignores, dead routes) | Repo matches what ships; local secrets/data documented | ✓ Done — Phase 7 (dep prune, `docs/REPO_HYGIENE.md`, `.gitignore`) |
-| v1.1 PlantUML feature docs | Each major feature described with a diagram under `docs/` | — Pending |
+| v1.1 PlantUML feature docs | Each major feature described with a diagram under `docs/` | ✓ Done — Phase 8 (`docs/features/*.puml`, `docs/README.md`, README **Feature architecture**) |
 
 ## Evolution
 
@@ -85,4 +85,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-12 after Phase 7 housekeeping (Phase 8 next: PlantUML docs)*
+*Last updated: 2026-04-12 after Phase 8 PlantUML feature docs (`docs/features/`, `docs/README.md`)*

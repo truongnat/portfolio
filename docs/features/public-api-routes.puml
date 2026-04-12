@@ -1,0 +1,55 @@
+@startuml public-api-routes
+skinparam packageStyle rectangle
+skinparam linetype ortho
+
+title src/pages/api — HTTP routes (22 TypeScript entrypoints)
+
+package "Core / integrations" #E8F4FC {
+  [GET/POST /api/contact] as contact
+  [GET /api/search] as search
+  [GET /api/certificate] as cert
+  [POST /api/certificate-issue] as certissue
+  [GET /api/portfolio.md] as portfolio
+}
+
+package "Stripe" #E8FCE8 {
+  [POST /api/stripe/webhook] as stripe_wh
+  [POST /api/stripe/create-payment] as stripe_pay
+}
+
+package "Crypto (stub)" #FFF8E8 {
+  [POST /api/crypto/create-payment] as crypto_pay
+  [GET /api/crypto/qr] as crypto_qr
+}
+
+package "Donations" #FCE8F8 {
+  [POST /api/donations] as donations
+}
+
+package "Demo / stub UIs" #F0F0F0 {
+  together {
+    [ai-thank-you/*] as ai_ty
+    [bug-bounty/*] as bug
+    [terminal/*] as term
+    [learning-journey/*] as learn
+    [auction/*] as auction
+    [roadmap/*] as roadmap
+  }
+}
+
+cloud "Client / integrations" as client
+client --> contact
+client --> search
+client --> cert
+client --> stripe_wh
+client --> stripe_pay
+client --> crypto_pay
+client --> donations
+client --> ai_ty
+
+note bottom of Demo / stub UIs
+  Low-trust or demo endpoints;
+  see .planning/codebase/CONCERNS.md
+end note
+
+@enduml

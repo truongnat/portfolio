@@ -2,6 +2,10 @@
 
 🚀 Fullstack Developer Portfolio built with Astro, React, and TailwindCSS
 
+## Feature architecture
+
+Architecture diagrams (PlantUML) and feature companions live under [`docs/`](./docs/README.md). See the [Feature architecture index](./docs/README.md) for content collections, API map, search, contact, and payments.
+
 ## 📖 Documentation
 
 ### Content Creation

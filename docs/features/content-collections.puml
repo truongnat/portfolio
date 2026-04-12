@@ -1,0 +1,29 @@
+@startuml content-collections
+skinparam componentStyle rectangle
+skinparam linetype ortho
+
+package "Astro Content Collections" {
+  [blog] as blog
+  [journal] as journal
+  [courses] as courses
+}
+
+package "Loaders" {
+  [glob loaders\n(content.config)] as loaders
+}
+
+package "Validation" {
+  [Zod schemas\nschemas.ts] as zod
+}
+
+package "Consumers" {
+  [MD/MDX pages\nsrc/pages/**] as pages
+}
+
+blog --> loaders
+journal --> loaders
+courses --> loaders
+loaders --> zod
+zod ..> pages : typed props
+
+@enduml

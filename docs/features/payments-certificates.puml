@@ -1,0 +1,42 @@
+@startuml payments-certificates
+skinparam linetype ortho
+
+package "Stripe" {
+  [POST /api/stripe/webhook] as wh
+  [POST /api/stripe/create-payment] as cp
+}
+
+package "Certificates" {
+  [GET /api/certificate] as getcert
+  [POST /api/certificate-issue] as issue
+  [certificate-generator.ts] as gen
+}
+
+package "Crypto (stub)" {
+  [POST /api/crypto/create-payment] as cryptocp
+  [GET /api/crypto/qr] as qr
+}
+
+cloud "Stripe servers" as stripe
+cloud "Donor browser" as donor
+
+stripe --> wh : signed webhook events
+wh --> wh : verify signature\n(STRIPE_WEBHOOK_SECRET)
+
+donor --> getcert : HMAC sig query
+getcert --> gen : render PDF/HTML
+
+donor --> issue : dev-only issuance (if enabled)
+
+donor --> cryptocp : stub payment
+cryptocp ..> qr : optional QR
+
+note right of wh
+  SEC-01: constructEvent
+end note
+
+note right of getcert
+  SEC-02: certificate signing secret
+end note
+
+@enduml

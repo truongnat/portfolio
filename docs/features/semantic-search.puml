@@ -1,0 +1,20 @@
+@startuml semantic-search
+skinparam sequenceMessageAlign center
+
+participant "Operator / CI" as op
+participant "bun run journal:index\n→ scripts/index-content.ts" as indexer
+participant "@xenova/transformers\nembeddings" as embed
+participant "LanceDB\ndata/lancedb" as db
+participant "GET /api/search.ts" as api
+participant "Browser" as browser
+
+op -> indexer : run index
+indexer -> embed : embed chunks
+embed --> indexer : vectors
+indexer -> db : upsert table
+browser -> api : query + optional filters
+api -> db : vector / keyword search
+db --> api : hits
+api --> browser : JSON (generic errors only)
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml page-shell-navigation
+skinparam sequenceMessageAlign center
+
+actor Visitor
+participant "BaseLayout.astro" as Layout
+participant "CommandPalette.tsx\n(client:idle)" as CP
+participant "cmdk / search" as Search
+
+Visitor -> Layout : HTTP page
+Layout -> CP : hydrate island
+Visitor -> CP : keyboard shortcut
+CP -> Search : filter posts / navigate
+Search --> Visitor : route or selection
+
+note right of CP
+  transition:persist where used
+  for SPA-like palette state
+end note
+
+@enduml

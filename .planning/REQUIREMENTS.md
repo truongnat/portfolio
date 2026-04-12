@@ -17,8 +17,8 @@
 
 ### Documentation (PlantUML)
 
-- [ ] **DOC-01**: `docs/README.md` is the entry point and links every feature doc; root `README.md` has a **Feature architecture** section pointing to `docs/`.
-- [ ] **DOC-02**: For each catalogued feature area below, a `.puml` file exists under `docs/features/` with at least one diagram (component, sequence, or deployment) and a short markdown companion describing the feature:
+- [x] **DOC-01**: `docs/README.md` is the entry point and links every feature doc; root `README.md` has a **Feature architecture** section pointing to `docs/`.
+- [x] **DOC-02**: For each catalogued feature area below, a `.puml` file exists under `docs/features/` with at least one diagram (component, sequence, or deployment) and a short markdown companion describing the feature:
   - Content (blog & journal collections)
   - Page shell & navigation / command palette
   - Public API routes (grouped)
@@ -86,8 +86,8 @@
 | DOM-02 | Phase 6 | Complete |
 | HK-01 | Phase 7 | Complete |
 | HK-02 | Phase 7 | Complete |
-| DOC-01 | Phase 8 | Pending |
-| DOC-02 | Phase 8 | Pending |
+| DOC-01 | Phase 8 | Complete |
+| DOC-02 | Phase 8 | Complete |
 
 **Coverage — v1.0:** 9/9 mapped to Phases 1–5 ✓  
 **Coverage — v1.1:** 6/6 mapped to Phases 6–8 ✓
