@@ -1,20 +1,27 @@
 # Milestones
 
-## v1.0 — Brownfield hardening
+## Shipped: v1.1 — Domain, housekeeping & feature documentation
 
-**Defined:** 2026-04-12  
-**Focus:** Build baseline, API trust boundaries, safe errors, data honesty, publishing & contact.  
-**Roadmap:** Phases 1–5 in `.planning/ROADMAP.md`  
-**Status:** v1.1 complete — Phases 6–8 (domain cutover, housekeeping, PlantUML feature docs) executed (see `.planning/ROADMAP.md`). Optional: milestone audit / archive via `/gsd-complete-milestone`.
+**Shipped:** 2026-04-12  
+**Scope:** Phases **1–8** (brownfield v1.0 phases 1–5, then v1.1 phases 6–8); **16** plans, all complete.
 
-## v1.1 — Domain, housekeeping & feature documentation
+**Archives**
 
-**Started:** 2026-04-12  
-**Completed:** 2026-04-12 (Phases 6–8)  
-**Focus:**
+- [Full roadmap snapshot](milestones/v1.1-ROADMAP.md) — all phase details at completion
+- [Full requirements snapshot](milestones/v1.1-REQUIREMENTS.md) — v1.0 + v1.1 requirement IDs
 
-1. Migrate public site identity and URLs from `truongdq.com` to `truongsoftware.com` (config, fallbacks, server/DNS docs).
-2. Repository housekeeping: dependencies, ignores, obsolete artifacts, clearer structure.
-3. Document major features with PlantUML (under `docs/`), indexed from README.
+**Summary**
 
-**Roadmap:** Phases 6+ (continues numbering after v1.0)
+- Quality gate and API trust boundaries (Stripe webhook, certificate HMAC, generic API errors)
+- Honest stubs / data-layer cleanup; content collections and Telegram contact
+- Canonical **truongsoftware.com** domain, migration and deploy docs
+- Repository hygiene (deps, `.gitignore`, `docs/REPO_HYGIENE.md`)
+- Feature architecture docs under `docs/features/` (PlantUML + SVG)
+
+**Note:** Earlier docs referred to “v1.0” as Phases 1–5 only; this closure archives the **entire** delivered roadmap (Phases 1–8) under the v1.1 milestone entry for GSD traceability.
+
+---
+
+## Next
+
+Use `/gsd-new-milestone` to plan **v1.2+** (new requirements and roadmap).

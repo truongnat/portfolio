@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: milestone
 status: milestone_complete
-stopped_at: Phase 8 execution complete — v1.1 roadmap phases 6–8 done
-last_updated: "2026-04-12T18:15:00.000Z"
-last_activity: 2026-04-12 — Phase 8 DOC-01/DOC-02; docs/features PlantUML + companions; docs/README.md; README Feature architecture; bun run verify green
+stopped_at: v1.1 milestone archived — plan next milestone
+last_updated: "2026-04-12T02:21:50.635Z"
+last_activity: 2026-04-12
 progress:
   total_phases: 8
   completed_phases: 8
@@ -22,14 +22,14 @@ See: `.planning/PROJECT.md` (updated 2026-04-12)
 
 **Core value:** Visitors can reliably read your writing, understand your background, and reach you—while the site stays fast, maintainable, and honest to how you build software.
 
-**Current focus:** Milestone v1.1 complete (Phases 6–8). Optional: `/gsd-complete-milestone` or backlog / v2 items from REQUIREMENTS.
+**Current focus:** v1.1 shipped and archived. Next: `/gsd-new-milestone` for v1.2+ scope.
 
 ## Current Position
 
-Phase: 8 complete — **Feature documentation (PlantUML)** (DOC-01, DOC-02)  
-Plan: 2 of 2 plans done (`08-01`, `08-02`)  
-Status: **v1.1 roadmap phases complete** (6 → 7 → 8)  
-Last activity: 2026-04-12 — `docs/features/*` diagrams; `docs/README.md`; root `README.md` **Feature architecture**; `bun run verify` passes  
+Phase: — (no active phase)  
+Plan: —  
+Status: **Milestone v1.1 complete**; roadmap reset in `.planning/ROADMAP.md`  
+Last activity: 2026-04-12 — milestone archive + tag v1.1
 
 Progress: [██████████] 100% (8 of 8 roadmap phases complete)
 

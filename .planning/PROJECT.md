@@ -1,14 +1,14 @@
 # Portfolio (truongsoftware.com)
 
-## Current Milestone: v1.1 Domain, housekeeping & feature documentation
+## Current state (shipped)
 
-**Goal:** Cut over the live site and repo branding to **truongsoftware.com**, tidy the codebase and dependencies, and add **PlantUML-based feature documentation** under `docs/` (linked from the root README).
+**Milestone v1.1** is **complete** (2026-04-12): Phases 1–8 delivered brownfield hardening, **truongsoftware.com** canonical URLs, repo hygiene, and **feature architecture docs** under `docs/` (PlantUML sources + SVG previews, indexed from the root README).
 
-**Target features:**
+Archives: `.planning/milestones/v1.1-ROADMAP.md`, `.planning/milestones/v1.1-REQUIREMENTS.md`.
 
-- **Domain migration** — Single canonical site URL (`https://truongsoftware.com`), updated Astro `site`, `src/lib/config.ts`, layout/SEO fallbacks, OG assets, nginx/DNS/preview docs, and content examples that reference the old domain.
-- **Housekeeping** — Audit dependencies and scripts, `.gitignore`/local data patterns, and remove or clearly document dead routes and experimental folders so the repo matches what ships.
-- **Feature docs** — A `docs/` index plus one PlantUML diagram (component or sequence — your choice per feature) per major feature area, describing behavior and boundaries.
+## Next milestone goals
+
+Not set. Use `/gsd-new-milestone` to define **v1.2+** (e.g. rate limits, stub API strategy, search operations — see `.planning/codebase/CONCERNS.md` and candidate backlog in `.planning/REQUIREMENTS.md`).
 
 ## What This Is
 
@@ -85,4 +85,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-12 after Phase 8 PlantUML feature docs (`docs/features/`, `docs/README.md`)*
+*Last updated: 2026-04-12 after v1.1 milestone completion (`/gsd-complete-milestone`)*
