@@ -72,7 +72,11 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Each payment-adjacent or donation flow either persists to a real store with auditable records or is clearly disabled or non-misleading in production (per routes listed in `.planning/codebase/CONCERNS.md`).
   2. `src/lib/db/index.ts` is wired to real bindings where the app relies on it, or is removed/replaced so the codebase does not imply persistence that does not exist.
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] `04-01-PLAN.md` — `production-stub-guard` + honest 503s for demo POSTs; Stripe mock disabled in prod (DATA-01)
+- [ ] `04-02-PLAN.md` — Remove unused `src/lib/db/index.ts`; README + `schema.sql` reference; doc alignment (DATA-02)
 
 ### Phase 5: Publishing & contact
 **Goal**: Visitors can read blog, journal, and course content reliably, and reach the owner via the contact form when Telegram is configured.
