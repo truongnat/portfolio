@@ -121,11 +121,6 @@
 - Files: `src/pages/api/search.ts`, `scripts/index-content.ts`
 - Safe modification: Document and automate index replication alongside deploy, or host DB on shared storage.
 
-**Non-npm dependency alias for `@nanostores/react`:**
-- Why fragile: `package.json` resolves `@nanostores/react` to `ai/react` (GitHub fork per lockfile), not the npm semver line.
-- Files: `package.json`, `bun.lock`
-- Safe modification: Pin to a specific commit or migrate to the official package when possible; audit updates carefully.
-
 ## Scaling Limits
 
 **In-memory singletons in search:**
@@ -137,13 +132,6 @@
 - Current capacity: Unlimited fake success responses when Stripe is unset or flows are stubbed.
 - Limit: Cannot reconcile real money with application state until persistence and webhooks are complete.
 - Scaling path: End-to-end payment state machine and idempotent webhook handling.
-
-## Dependencies at Risk
-
-**`@nanostores/react` via `ai/react`:**
-- Risk: Unusual alias to a GitHub dependency; harder to audit than npm semver.
-- Impact: Install or lockfile drift, possible supply-chain surprises.
-- Migration plan: Replace with `@nanostores/react` from npm if features match, or vendor a minimal fork with explicit version.
 
 ## Missing Critical Features
 

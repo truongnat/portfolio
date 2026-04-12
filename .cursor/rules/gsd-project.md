@@ -34,19 +34,18 @@ A personal developer portfolio and publishing site: Astro-driven hybrid static s
 - `@astrojs/rss`, `@astrojs/sitemap` — feeds and sitemap (`package.json` integrations in `astro.config.mjs`)
 - Not detected — no `vitest`, `jest`, or `playwright` test runner in `package.json`; only `src/lib/utils.test.ts` exists as a stray pattern (verify before relying on it)
 - ESLint flat config — `eslint.config.mjs` (`typescript-eslint`, `eslint-plugin-react-hooks`)
-- Astro Check — `@astrojs/check` in dependencies for typechecking Astro projects
+- Astro Check — `@astrojs/check` in **devDependencies** for `astro check`
 ## Key Dependencies
 - `tailwindcss` `^4.1.18`, `@tailwindcss/typography`, `tailwind-merge`, `class-variance-authority`, `clsx` — styling system
 - `framer-motion`, `lucide-react`, Radix UI primitives (`@radix-ui/react-*`) — components
 - `react-hook-form`, `@hookform/resolvers`, `zod` — forms and validation (`src/components/ContactForm.client.tsx`, API routes under `src/pages/api/`)
-- `d3`, `recharts`, `mermaid`, `react-force-graph-2d`, `react-force-graph-3d`, `three` — charts, diagrams, graph views
+- `mermaid`, `react-force-graph-3d`, `three` — diagrams and knowledge graph (`KnowledgeGraph.client.tsx`)
 - `cmdk` — command palette UX
 - `@lancedb/lancedb` — vector store for semantic search (`scripts/index-content.ts`, `src/pages/api/search.ts`)
 - `@xenova/transformers` — local embedding model `Xenova/all-MiniLM-L6-v2` (same files)
 - `gray-matter` (devDependency) — frontmatter parsing in scripts
 - `satori`, `@resvg/resvg-js` — certificate SVG generation (`src/lib/certificate-generator.ts`)
-- `ai`, `@ai-sdk/google`, `@ai-sdk/react`, `@google/generative-ai` — listed in `package.json` / `bun.lock` with no matching `import` statements in application or script code; treat as optional/future unless a build-time reference appears
-- `@astrojs/cloudflare` is a dependency in `package.json` but `astro.config.mjs` uses `@astrojs/node`, not the Cloudflare adapter — do not assume Workers deployment from config alone
+- Deploy adapter: `astro.config.mjs` uses `@astrojs/node` (not Cloudflare)
 ## Configuration
 - Astro injects build metadata via Vite `define`: `import.meta.env.APP_VERSION`, `APP_HASH`, `APP_LICENSE` (`astro.config.mjs`)
 - Typed public env in `src/env.d.ts`: `APP_*` and related keys (Telegram contact: server-only `TELEGRAM_*` in `src/pages/api/contact.ts`)

@@ -16,6 +16,8 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.local
+.env.*.local
 
 # macOS-specific files
 .DS_Store
@@ -24,9 +26,9 @@ pnpm-debug.log*
 .idea/
 
 # SSH keys / secrets (never commit)
-LightsailDefaultKey-ap-southeast-1.pem
+*.pem
 
-# local data (e.g. LanceDB index)
+# local data (e.g. LanceDB index under data/lancedb — regenerate via scripts/index-content.ts)
 data/
 
 # GitNexus graph index (regenerate with npx gitnexus analyze)

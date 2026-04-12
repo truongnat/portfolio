@@ -20,7 +20,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 4: Data layer & payment honesty** — Real persistence or explicit prod disable; resolve `src/lib/db` drift (completed 2026-04-12)
 - [x] **Phase 5: Publishing & contact** — Content collections stable; Telegram contact delivery when configured (completed 2026-04-12)
 - [x] **Phase 6: Domain cutover** — Canonical truongsoftware.com across config, SEO fallbacks, OG, and deployment docs; migration note for legacy domain references (completed 2026-04-12)
-- [ ] **Phase 7: Housekeeping** — Dependencies/scripts audit, `.gitignore` clarity, dead routes removed or documented
+- [x] **Phase 7: Housekeeping** — Dependencies/scripts audit, `.gitignore` clarity, dead routes removed or documented (completed 2026-04-12)
 - [ ] **Phase 8: Feature documentation (PlantUML)** — `docs/` index, README link, one diagram + companion per major feature area
 
 ## Phase Details
@@ -116,7 +116,11 @@ Plans:
   2. Unused packages are removed or explicitly documented with rationale if kept.
   3. `.gitignore` (and related docs) clearly exclude non-committed paths such as `data/lancedb`, keys, and pem material.
   4. Obvious dead or `.disabled` routes are either removed or listed in `docs/` with rationale.
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [x] `07-01-PLAN.md` — Depcheck/knip + remove or document unused deps; scripts review; `docs/REPO_HYGIENE.md` Dependencies section (HK-01)
+- [x] `07-02-PLAN.md` — `.gitignore` hardening; disabled-routes table + README link (HK-02)
 
 ### Phase 8: Feature documentation (PlantUML)
 **Goal**: Major feature areas are documented under `docs/` with PlantUML diagrams and short companions, and visitors/contributors can find them from the root README.
@@ -142,7 +146,7 @@ Plans:
 | 4. Data layer & payment honesty | 2/2 | Complete | 2026-04-12 |
 | 5. Publishing & contact | 2/2 | Complete | 2026-04-12 |
 | 6. Domain cutover | 2/2 | Complete | 2026-04-12 |
-| 7. Housekeeping | 0/TBD | Not started | - |
+| 7. Housekeeping | 2/2 | Complete | 2026-04-12 |
 | 8. Feature documentation (PlantUML) | 0/TBD | Not started | - |
 
 ---

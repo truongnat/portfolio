@@ -47,7 +47,7 @@
 - `react-hook-form`, `@hookform/resolvers`, `zod` — forms and validation (`src/components/ContactForm.client.tsx`, API routes under `src/pages/api/`)
 
 **Content & visualization:**
-- `d3`, `recharts`, `mermaid`, `react-force-graph-2d`, `react-force-graph-3d`, `three` — charts, diagrams, graph views
+- `mermaid`, `react-force-graph-3d`, `three` — diagrams and 3D knowledge graph (`KnowledgeGraph.client.tsx`)
 - `cmdk` — command palette UX
 
 **Server-side / tooling scripts:**
@@ -58,12 +58,7 @@
 **Image / OG-style generation:**
 - `satori`, `@resvg/resvg-js` — certificate SVG generation (`src/lib/certificate-generator.ts`)
 
-**Declared but not imported in `src/` or `scripts/` (as of analysis):**
-- `ai`, `@ai-sdk/google`, `@ai-sdk/react`, `@google/generative-ai` — listed in `package.json` / `bun.lock` with no matching `import` statements in application or script code; treat as optional/future unless a build-time reference appears
-
 **Infrastructure adapters (package vs config):**
-- `@astrojs/cloudflare` is a dependency in `package.json` but `astro.config.mjs` uses `@astrojs/node`, not the Cloudflare adapter — do not assume Workers deployment from config alone
-
 ## Configuration
 
 **Environment:**

@@ -6,6 +6,7 @@
 
 ### Content Creation
 - **[🌐 docs/DOMAIN_MIGRATION.md](./docs/DOMAIN_MIGRATION.md)** — Canonical domain (`truongsoftware.com`), nginx/DNS checklist
+- **[📎 docs/REPO_HYGIENE.md](./docs/REPO_HYGIENE.md)** — Ignored paths, dependency notes, disabled routes
 - **[📋 CONTENT_TEMPLATES.md](./CONTENT_TEMPLATES.md)** - Template index (start here)
 - **[🤖 AI_AGENT_INSTRUCTIONS.md](./AI_AGENT_INSTRUCTIONS.md)** - AI agent usage guide
 - **[📔 TEMPLATES_JOURNAL.md](./TEMPLATES_JOURNAL.md)** - Journal entry templates

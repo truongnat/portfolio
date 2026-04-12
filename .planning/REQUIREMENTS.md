@@ -12,8 +12,8 @@
 
 ### Housekeeping
 
-- [ ] **HK-01**: Dependencies and scripts reviewed: unused packages removed or explicitly documented; `bun run build` and `bun run lint` still pass.
-- [ ] **HK-02**: Repository hygiene: `.gitignore` (and docs) clarify non-committed paths (`data/lancedb`, keys, pem); obvious dead or `.disabled` routes are either removed or listed in `docs/` with rationale.
+- [x] **HK-01**: Dependencies and scripts reviewed: unused packages removed or explicitly documented; `bun run build` and `bun run lint` still pass.
+- [x] **HK-02**: Repository hygiene: `.gitignore` (and docs) clarify non-committed paths (`data/lancedb`, keys, pem); obvious dead or `.disabled` routes are either removed or listed in `docs/` with rationale.
 
 ### Documentation (PlantUML)
 
@@ -84,8 +84,8 @@
 | CONT-02 | Phase 5 | Complete |
 | DOM-01 | Phase 6 | Complete |
 | DOM-02 | Phase 6 | Complete |
-| HK-01 | Phase 7 | Pending |
-| HK-02 | Phase 7 | Pending |
+| HK-01 | Phase 7 | Complete |
+| HK-02 | Phase 7 | Complete |
 | DOC-01 | Phase 8 | Pending |
 | DOC-02 | Phase 8 | Pending |
 
