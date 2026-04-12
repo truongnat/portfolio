@@ -1,0 +1,12 @@
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "3000"
+    # Semantic search (/api/search) expects LanceDB under data/lancedb (see scripts/index-content.ts).
+    # Remove this volume if you do not need search in the container.
+    volumes:
+      - ./data:/app/data:ro
