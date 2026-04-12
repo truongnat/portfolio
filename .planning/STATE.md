@@ -74,8 +74,14 @@ None yet.
 
 See `.planning/codebase/CONCERNS.md` for stub routes, LanceDB deploy path, and v2 hardening items (rate limits, etc.).
 
+## Quick tasks completed
+
+| Date | Task | Notes |
+|------|------|--------|
+| 2026-04-12 | Sync `main` with `origin/main` | `git fetch` + `git rebase origin/main` (30 commits replayed); `git push origin main` |
+
 ## Session Continuity
 
 Last session: 2026-04-12
-Stopped at: Phase 8 execution complete
+Stopped at: Git sync complete (`main` aligned with `origin/main`)
 Resume file: None
