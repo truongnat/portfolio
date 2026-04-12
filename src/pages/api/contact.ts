@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { z } from 'zod';
+import { logApiError } from '@/lib/api-error-response';
 import { fetchWithRetry } from '@/lib/api-utils';
 
 const contactFormSchema = z.object({
@@ -37,7 +38,7 @@ export const POST: APIRoute = async ({ request }) => {
     const telegramChatId = process.env.TELEGRAM_CHAT_ID;
 
     if (!telegramBotToken || !telegramChatId) {
-      console.error('Telegram credentials not configured');
+      logApiError('POST /api/contact: Telegram credentials not configured', new Error('missing env'));
       return new Response(
         JSON.stringify({
           success: false,
@@ -82,7 +83,7 @@ ${message}
     const telegramResult = await telegramResponse.json();
 
     if (!telegramResponse.ok) {
-      console.error('Telegram API error:', telegramResult);
+      logApiError('POST /api/contact: Telegram API error', telegramResult);
       throw new Error('Failed to send message to Telegram');
     }
 
@@ -99,7 +100,7 @@ ${message}
       }
     );
   } catch (error) {
-    console.error('Contact form error:', error);
+    logApiError('POST /api/contact', error);
 
     return new Response(
       JSON.stringify({

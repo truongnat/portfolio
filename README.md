@@ -73,6 +73,7 @@ bun run journal:summary:force-year
 ```bash
 bun run lint        # ESLint check
 bun run lint:fix    # Fix issues
+bun run content:validate  # Zod frontmatter vs blog/journal/courses (also runs in `bun run verify`)
 ```
 
 ## 🎯 Content Templates
@@ -167,10 +168,15 @@ When generating content:
 ## 🔧 Configuration
 
 ### Environment Variables
+
+**Contact form (Telegram)** — set on the **server** only (never `PUBLIC_*` for the bot token). The homepage form calls `POST /api/contact`, which reads:
+
 ```bash
-PUBLIC_TELEGRAM_BOT_TOKEN=your_bot_token
-PUBLIC_TELEGRAM_CHAT_ID=your_chat_id
+TELEGRAM_BOT_TOKEN=your_bot_token
+TELEGRAM_CHAT_ID=your_chat_id
 ```
+
+For local development, add these to `.env` so the Astro dev server can pass them to API routes.
 
 ### Site Config
 Edit `src/lib/config.ts` for:

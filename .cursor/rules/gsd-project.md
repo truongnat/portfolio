@@ -49,7 +49,7 @@ A personal developer portfolio and publishing site: Astro-driven hybrid static s
 - `@astrojs/cloudflare` is a dependency in `package.json` but `astro.config.mjs` uses `@astrojs/node`, not the Cloudflare adapter — do not assume Workers deployment from config alone
 ## Configuration
 - Astro injects build metadata via Vite `define`: `import.meta.env.APP_VERSION`, `APP_HASH`, `APP_LICENSE` (`astro.config.mjs`)
-- Typed public env in `src/env.d.ts`: `PUBLIC_TELEGRAM_BOT_TOKEN`, `PUBLIC_TELEGRAM_CHAT_ID`, plus `APP_*`
+- Typed public env in `src/env.d.ts`: `APP_*` and related keys (Telegram contact: server-only `TELEGRAM_*` in `src/pages/api/contact.ts`)
 - Server APIs use `process.env` for Telegram in `src/pages/api/contact.ts` (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`) — align client vs server naming when configuring
 - Local `.env` files are gitignored; use them for secrets in development and map equivalent vars on the host/PM2
 - `@/*` → `src/*` (`tsconfig.json`)
@@ -127,7 +127,7 @@ A personal developer portfolio and publishing site: Astro-driven hybrid static s
 - Depends on: `astro:content`, `astro/loaders` (`glob`), `zod`
 - Used by: Pages (`getCollection`, `render`), `src/lib/graph.ts`, RSS (`src/pages/rss.xml.js`), OG image route (`src/pages/og/[...path].png.ts`).
 - Purpose: Shared business rules, API helpers, graph/search data assembly, feature-specific static data.
-- Location: `src/lib/` (e.g. `api-utils.ts`, `graph.ts`, `config.ts`, `telegram.ts`, `*-data.ts` modules)
+- Location: `src/lib/` (e.g. `api-utils.ts`, `graph.ts`, `config.ts`, `*-data.ts` modules)
 - Contains: Pure/async helpers, Zod validation in routes, fetch helpers.
 - Depends on: `astro:content` where needed, env-backed services in API routes.
 - Used by: `src/pages/api/*`, Astro pages, React components.

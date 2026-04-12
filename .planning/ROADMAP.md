@@ -18,7 +18,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Trust boundaries (Stripe & certificates)** — Webhook signature verification and non-forgeable certificate issuance (completed 2026-04-12)
 - [x] **Phase 3: Safe API error surfaces** — Generic client errors and server-only diagnostics for search and peers (completed 2026-04-12)
 - [x] **Phase 4: Data layer & payment honesty** — Real persistence or explicit prod disable; resolve `src/lib/db` drift (completed 2026-04-12)
-- [ ] **Phase 5: Publishing & contact** — Content collections stable; Telegram contact delivery when configured
+- [x] **Phase 5: Publishing & contact** — Content collections stable; Telegram contact delivery when configured (completed 2026-04-12)
 - [ ] **Phase 6: Domain cutover** — Canonical truongsoftware.com across config, SEO fallbacks, OG, and deployment docs; migration note for legacy domain references
 - [ ] **Phase 7: Housekeeping** — Dependencies/scripts audit, `.gitignore` clarity, dead routes removed or documented
 - [ ] **Phase 8: Feature documentation (PlantUML)** — `docs/` index, README link, one diagram + companion per major feature area
@@ -85,7 +85,11 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Blog, journal, and course pages render from Content Collections without schema or build regressions.
   2. Submitting the contact form delivers messages via configured Telegram credentials when the required environment variables are present.
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [x] `05-01-PLAN.md` — Shared content Zod schemas + `scripts/validate-content.ts` wired into `verify` (CONT-01)
+- [x] `05-02-PLAN.md` — Contact form → `POST /api/contact`; remove client Telegram / `PUBLIC_*` path (CONT-02)
 **UI hint**: yes
 
 ### Phase 6: Domain cutover
@@ -132,7 +136,7 @@ Plans:
 | 2. Trust boundaries (Stripe & certificates) | 2/2 | Complete | 2026-04-12 |
 | 3. Safe API error surfaces | 2/2 | Complete | 2026-04-12 |
 | 4. Data layer & payment honesty | 2/2 | Complete | 2026-04-12 |
-| 5. Publishing & contact | 0/TBD | Not started | - |
+| 5. Publishing & contact | 2/2 | Complete | 2026-04-12 |
 | 6. Domain cutover | 0/TBD | Not started | - |
 | 7. Housekeeping | 0/TBD | Not started | - |
 | 8. Feature documentation (PlantUML) | 0/TBD | Not started | - |

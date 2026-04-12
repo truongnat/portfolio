@@ -1,56 +1,20 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { z } from 'zod';
+import { blogSchema, coursesSchema, journalSchema } from './content/schemas';
 
 const blog = defineCollection({
 	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/blog" }),
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		date: z.coerce.date(),
-		updatedDate: z.coerce.date().optional(),
-		coverImage: z.string().optional(),
-		published: z.boolean().default(false),
-		tags: z.array(z.string()).optional(),
-		author: z.string().optional(),
-	}),
+	schema: blogSchema,
 });
 
 const journal = defineCollection({
 	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/journal" }),
-	schema: z.object({
-		title: z.string(),
-		date: z.coerce.date(),
-		type: z.enum(['day', 'week', 'month', 'quarter', 'year', 'cycle']),
-		summary: z.string().optional(),
-		tags: z.array(z.string()).optional(),
-	}),
+	schema: journalSchema,
 });
 
 const courses = defineCollection({
 	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/courses" }),
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		date: z.coerce.date(),
-		published: z.boolean().default(false),
-		tags: z.array(z.string()).optional(),
-		author: z.string().optional(),
-		coverImage: z.string().optional(),
-		level: z.enum(['beginner', 'intermediate', 'advanced']).optional(),
-		duration: z.string().optional(),
-		status: z.string().optional(),
-		price: z.string().optional(),
-		modules: z.array(z.object({
-			title: z.string(),
-			lessons: z.array(z.string()),
-		})).optional(),
-		videos: z.array(z.object({
-			title: z.string(),
-			url: z.string(),
-			lesson: z.number().optional(),
-		})).optional(),
-	}),
+	schema: coursesSchema,
 });
 
 export const collections = { blog, journal, courses };

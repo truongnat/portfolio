@@ -5,7 +5,7 @@
 **Defined:** 2026-04-12  
 **Focus:** Build baseline, API trust boundaries, safe errors, data honesty, publishing & contact.  
 **Roadmap:** Phases 1–5 in `.planning/ROADMAP.md`  
-**Status:** In progress — Phases 1–4 executed; next focus Phase 5 (see `.planning/ROADMAP.md`)
+**Status:** In progress — Phases 1–5 executed (v1.0 complete); next focus Phase 6+ (see `.planning/ROADMAP.md`)
 
 ## v1.1 — Domain, housekeeping & feature documentation
 

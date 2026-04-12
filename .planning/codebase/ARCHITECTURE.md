@@ -37,7 +37,7 @@
 
 **Domain & integration logic:**
 - Purpose: Shared business rules, API helpers, graph/search data assembly, feature-specific static data.
-- Location: `src/lib/` (e.g. `api-utils.ts`, `graph.ts`, `config.ts`, `telegram.ts`, `*-data.ts` modules)
+- Location: `src/lib/` (e.g. `api-utils.ts`, `graph.ts`, `config.ts`, `*-data.ts` modules)
 - Contains: Pure/async helpers, Zod validation in routes, fetch helpers.
 - Depends on: `astro:content` where needed, env-backed services in API routes.
 - Used by: `src/pages/api/*`, Astro pages, React components.

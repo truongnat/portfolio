@@ -48,8 +48,8 @@
 
 ### Content & UX
 
-- [ ] **CONT-01**: Blog, journal, and course pages render from Content Collections without schema or build regressions
-- [ ] **CONT-02**: Contact form delivers messages via configured Telegram credentials when env is present
+- [x] **CONT-01**: Blog, journal, and course pages render from Content Collections without schema or build regressions
+- [x] **CONT-02**: Contact form delivers messages via configured Telegram credentials when env is present
 
 ## v2 (backlog)
 
@@ -80,8 +80,8 @@
 | SEC-03 | Phase 3 | Pending |
 | DATA-01 | Phase 4 | Pending |
 | DATA-02 | Phase 4 | Pending |
-| CONT-01 | Phase 5 | Pending |
-| CONT-02 | Phase 5 | Pending |
+| CONT-01 | Phase 5 | Complete |
+| CONT-02 | Phase 5 | Complete |
 | DOM-01 | Phase 6 | Pending |
 | DOM-02 | Phase 6 | Pending |
 | HK-01 | Phase 7 | Pending |

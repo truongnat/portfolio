@@ -7,7 +7,7 @@
 **Messaging (contact form):**
 - Telegram Bot API — `https://api.telegram.org/bot<token>/sendMessage`
   - Client: native `fetch` with retries via `fetchWithRetry` in `src/lib/api-utils.ts`
-  - Used from: `src/pages/api/contact.ts` (`process.env.TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`); `src/lib/telegram.ts` uses `import.meta.env.PUBLIC_TELEGRAM_*` (same integration, two env patterns)
+  - Used from: `src/pages/api/contact.ts` (`process.env.TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`); homepage form posts to this route (Phase 5 — no client-side bot token)
   - Auth: bot token + chat ID (never commit; configure in environment)
 
 **Payments:**
@@ -69,8 +69,7 @@
 
 | Concern | Variables | Where referenced |
 |--------|-----------|------------------|
-| Contact (API route) | `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` | `src/pages/api/contact.ts` |
-| Contact (lib helper) | `PUBLIC_TELEGRAM_BOT_TOKEN`, `PUBLIC_TELEGRAM_CHAT_ID` | `src/lib/telegram.ts`, `src/env.d.ts` |
+| Contact (Telegram) | `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` | `src/pages/api/contact.ts`, `README.md` |
 | Stripe | `STRIPE_SECRET_KEY`; docs mention `STRIPE_WEBHOOK_SECRET`, `PUBLIC_STRIPE_PUBLISHABLE_KEY` | `src/pages/api/stripe/create-payment.ts`, comments in same file |
 | Weekly workflow (unused by scripts today) | `GOOGLE_GENERATIVE_AI_API_KEY` | `.github/workflows/weekly-summary.yml` |
 

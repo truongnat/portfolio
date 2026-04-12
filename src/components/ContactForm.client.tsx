@@ -7,7 +7,6 @@ import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, User, MessageSquare, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { uiStrings } from '@/lib/config';
-import { sendContactMessage } from '@/lib/telegram';
 
 // Zod validation schema
 const contactFormSchema = z.object({
@@ -54,9 +53,29 @@ export function ContactFormClient() {
     }
 
     try {
-      const status = await sendContactMessage(data.name, data.email, data.message);
-      if (!status) {
-        throw new Error('Failed to send message');
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          message: data.message,
+        }),
+      });
+
+      const payload = (await res.json()) as {
+        success?: boolean;
+        error?: string;
+      };
+
+      if (!res.ok || !payload.success) {
+        setSubmitStatus('error');
+        setErrorMessage(
+          typeof payload.error === 'string' && payload.error.length > 0
+            ? payload.error
+            : 'Failed to send message'
+        );
+        return;
       }
 
       // Store submission time

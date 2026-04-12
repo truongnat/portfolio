@@ -84,7 +84,7 @@
 
 **Telegram credentials for contact form:**
 - Risk: `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` must be set; missing config returns 500 (good). Ensure tokens never appear in client bundles or logs.
-- Files: `src/pages/api/contact.ts`
+- Files: `src/pages/api/contact.ts`; homepage form posts to this route only (Phase 5 — removed client-side `PUBLIC_TELEGRAM_*` / `telegram.ts`).
 - Current mitigation: Server-only `process.env` usage.
 - Recommendations: Rotate tokens if ever exposed; avoid logging `telegramResult` with secrets.
 

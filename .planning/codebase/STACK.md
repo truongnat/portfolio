@@ -68,8 +68,8 @@
 
 **Environment:**
 - Astro injects build metadata via Vite `define`: `import.meta.env.APP_VERSION`, `APP_HASH`, `APP_LICENSE` (`astro.config.mjs`)
-- Typed public env in `src/env.d.ts`: `PUBLIC_TELEGRAM_BOT_TOKEN`, `PUBLIC_TELEGRAM_CHAT_ID`, plus `APP_*`
-- Server APIs use `process.env` for Telegram in `src/pages/api/contact.ts` (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`) — align client vs server naming when configuring
+- Typed public env in `src/env.d.ts`: `APP_*` and other `import.meta.env` keys (no Telegram `PUBLIC_*` — contact uses server env only)
+- Server APIs use `process.env` for Telegram in `src/pages/api/contact.ts` (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`)
 - Local `.env` files are gitignored; use them for secrets in development and map equivalent vars on the host/PM2
 
 **Path aliases:**
