@@ -1,4 +1,4 @@
-name: Deploy Astro to Lightsail (Self-hosted)
+name: Deploy Astro to VPS (Self-hosted)
 on:
   push:
     branches:
