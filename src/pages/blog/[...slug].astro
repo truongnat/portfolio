@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { TableOfContents } from '@/components/TableOfContents';
-import { Calendar, Clock, ArrowLeft, User, Share2, TwitterIcon, LinkedinIcon } from 'lucide-react';
+import { Calendar, Clock, ArrowLeft, User, Share2, Twitter, Linkedin } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import Callout from '@/components/mdx/Callout.astro';
 import Mermaid from '@/components/mdx/Mermaid.astro';
@@ -178,7 +178,7 @@ const shareTitle = post.data.title;
 										class="p-2 rounded-full bg-secondary/50 hover:bg-primary/10 hover:text-primary transition-all duration-200"
 										aria-label="Share on Twitter"
 									>
-										<TwitterIcon className="h-4 w-4" />
+										<Twitter className="h-4 w-4" />
 									</a>
 									<a
 										href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
@@ -187,7 +187,7 @@ const shareTitle = post.data.title;
 										class="p-2 rounded-full bg-secondary/50 hover:bg-primary/10 hover:text-primary transition-all duration-200"
 										aria-label="Share on LinkedIn"
 									>
-										<LinkedinIcon className="h-4 w-4" />
+										<Linkedin className="h-4 w-4" />
 									</a>
 								</div>
 							</div>
