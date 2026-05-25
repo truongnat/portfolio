@@ -43,7 +43,7 @@ export const personalInfo = {
   ],
   resumeUrl: "/Dao_Quang_Truong_CV.pdf",
   stats: [
-    { label: 'Years Experience', value: '4' },
+    { label: 'Years Experience', value: '5+' },
     { label: 'Team Members Led', value: '8+' },
     { label: 'AI Integration', value: 'Advanced' },
     { label: 'API Optimization', value: '50%' }
