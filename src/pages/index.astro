@@ -7,9 +7,9 @@ import { SkillsClient } from '@/components/Skills.client';
 import { ExperienceClient } from '@/components/Experience.client';
 import { CertificatesClient } from '@/components/Certificates.client';
 import { GitHubStatsClient } from '@/components/GitHubStats.client';
-import { TestimonialsClient } from '@/components/Testimonials.client';
 import { ProjectsClient } from '@/components/Projects.client';
 import { ContactFormClient } from '@/components/ContactForm.client';
+import { uiStrings } from '@/lib/config';
 ---
 
 	<BaseLayout>
@@ -20,7 +20,6 @@ import { ContactFormClient } from '@/components/ContactForm.client';
 		<ExperienceClient client:visible />
 		<CertificatesClient client:visible />
 		<GitHubStatsClient client:visible />
-		<TestimonialsClient client:visible />
 		<ProjectsClient client:visible />
 
 		<!-- Contact Section -->
@@ -28,10 +27,10 @@ import { ContactFormClient } from '@/components/ContactForm.client';
 			<div class="max-w-7xl mx-auto">
 				<div class="text-center mb-20">
 					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 font-mono">
-						Connect
+						{uiStrings.contact.title}
 					</h2>
 					<p class="text-base text-muted-foreground uppercase tracking-widest font-mono">
-						Reach out for collaborations
+						{uiStrings.contact.subtitle}
 					</p>
 				</div>
 				<ContactFormClient client:visible />

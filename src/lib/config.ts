@@ -19,7 +19,7 @@ export const CANONICAL_SITE_URL = 'https://truongsoftware.com' as const;
 export const personalInfo = {
   name: "Dao Quang Truong",
   role: "Fullstack Engineer",
-  bio: "Fullstack engineer with 6 years of experience building cross-platform products, TypeScript systems, and AI-assisted developer workflows for teams that care about speed, clarity, and maintainability.",
+  bio: "Fullstack engineer with 6 years of experience shipping cross-platform products, modernizing TypeScript systems, and building AI-assisted workflows that help teams move faster without losing engineering rigor.",
   location: "Hanoi, Vietnam",
   phone: "(+84) 96 906 9035",
   email: "truongdq.dev@gmail.com",
@@ -53,7 +53,7 @@ export const personalInfo = {
     { label: 'Years Experience', value: '6+' },
     { label: 'Team Members Led', value: '8+' },
     { label: 'API Latency Reduced', value: '50%' },
-    { label: 'Platforms Shipped', value: 'Web-Mobile-Desktop' }
+    { label: 'Platforms Shipped', value: 'Web, Mobile, Desktop' }
   ]
 };
 
@@ -209,12 +209,12 @@ export interface Project {
 export const workExperience: Experience[] = [
   {
     id: 'ai',
-    role: 'AI Engineer',
-    company: 'Self-employed',
+    role: 'Independent AI Engineer',
+    company: 'Personal R&D and Product Work',
     period: 'Jan 2024 – Present',
     achievements: [
-      'Focus: Researching and developing autonomous AI agents to revolutionize the Software Development Life Cycle (SDLC).',
-      'Key Achievement: Built and open-sourced Agentic-SDLC, a framework that automates coding tasks and system design using Multi-agent orchestration.',
+      'Built and iterated on agentic developer workflows focused on code generation, repository analysis, and execution guardrails for practical day-to-day engineering use.',
+      'Shipped open-source experiments around orchestrated AI agents, local-first tooling, and reusable workflow patterns for product and engineering teams.',
     ],
   },
   {
@@ -223,9 +223,9 @@ export const workExperience: Experience[] = [
     company: 'Blameo (Outsourcing for Viettel Group)',
     period: 'Jun 2022 – Present',
     achievements: [
-      'Engineering Leadership: Led and mentored a cross-functional team of 8 engineers. Scaled the engineering department by designing a rigorous technical interview framework and established a structured mentorship program for interns.',
-      'Backend Architecture: Refactored legacy Node.js services reducing API latency by 50% and improving system reliability during peak loads.',
-      'Full-stack Development: Architected a KPI tracking platform and Viettel Cloud features using React, TypeScript, and Node.js. Established high-level coding standards such as ESLint and Git flow.',
+      'Led and mentored a cross-functional team of 8 engineers, aligning delivery plans with product milestones while raising review quality and engineering consistency.',
+      'Refactored legacy Node.js services to reduce API latency by 50% and improve reliability under heavier production traffic.',
+      'Architected KPI and cloud-product features with React, TypeScript, and Node.js while standardizing project setup, linting, and Git workflows.',
     ],
   },
   {
@@ -234,9 +234,9 @@ export const workExperience: Experience[] = [
     company: 'CMC Global',
     period: 'Oct 2021 – Jun 2022',
     achievements: [
-      'Cross-Platform Development: Engineered a unified video conference solution across Web (Vue.js), Desktop (Electron.js), and Mobile (React Native) platforms.',
-      'Real-Time Communication (RTC): Researched and implemented media synchronization algorithms to stabilize video quality and connection across different devices and bandwidths.',
-      'Code Quality: Actively participated in code reviews and architectural discussions to ensure clean code and minimize production bugs.',
+      'Engineered a unified video conferencing experience across web, desktop, and mobile using Vue.js, Electron, and React Native.',
+      'Researched and implemented RTC/media synchronization improvements to keep video quality more stable across device and network conditions.',
+      'Contributed to code reviews and architecture discussions to reduce production regressions and improve maintainability.',
     ],
   },
   {
@@ -245,8 +245,8 @@ export const workExperience: Experience[] = [
     company: 'NTQ Solution',
     period: 'Oct 2020 – Oct 2021',
     achievements: [
-      'Low-Code Platform Development: Built core features for a mobile app generation platform using React Native, focusing on automation and dynamic functionality.',
-      'E-Learning Application: Developed an exam and e-learning mobile app with a focus on intuitive user interfaces and smooth interactive flows.',
+      'Built core features for a React Native low-code platform focused on reusable mobile generation patterns and dynamic runtime behavior.',
+      'Delivered e-learning and exam application flows with an emphasis on stability, mobile usability, and smooth interaction design.',
     ],
   },
 ];
@@ -272,7 +272,7 @@ export const projectsConfig: Project[] = [
     title: 'TanStack Full Demo',
     role: 'Fullstack Developer',
     period: 'Present',
-    description: 'A beginner-friendly dashboard showcasing all major TanStack libraries working together in a real app — Query, Table, Virtual, Form, Store, and Router. Built with TanStack Start (SSR), shadcn/ui, and Tailwind CSS v4, deployed on Vercel.',
+    description: 'A polished demo app showing how Query, Table, Virtual, Form, Store, and Router fit together in one SSR product workflow. Built with TanStack Start, shadcn/ui, and Tailwind CSS v4.',
     techStack: ['React 19', 'TypeScript', 'TanStack Start', 'TanStack Query', 'TanStack Table', 'TanStack Virtual', 'TanStack Form', 'TanStack Store', 'TanStack Router', 'shadcn/ui', 'Tailwind CSS v4', 'Vite', 'Nitro', 'Vercel'],
     categories: ['Web', 'Open Source'],
     achievements: [
@@ -287,7 +287,7 @@ export const projectsConfig: Project[] = [
     title: 'Agentic SDLC',
     role: 'Systems Engineer',
     period: 'Present',
-    description: 'Deterministic local execution runtime for AI agent workflows. Define workflows in Markdown, execute under policy guardrails, persist state, and replay LLM responses for perfect reproducibility. Built in Rust for performance and reliability.',
+    description: 'A deterministic local runtime for AI agent workflows with policy guardrails, persisted state, and replayable LLM responses for reproducible execution.',
     techStack: ['Rust', 'Tokio', 'Clap', 'SQLite (rusqlite)', 'PostgreSQL + pgvector', 'git2', 'AWS Bedrock', 'OpenAI', 'Anthropic', 'Gemini', 'Azure OpenAI', 'Ollama', 'ed25519-dalek', 'OpenTelemetry'],
     categories: ['AI', 'Open Source'],
     achievements: [
@@ -332,7 +332,7 @@ export const projectsConfig: Project[] = [
     title: 'NetBI – KPI Management Platform',
     role: 'Software Engineer',
     period: 'Jan 2023 – Jan 2024',
-    description: 'Build a unified web and mobile platform for enterprise KPI monitoring with complex data visualization needs.',
+    description: 'Unified web and mobile KPI platform for enterprise monitoring, including complex data visualization and regional performance tracking.',
     techStack: ['React', 'React Native', 'ChartJS', 'GitLab CI/CD', 'Jenkins', 'Linux VPS', 'Nginx'],
     categories: ['Web', 'Mobile'],
     achievements: [
@@ -346,7 +346,7 @@ export const projectsConfig: Project[] = [
     title: 'Naver Cloud Meeting',
     role: 'Software Engineer',
     period: 'Jun 2021 – Dec 2022',
-    description: 'Develop a stable, multi-platform video conferencing solution with consistent user experience.',
+    description: 'Cross-platform video conferencing product focused on stable media delivery and a consistent user experience across web, desktop, and mobile.',
     techStack: ['Vue.js', 'React Native', 'Electron.js', 'Jitsi Meet'],
     categories: ['Web', 'Mobile'],
     achievements: [
@@ -360,7 +360,7 @@ export const projectsConfig: Project[] = [
     title: 'GoPass – Online Exam Platform',
     role: 'Mobile Developer',
     period: 'Oct 2020 – Jun 2021',
-    description: 'Create a stable, user-friendly exam application for the Japanese market with offline functionality.',
+    description: 'Offline-capable exam application for the Japanese market, built to handle structured test flows with dependable mobile performance.',
     techStack: ['React Native', 'Realm DB', 'PHP'],
     categories: ['Mobile'],
     achievements: [
@@ -498,18 +498,18 @@ export const uiStrings = {
   },
   experience: {
     title: 'Experience',
-    subtitle: 'Professional Journey',
-    achievementsTitle: 'Major Achievements',
+    subtitle: 'Teams, Systems, and Outcomes',
+    achievementsTitle: 'Key Contributions',
   },
   projects: {
     title: 'Selected Works',
-    subtitle: 'Technical Case Studies & Products',
+    subtitle: 'Products, Systems, and Technical Case Studies',
     emptyMessage: 'NO_PROJECTS_FOUND',
-    viewLive: 'OPEN_PROJECT',
+    viewLive: 'VIEW_PROJECT',
   },
   contact: {
-    title: 'Get In Touch',
-    subtitle: 'Let\'s build something together',
+    title: "Let's Talk",
+    subtitle: 'Open to product, platform, and engineering leadership conversations',
     form: {
       nameLabel: '01 // Name',
       namePlaceholder: 'ENTER_NAME',
