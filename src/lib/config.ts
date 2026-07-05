@@ -3,6 +3,7 @@ import {
   Layers as LayersIcon,
   Sparkles as SparklesIcon,
   Server as ServerIcon,
+  Github as GithubIcon,
   LinkedinIcon,
   Mail as MailIcon,
   Users as UsersIcon,
@@ -17,13 +18,19 @@ export const CANONICAL_SITE_URL = 'https://truongsoftware.com' as const;
 
 export const personalInfo = {
   name: "Dao Quang Truong",
-  role: "Fullstack Developer",
-  bio: "Fullstack Developer specializing in cross-platform architecture and Agentic AI . Proven track record of leading engineering teams and delivering high-scale enterprise solutions for Viettel and Naver.",
-  location: "Ninh Binh, Vietnam",
+  role: "Fullstack Engineer",
+  bio: "Fullstack engineer with 6 years of experience building cross-platform products, TypeScript systems, and AI-assisted developer workflows for teams that care about speed, clarity, and maintainability.",
+  location: "Hanoi, Vietnam",
   phone: "(+84) 96 906 9035",
   email: "truongdq.dev@gmail.com",
-  website: "porfolio-truongdq.vercel.app",
+  website: CANONICAL_SITE_URL,
+  githubUsername: "truongnat",
   socials: [
+    {
+      platform: "GitHub",
+      url: "https://github.com/truongnat",
+      icon: GithubIcon,
+    },
     {
       platform: "LinkedIn",
       url: "https://linkedin.com/in/truongdq01",
@@ -36,25 +43,25 @@ export const personalInfo = {
     },
   ],
   typingPhrases: [
-    'Fullstack Developer',
-    'Agentic AI',
-    'Cross-platform Architect',
-    'AI-Powered SDLC',
+    'Fullstack Engineer',
+    'TypeScript Systems',
+    'React Native + Web',
+    'Agentic AI Workflows',
   ],
   resumeUrl: "/Dao_Quang_Truong_CV.pdf",
   stats: [
-    { label: 'Years Experience', value: '5+' },
+    { label: 'Years Experience', value: '6+' },
     { label: 'Team Members Led', value: '8+' },
-    { label: 'AI Integration', value: 'Advanced' },
-    { label: 'API Optimization', value: '50%' }
+    { label: 'API Latency Reduced', value: '50%' },
+    { label: 'Platforms Shipped', value: 'Web-Mobile-Desktop' }
   ]
 };
 
 export const liveWork = {
-  company: 'Viet IS',
+  company: 'VietIS',
   url: 'https://vietis.com.vn/en/',
   location: 'Vietnam',
-  label: 'Current Workplace',
+  label: 'Currently shipping at',
 } as const;
 
 export const appInfo = {
@@ -69,8 +76,8 @@ export const appInfo = {
 };
 
 export const seo = {
-  title: "Dao Quang Truong | Fullstack Developer",
-  description: "Fullstack Developer specializing in cross-platform solutions, Agentic AI, and high-scale enterprise systems.",
+  title: "Dao Quang Truong | Fullstack Engineer",
+  description: "Portfolio of Dao Quang Truong, a fullstack engineer with 6 years of experience building cross-platform products, TypeScript systems, and AI-assisted developer workflows.",
   keywords: [
     'portfolio',
     'developer',
@@ -457,7 +464,8 @@ export const awards: Award[] = [
 ];
 
 export const navLinks = [
-  //{ label: 'About', href: '/#about' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Experience', href: '/#experience' },
   { label: 'Now', href: '/now/' },
   { label: 'Uses', href: '/uses/' },
   { label: 'Journal', href: '/journal/' },
@@ -475,13 +483,13 @@ export const navLinks = [
 
 export const uiStrings = {
   common: {
-    logo: 'TRUONG.DEV',
+    logo: 'TRUONG.SOFTWARE',
   },
   hero: {
     cta: {
-      projects: 'View Projects',
+      projects: 'See Selected Work',
       cv: 'Download CV',
-      contact: 'Contact Me',
+      contact: 'Start a Conversation',
     },
   },
   skills: {
@@ -497,7 +505,7 @@ export const uiStrings = {
     title: 'Selected Works',
     subtitle: 'Technical Case Studies & Products',
     emptyMessage: 'NO_PROJECTS_FOUND',
-    viewLive: 'VIEW_LIVE',
+    viewLive: 'OPEN_PROJECT',
   },
   contact: {
     title: 'Get In Touch',

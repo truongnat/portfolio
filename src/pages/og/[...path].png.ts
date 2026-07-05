@@ -187,7 +187,7 @@ export const GET: APIRoute = async ({ props }) => {
                             {
                                 type: 'img',
                                 props: {
-                                    src: 'https://github.com/truongdq01.png',
+                                    src: 'https://github.com/truongnat.png',
                                     width: 80,
                                     height: 80,
                                 }

@@ -1,26 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { liveWork } from '@/lib/config';
 
 export function LiveWorkFloatClient() {
   const constraintsRef = useRef<HTMLDivElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const floatAnimation = isDragging
     ? {}
     : {
         y: [0, -10, 0],
         rotate: [0, 1.5, 0],
       };
-
-  if (!mounted) return null;
 
   return (
     <>

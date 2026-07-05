@@ -1,6 +1,6 @@
-# Portfolio - Dao Quang Truong
+# truongsoftware.com
 
-🚀 Fullstack Developer Portfolio built with Astro, React, and TailwindCSS
+Personal website and portfolio for Dao Quang Truong. Built with Astro, React, and Tailwind CSS, and published around the `truongsoftware.com` brand.
 
 ## Feature architecture
 
@@ -17,7 +17,14 @@ Architecture diagrams (PlantUML) and feature companions live under [`docs/`](./d
 - **[📝 TEMPLATES_BLOG.md](./TEMPLATES_BLOG.md)** - Blog post templates
 - **[📜 JOURNAL_RULES.md](./JOURNAL_RULES.md)** - Journal generation rules
 
-## 🚀 Quick Start
+## What lives here
+
+- Marketing homepage and portfolio sections
+- Blog, journal, and evergreen content pages
+- Public utility routes for contact, search, certificates, and experiments
+- Static assets including the downloadable CV
+
+## Quick Start
 
 ```bash
 # Install dependencies
@@ -33,7 +40,7 @@ bun run build
 bun run preview
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 portfolio/
@@ -61,7 +68,7 @@ portfolio/
 └── public/                       ← Static assets
 ```
 
-## 📋 Content Commands
+## Content Commands
 
 ### Journal Generation
 ```bash
@@ -82,7 +89,7 @@ bun run lint:fix    # Fix issues
 bun run content:validate  # Zod frontmatter vs blog/journal/courses (also runs in `bun run verify`)
 ```
 
-## 🎯 Content Templates
+## Content Templates
 
 ### Journal Types
 | Type | Frequency | Template |
@@ -101,13 +108,13 @@ bun run content:validate  # Zod frontmatter vs blog/journal/courses (also runs i
 | Reflection | Personal insights | `TEMPLATES_BLOG.md` |
 | Tutorial | How-to guides | `TEMPLATES_BLOG.md` |
 
-## 🛠 Tech Stack
+## Tech Stack
 
-- **Framework**: Astro 5.x
+- **Framework**: Astro 6.x
 - **UI**: React 19, TailwindCSS 4.x
 - **Animation**: Framer Motion
 - **Diagrams**: Mermaid.js
-- **AI**: Vercel AI SDK, Google Generative AI
+- **AI**: OpenAI-compatible integrations and local experiments
 - **Database**: Content Collections
 - **Deployment**: Cloudflare Pages
 
@@ -148,7 +155,7 @@ import { ExperienceClient } from '@/components/Experience.client';
 import { AIAssistant } from '@/components/AIAssistant';
 ```
 
-## 🚢 Deployment
+## Deployment
 
 ### Production Build
 ```bash
@@ -161,7 +168,7 @@ bun run preview  # Test locally
 - Configure KV bindings for sessions
 - Set environment variables
 
-## 📞 For AI Agents
+## For AI Agents
 
 When generating content:
 
@@ -171,7 +178,7 @@ When generating content:
 4. **Use** English throughout
 5. **Check** quality checklist before finalizing
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -191,15 +198,22 @@ Edit `src/lib/config.ts` for:
 - UI strings
 - Work experience
 - Projects
+- GitHub identity and social links
 
-## 📚 Learning Resources
+## Brand Notes
+
+- Canonical production URL: `https://truongsoftware.com`
+- CV asset path: `public/Dao_Quang_Truong_CV.pdf`
+- Profile repo for GitHub homepage: `truongnat/README.md`
+
+## Learning Resources
 
 - [Astro Docs](https://docs.astro.build)
 - [React Docs](https://react.dev)
 - [TailwindCSS](https://tailwindcss.com)
 - [Framer Motion](https://www.framer.com/motion)
 
-## 🤝 Contributing
+## Contributing
 
 When adding new content:
 1. Use appropriate template
@@ -207,10 +221,10 @@ When adding new content:
 3. Check for consistency
 4. Commit with descriptive message
 
-## 📄 License
+## License
 
 MIT License - Copyright © Dao Quang Truong
 
 ---
 
-**Last Updated**: 2026-03-14
+**Last Updated**: 2026-07-05

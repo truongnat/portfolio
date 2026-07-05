@@ -2,10 +2,10 @@
 
 import { motion, type Variants } from 'framer-motion';
 import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
-import { ArrowRight, Mail, Download } from 'lucide-react';
+import { ArrowRight, BriefcaseBusiness, Download, Globe, Mail, MapPin } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-import { personalInfo, uiStrings } from '@/lib/config';
+import { liveWork, personalInfo, uiStrings } from '@/lib/config';
 
 interface CTAButton {
   label: string;
@@ -22,7 +22,7 @@ interface HeroProps {
 }
 
 export function HeroClient({
-  title = personalInfo.role,
+  title = personalInfo.name,
   subtitle = personalInfo.bio,
   typingPhrases = personalInfo.typingPhrases,
   ctaButtons = [
@@ -117,6 +117,20 @@ export function HeroClient({
         animate="visible"
       >
         {/* Title */}
+        <motion.div
+          className="mb-4 flex flex-wrap items-center justify-center gap-3 text-xs font-mono uppercase tracking-[0.24em] text-muted-foreground"
+          variants={itemVariants}
+        >
+          <span className="inline-flex items-center gap-2">
+            <BriefcaseBusiness className="h-3.5 w-3.5" />
+            {personalInfo.role}
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <MapPin className="h-3.5 w-3.5" />
+            {personalInfo.location}
+          </span>
+        </motion.div>
+
         <motion.h1
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground font-mono"
           variants={itemVariants}
@@ -143,6 +157,30 @@ export function HeroClient({
         >
           {subtitle}
         </motion.p>
+
+        <motion.div
+          className="mt-6 flex flex-col items-center justify-center gap-3 text-sm text-muted-foreground sm:flex-row sm:flex-wrap"
+          variants={itemVariants}
+        >
+          <a
+            href={liveWork.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 hover:border-muted-foreground/50 hover:text-foreground transition-colors"
+          >
+            <BriefcaseBusiness className="h-4 w-4" />
+            {liveWork.label} {liveWork.company}
+          </a>
+          <a
+            href={personalInfo.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 hover:border-muted-foreground/50 hover:text-foreground transition-colors"
+          >
+            <Globe className="h-4 w-4" />
+            truongsoftware.com
+          </a>
+        </motion.div>
 
         {/* CTA Buttons */}
         <motion.div

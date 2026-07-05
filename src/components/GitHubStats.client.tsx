@@ -3,16 +3,34 @@
 import { motion, type Variants } from 'framer-motion';
 import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { GithubIcon, Calendar, Star, GitBranch, Users } from 'lucide-react';
+import { ExternalLink, GithubIcon, GitBranch, RefreshCw, Star, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
+
+import { personalInfo } from '@/lib/config';
 
 interface GitHubStats {
   totalRepos: number;
   totalStars: number;
-  totalCommits: number;
-  totalPRs: number;
   followers: number;
   following: number;
+  featuredRepo?: {
+    name: string;
+    url: string;
+    stars: number;
+  };
+  latestRepo?: {
+    name: string;
+    url: string;
+    pushedAt: string;
+  };
+}
+
+interface GitHubRepo {
+  fork: boolean;
+  html_url: string;
+  name: string;
+  pushed_at: string;
+  stargazers_count: number;
 }
 
 export function GitHubStatsClient() {
@@ -25,8 +43,7 @@ export function GitHubStatsClient() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // GitHub username - you can customize this
-  const githubUsername = 'truongnat'; // Replace with your actual GitHub username
+  const githubUsername = personalInfo.githubUsername;
 
   useEffect(() => {
     const fetchGitHubStats = async () => {
@@ -45,21 +62,35 @@ export function GitHubStatsClient() {
         if (!reposResponse.ok) {
           throw new Error('Failed to fetch GitHub repos data');
         }
-        const reposData = await reposResponse.json();
+        const reposData: GitHubRepo[] = await reposResponse.json();
+        const publicRepos = reposData.filter((repo) => !repo.fork);
 
-        // Calculate stats
-        const totalRepos = reposData.length;
-        const totalStars = reposData.reduce((acc: number, repo: any) => acc + repo.stargazers_count, 0);
-        
-        // For commits and PRs, we'll use placeholder values since GitHub API has rate limits
-        // In a real implementation, you might want to cache this data or use a server endpoint
+        const totalRepos = publicRepos.length;
+        const totalStars = publicRepos.reduce((acc, repo) => acc + repo.stargazers_count, 0);
+        const featuredRepo = [...publicRepos].sort((a, b) => b.stargazers_count - a.stargazers_count)[0];
+        const latestRepo = [...publicRepos].sort(
+          (a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime()
+        )[0];
+
         const calculatedStats: GitHubStats = {
           totalRepos,
           totalStars,
-          totalCommits: userData.public_repos > 0 ? Math.floor(Math.random() * 1000) + 500 : 0, // Placeholder
-          totalPRs: userData.public_repos > 0 ? Math.floor(Math.random() * 200) + 50 : 0, // Placeholder
           followers: userData.followers,
           following: userData.following,
+          featuredRepo: featuredRepo
+            ? {
+                name: featuredRepo.name,
+                url: featuredRepo.html_url,
+                stars: featuredRepo.stargazers_count,
+              }
+            : undefined,
+          latestRepo: latestRepo
+            ? {
+                name: latestRepo.name,
+                url: latestRepo.html_url,
+                pushedAt: latestRepo.pushed_at,
+              }
+            : undefined,
         };
 
         setStats(calculatedStats);
@@ -72,13 +103,13 @@ export function GitHubStatsClient() {
     };
 
     fetchGitHubStats();
-  }, []);
+  }, [githubUsername]);
 
   const statItems = [
     { label: 'Total Repositories', value: stats?.totalRepos || 0, icon: GitBranch },
     { label: 'Total Stars', value: stats?.totalStars || 0, icon: Star },
-    { label: 'Total Commits', value: stats?.totalCommits || 0, icon: Calendar },
     { label: 'Followers', value: stats?.followers || 0, icon: Users },
+    { label: 'Following', value: stats?.following || 0, icon: RefreshCw },
   ];
 
   const containerVariants: Variants = {
@@ -120,11 +151,11 @@ export function GitHubStatsClient() {
           <div className="flex items-center justify-center mb-4">
             <GithubIcon className="h-8 w-8 text-foreground mr-3" />
             <h2 className="text-3xl sm:text-4xl font-bold font-mono">
-              GitHub Activity
+              GitHub Footprint
             </h2>
           </div>
           <p className="text-base text-muted-foreground uppercase tracking-widest font-mono">
-            Recent Contributions & Stats
+            Real public signals from github.com/{githubUsername}
           </p>
         </motion.div>
 
@@ -149,6 +180,59 @@ export function GitHubStatsClient() {
             </motion.div>
           ))}
         </motion.div>
+
+        {(stats?.latestRepo || stats?.featuredRepo) && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="mt-8 grid gap-4 md:grid-cols-2"
+          >
+            {stats.latestRepo && (
+              <a
+                href={stats.latestRepo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-lg border border-border bg-card p-5 transition-colors hover:border-muted-foreground/50"
+              >
+                <div className="mb-2 text-xs font-mono uppercase tracking-[0.24em] text-muted-foreground">
+                  Recently active repo
+                </div>
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <div className="text-lg font-semibold text-foreground">{stats.latestRepo.name}</div>
+                    <div className="text-sm text-muted-foreground">
+                      Updated {new Date(stats.latestRepo.pushedAt).toLocaleDateString()}
+                    </div>
+                  </div>
+                  <ExternalLink className="h-4 w-4 text-muted-foreground" />
+                </div>
+              </a>
+            )}
+
+            {stats.featuredRepo && (
+              <a
+                href={stats.featuredRepo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-lg border border-border bg-card p-5 transition-colors hover:border-muted-foreground/50"
+              >
+                <div className="mb-2 text-xs font-mono uppercase tracking-[0.24em] text-muted-foreground">
+                  Most starred public repo
+                </div>
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <div className="text-lg font-semibold text-foreground">{stats.featuredRepo.name}</div>
+                    <div className="text-sm text-muted-foreground">
+                      {stats.featuredRepo.stars.toLocaleString()} stars
+                    </div>
+                  </div>
+                  <ExternalLink className="h-4 w-4 text-muted-foreground" />
+                </div>
+              </a>
+            )}
+          </motion.div>
+        )}
 
         {/* Contribution graph */}
         <motion.div
