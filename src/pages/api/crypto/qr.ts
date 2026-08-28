@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import { z } from 'zod';
 
+export const prerender = false;
+
 const qrSchema = z.object({
   data: z.string(),
   size: z.string().default('256'),

@@ -17,6 +17,7 @@ interface Props {
 	description?: string;
 	image?: string;
 	article?: boolean;
+	schemaType?: 'WebSite' | 'Article' | 'Profile' | 'Person';
 	publishDate?: Date;
 	tags?: string[];
 }
@@ -26,6 +27,7 @@ const {
 	description = seo.description, 
 	image: propImage,
 	article = false,
+	schemaType,
 	publishDate,
 	tags
 } = Astro.props;
@@ -96,7 +98,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || CANONICAL_SITE_UR
 
 		<!-- JSON-LD Structured Data -->
 		<Schema 
-			type={article ? 'Article' : 'WebSite'}
+			type={schemaType || (article ? 'Article' : 'WebSite')}
 			title={title}
 			description={description}
 			image={ogImage}

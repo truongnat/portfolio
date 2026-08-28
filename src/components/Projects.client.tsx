@@ -73,7 +73,7 @@ export function ProjectsClient() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 font-mono">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             {uiStrings.projects.title}
           </h2>
           <p className="text-base text-muted-foreground uppercase tracking-widest font-mono">
@@ -139,9 +139,11 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, variants }: ProjectCardProps) {
   const shouldReduceMotion = useSafeReducedMotion();
+  const impact = project.achievements.find((achievement) => achievement.startsWith('Result:'))
+    ?? project.achievements[project.achievements.length - 1];
 
   return (
-    <motion.div
+    <motion.article
       layout
       variants={variants}
       initial="hidden"
@@ -159,32 +161,43 @@ export function ProjectCard({ project, variants }: ProjectCardProps) {
       data-project-title={project.title}
       data-project-categories={project.categories.join(' ')}
     >
-      {/* Content */}
       <div className="p-6" data-testid="project-content">
-        {/* Title */}
         <h3 className="text-lg font-bold mb-3 font-mono tracking-tight" data-testid="project-title">
           {project.title}
         </h3>
 
-        {/* Description */}
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+          <span className="font-semibold text-foreground">{project.role}</span>
+          <span>{project.period}</span>
+        </div>
+
         <p className="text-base text-muted-foreground mb-6 line-clamp-3 leading-relaxed" data-testid="project-description">
           {project.description}
         </p>
 
-        {/* Tech stack badges */}
-        <div className="flex flex-wrap gap-2 mb-6" data-testid="project-tech-stack">
+        {impact && (
+          <div className="mb-6 border-l-2 border-primary/60 pl-4" data-testid="project-impact">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              {uiStrings.projects.impactLabel}
+            </p>
+            <p className="mt-2 text-sm leading-6 text-foreground/80">
+              {impact.replace(/^Result:\s*/, '')}
+            </p>
+          </div>
+        )}
+
+        <ul className="mb-6 flex flex-wrap gap-2" aria-label={`${project.title} technologies`} data-testid="project-tech-stack">
           {project?.techStack?.map((tech, index) => (
-            <span
+            <li
               key={index}
               className="px-2 py-0.5 text-sm font-mono border border-border bg-muted/30 text-muted-foreground rounded"
               data-testid={`tech-badge-${tech}`}
             >
               {tech}
-            </span>
+            </li>
           ))}
-        </div>
+        </ul>
 
-        {/* Action buttons */}
         <div className="flex gap-3" data-testid="project-actions">
           {project.link && (
             <a
@@ -200,6 +213,6 @@ export function ProjectCard({ project, variants }: ProjectCardProps) {
           )}
         </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }

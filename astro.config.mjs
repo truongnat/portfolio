@@ -38,10 +38,10 @@ export default defineConfig({
       'import.meta.env.APP_VERSION': JSON.stringify(pkg.version),
       'import.meta.env.APP_HASH': JSON.stringify(commitHash),
       'import.meta.env.APP_LICENSE': JSON.stringify(pkg.license || 'MIT'),
-    }
+    },
   },
   trailingSlash: "always",
   build: {
-    format: 'directory'
+    format: 'directory',
   }
 });

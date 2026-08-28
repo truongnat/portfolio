@@ -28,7 +28,7 @@ const graphData = await getGraphData();
 
 			<div class="mb-8 p-4 rounded-xl bg-blue-500/5 border border-blue-500/20 text-blue-200/80 text-sm font-mono flex items-start gap-3">
 				<span class="p-1 bg-blue-500/20 rounded text-[10px] mt-0.5">TIP</span>
-				<p>Scroll to zoom, drag to pan, and click nodes to dive into specific topics. High-density nodes represent core technical clusters.</p>
+				<p>Hover a node for context and click an article node to open it. High-density nodes represent core technical clusters.</p>
 			</div>
 
 			<KnowledgeGraphClient client:load data={graphData} />

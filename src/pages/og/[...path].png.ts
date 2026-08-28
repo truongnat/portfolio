@@ -1,12 +1,19 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import { CANONICAL_SITE_URL } from '@/lib/config';
 
 const OG_SITE_LABEL = new URL(CANONICAL_SITE_URL).hostname;
+const OG_FONT_FAMILY = 'KaTeX Typewriter';
 
-export const prerender = false;
+export const prerender = true;
+
+const fontDataPromise = readFile(
+  join(process.cwd(), 'node_modules/katex/dist/fonts/KaTeX_Typewriter-Regular.ttf')
+);
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
@@ -29,10 +36,7 @@ export async function getStaticPaths() {
 export const GET: APIRoute = async ({ props }) => {
   const { title, description, type } = props as { title: string; description: string; type: string };
 
-  // Load font
-  const fontData = await fetch(
-    'https://fonts.gstatic.com/s/jetbrainsmono/v18/tueOakoa9rqPnbHLNoatpE_AS76DBHt7asE.woff'
-  ).then((res) => res.arrayBuffer());
+  const fontData = await fontDataPromise;
 
   const svg = await satori(
     // @ts-expect-error Satori intrinsic element object
@@ -50,7 +54,7 @@ export const GET: APIRoute = async ({ props }) => {
           backgroundImage: 'radial-gradient(circle at 25px 25px, #27272a 2px, transparent 0)',
           backgroundSize: '50px 50px',
           padding: '80px',
-          fontFamily: 'JetBrains Mono',
+          fontFamily: OG_FONT_FAMILY,
         },
         children: [
           // Border accent
@@ -170,7 +174,7 @@ export const GET: APIRoute = async ({ props }) => {
                     ]
                   }
                 },
-                // Avatar placeholder or simple circle
+                // Keep OG generation self-contained; remote image fetches are not reliable at build time.
                 {
                     type: 'div',
                     props: {
@@ -185,11 +189,14 @@ export const GET: APIRoute = async ({ props }) => {
                         },
                         children: [
                             {
-                                type: 'img',
+                                type: 'span',
                                 props: {
-                                    src: 'https://github.com/truongnat.png',
-                                    width: 80,
-                                    height: 80,
+                                    style: {
+                                      color: '#ffffff',
+                                      fontSize: '28px',
+                                      fontWeight: 'bold',
+                                    },
+                                    children: 'DQ',
                                 }
                             }
                         ]
@@ -206,7 +213,7 @@ export const GET: APIRoute = async ({ props }) => {
       height: 630,
       fonts: [
         {
-          name: 'JetBrains Mono',
+          name: OG_FONT_FAMILY,
           data: fontData,
           style: 'normal',
         },

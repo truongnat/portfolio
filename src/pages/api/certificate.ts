@@ -7,6 +7,8 @@ import {
 } from '@/lib/certificate-signature';
 import { z } from 'zod';
 
+export const prerender = false;
+
 /**
  * GET /api/certificate — PNG certificate image
  *

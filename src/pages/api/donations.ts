@@ -1,17 +1,22 @@
 import type { APIRoute } from 'astro';
 import { stubUnavailableInProduction } from '@/lib/production-stub-guard';
+import { methodNotAllowed } from '@/lib/api-methods';
 import { z } from 'zod';
+
+export const prerender = false;
 
 const donationSchema = z.object({
   skillId: z.string(),
   amount: z.number().positive(),
   currency: z.string().default('USD'),
   donatorName: z.string().min(1),
-  donatorEmail: z.string().email().optional(),
+  donatorEmail: z.email().optional(),
   paymentMethod: z.enum(['stripe', 'crypto', 'paypal', 'manual']),
   message: z.string().optional(),
   isAnonymous: z.boolean().default(false),
 });
+
+export const GET: APIRoute = () => methodNotAllowed('POST');
 
 export const POST: APIRoute = async ({ request }) => {
   try {

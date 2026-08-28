@@ -1,5 +1,8 @@
 import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
+import { methodNotAllowed } from '@/lib/api-methods';
+
+export const prerender = false;
 
 /**
  * Stripe Webhook Handler
@@ -13,6 +16,8 @@ import Stripe from 'stripe';
  * Missing webhook secret → 400 (Webhook not configured).
  * Webhook secret set but API key missing → 503 (server misconfiguration).
  */
+export const GET: APIRoute = () => methodNotAllowed('POST');
+
 export const POST: APIRoute = async ({ request }) => {
   const webhookSecret = import.meta.env.STRIPE_WEBHOOK_SECRET;
   const stripeSecretKey = import.meta.env.STRIPE_SECRET_KEY;

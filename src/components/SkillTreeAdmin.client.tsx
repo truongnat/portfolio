@@ -138,7 +138,7 @@ export function SkillTreeAdmin() {
       return;
     }
 
-    const res = await fetch('/api/certificate-issue', {
+    const res = await fetch('/api/certificate-issue/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),

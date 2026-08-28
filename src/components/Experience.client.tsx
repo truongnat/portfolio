@@ -53,7 +53,7 @@ export function ExperienceClient({ experiences = workExperience }: ExperiencePro
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 font-mono">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                         {uiStrings.experience.title}
                     </h2>
                     <p className="text-base text-muted-foreground uppercase tracking-widest font-mono">

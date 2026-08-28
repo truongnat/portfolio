@@ -2,10 +2,10 @@
 
 import { motion, type Variants } from 'framer-motion';
 import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
-import { ArrowRight, BriefcaseBusiness, Download, Globe, Mail, MapPin } from 'lucide-react';
+import { ArrowRight, Mail, Download, MapPin, Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-import { liveWork, personalInfo, uiStrings } from '@/lib/config';
+import { personalInfo, uiStrings } from '@/lib/config';
 
 interface CTAButton {
   label: string;
@@ -46,7 +46,7 @@ export function HeroClient({
     },
   ],
 }: HeroProps) {
-  const [typingText, setTypingText] = useState('');
+  const [typingText, setTypingText] = useState(typingPhrases[0] ?? '');
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const shouldReduceMotion = useSafeReducedMotion();
@@ -107,145 +107,173 @@ export function HeroClient({
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pb-32 sm:pb-0 pt-24 sm:pt-16"
+      aria-labelledby="hero-title"
+      className="relative min-h-screen flex items-center overflow-hidden px-4 sm:px-6 lg:px-8 pb-24 pt-28 sm:pt-32"
     >
-      {/* Hero content */}
-      <motion.div
-        className="relative z-10 max-w-4xl mx-auto text-center"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Title */}
-        <motion.div
-          className="mb-4 flex flex-wrap items-center justify-center gap-3 text-xs font-mono uppercase tracking-[0.24em] text-muted-foreground"
-          variants={itemVariants}
-        >
-          <span className="inline-flex items-center gap-2">
-            <BriefcaseBusiness className="h-3.5 w-3.5" />
-            {personalInfo.role}
-          </span>
-          <span className="inline-flex items-center gap-2">
-            <MapPin className="h-3.5 w-3.5" />
-            {personalInfo.location}
-          </span>
-        </motion.div>
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
+        <div className="grid items-center gap-16 lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.75fr)]">
+          <motion.div
+            className="max-w-3xl text-left"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.div
+              className="inline-flex items-center gap-3 border-l-2 border-primary pl-4 text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground"
+              variants={itemVariants}
+            >
+              <span className="text-primary">///</span>
+              {uiStrings.hero.eyebrow}
+            </motion.div>
 
-        <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground font-mono"
-          variants={itemVariants}
-        >
-          {title}
-        </motion.h1>
+            <motion.h1
+              id="hero-title"
+              className="mt-6 text-5xl font-bold tracking-[-0.06em] text-foreground sm:text-6xl lg:text-8xl"
+              variants={itemVariants}
+            >
+              {title}
+            </motion.h1>
 
-        {/* Typing animation */}
+            <motion.p
+              className="mt-5 text-xl font-semibold tracking-tight text-foreground sm:text-2xl"
+              variants={itemVariants}
+            >
+              {personalInfo.role}
+            </motion.p>
+
+            <motion.p
+              className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg"
+              variants={itemVariants}
+            >
+              {subtitle}
+            </motion.p>
+
+            <motion.ul
+              aria-label={uiStrings.hero.focusLabel}
+              className="mt-8 grid gap-3 text-sm font-medium text-foreground sm:grid-cols-2"
+              variants={itemVariants}
+            >
+              {personalInfo.focusAreas.map((area) => (
+                <li key={area} className="flex items-center gap-3">
+                  <Sparkles className="h-4 w-4 text-primary" aria-hidden="true" />
+                  {area}
+                </li>
+              ))}
+            </motion.ul>
+
+            <motion.div
+              className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
+              variants={itemVariants}
+            >
+              {ctaButtons.map((button, index) => (
+                <motion.a
+                  key={index}
+                  href={button.href}
+                  className={`group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg px-6 py-3 font-semibold transition-all duration-200 sm:w-auto ${button.variant === 'primary'
+                    ? 'bg-primary text-primary-foreground hover:opacity-90'
+                    : 'border border-border bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                    }`}
+                  whileHover={shouldReduceMotion ? {} : { y: -2 }}
+                  whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+                >
+                  {button.label}
+                  {button.icon && (
+                    <span className="transition-transform group-hover:translate-x-1">
+                      {button.icon}
+                    </span>
+                  )}
+                </motion.a>
+              ))}
+            </motion.div>
+
+            <motion.div
+              className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-muted-foreground"
+              variants={itemVariants}
+            >
+              <a className="inline-flex items-center gap-2 hover:text-foreground" href={`mailto:${personalInfo.email}`}>
+                <Mail className="h-4 w-4" aria-hidden="true" />
+                {personalInfo.email}
+              </a>
+              <span className="hidden text-border sm:inline" aria-hidden="true">/</span>
+              <span className="inline-flex items-center gap-2">
+                <MapPin className="h-4 w-4" aria-hidden="true" />
+                {personalInfo.location}
+              </span>
+              <span className="hidden text-border sm:inline" aria-hidden="true">/</span>
+              <div className="flex items-center gap-4">
+                {personalInfo.socials.map((social) => (
+                  <a
+                    key={social.platform}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
+                    aria-label={social.platform}
+                  >
+                    <social.icon className="h-5 w-5" />
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+
+          <motion.aside
+            aria-label={uiStrings.hero.snapshotLabel}
+            className="relative overflow-hidden rounded-2xl border border-primary/20 bg-primary/[0.04] p-6 shadow-2xl shadow-black/20 sm:p-8"
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
+            <div className="relative">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                {uiStrings.hero.snapshotLabel}
+              </p>
+              <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8">
+                {personalInfo.stats.map((stat) => (
+                  <div key={stat.label}>
+                    <dd className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{stat.value}</dd>
+                    <dt className="mt-2 text-xs leading-5 text-muted-foreground">{stat.label}</dt>
+                  </div>
+                ))}
+              </dl>
+
+              <div className="mt-10 border-t border-border/70 pt-6">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                  {uiStrings.hero.currentFocusLabel}
+                </p>
+                <p className="mt-3 text-sm leading-7 text-foreground">
+                  Building reliable full-stack applications, reporting workflows, and cross-platform products.
+                </p>
+              </div>
+
+              <a
+                href="#experience"
+                className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
+              >
+                Review professional experience
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </div>
+          </motion.aside>
+        </div>
+
         <motion.div
-          className="mt-6 text-xl sm:text-2xl md:text-3xl text-muted-foreground min-h-[2.5rem] font-mono"
+          className="mt-16 flex flex-col gap-3 border-t border-border pt-5 text-sm sm:flex-row sm:items-center sm:justify-between"
           variants={itemVariants}
+          initial="hidden"
+          animate="visible"
           data-testid="typing-animation"
         >
-          <span className="inline-block">
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            Current technical lens
+          </span>
+          <span className="font-mono text-foreground" aria-live="polite">
             {typingText}
-            <span className="inline-block w-0.5 h-6 sm:h-7 md:h-8 bg-primary ml-1 animate-pulse align-middle" />
+            <span className="ml-1 inline-block h-4 w-0.5 animate-pulse bg-primary align-middle" aria-hidden="true" />
           </span>
         </motion.div>
-
-        {/* Subtitle */}
-        <motion.p
-          className="mt-6 text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
-          variants={itemVariants}
-        >
-          {subtitle}
-        </motion.p>
-
-        <motion.div
-          className="mt-6 flex flex-col items-center justify-center gap-3 text-sm text-muted-foreground sm:flex-row sm:flex-wrap"
-          variants={itemVariants}
-        >
-          <a
-            href={liveWork.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 hover:border-muted-foreground/50 hover:text-foreground transition-colors"
-          >
-            <BriefcaseBusiness className="h-4 w-4" />
-            {liveWork.label} {liveWork.company}
-          </a>
-          <a
-            href={personalInfo.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 hover:border-muted-foreground/50 hover:text-foreground transition-colors"
-          >
-            <Globe className="h-4 w-4" />
-            truongsoftware.com
-          </a>
-        </motion.div>
-
-        {/* CTA Buttons */}
-        <motion.div
-          className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center"
-          variants={itemVariants}
-        >
-          {ctaButtons.map((button, index) => (
-            <motion.a
-              key={index}
-              href={button.href}
-              className={`
-                group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg
-                font-semibold transition-all duration-200 min-w-[160px] w-full sm:w-auto
-                ${button.variant === 'primary'
-                  ? 'bg-primary text-primary-foreground hover:opacity-90'
-                  : 'bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border'
-                }
-              `}
-              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
-              whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-            >
-              {button.label}
-              {button.icon && (
-                <span className="transition-transform group-hover:translate-x-1">
-                  {button.icon}
-                </span>
-              )}
-            </motion.a>
-          ))}
-        </motion.div>
-
-        {/* Social links */}
-        <motion.div
-          className="mt-12 flex gap-6 justify-center items-center"
-          variants={itemVariants}
-        >
-          {personalInfo.socials.map((social) => (
-            <a
-              key={social.platform}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label={social.platform}
-            >
-              <social.icon className="h-6 w-6" />
-            </a>
-          ))}
-        </motion.div>
-
-        {/* Quick Stats - Technical Focus */}
-        <motion.div
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 md:gap-12 border-t border-border pt-12"
-          variants={itemVariants}
-        >
-          {personalInfo.stats.map((stat, index) => (
-            <div key={index} className="flex flex-col items-center justify-center space-y-2">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground font-mono">
-                {stat.value}
-              </span>
-              <span className="text-xs sm:text-sm text-muted-foreground font-mono uppercase tracking-wider">{stat.label}</span>
-            </div>
-          ))}
-        </motion.div>
-      </motion.div>
+      </div>
 
       {/* Scroll indicator */}
       <motion.div

@@ -1,40 +1,39 @@
 import {
-  Brain as BrainIcon,
   Layers as LayersIcon,
   Sparkles as SparklesIcon,
   Server as ServerIcon,
-  Github as GithubIcon,
-  LinkedinIcon,
+  BriefcaseBusiness,
   Mail as MailIcon,
   Users as UsersIcon,
   type LucideIcon,
 } from 'lucide-react';
 import type { ProjectCategory } from '@/types';
 
-export const projectCategories: ProjectCategory[] = ['All', 'AI', 'Web', 'Mobile', 'Open Source', 'Product'];
+export const projectCategories: ProjectCategory[] = ['All', 'Web', 'Mobile', 'Open Source', 'Product'];
 
 /** Production canonical origin — must match `site` in `astro.config.mjs`. */
 export const CANONICAL_SITE_URL = 'https://truongsoftware.com' as const;
 
 export const personalInfo = {
   name: "Dao Quang Truong",
-  role: "Fullstack Engineer",
-  bio: "Fullstack engineer with 6 years of experience shipping cross-platform products, modernizing TypeScript systems, and building AI-assisted workflows that help teams move faster without losing engineering rigor.",
-  location: "Hanoi, Vietnam",
+  role: "Middle+ Fullstack Developer",
+  bio: "Middle+ full-stack engineer specializing in TypeScript, React, Next.js, Node.js, NestJS, C#, PostgreSQL, reporting workflows, and cross-platform products. Proven track record of leading engineering teams, modernizing legacy services, and delivering reliable enterprise products for VIETIS, Viettel, and Naver.",
+  location: "Ninh Binh, Vietnam",
   phone: "(+84) 96 906 9035",
   email: "truongdq.dev@gmail.com",
-  website: CANONICAL_SITE_URL,
+  website: "porfolio-truongdq.vercel.app",
   githubUsername: "truongnat",
+  focusAreas: [
+    'Full-stack Application Engineering',
+    'Backend & API Development',
+    'Cross-Platform Architecture',
+    'Technical Leadership',
+  ],
   socials: [
-    {
-      platform: "GitHub",
-      url: "https://github.com/truongnat",
-      icon: GithubIcon,
-    },
     {
       platform: "LinkedIn",
       url: "https://linkedin.com/in/truongdq01",
-      icon: LinkedinIcon,
+      icon: BriefcaseBusiness,
     },
     {
       platform: "Email",
@@ -43,25 +42,25 @@ export const personalInfo = {
     },
   ],
   typingPhrases: [
-    'Fullstack Engineer',
-    'TypeScript Systems',
-    'React Native + Web',
-    'Agentic AI Workflows',
+    'Fullstack Developer',
+    'Web Application Engineer',
+    'Backend & API Developer',
+    'Cross-platform Architect',
   ],
   resumeUrl: "/Dao_Quang_Truong_CV.pdf",
   stats: [
-    { label: 'Years Experience', value: '6+' },
-    { label: 'Team Members Led', value: '8+' },
-    { label: 'API Latency Reduced', value: '50%' },
-    { label: 'Platforms Shipped', value: 'Web, Mobile, Desktop' }
+    { label: 'Years engineering', value: '6+' },
+    { label: 'Engineers mentored', value: '8+' },
+    { label: 'API latency reduced', value: '50%' },
+    { label: 'Runtime tests passing', value: '183' }
   ]
 };
 
 export const liveWork = {
-  company: 'VietIS',
+  company: 'VIETIS',
   url: 'https://vietis.com.vn/en/',
   location: 'Vietnam',
-  label: 'Currently shipping at',
+  label: 'Current Workplace',
 } as const;
 
 export const appInfo = {
@@ -76,24 +75,36 @@ export const appInfo = {
 };
 
 export const seo = {
-  title: "Dao Quang Truong | Fullstack Engineer",
-  description: "Portfolio of Dao Quang Truong, a fullstack engineer with 6 years of experience building cross-platform products, TypeScript systems, and AI-assisted developer workflows.",
+  title: "Dao Quang Truong | Middle+ Fullstack Developer",
+  description: "Middle+ full-stack engineer specializing in TypeScript, React, Next.js, Node.js, NestJS, C#, PostgreSQL, and cross-platform systems.",
   keywords: [
     'portfolio',
     'developer',
+    'mid-level software engineer',
     'full-stack',
+    'platform engineering',
     'TypeScript',
     'React',
     'React Native',
     'Node.js',
+    'Python',
+    'Rust',
+    'PostgreSQL',
+    'system design',
+    'technical leadership',
     'Team Leader',
     'CI/CD',
     'DevOps',
     'Viettel',
     'Naver',
-    'Agentic AI',
-    'SDLC Automation',
-    'Multi-agent Systems',
+    'Next.js',
+    'NestJS',
+    'C#',
+    'TanStack',
+    'ERP',
+    'OCR',
+    'Keycloak',
+    'Reporting',
     'Performance Optimization',
   ],
   url: CANONICAL_SITE_URL,
@@ -117,24 +128,6 @@ export interface SkillCardData {
 
 export const skillsConfig = {
   cards: [
-    {
-      id: 'ai-agentic',
-      title: 'AI & Agentic Systems',
-      level: 'Advanced',
-      icon: BrainIcon,
-      subSections: [
-        {
-          label: 'Agentic AI',
-          skills: ['LLMs', 'LangGraph', 'Neo4j', 'Prompt Engineering', 'Multi-agent Orchestration'],
-          highlight: 'Pioneering Agentic SDLC frameworks to automate coding tasks and system design.'
-        },
-        {
-          label: 'AI Development',
-          skills: ['Antigravity', 'Gemini', 'LangChain', 'OpenAI'],
-          highlight: 'Building production-ready self-correcting code through AI feedback loops.'
-        }
-      ]
-    },
     {
       id: 'frontend-crossplatform',
       title: 'Core Stack & Cross-Platform',
@@ -208,13 +201,16 @@ export interface Project {
 
 export const workExperience: Experience[] = [
   {
-    id: 'ai',
-    role: 'Independent AI Engineer',
-    company: 'Personal R&D and Product Work',
-    period: 'Jan 2024 – Present',
+    id: 'vietis',
+    role: 'Fullstack Developer',
+    company: 'VIETIS',
+    period: 'Mar 2026 – Present',
+    description: 'Delivering full-stack features for a Japanese school-management and OCR assessment platform, plus an enterprise ERP accounting and reporting platform.',
     achievements: [
-      'Built and iterated on agentic developer workflows focused on code generation, repository analysis, and execution guardrails for practical day-to-day engineering use.',
-      'Shipped open-source experiments around orchestrated AI agents, local-first tooling, and reusable workflow patterns for product and engineering teams.',
+      'Japanese School Management & OCR Assessment Platform: Developed student and teacher management features for a school-operations system serving the Japanese market.',
+      'OCR Assessment: Fixed and improved OCR-based exam scoring workflows, resolving issues in scan processing and assessment results.',
+      'Identity & Access: Investigated and resolved Keycloak-related authentication and authorization issues.',
+      'Enterprise ERP Accounting & Reporting Platform: Developed report features and business-rule-driven file export and file-generation workflows using a TanStack React frontend and C# backend.',
     ],
   },
   {
@@ -223,9 +219,9 @@ export const workExperience: Experience[] = [
     company: 'Blameo (Outsourcing for Viettel Group)',
     period: 'Jun 2022 – Present',
     achievements: [
-      'Led and mentored a cross-functional team of 8 engineers, aligning delivery plans with product milestones while raising review quality and engineering consistency.',
-      'Refactored legacy Node.js services to reduce API latency by 50% and improve reliability under heavier production traffic.',
-      'Architected KPI and cloud-product features with React, TypeScript, and Node.js while standardizing project setup, linting, and Git workflows.',
+      'Engineering Leadership: Led and mentored a cross-functional team of 8 engineers. Scaled the engineering department by designing a rigorous technical interview framework and established a structured mentorship program for interns.',
+      'Backend Architecture: Refactored legacy Node.js services reducing API latency by 50% and improving system reliability during peak loads.',
+      'Full-stack Development: Architected a KPI tracking platform and Viettel Cloud features using React, TypeScript, and Node.js. Established high-level coding standards such as ESLint and Git flow.',
     ],
   },
   {
@@ -234,9 +230,9 @@ export const workExperience: Experience[] = [
     company: 'CMC Global',
     period: 'Oct 2021 – Jun 2022',
     achievements: [
-      'Engineered a unified video conferencing experience across web, desktop, and mobile using Vue.js, Electron, and React Native.',
-      'Researched and implemented RTC/media synchronization improvements to keep video quality more stable across device and network conditions.',
-      'Contributed to code reviews and architecture discussions to reduce production regressions and improve maintainability.',
+      'Cross-Platform Development: Engineered a unified video conference solution across Web (Vue.js), Desktop (Electron.js), and Mobile (React Native) platforms.',
+      'Real-Time Communication (RTC): Researched and implemented media synchronization algorithms to stabilize video quality and connection across different devices and bandwidths.',
+      'Code Quality: Actively participated in code reviews and architectural discussions to ensure clean code and minimize production bugs.',
     ],
   },
   {
@@ -245,13 +241,41 @@ export const workExperience: Experience[] = [
     company: 'NTQ Solution',
     period: 'Oct 2020 – Oct 2021',
     achievements: [
-      'Built core features for a React Native low-code platform focused on reusable mobile generation patterns and dynamic runtime behavior.',
-      'Delivered e-learning and exam application flows with an emphasis on stability, mobile usability, and smooth interaction design.',
+      'Low-Code Platform Development: Built core features for a mobile app generation platform using React Native, focusing on automation and dynamic functionality.',
+      'E-Learning Application: Developed an exam and e-learning mobile app with a focus on intuitive user interfaces and smooth interactive flows.',
     ],
   },
 ];
 
 export const projectsConfig: Project[] = [
+  {
+    id: 'vietis-school-ocr',
+    title: 'Japanese School Management & OCR Assessment Platform',
+    role: 'Fullstack Developer',
+    period: 'Mar 2026 – Present',
+    description: 'Enterprise school-management platform for the Japanese market, covering student and teacher administration, OCR-based exam scanning, and automated scoring workflows.',
+    techStack: ['Next.js', 'React', 'TypeScript', 'NestJS', 'OCR', 'Keycloak'],
+    categories: ['Web', 'Product'],
+    achievements: [
+      'Scope: Developed features for student and teacher management across the school administration workflow.',
+      'OCR Assessment: Fixed and improved OCR-based exam scoring workflows, resolving issues affecting scan processing and assessment results.',
+      'Identity & Access: Investigated and resolved Keycloak-related authentication and authorization issues.',
+    ],
+  },
+  {
+    id: 'vietis-erp-accounting',
+    title: 'Enterprise ERP Accounting & Reporting Platform',
+    role: 'Fullstack Developer',
+    period: 'Mar 2026 – Present',
+    description: 'Enterprise ERP accounting platform focused on business-rule-driven reporting, file export, and document generation workflows.',
+    techStack: ['React', 'TanStack', 'TypeScript', 'C#'],
+    categories: ['Web', 'Product'],
+    achievements: [
+      'Reporting: Developed report features aligned with accounting and enterprise business workflows.',
+      'File Export: Implemented export and file-generation flows based on business rules and operational data.',
+      'Full-stack Delivery: Built TanStack-based React interfaces and connected reporting workflows to the C# backend.',
+    ],
+  },
   {
     id: 'rnui',
     title: 'RNUI — React Native UI Framework',
@@ -272,7 +296,7 @@ export const projectsConfig: Project[] = [
     title: 'TanStack Full Demo',
     role: 'Fullstack Developer',
     period: 'Present',
-    description: 'A polished demo app showing how Query, Table, Virtual, Form, Store, and Router fit together in one SSR product workflow. Built with TanStack Start, shadcn/ui, and Tailwind CSS v4.',
+    description: 'A beginner-friendly dashboard showcasing all major TanStack libraries working together in a real app — Query, Table, Virtual, Form, Store, and Router. Built with TanStack Start (SSR), shadcn/ui, and Tailwind CSS v4, deployed on Vercel.',
     techStack: ['React 19', 'TypeScript', 'TanStack Start', 'TanStack Query', 'TanStack Table', 'TanStack Virtual', 'TanStack Form', 'TanStack Store', 'TanStack Router', 'shadcn/ui', 'Tailwind CSS v4', 'Vite', 'Nitro', 'Vercel'],
     categories: ['Web', 'Open Source'],
     achievements: [
@@ -281,36 +305,6 @@ export const projectsConfig: Project[] = [
       'Result: A production-ready SSR app on Vercel showcasing real-world patterns: optimistic updates, cache invalidation, virtualization, headless UI, and SSR-safe global state.',
     ],
     link: 'https://example-react-brown.vercel.app'
-  },
-  {
-    id: 'agentic-sdlc-product',
-    title: 'Agentic SDLC',
-    role: 'Systems Engineer',
-    period: 'Present',
-    description: 'A deterministic local runtime for AI agent workflows with policy guardrails, persisted state, and replayable LLM responses for reproducible execution.',
-    techStack: ['Rust', 'Tokio', 'Clap', 'SQLite (rusqlite)', 'PostgreSQL + pgvector', 'git2', 'AWS Bedrock', 'OpenAI', 'Anthropic', 'Gemini', 'Azure OpenAI', 'Ollama', 'ed25519-dalek', 'OpenTelemetry'],
-    categories: ['AI', 'Open Source'],
-    achievements: [
-      'Challenge: Building a reliable, auditable runtime for AI agent workflows that eliminates non-determinism and enables safe execution of untrusted code.',
-      'Action: Implemented deterministic workflow engine with trace IDs, replay store for LLM responses (record/replay mode), process isolation sandbox with CPU/memory limits, 6 LLM provider backends, and Git integration design with crash recovery via persistent state.',
-      'Result: 183 tests passing with 100% pass rate. Supports resumable workflows, idempotent steps, policy-enforced trust tiers, and audit-ready timeline traces — deployable as a local CLI tool or CI/CD component.',
-    ],
-    link: 'https://agentic-sdlc-truongdqdev-9126s-projects.vercel.app'
-  },
-  {
-    id: 'agentic-sdlc',
-    title: 'Agentic SDLC (Personal R&D)',
-    role: 'AI Engineer',
-    period: 'Jan 2024 – Present',
-    description: 'AI-powered Software Development Lifecycle framework providing tools for orchestrating agents, managing workflows, and building intelligent automation systems. Features clean public API, modular architecture, and extensibility through plugins.',
-    techStack: ['Python', 'LangChain', 'OpenAI', 'Anthropic', 'DSPy', 'Autogen', 'Neo4j', 'Docker', 'Pydantic', 'Streamlit'],
-    categories: ['AI', 'Open Source'],
-    achievements: [
-      'Challenge: Building a comprehensive AI-powered framework for automating the software development lifecycle with clean architecture and extensibility.',
-      'Action: Developed a production-ready Python SDK with configuration management, agent orchestration, workflow automation, intelligence features (learning, monitoring, reasoning), and a plugin system. Implemented CLI tools, comprehensive testing, and documentation.',
-      'Result: Created a 100%-complete framework with 15+ CLI commands, full test coverage, and production-ready code that enables AI agents to collaborate on software development tasks with learning and adaptation capabilities.',
-    ],
-    link: 'https://agentic-sdlc-truongdqdev-9126s-projects.vercel.app'
   },
   {
     id: 'universal-music-downloader',
@@ -332,7 +326,7 @@ export const projectsConfig: Project[] = [
     title: 'NetBI – KPI Management Platform',
     role: 'Software Engineer',
     period: 'Jan 2023 – Jan 2024',
-    description: 'Unified web and mobile KPI platform for enterprise monitoring, including complex data visualization and regional performance tracking.',
+    description: 'Build a unified web and mobile platform for enterprise KPI monitoring with complex data visualization needs.',
     techStack: ['React', 'React Native', 'ChartJS', 'GitLab CI/CD', 'Jenkins', 'Linux VPS', 'Nginx'],
     categories: ['Web', 'Mobile'],
     achievements: [
@@ -346,7 +340,7 @@ export const projectsConfig: Project[] = [
     title: 'Naver Cloud Meeting',
     role: 'Software Engineer',
     period: 'Jun 2021 – Dec 2022',
-    description: 'Cross-platform video conferencing product focused on stable media delivery and a consistent user experience across web, desktop, and mobile.',
+    description: 'Develop a stable, multi-platform video conferencing solution with consistent user experience.',
     techStack: ['Vue.js', 'React Native', 'Electron.js', 'Jitsi Meet'],
     categories: ['Web', 'Mobile'],
     achievements: [
@@ -360,7 +354,7 @@ export const projectsConfig: Project[] = [
     title: 'GoPass – Online Exam Platform',
     role: 'Mobile Developer',
     period: 'Oct 2020 – Jun 2021',
-    description: 'Offline-capable exam application for the Japanese market, built to handle structured test flows with dependable mobile performance.',
+    description: 'Create a stable, user-friendly exam application for the Japanese market with offline functionality.',
     techStack: ['React Native', 'Realm DB', 'PHP'],
     categories: ['Mobile'],
     achievements: [
@@ -442,11 +436,6 @@ export const testimonialsData: Testimonial[] = [
     role: "PM at Viettel Net"
   },
   {
-    quote: "Working with Truong on the AI automation project was transformative for our team. He not only delivered ahead of schedule but also elevated the entire team's technical capabilities.",
-    author: "Vu Thanh Dat",
-    role: "CTO at Blameo"
-  },
-  {
     quote: "Truong's expertise in cross-platform development helped us deliver a seamless video conferencing solution across web, mobile, and desktop. His attention to detail and problem-solving skills are outstanding.",
     author: "Vu Ba Huan",
     role: "Director at CMC"
@@ -464,52 +453,49 @@ export const awards: Award[] = [
 ];
 
 export const navLinks = [
-  { label: 'Projects', href: '/#projects' },
   { label: 'Experience', href: '/#experience' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Skills', href: '/#skills' },
   { label: 'Now', href: '/now/' },
-  { label: 'Uses', href: '/uses/' },
-  { label: 'Journal', href: '/journal/' },
-  { label: 'Graph', href: '/graph/' },
-  //{ label: 'Skills', href: '/#skills' },
-  { label: 'Tech Radar', href: '/tech-radar/' },
-  //{ label: 'Experience', href: '/#experience' },
-  //{ label: 'Certificates', href: '/#certificates' },
-  //{ label: 'GitHub Stats', href: '/#github-stats' },
-  //{ label: 'Testimonials', href: '/#testimonials' },
-  //{ label: 'Projects', href: '/#projects' },
   { label: 'Blog', href: '/blog/' },
+  { label: 'Tech Radar', href: '/tech-radar/' },
   { label: 'Contact', href: '/#contact' },
 ];
 
 export const uiStrings = {
   common: {
-    logo: 'TRUONG.SOFTWARE',
+    logo: 'TRUONG.DEV',
   },
   hero: {
+    eyebrow: 'Middle+ engineering profile',
+    focusLabel: 'Core expertise',
+    snapshotLabel: 'Career snapshot',
+    currentFocusLabel: 'Current focus',
     cta: {
-      projects: 'See Selected Work',
-      cv: 'Download CV',
-      contact: 'Start a Conversation',
+      projects: 'View selected projects',
+      cv: 'Download resume',
+      contact: 'Start a conversation',
     },
   },
   skills: {
-    title: 'Technical Stack',
-    subtitle: 'Fullstack Development & AI Systems',
+    title: 'Technical Skills',
+    subtitle: 'Full-stack Engineering · Web Applications · Cross-Platform Development',
   },
   experience: {
-    title: 'Experience',
-    subtitle: 'Teams, Systems, and Outcomes',
-    achievementsTitle: 'Key Contributions',
+    title: 'Professional Experience',
+    subtitle: 'Leadership, delivery, and measurable outcomes',
+    achievementsTitle: 'Major Achievements',
   },
   projects: {
-    title: 'Selected Works',
-    subtitle: 'Products, Systems, and Technical Case Studies',
+    title: 'Selected Projects',
+    subtitle: 'Production systems, developer tools, and open-source products',
     emptyMessage: 'NO_PROJECTS_FOUND',
-    viewLive: 'VIEW_PROJECT',
+    impactLabel: 'Impact',
+    viewLive: 'View project',
   },
   contact: {
-    title: "Let's Talk",
-    subtitle: 'Open to product, platform, and engineering leadership conversations',
+    title: 'Contact',
+    subtitle: 'Available for full-stack engineering and platform opportunities',
     form: {
       nameLabel: '01 // Name',
       namePlaceholder: 'ENTER_NAME',

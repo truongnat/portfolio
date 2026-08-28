@@ -1,7 +1,10 @@
 import type { APIRoute } from 'astro';
 import { jsonErrorResponse, logApiError } from '@/lib/api-error-response';
+import { methodNotAllowed } from '@/lib/api-methods';
 import { computeCertificateSignatureHex } from '@/lib/certificate-signature';
 import { z } from 'zod';
+
+export const prerender = false;
 
 /**
  * Dev-only: returns a signed `/api/certificate` path+query for local admin/testing.
@@ -14,6 +17,8 @@ const bodySchema = z.object({
   date: z.string(),
   certificateId: z.string(),
 });
+
+export const GET: APIRoute = () => methodNotAllowed('POST');
 
 export const POST: APIRoute = async ({ request }) => {
   if (import.meta.env.PROD) {

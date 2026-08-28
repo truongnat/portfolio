@@ -1,6 +1,9 @@
 import type { APIRoute } from 'astro';
 import { stubUnavailableInProduction } from '@/lib/production-stub-guard';
+import { methodNotAllowed } from '@/lib/api-methods';
 import { z } from 'zod';
+
+export const prerender = false;
 
 const cryptoPaymentSchema = z.object({
   skillId: z.string(),
@@ -8,9 +11,11 @@ const cryptoPaymentSchema = z.object({
   amount: z.number().positive(),
   currency: z.enum(['BTC', 'ETH', 'USDT', 'USDC']),
   donatorName: z.string().min(1),
-  donatorEmail: z.string().email(),
+  donatorEmail: z.email(),
   isAnonymous: z.boolean().default(false),
 });
+
+export const GET: APIRoute = () => methodNotAllowed('POST');
 
 /**
  * Generate crypto payment address/QR code

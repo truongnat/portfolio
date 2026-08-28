@@ -2,6 +2,8 @@ import type { APIRoute } from 'astro';
 import { personalInfo, workExperience, projectsConfig, skillsConfig, certificatesData, testimonialsData, awards, navLinks, seo, uiStrings, liveWork, projectCategories } from '@/lib/config';
 import { getCollection } from 'astro:content';
 
+export const prerender = false;
+
 export const GET: APIRoute = async () => {
   const blogPosts = await getCollection('blog');
   const journalEntries = await getCollection('journal');

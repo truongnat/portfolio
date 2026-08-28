@@ -6,7 +6,7 @@ export const prerender = false;
 
 const submitBugSchema = z.object({
   reporterName: z.string().min(2),
-  reporterEmail: z.string().email(),
+  reporterEmail: z.email(),
   title: z.string().min(10),
   description: z.string().min(50),
   severity: z.enum(['critical', 'high', 'medium', 'low', 'info']),

@@ -29,4 +29,4 @@ export interface Project {
     link?: string;
 }
 
-export type ProjectCategory = 'All' | 'AI' | 'Web' | 'Mobile' | 'Open Source' | 'Product';
+export type ProjectCategory = 'All' | 'Web' | 'Mobile' | 'Open Source' | 'Product';

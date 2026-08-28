@@ -1,6 +1,9 @@
 import type { APIRoute } from 'astro';
 import { jsonErrorResponse } from '@/lib/api-error-response';
+import { methodNotAllowed } from '@/lib/api-methods';
 import { z } from 'zod';
+
+export const prerender = false;
 
 const createPaymentSchema = z.object({
   skillId: z.string(),
@@ -8,9 +11,11 @@ const createPaymentSchema = z.object({
   amount: z.number().positive(),
   currency: z.string().default('usd'),
   donatorName: z.string().min(1),
-  donatorEmail: z.string().email(),
+  donatorEmail: z.email(),
   isAnonymous: z.boolean().default(false),
 });
+
+export const GET: APIRoute = () => methodNotAllowed('POST');
 
 /**
  * Create Stripe Payment Intent

@@ -1,13 +1,18 @@
 import type { APIRoute } from 'astro';
 import { z } from 'zod';
 import { logApiError } from '@/lib/api-error-response';
+import { methodNotAllowed } from '@/lib/api-methods';
 import { fetchWithRetry } from '@/lib/api-utils';
+
+export const prerender = false;
 
 const contactFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.email('Invalid email address'),
   message: z.string().min(10, 'Message must be at least 10 characters'),
 });
+
+export const GET: APIRoute = () => methodNotAllowed('POST');
 
 export const POST: APIRoute = async ({ request }) => {
   try {

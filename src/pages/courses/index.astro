@@ -7,7 +7,6 @@ const allCourses = await getCollection('courses', ({ data }) => data.published =
 
 const sortedCourses = allCourses.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const levelOrder = { beginner: 0, intermediate: 1, advanced: 2 };
 const levelColors = {
   beginner: 'bg-green-500/10 text-green-400 border-green-500/20',
   intermediate: 'bg-blue-500/10 text-blue-400 border-blue-500/20',

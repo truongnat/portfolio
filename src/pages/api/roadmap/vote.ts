@@ -8,7 +8,7 @@ const voteSchema = z.object({
   featureId: z.string(),
   amount: z.number().positive(),
   voterName: z.string().min(2),
-  voterEmail: z.string().email().optional(),
+  voterEmail: z.email().optional(),
   message: z.string().optional(),
   isAnonymous: z.boolean().default(false),
   paymentMethod: z.enum(['stripe', 'crypto', 'manual']),

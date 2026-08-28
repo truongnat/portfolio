@@ -1,10 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Maximize2, Minimize2, RefreshCw, Box } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Box, Maximize2, Minimize2, RefreshCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import * as THREE from 'three';
 
 interface Node {
   id: string;
@@ -12,9 +11,6 @@ interface Node {
   type: 'blog' | 'journal' | 'tag';
   val: number;
   group: number;
-  x?: number;
-  y?: number;
-  z?: number;
 }
 
 interface Link {
@@ -29,182 +25,250 @@ interface KnowledgeGraphProps {
   };
 }
 
+interface Position {
+  x: number;
+  y: number;
+}
+
+const VIEWBOX_WIDTH = 1000;
+const VIEWBOX_HEIGHT = 560;
+
+function getNodeColor(type: Node['type']) {
+  if (type === 'blog') return '#60a5fa';
+  if (type === 'journal') return '#34d399';
+  return '#a1a1aa';
+}
+
+function getNodeHref(node: Node) {
+  if (node.type === 'blog') return `/blog/${node.id}/`;
+  if (node.type === 'journal') return `/journal/${node.id}/`;
+  return null;
+}
+
+function getShortLabel(label: string, maxLength = 26) {
+  return label.length > maxLength ? `${label.slice(0, maxLength - 1)}…` : label;
+}
+
 export function KnowledgeGraphClient({ data }: KnowledgeGraphProps) {
-  const fgRef = useRef<any>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [ForceGraph3D, setForceGraph3D] = useState<any>(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 600 });
   const [hoverNode, setHoverNode] = useState<Node | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [layoutSeed, setLayoutSeed] = useState(0);
 
-  // Dynamic import on client side
-  useEffect(() => {
-    import('react-force-graph-3d').then(mod => {
-      setForceGraph3D(() => mod.default);
-    });
-  }, []);
-
-  // Resize handler
-  useEffect(() => {
-    const updateDimensions = () => {
-      if (containerRef.current) {
-        setDimensions({
-          width: containerRef.current.offsetWidth,
-          height: isFullscreen ? window.innerHeight - 100 : (typeof window !== 'undefined' && window.innerWidth < 768 ? 350 : 600)
-        });
-      }
+  const positions = useMemo(() => {
+    const positionMap = new Map<string, Position>();
+    const contentNodes = data.nodes.filter((node) => node.type !== 'tag');
+    const tagNodes = data.nodes.filter((node) => node.type === 'tag');
+    const contentGroups = {
+      blog: contentNodes.filter((node) => node.type === 'blog'),
+      journal: contentNodes.filter((node) => node.type === 'journal'),
     };
 
-    updateDimensions();
-    window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
-  }, [isFullscreen]);
-
-  const nodeColor = useCallback((node: Node) => {
-    if (node.type === 'blog') return '#3b82f6'; // blue-500
-    if (node.type === 'journal') return '#10b981'; // emerald-500
-    return '#71717a'; // zinc-500
-  }, []);
-
-  const nodeThreeObject = useCallback((node: any) => {
-    const n = node as Node;
-    const size = Math.sqrt(n.val || 1) * 2;
-    
-    // Create group to hold mesh and label
-    const group = new THREE.Group();
-
-    // Create Sphere
-    const geometry = new THREE.SphereGeometry(size, 16, 16);
-    const material = new THREE.MeshLambertMaterial({ 
-      color: nodeColor(n), 
-      transparent: true, 
-      opacity: 0.9 
-    });
-    const sphere = new THREE.Mesh(geometry, material);
-    group.add(sphere);
-
-    // Create label (only if important or on hover)
-    if (n.type !== 'tag' || n.val > 10) {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-            canvas.width = 256;
-            canvas.height = 64;
-            ctx.font = '24px "JetBrains Mono"';
-            ctx.fillStyle = '#ffffff';
-            ctx.textAlign = 'center';
-            ctx.fillText(n.name, 128, 32);
-
-            const texture = new THREE.CanvasTexture(canvas);
-            const labelMaterial = new THREE.SpriteMaterial({ map: texture, transparent: true });
-            const label = new THREE.Sprite(labelMaterial);
-            label.position.set(0, size + 5, 0);
-            label.scale.set(size * 4, size, 1);
-            group.add(label);
-        }
+    for (const [type, nodes] of Object.entries(contentGroups) as Array<[
+      'blog' | 'journal',
+      Node[],
+    ]>) {
+      const x = type === 'blog' ? 180 : 820;
+      nodes.forEach((node, index) => {
+        const progress = (index + 1) / (nodes.length + 1);
+        positionMap.set(node.id, {
+          x: x + Math.sin((index + layoutSeed) * 1.7) * 36,
+          y: 48 + progress * 404,
+        });
+      });
     }
 
-    return group;
-  }, [nodeColor]);
+    const tagRadius = Math.min(222, 116 + tagNodes.length * 2.5);
+    tagNodes.forEach((node, index) => {
+      const angle = (index / Math.max(tagNodes.length, 1)) * Math.PI * 2 + layoutSeed * 0.22;
+      positionMap.set(node.id, {
+        x: VIEWBOX_WIDTH / 2 + Math.cos(angle) * tagRadius,
+        y: VIEWBOX_HEIGHT / 2 + Math.sin(angle) * tagRadius * 0.72,
+      });
+    });
+
+    return positionMap;
+  }, [data.nodes, layoutSeed]);
 
   return (
-    <div 
-      ref={containerRef}
+    <div
       className={cn(
-        "relative rounded-2xl border border-border/40 bg-card/30 overflow-hidden backdrop-blur-sm transition-all duration-500",
-        isFullscreen ? "fixed inset-0 z-[200] m-4 h-[calc(100vh-2rem)]" : "w-full h-[600px]"
+        'relative overflow-hidden rounded-2xl border border-border/40 bg-card/30 backdrop-blur-sm transition-all duration-500',
+        isFullscreen ? 'fixed inset-0 z-[200] m-4 h-[calc(100vh-2rem)]' : 'w-full',
       )}
     >
-      {/* Mobile warning */}
-      <div className="sm:hidden mb-4 px-4 py-3 bg-muted/30 border border-border/40 rounded-xl text-xs font-mono text-muted-foreground text-center">
-        💡 Best viewed on desktop — rotate device or use a larger screen for the full 3D experience
+      <div className="border-b border-border/40 px-4 py-3 text-center text-xs text-muted-foreground font-mono sm:hidden">
+        Tap a node to open its article. Best viewed on a larger screen.
       </div>
-      {/* Controls */}
-      <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
-        <button 
-          onClick={() => setIsFullscreen(!isFullscreen)}
-          className="p-2 rounded-lg bg-background/80 border border-border hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
-          title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+
+      <div className="absolute right-4 top-4 z-10 flex flex-col gap-2">
+        <button
+          type="button"
+          onClick={() => setIsFullscreen((current) => !current)}
+          className="rounded-lg border border-border bg-background/80 p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+          aria-label={isFullscreen ? 'Exit fullscreen' : 'View graph fullscreen'}
         >
           {isFullscreen ? <Minimize2 size={18} /> : <Maximize2 size={18} />}
         </button>
-        <button 
-          onClick={() => fgRef.current?.zoomToFit(400)}
-          className="p-2 rounded-lg bg-background/80 border border-border hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
-          title="Zoom to Fit"
+        <button
+          type="button"
+          onClick={() => setLayoutSeed((seed) => seed + 1)}
+          className="rounded-lg border border-border bg-background/80 p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          title="Rearrange network"
+          aria-label="Rearrange network"
         >
           <RefreshCw size={18} />
         </button>
-        <div className="p-2 rounded-lg bg-primary/10 border border-primary/20 text-primary flex items-center justify-center">
-            <Box size={18} />
+        <div
+          className="flex items-center justify-center rounded-lg border border-primary/20 bg-primary/10 p-2 text-primary"
+          title="SVG knowledge network"
+          aria-label="SVG knowledge network"
+        >
+          <Box size={18} />
         </div>
       </div>
 
-      {/* Legend */}
-      <div className="absolute bottom-4 left-4 z-10 p-4 rounded-xl bg-background/60 border border-border/40 backdrop-blur-md space-y-2 pointer-events-none">
-        <h4 className="text-[10px] font-mono font-bold text-muted-foreground uppercase tracking-widest mb-3">3D Knowledge Space</h4>
+      <svg
+        className="min-h-[350px] w-full"
+        viewBox={`0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
+        role="img"
+        aria-label="Interactive engineering knowledge network"
+      >
+        <defs>
+          <radialGradient id="network-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.12" />
+            <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+
+        <rect width={VIEWBOX_WIDTH} height={VIEWBOX_HEIGHT} fill="url(#network-glow)" />
+
+        <g aria-hidden="true">
+          {data.links.map((link, index) => {
+            const source = positions.get(link.source);
+            const target = positions.get(link.target);
+            if (!source || !target) return null;
+            const sourceNode = data.nodes.find((node) => node.id === link.source);
+
+            return (
+              <line
+                key={`${link.source}-${link.target}-${index}`}
+                x1={source.x}
+                y1={source.y}
+                x2={target.x}
+                y2={target.y}
+                stroke={getNodeColor(sourceNode?.type ?? 'tag')}
+                strokeOpacity="0.2"
+                strokeWidth="1"
+              />
+            );
+          })}
+        </g>
+
+        <g>
+          {data.nodes.map((node) => {
+            const position = positions.get(node.id);
+            if (!position) return null;
+            const href = getNodeHref(node);
+            const radius = Math.max(5, Math.sqrt(node.val || 1) * 1.8);
+            const isHovered = hoverNode?.id === node.id;
+            const nodeContent = (
+              <>
+                <circle
+                  cx={position.x}
+                  cy={position.y}
+                  r={isHovered ? radius + 3 : radius}
+                  fill={getNodeColor(node.type)}
+                  fillOpacity={node.type === 'tag' ? 0.65 : 0.9}
+                  stroke={isHovered ? '#ffffff' : getNodeColor(node.type)}
+                  strokeOpacity={isHovered ? 0.9 : 0.45}
+                  strokeWidth={isHovered ? 2 : 1}
+                  className="transition-all duration-200"
+                />
+                {node.type !== 'tag' && (
+                  <text
+                    x={position.x + radius + 7}
+                    y={position.y + 3}
+                    fill="currentColor"
+                    className="fill-foreground/75 text-[10px] font-mono"
+                  >
+                    {getShortLabel(node.name)}
+                  </text>
+                )}
+              </>
+            );
+
+            const sharedProps = {
+              onMouseEnter: () => setHoverNode(node),
+              onMouseLeave: () => setHoverNode(null),
+            };
+
+            return href ? (
+              <a
+                key={node.id}
+                href={href}
+                aria-label={`Open ${node.type}: ${node.name}`}
+                {...sharedProps}
+              >
+                {nodeContent}
+              </a>
+            ) : (
+              <g
+                key={node.id}
+                role="img"
+                aria-label={`Topic: ${node.name}`}
+                {...sharedProps}
+              >
+                {nodeContent}
+              </g>
+            );
+          })}
+        </g>
+      </svg>
+
+      <div className="pointer-events-none absolute bottom-4 left-4 z-10 space-y-2 rounded-xl border border-border/40 bg-background/70 p-4 backdrop-blur-md">
+        <h2 className="mb-3 text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground">
+          Engineering knowledge network
+        </h2>
         <div className="flex items-center gap-3">
-          <div className="w-2 h-2 rounded-full bg-blue-500" />
-          <span className="text-[10px] font-mono text-foreground/80 uppercase">Engineering Blog</span>
+          <span className="h-2 w-2 rounded-full bg-blue-400" />
+          <span className="text-[10px] font-mono uppercase text-foreground/80">Engineering blog</span>
         </div>
         <div className="flex items-center gap-3">
-          <div className="w-2 h-2 rounded-full bg-emerald-500" />
-          <span className="text-[10px] font-mono text-foreground/80 uppercase">Daily Journal</span>
+          <span className="h-2 w-2 rounded-full bg-emerald-400" />
+          <span className="text-[10px] font-mono uppercase text-foreground/80">Daily journal</span>
         </div>
         <div className="flex items-center gap-3">
-          <div className="w-2 h-2 rounded-full bg-zinc-500" />
-          <span className="text-[10px] font-mono text-foreground/80 uppercase">Core Concepts</span>
+          <span className="h-2 w-2 rounded-full bg-zinc-400" />
+          <span className="text-[10px] font-mono uppercase text-foreground/80">Core concepts</span>
         </div>
       </div>
 
-      {ForceGraph3D ? (
-        <ForceGraph3D
-          ref={fgRef}
-          graphData={data}
-          width={dimensions.width}
-          height={dimensions.height}
-          backgroundColor="rgba(0,0,0,0)"
-          nodeThreeObject={nodeThreeObject}
-          linkColor={() => 'rgba(255, 255, 255, 0.1)'}
-          linkWidth={0.5}
-          onNodeHover={(node: any) => setHoverNode(node)}
-          onNodeClick={(node: any) => {
-            if (node.type !== 'tag') {
-              const path = node.type === 'blog' ? `/blog/${node.id}/` : `/journal/${node.id}/`;
-              window.location.href = path;
-            }
-          }}
-          showNavInfo={false}
-          enableNodeDrag={false}
-          cooldownTicks={100}
-        />
-      ) : (
-        <div className="w-full h-full flex items-center justify-center font-mono text-muted-foreground animate-pulse">
-          INITIALIZING_3D_ENGINE...
-        </div>
-      )}
-
-      {/* Hover Info Overlay */}
       <AnimatePresence>
         {hoverNode && (
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="absolute top-4 left-4 z-10 p-4 max-w-[240px] rounded-xl bg-background/80 border border-border/80 backdrop-blur-xl shadow-2xl pointer-events-none"
+            className="pointer-events-none absolute right-4 top-24 z-10 max-w-[240px] rounded-xl border border-border/80 bg-background/80 p-4 shadow-2xl backdrop-blur-xl"
           >
-            <div className="flex items-center gap-2 mb-2">
-              <div className={cn(
-                "w-1.5 h-1.5 rounded-full",
-                hoverNode.type === 'blog' ? "bg-blue-500" : hoverNode.type === 'journal' ? "bg-emerald-500" : "bg-zinc-500"
-              )} />
-              <span className="text-[10px] font-mono text-muted-foreground uppercase">{hoverNode.type}</span>
+            <div className="mb-2 flex items-center gap-2">
+              <span
+                className={cn(
+                  'h-1.5 w-1.5 rounded-full',
+                  hoverNode.type === 'blog'
+                    ? 'bg-blue-400'
+                    : hoverNode.type === 'journal'
+                      ? 'bg-emerald-400'
+                      : 'bg-zinc-400',
+                )}
+              />
+              <span className="text-[10px] font-mono uppercase text-muted-foreground">{hoverNode.type}</span>
             </div>
-            <h3 className="text-sm font-bold font-mono leading-tight">{hoverNode.name}</h3>
+            <p className="text-sm font-bold leading-tight text-foreground">{hoverNode.name}</p>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
   );
 }
-

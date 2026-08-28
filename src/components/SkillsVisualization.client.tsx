@@ -3,7 +3,7 @@
 import { motion, type Variants } from 'framer-motion';
 import { useSafeReducedMotion } from '@/hooks/useSafeReducedMotion';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { Brain, Layers, Server, type LucideIcon } from 'lucide-react';
+import { Layers, Server, type LucideIcon } from 'lucide-react';
 
 interface SkillLevel {
   name: string;
@@ -25,19 +25,6 @@ export function SkillsVisualizationClient() {
   const shouldReduceMotion = useSafeReducedMotion();
 
   const skillsData: SkillCategoryWithLevels[] = [
-    {
-      id: 'ai-agentic',
-      title: 'AI & Agentic Systems',
-      icon: Brain,
-      skills: [
-        { name: 'Agentic AI', level: 95 },
-        { name: 'LLMs', level: 90 },
-        { name: 'LangGraph', level: 85 },
-        { name: 'CrewAI', level: 80 },
-        { name: 'Prompt Engineering', level: 90 },
-        { name: 'Multi-agent Orchestration', level: 85 }
-      ]
-    },
     {
       id: 'frontend-crossplatform',
       title: 'Core Stack & Cross-Platform',

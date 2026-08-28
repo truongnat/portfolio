@@ -7,7 +7,7 @@ export const prerender = false;
 const sponsorSessionSchema = z.object({
   sessionId: z.string(),
   sponsorName: z.string().min(2),
-  sponsorEmail: z.string().email().optional(),
+  sponsorEmail: z.email().optional(),
   amount: z.number().positive(),
   hours: z.number().positive(),
   message: z.string().optional(),
