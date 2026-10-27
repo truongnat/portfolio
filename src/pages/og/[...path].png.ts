@@ -15,7 +15,7 @@ const fontDataPromise = readFile(
 );
 
 export async function getStaticPaths() {
-  const blogPosts = await getCollection('blog');
+  const blogPosts = await getCollection('blog', ({ data }) => data.published === true);
   const journalPosts = await getCollection('journal');
 
   const paths = [

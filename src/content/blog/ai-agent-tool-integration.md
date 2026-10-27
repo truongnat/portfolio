@@ -184,7 +184,7 @@ Never run LLM-generated code directly in your host process. Even well-intentione
 
 ## Security Considerations
 
-A few hard-won lessons:
+A few rules I keep:
 
 **Treat tool inputs as untrusted user input.** An LLM can be prompted (intentionally or through prompt injection in retrieved content) to produce malicious tool arguments. Validate everything.
 

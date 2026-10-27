@@ -13,7 +13,7 @@ coverImage: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=form
 
 In multi-tenant applications, tenant isolation is usually enforced in application code: every query includes a `WHERE tenant_id = $1` clause, and you hope every developer on the team remembers to add it. That's a fragile guarantee. One missing WHERE clause and Tenant A reads Tenant B's data.
 
-PostgreSQL's Row Level Security (RLS) moves that guarantee into the database. The isolation is enforced at the storage layer, not the application layer. Even if your application code has a bug and forgets the tenant filter, the database silently enforces it. I've used RLS in both my Agentic SDLC project and client portfolio applications, and I'll never go back to application-layer-only isolation for multi-tenant systems.
+PostgreSQL's Row Level Security (RLS) moves that guarantee into the database. The isolation is enforced at the storage layer, not the application layer. Even if your application code has a bug and forgets the tenant filter, the database silently enforces it. I've used RLS in both my Agentic SDLC project and client portfolio applications.
 
 ## What Row Level Security Does
 

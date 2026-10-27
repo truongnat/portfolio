@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 export const prerender = false;
 
 export const GET: APIRoute = async () => {
-  const blogPosts = await getCollection('blog');
+  const blogPosts = await getCollection('blog', ({ data }) => data.published === true);
   const journalEntries = await getCollection('journal');
 
   const markdownContent = generatePortfolioMarkdown(blogPosts, journalEntries);

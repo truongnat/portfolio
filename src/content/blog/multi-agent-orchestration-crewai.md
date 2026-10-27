@@ -115,7 +115,7 @@ I solved this with a shared memory store: a simple in-memory dictionary backed b
 
 ## Lessons From the Real System
 
-A few hard-won lessons from building this in Agentic SDLC:
+Notes from building this in Agentic SDLC:
 
 **Temperature matters per role.** The requirements analyst benefits from slightly higher temperature (more exploratory questions). The code generator should be at 0 — you want deterministic output, not creative code.
 
@@ -125,4 +125,4 @@ A few hard-won lessons from building this in Agentic SDLC:
 
 **Log everything.** CrewAI's verbose mode helps during development. In production, I pipe agent outputs to a structured log store. When something goes wrong in a 20-step workflow, you need to know exactly which agent at which step introduced the problem.
 
-Multi-agent orchestration with CrewAI genuinely changed how I think about AI system design. The shift is from "how do I write one smart prompt" to "how do I design a team of AI specialists that can collaborate effectively." It's a harder problem, but the results at scale are dramatically better.
+The shift is from "how do I write one smart prompt" to "how do I design a team of AI specialists that can collaborate effectively."

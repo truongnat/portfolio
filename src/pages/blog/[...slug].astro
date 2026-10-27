@@ -10,7 +10,7 @@ import { PostCard } from '@/components/PostCard';
 import { CANONICAL_SITE_URL, seo } from '@/lib/config';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
+	const posts = await getCollection('blog', ({ data }) => data.published === true);
 	return posts.map((post) => ({
 		params: { slug: post.id },
 		props: post,
@@ -33,8 +33,7 @@ const tocItems = headings.map(h => ({
 
 // Fetch related posts
 const allPosts = await getCollection('blog', ({ data, id }) => {
-    const isPublished = import.meta.env.PROD ? data.published !== false : true;
-    return isPublished && id !== post.id;
+    return data.published === true && id !== post.id;
 });
 
 const relatedPosts = allPosts

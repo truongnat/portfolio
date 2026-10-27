@@ -1,7 +1,7 @@
 ---
 title: "Next.js App Router: Server Components, Streaming, and the Mental Model Shift"
 date: "2026-03-24"
-description: "How migrating an e-commerce project to the Next.js App Router changed my mental model of React, doubled page load speeds, and pushed Lighthouse scores past 90."
+description: "How migrating an e-commerce project to the Next.js App Router changed my mental model of React: Server Components, streaming, and where the client boundary goes."
 slug: "nextjs-app-router-patterns"
 published: true
 tags: ["Frontend", "Next.js", "React"]
@@ -9,7 +9,7 @@ author: "Dao Quang Truong"
 coverImage: "https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?auto=format&fit=crop&q=80&w=1000"
 ---
 
-When Next.js 13 introduced the App Router, I was skeptical. The Pages Router worked well. I knew it deeply. The new model seemed more complex — a new directory structure, a new data fetching paradigm, Server Components that nobody fully understood yet. Then I had a real reason to switch: an e-commerce client with slow load times and a Lighthouse score in the 60s. The migration doubled page load speed and pushed Lighthouse past 90. Here's what actually changed and how I think about the App Router now.
+When Next.js 13 introduced the App Router, I was skeptical. The Pages Router worked well. I knew it deeply. The new model seemed more complex — a new directory structure, a new data fetching paradigm, Server Components that nobody fully understood yet. Then I had a real reason to switch: an e-commerce client whose pages were slow. Here's what actually changed and how I think about the App Router now.
 
 ## The Pages Router Mental Model
 
@@ -141,7 +141,7 @@ export default function CategoryPage() {
 }
 ```
 
-The impact on perceived performance was immediate. Users see the page structure and navigation instantly. Products appear as they load. The Lighthouse Time to First Byte and First Contentful Paint scores jumped significantly. Our actual measurements showed page load time cut roughly in half compared to the SSR approach in Pages Router.
+Users see the page structure and navigation instantly. Products appear as they load.
 
 ## Data Fetching Patterns
 
@@ -185,4 +185,4 @@ React's `cache` function memoizes the result per render, so even if multiple com
 
 4. **Forgetting that `"use client"` propagates down.** Once a component is marked `"use client"`, all its children are also treated as client components.
 
-The App Router genuinely improved our e-commerce project's performance and our codebase structure. It took a few weeks to internalize the mental model, but once it clicks, the pattern of "server by default, client only when needed" leads to faster, leaner applications. The 2x load improvement and 90+ Lighthouse score weren't from tricks — they were the natural result of sending less JavaScript to the browser.
+It took a few weeks to internalize the mental model, but once it clicks, the pattern of "server by default, client only when needed" leads to faster, leaner applications. Sending less JavaScript to the browser is the whole point of that split.

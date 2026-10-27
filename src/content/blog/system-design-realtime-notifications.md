@@ -1,7 +1,7 @@
 ---
 title: "System Design: Building a Real-Time Notification System at Scale"
 date: "2026-03-24"
-description: "A deep dive into designing a real-time notification engine that handles 100k concurrent WebSocket connections — architecture decisions, Redis pub/sub, delivery guarantees, and monitoring."
+description: "A design sketch for a real-time notification engine: WebSockets, Redis pub/sub, delivery guarantees, and how connections spread across instances."
 slug: "system-design-realtime-notifications"
 published: true
 tags: ["Architecture", "System Design", "Real-Time", "Backend"]
@@ -11,7 +11,7 @@ coverImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=f
 
 # System Design: Building a Real-Time Notification System at Scale
 
-When I was asked to design a real-time notification engine capable of handling 100,000 concurrent WebSocket connections, my first instinct was to reach for a ready-made solution. But the requirements were specific enough — custom delivery guarantees, multi-tenant isolation, hybrid push/pull — that we ended up building our own. This is what we designed, why, and what I'd do differently.
+I designed a real-time notification engine around custom delivery guarantees, multi-tenant isolation, and a mix of push and pull. A hosted broker was the first idea. The constraints were specific enough that the design went custom. This is the shape of it.
 
 ## Requirements First
 
@@ -24,7 +24,7 @@ Before any architecture discussion, I established clear requirements:
 - Mark notifications as read with acknowledgment
 
 **Non-functional:**
-- Handle 100k concurrent WebSocket connections per cluster
+- A capacity target of many concurrent WebSocket connections per cluster, spread across instances
 - Horizontally scalable (stateless notification servers)
 - At-least-once delivery (no dropped notifications)
 - Message ordering within a user's notification stream
@@ -35,7 +35,7 @@ These requirements immediately ruled out some approaches and mandated others.
 
 I evaluated three transport options:
 
-**Long polling** was off the table immediately. At 100k connections, even 30-second poll intervals meant roughly 3,300 HTTP requests per second just for heartbeats — before any actual notifications. The connection overhead and server resource usage was too high.
+**Long polling** was off the table immediately. At a large connection count, a 30-second poll interval turns into thousands of HTTP requests per second just for heartbeats, before any notification is sent. The connection overhead and server resource usage was too high.
 
 **Server-Sent Events (SSE)** is excellent for one-way server-to-client updates. It's simpler than WebSockets, works over HTTP/2, and has automatic reconnection built in. But our system needed bidirectional communication: clients send read receipts and typing indicators. SSE would have required a separate HTTP channel for client-to-server messages, adding complexity.
 
@@ -161,7 +161,7 @@ This is simpler than exactly-once delivery (which requires distributed transacti
 
 ## Connection Management at Scale
 
-Each Node.js process can handle roughly 10,000-15,000 WebSocket connections comfortably before memory and event loop pressure builds up. At 100k connections, we run 8-10 server instances behind a load balancer.
+A single Node.js process runs into memory and event-loop pressure well before the socket count looks impressive, so the design spreads connections across several instances behind a load balancer.
 
 The load balancer must use sticky sessions (or hash by user ID) to ensure a reconnecting client hits the same server if possible — though since we recover from Redis, any server can handle reconnections.
 

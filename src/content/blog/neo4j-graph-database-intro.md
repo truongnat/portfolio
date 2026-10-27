@@ -3,7 +3,7 @@ title: "Introduction to Graph Databases with Neo4j: Why Relationships Matter"
 date: "2026-03-24"
 description: "A beginner's look at graph databases and Neo4j — what they are, how they work, and why I explored them for building a knowledge graph in an Agentic SDLC project."
 slug: "neo4j-graph-database-intro"
-published: true
+published: false
 tags: ["Database", "Neo4j", "Backend"]
 author: "Dao Quang Truong"
 coverImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1000"

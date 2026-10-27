@@ -69,6 +69,9 @@ export default defineConfig({
     },
   },
   trailingSlash: "always",
+  redirects: {
+    '/blog/agentic-sdlc-architecture/': '/blog/rust-deterministic-runtime-design/',
+  },
   build: {
     format: 'directory',
   }

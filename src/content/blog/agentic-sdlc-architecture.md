@@ -3,7 +3,7 @@ title: "Designing a Deterministic AI Workflow Runtime in Rust"
 date: "2026-03-24"
 description: "Why I built the Agentic SDLC runtime in Rust, how I achieved deterministic execution with trace IDs and an LLM replay store, and what 183 passing tests taught me about AI reliability."
 slug: "agentic-sdlc-architecture"
-published: true
+published: false
 tags: ["AI/ML", "Rust", "Architecture", "Systems Design"]
 author: "Dao Quang Truong"
 coverImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1000"

@@ -3,7 +3,7 @@ title: "Getting Started with Real-Time Features in Vue.js"
 date: "2026-03-24"
 description: "A beginner-friendly guide to building real-time features in Vue.js using WebSockets and Pinia, based on my experience with the Naver Cloud Meeting web app."
 slug: "vuejs-real-time-features"
-published: true
+published: false
 tags: ["Frontend", "Vue.js", "Real-Time"]
 author: "Dao Quang Truong"
 coverImage: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&q=80&w=1000"

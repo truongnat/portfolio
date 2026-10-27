@@ -3,7 +3,7 @@ title: "Building Your First Cross-Platform Desktop App with Electron.js"
 date: "2026-03-24"
 description: "Learn the basics of Electron.js and how I used it with Jitsi Meet to build the Naver Cloud Meeting desktop app for Windows, macOS, and Linux."
 slug: "electron-cross-platform-desktop"
-published: true
+published: false
 tags: ["Desktop", "Electron.js", "JavaScript"]
 author: "Dao Quang Truong"
 coverImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1000"

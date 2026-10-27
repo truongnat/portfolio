@@ -41,9 +41,7 @@ if (article) {
     }
 }
 
-const posts = await getCollection('blog', ({ data }) => {
-  return import.meta.env.PROD ? data.published : true;
-});
+const posts = await getCollection('blog', ({ data }) => data.published === true);
 
 const journal = await getCollection('journal');
 

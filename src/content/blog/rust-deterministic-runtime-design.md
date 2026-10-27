@@ -1,7 +1,7 @@
 ---
 title: "Why I Built a Deterministic AI Workflow Runtime in Rust"
 date: "2026-03-24"
-description: "An honest account of building the Agentic SDLC runtime in Rust — the non-determinism problem in AI systems, key design decisions, and why 183 tests weren't enough until they were."
+description: "How I designed a deterministic AI workflow runtime in Rust: the non-determinism problem, the runtime decisions, and how the tests stay deterministic without calling a live model."
 slug: "rust-deterministic-runtime-design"
 published: true
 tags: ["Architecture", "Rust", "AI/ML", "Systems Design"]
@@ -11,7 +11,7 @@ coverImage: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=f
 
 # Why I Built a Deterministic AI Workflow Runtime in Rust
 
-Last year I built something I didn't fully expect to build: a deterministic AI workflow runtime in Rust. It supports 6 LLM providers, runs on Tokio for async execution, persists state to SQLite, and has 183 tests that I ran obsessively during development. This is the story of why it exists, the decisions I made, and what I'd do differently.
+Last year I built a deterministic AI workflow runtime in Rust. It runs on Tokio, persists state to SQLite, and calls out to language models. This is why it exists, the decisions I made, and what I would change.
 
 ## The Non-Determinism Problem
 
@@ -111,11 +111,13 @@ pub enum PolicyDecision {
 }
 ```
 
+The same check belongs on tools. A file write stays inside the project directory. A shell rule refuses commands such as `rm -rf`. A budget rule pauses the run when the API cost crosses the limit set for that workflow. Pushing code is not an automatic step: the runtime serializes the execution state and waits until a person approves it.
+
 The composable policy chain pattern came from studying Axum's middleware design. Policies are just structs implementing a trait, stacked in order. Clean, testable, extensible.
 
-## Test Strategy: 183 Tests and Why
+## Test Strategy
 
-The test count sounds impressive but the strategy behind it matters more. I organized tests into three tiers:
+I organized tests into three tiers:
 
 **Unit tests** for pure logic: the policy evaluator, the input hasher, the step status machine. These are fast and deterministic.
 
@@ -151,6 +153,6 @@ async fn test_workflow_resumes_from_checkpoint() {
 
 Building this in Rust forced me to think more carefully about system design than I ever had in Node.js. The type system demanded I be explicit about failure modes, ownership, and concurrency. Things I'd previously glossed over with `try/catch` and `async/await` sugar.
 
-Would I use Rust for everything? No. For CRUD APIs, TypeScript with Express is faster to ship and easier to maintain for most teams. But for a runtime with correctness requirements, long-running processes, and complex state management? Rust was the right call, and I'd make it again.
+Would I use Rust for everything? No. For CRUD APIs, TypeScript with Express is faster to ship and easier to maintain for most teams. For a runtime with correctness requirements, long-running processes, and complex state management, Rust was the right call.
 
 The project taught me that determinism is an engineering choice, not a property of the problem. You build it in, or you don't have it.

@@ -14,7 +14,7 @@ export interface GraphLink {
 }
 
 export async function getGraphData() {
-  const blogPosts = await getCollection('blog');
+  const blogPosts = await getCollection('blog', ({ data }) => data.published === true);
   const journalPosts = await getCollection('journal');
   
   const nodes: GraphNode[] = [];

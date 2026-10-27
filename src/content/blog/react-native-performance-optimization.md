@@ -128,8 +128,6 @@ function KpiCard({ item, onPress }: Props) {
 
 The key pattern here is `runOnJS` — it lets you call a JS function from a worklet when you need to (like triggering navigation), while keeping the animation itself isolated on the UI thread.
 
-**Result**: Animations now maintain 60 FPS even when the JS thread is busy processing a large data update.
-
 ## Fix 3: Hermes Engine
 
 This one was almost free. Hermes is Meta's JavaScript engine optimized specifically for React Native. Unlike V8/JSC which JIT-compile JavaScript at runtime, Hermes pre-compiles to bytecode at build time.
@@ -150,27 +148,8 @@ use_react_native!(
 )
 ```
 
-**Results on the same mid-range Android (Snapdragon 665)**:
-
-| Metric | Before (JSC) | After (Hermes) | Improvement |
-|---|---|---|---|
-| Cold start | 4.2s | 1.8s | **57% faster** |
-| TTI (interactive) | 5.1s | 2.3s | **55% faster** |
-| Memory baseline | 148 MB | 112 MB | **24% less** |
-
-The improvements are especially dramatic on low-end Android devices because Hermes avoids the expensive JIT compilation warmup.
-
 ## Putting It All Together
 
-After all three optimizations, here's the before/after summary for NetBI mobile:
+The lesson I keep relearning: profile before you optimize. I have assumed the charts were the bottleneck and then found the list was the thing dropping frames. Without a profile, the week goes to the wrong function.
 
-| Metric | Before | After |
-|---|---|---|
-| List scroll FPS | 18 | 60 |
-| Animation FPS | 42 | 60 |
-| Cold start (Android) | 4.2s | 1.8s |
-| Memory usage | 148 MB | 98 MB |
-
-The lesson I keep relearning: **profile before you optimize**. I initially assumed the charts were the bottleneck, but profiling showed the list rendering was responsible for 70% of the frame drops. Without the data, I would have spent a week optimizing the wrong thing.
-
-If your React Native app is feeling sluggish, start with FlashList for any list over 50 items, move your animations to Reanimated worklets, and enable Hermes if you haven't already. These three changes alone will cover 80% of performance problems I've encountered in production apps.
+If a React Native app feels sluggish, start with FlashList for any list over 50 items, move animations to Reanimated worklets, and enable Hermes if it is still off.

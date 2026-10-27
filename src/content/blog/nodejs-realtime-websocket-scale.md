@@ -1,7 +1,7 @@
 ---
-title: "Scaling to 100k Concurrent WebSocket Connections with Node.js and Redis Streams"
+title: "Scaling WebSocket Connections with Node.js and Redis Streams"
 date: "2026-03-24"
-description: "How I designed and scaled a real-time notification engine to handle 100,000 concurrent WebSocket connections using Node.js, Redis Streams, and horizontal scaling."
+description: "A design for a real-time notification engine on Node.js and Redis Streams: horizontal scaling, reconnects, and where a single process runs out of room."
 slug: "nodejs-realtime-websocket-scale"
 published: true
 tags: ["Backend", "Node.js", "Real-Time", "Performance"]
@@ -9,11 +9,9 @@ author: "Dao Quang Truong"
 coverImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1000"
 ---
 
-# Scaling to 100k Concurrent WebSocket Connections with Node.js and Redis Streams
+# Scaling WebSocket Connections with Node.js and Redis Streams
 
-When I was tasked with building a real-time notification engine for a platform expecting 100,000 concurrent users, my first reaction was excitement. My second was: *a single Node.js process handles ~65,000 connections before TCP file descriptor limits kick in*. This was going to require horizontal scaling from day one.
-
-Here's how I designed the system, handled the scaling challenges, and load-tested it to validate the result.
+A notification engine with one socket per connected user will not fit in a single Node.js process. File descriptors and memory give out first, so the design scales out from the start.
 
 ## The Architecture
 
@@ -200,7 +198,7 @@ export async function startStreamConsumer(
 
 ## Connection Pooling and Memory Management
 
-At scale, memory management becomes critical. Each WebSocket connection in `uWS` costs ~1.3 KB for the socket itself. At 50k connections per pod, that's 65 MB just for connection overhead — manageable, but you need to be careful about what you attach to each socket.
+At scale, memory management becomes critical. The socket itself is the small part. What you attach to each connection is what blows the process up.
 
 I kept the per-connection data minimal (`userId` + `deviceId`). User preferences, notification history, and other data stays in Redis, fetched only when needed.
 
@@ -227,23 +225,8 @@ process.on('SIGTERM', async () => {
 
 Clients receive the `RECONNECT` message, wait 3 seconds, then reconnect — by which time the load balancer has stopped sending traffic to the shutting-down pod.
 
-## Load Testing Results
-
-I used `artillery` with a custom WebSocket plugin for load testing:
-
-| Concurrent Connections | Pod Count | Avg Latency | Memory/Pod | CPU/Pod |
-|---|---|---|---|---|
-| 10,000 | 1 | 8ms | 340 MB | 12% |
-| 50,000 | 1 | 14ms | 890 MB | 31% |
-| 100,000 | 2 | 11ms | 870 MB each | 28% each |
-| 200,000 | 4 | 12ms | 880 MB each | 30% each |
-
-The system scaled linearly. Adding a pod doubled capacity with minimal overhead from the Redis Stream coordination.
-
 ## What I'd Change
 
-**Consider using Redis Cluster for > 1M connections.** A single Redis instance becomes the bottleneck at extreme scale. Redis Cluster with stream sharding by user ID shard handles this.
+**Consider Redis Cluster once one instance is the bottleneck.** Redis Cluster with stream sharding by user ID handles that case.
 
 **Add a circuit breaker on the consumer loop.** If Redis is slow or unavailable, the consume loop hammers it with retries. A proper circuit breaker with exponential backoff is essential in production.
-
-The architecture held up well in production. Real-time notifications are now delivered in under 50ms end-to-end for 95% of events — a significant improvement over the polling approach it replaced.

@@ -1,7 +1,7 @@
 ---
 title: "Containerizing a Legacy Node.js App with Docker: Lessons Learned"
 date: "2026-03-24"
-description: "Hard-won lessons from containerizing a legacy Node.js application — multi-stage builds, shrinking image size by 80%, handling legacy dependencies, and setting up docker-compose for local development."
+description: "Containerizing a legacy Node.js application: multi-stage builds, legacy native dependencies, and docker-compose for local development."
 slug: "docker-legacy-app-containerization"
 published: true
 tags: ["DevOps", "Docker", "Node.js"]
@@ -80,7 +80,7 @@ EXPOSE 3000
 CMD ["node", "dist/index.js"]
 ```
 
-This alone cut our image from 1.4GB to 280MB — an 80% reduction. The builder stage has TypeScript compiler, test runners, and dev tools. The production stage has none of that.
+The builder stage has the TypeScript compiler, test runners, and dev tools. The production stage has none of that.
 
 ## Handling Legacy Native Dependencies
 

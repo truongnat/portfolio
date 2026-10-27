@@ -1,7 +1,7 @@
 ---
-title: "Achieving 90+ Lighthouse Score with Next.js 14: A Practical Guide"
+title: "Next.js 14 Performance: Images, Fonts, Bundles, and Server Components"
 date: "2026-03-24"
-description: "The concrete techniques I used to push a Next.js 14 application past 90 on Lighthouse — image optimization, font loading, bundle analysis, Server Components, and lazy loading."
+description: "Techniques for a Next.js 14 app: image optimization, font loading, bundle analysis, Server Components, and lazy loading."
 slug: "nextjs-performance-optimization"
 published: true
 tags: ["Frontend", "Next.js", "Performance"]
@@ -9,7 +9,7 @@ author: "Dao Quang Truong"
 coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000"
 ---
 
-Performance optimization is one of those topics where the theory is easy and the practice is full of surprises. "Use Server Components, lazy load images, optimize fonts" — you know the principles. But actually getting a real production app above 90 on Lighthouse requires systematically finding and fixing the specific bottlenecks in your specific app. This post documents the techniques that moved the needle for me on a Next.js 14 project, with before/after numbers.
+Performance optimization is one of those topics where the theory is easy and the practice is full of surprises. "Use Server Components, lazy load images, optimize fonts" — you know the principles. A production app gets faster only after you find the bottlenecks in that app. This post documents the techniques I reached for on a Next.js 14 project.
 
 ## Start With Measurement
 
@@ -183,13 +183,13 @@ function PostEditor() {
 }
 ```
 
-For heavy components like chart libraries, code editors, or map components, lazy loading is essential. My project had a Recharts dashboard that was eagerly loading 350KB of chart code on every page. Lazy loading it shaved 200ms off TBT on pages that didn't even show the dashboard.
+For heavy components like chart libraries, code editors, or map components, lazy loading is essential. My project had a Recharts dashboard that loaded on pages that never showed a chart. Lazy loading kept that code off those pages.
 
 ## The Final Checklist
 
 In order of impact for my project:
 
-1. ✅ Add `priority` to LCP images (+20 Lighthouse points alone)
+1. ✅ Add `priority` to LCP images
 2. ✅ Switch all images to `next/image` with correct `sizes`
 3. ✅ Use `next/font` for all Google Fonts
 4. ✅ Run bundle analyzer, eliminate heavy dependencies
@@ -198,4 +198,4 @@ In order of impact for my project:
 7. ✅ Add `loading="lazy"` to below-fold `next/image` (it's the default, but verify)
 8. ✅ Enable `output: "standalone"` for smaller Docker images in production
 
-From 62 to 94 wasn't magic — it was methodical. Measure, identify the bottleneck, fix, measure again. The tools Next.js 14 provides make most of these optimizations straightforward once you know where to look.
+None of this is magic. Measure, identify the bottleneck, fix, measure again. The tools Next.js 14 provides make most of these optimizations straightforward once you know where to look.
