@@ -1,12 +1,12 @@
 # Public API routes
 
-Server routes live under `src/pages/api/` as **one file per HTTP handler** (Astro file-based API). There are **22** `.ts` entrypoints, grouped below by concern. Paths are the public URL prefix (no `.ts`).
+Server routes live under `src/pages/api/` as **one file per HTTP handler** (Astro file-based API). There are **21** `.ts` entrypoints, grouped below by concern. Paths are the public URL prefix (no `.ts`).
 
 ## Route index (by cluster)
 
 | Cluster | Example paths | Role |
 |---------|-----------------|------|
-| **Core / integrations** | `/api/contact`, `/api/search`, `/api/certificate`, `/api/certificate-issue`, `/api/portfolio.md` | Contact, semantic search, certificates, static portfolio export |
+| **Core / integrations** | `/api/contact`, `/api/certificate`, `/api/certificate-issue`, `/api/portfolio.md` | Contact, certificates, static portfolio export |
 | **Stripe** | `/api/stripe/webhook`, `/api/stripe/create-payment` | Webhook verification and payment session creation |
 | **Crypto (stub)** | `/api/crypto/create-payment`, `/api/crypto/qr` | Demo / stub flows — not production payment rails |
 | **Donations** | `/api/donations` | Donation POST handler |

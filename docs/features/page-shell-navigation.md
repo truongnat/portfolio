@@ -5,7 +5,7 @@ The global chrome (header, nav, theme, SEO) lives in **`BaseLayout.astro`**. The
 ## Key files
 
 - `src/layouts/BaseLayout.astro` — wraps most pages; imports shared UI and SEO.
-- `src/components/CommandPalette.tsx` — client island (`client:idle`); receives post metadata for search; uses `cmdk`-style UX.
+- `src/components/CommandPalette.tsx` — client island (`client:idle`); filters post title and description in the browser.
 
 ## Hydration
 

@@ -31,7 +31,7 @@ pnpm-debug.log*
 # SSH keys / secrets (never commit)
 *.pem
 
-# local data (e.g. LanceDB index under data/lancedb — regenerate via scripts/index-content.ts)
+# local data
 data/
 
 # GitNexus graph index (regenerate with npx gitnexus analyze)

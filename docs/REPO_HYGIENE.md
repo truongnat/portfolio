@@ -10,13 +10,14 @@ Non-committed paths, dependency choices, and **disabled** Astro pages are docume
 | `node_modules/` | Dependencies |
 | `.env`, `.env.production`, `.env.local`, `.env.*.local` | Secrets and local overrides |
 | `*.pem` | SSH/private keys (any filename) |
-| `data/` | Local LanceDB index and generated data (`data/lancedb` — rebuild with `bun run journal:index` / indexing scripts) |
+| `data/` | Local generated data, ignored |
 | `.gitnexus/` | Local GitNexus graph index |
 
 ## Dependencies (Phase 7 audit)
 
 **Removed** (no `import` in `src/` or `scripts/`; confirmed before removal):
 
+- `@lancedb/lancedb`, `@xenova/transformers` — only served `/api/search`; the command palette filters posts in the browser
 - `@ai-sdk/google`, `@ai-sdk/react`, `ai`, `@google/generative-ai` — unused AI SDK stubs
 - `@astrojs/cloudflare` — deploy uses `@astrojs/node` (`astro.config.mjs`)
 - `@tanstack/react-query` — only appeared in blog markdown examples, not app code

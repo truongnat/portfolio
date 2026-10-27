@@ -4,7 +4,7 @@ Personal website and portfolio for Dao Quang Truong. Built with Astro, React, an
 
 ## Feature architecture
 
-Architecture diagrams (PlantUML) and feature companions live under [`docs/`](./docs/README.md). See the [Feature architecture index](./docs/README.md) for content collections, API map, search, contact, and payments.
+Architecture diagrams (PlantUML) and feature companions live under [`docs/`](./docs/README.md). See the [Feature architecture index](./docs/README.md) for content collections, API map, contact, and payments.
 
 ## 📖 Documentation
 
@@ -21,7 +21,7 @@ Architecture diagrams (PlantUML) and feature companions live under [`docs/`](./d
 
 - Marketing homepage and portfolio sections
 - Blog, journal, and evergreen content pages
-- Public utility routes for contact, search, certificates, and experiments
+- Public utility routes for contact, certificates, and experiments
 - Static assets including the downloadable CV
 
 ## Quick Start

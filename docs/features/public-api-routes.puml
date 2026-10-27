@@ -2,11 +2,10 @@
 skinparam packageStyle rectangle
 skinparam linetype ortho
 
-title src/pages/api - HTTP routes (22 TypeScript entrypoints)
+title src/pages/api - HTTP routes (21 TypeScript entrypoints)
 
 package "Core integrations" as core_pkg #E8F4FC {
   [POST /api/contact] as contact
-  [GET /api/search] as search
   [GET /api/certificate] as cert
   [POST /api/certificate-issue] as certissue
   [GET /api/portfolio.md] as portfolio
@@ -37,7 +36,6 @@ package "Demo stub UIs" as demo_stub #F0F0F0 {
 
 cloud "Client / integrations" as client
 client --> contact
-client --> search
 client --> cert
 client --> stripe_wh
 client --> stripe_pay

@@ -3,10 +3,6 @@
  * Log details server-side; never echo Error.message to clients.
  */
 
-export const SEARCH_UNAVAILABLE_BODY = {
-  error: 'Search is temporarily unavailable',
-} as const;
-
 export function logApiError(context: string, error: unknown): void {
   console.error(`${context}`, error);
 }
