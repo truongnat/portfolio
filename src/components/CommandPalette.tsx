@@ -64,7 +64,7 @@ export function CommandPalette({ posts = [] }: CommandPaletteProps) {
         try {
             const res = await fetch(`/api/search/?q=${encodeURIComponent(debouncedSearch)}`);
             const data = await res.json();
-            setSearchResults(data);
+            setSearchResults(Array.isArray(data) ? data : []);
         } catch (e) {
             console.error('Search failed:', e);
         } finally {

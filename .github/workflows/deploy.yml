@@ -1,4 +1,4 @@
-name: Deploy Astro to VPS (Self-hosted)
+name: Deploy Astro to Cloudflare Workers
 on:
   push:
     branches:
@@ -7,39 +7,20 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 jobs:
   deploy:
-    runs-on: [self-hosted, linux]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
       - name: Install dependencies
         run: bun install
-      - name: ESLint
-        run: bun run lint
-      - name: Astro check
-        run: bun run check
       - name: Build
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
-        run: |
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          bun run build
-      - name: Deploy Static to Nginx
-        run: |
-          sudo mkdir -p /var/www/html
-          sudo rm -rf /var/www/html/*
-          sudo cp -r dist/client/* /var/www/html/
-          sudo chown -R www-data:www-data /var/www/html
-      - name: Restart Astro Server (PM2)
-        run: |
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          pm2 delete portfolio || true
-          HOST=127.0.0.1 PORT=4321 pm2 start dist/server/entry.mjs --name portfolio --update-env
-          sudo systemctl reload nginx
+        run: bun run build
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: bunx wrangler deploy --config dist/server/wrangler.json

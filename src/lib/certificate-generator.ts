@@ -1,4 +1,3 @@
-import { Resvg } from '@resvg/resvg-js';
 import satori from 'satori';
 
 /**
@@ -301,6 +300,7 @@ export async function generateCertificatePng(params: {
   certificateId: string;
 }) {
   const svg = await generateCertificateSvg(params);
+  const { Resvg } = await import(/* @vite-ignore */ '@resvg/resvg-js');
   const resvg = new Resvg(svg, {
     fitTo: {
       mode: 'width',

@@ -1,6 +1,5 @@
 import type { APIRoute } from 'astro';
 import { timingSafeEqual } from 'node:crypto';
-import { generateCertificatePng } from '@/lib/certificate-generator';
 import {
   computeCertificateSignatureHex,
   type CertificateSignFields,
@@ -68,6 +67,9 @@ export const GET: APIRoute = async ({ request }) => {
       return new Response('Unauthorized', { status: 401 });
     }
 
+    // resvg-js is a native addon and cannot run in the Worker. Node prerender of OG
+    // images still uses it; this on-demand route does not.
+    const { generateCertificatePng } = await import(/* @vite-ignore */ '@/lib/certificate-generator');
     const pngBuffer = await generateCertificatePng({
       donatorName: fields.donatorName,
       skillName: fields.skillName,

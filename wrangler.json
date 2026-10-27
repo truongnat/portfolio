@@ -1,7 +1,24 @@
 {
-    "name": "portfolio",
-    "compatibility_date": "2024-11-01",
-    "assets": {
-        "directory": "./dist"
+  "name": "portfolio",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-10-26",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "nodejs_compat_populate_process_env",
+    "global_fetch_strictly_public"
+  ],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "routes": [
+    {
+      "pattern": "truongsoftware.com",
+      "custom_domain": true
     }
+  ]
 }

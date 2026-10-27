@@ -2,12 +2,13 @@
 
 **Cutover (repo):** Application canonical URL, Astro `site`, SEO fallbacks, OG branding, nginx `server_name`, and preview docs now target **`https://truongsoftware.com`** (and **`preview.truongsoftware.com`** for the password-protected preview).
 
-## Operator checklist (production host)
+## Operator checklist (Cloudflare Workers)
 
-1. **DNS** — Point `truongsoftware.com`, `www.truongsoftware.com`, and `preview.truongsoftware.com` A records to your server (e.g. Lightsail IP), or CNAME as your provider requires.
-2. **TLS** — Run certbot (or equivalent) for those hostnames; see `PREVIEW_SETUP.md` for an example `certbot --nginx` line.
-3. **Nginx** — Deploy updated `nginx.conf` from the repo and `nginx -t && systemctl reload nginx`.
-4. **Legacy domain** — If `truongdq.com` still resolves, configure **301 redirects** to `https://truongsoftware.com` at DNS or nginx (optional; not committed here).
+1. **Worker** — `wrangler deploy` publishes the Astro build. The apex custom domain is `truongsoftware.com` (`routes` in `wrangler.json`). Do not point an A record at a VPS.
+2. **www** — Redirect `www.truongsoftware.com` to the apex with a proxied placeholder record and a 301 rule. Do not attach `www` as a second site.
+3. **Email** — Leave the existing Email Routing MX and SPF TXT records on the apex in place.
+4. **Secrets** — `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` are Worker secrets, not files in the repo.
+5. **Legacy domain** — If `truongdq.com` still resolves, configure **301 redirects** to `https://truongsoftware.com` (optional; not committed here).
 
 ## Intentional non-migration strings
 

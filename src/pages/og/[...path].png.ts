@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import satori from 'satori';
-import { Resvg } from '@resvg/resvg-js';
 import { CANONICAL_SITE_URL } from '@/lib/config';
 
 const OG_SITE_LABEL = new URL(CANONICAL_SITE_URL).hostname;
@@ -221,6 +220,8 @@ export const GET: APIRoute = async ({ props }) => {
     }
   );
 
+  // Native addon. Loaded only while Node prerenders these PNGs, not by the Worker graph.
+  const { Resvg } = await import(/* @vite-ignore */ '@resvg/resvg-js');
   const resvg = new Resvg(svg, {
     fitTo: {
       mode: 'width',

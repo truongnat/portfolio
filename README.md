@@ -116,7 +116,7 @@ bun run content:validate  # Zod frontmatter vs blog/journal/courses (also runs i
 - **Diagrams**: Mermaid.js
 - **AI**: OpenAI-compatible integrations and local experiments
 - **Database**: Content Collections
-- **Deployment**: Cloudflare Pages
+- **Deployment**: Cloudflare Workers
 
 ## 📝 Content Guidelines
 
@@ -164,9 +164,9 @@ bun run preview  # Test locally
 ```
 
 ### Cloudflare
-- Deploy to Cloudflare Pages
-- Configure KV bindings for sessions
-- Set environment variables
+- Deploy to Cloudflare Workers (`bunx wrangler deploy`)
+- Apex custom domain: `truongsoftware.com`
+- Set Worker secrets for the contact form (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`)
 
 ## For AI Agents
 
