@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 420" role="img" aria-labelledby="title desc">
+  <title id="title">dotagents is two directories and one file a tool can load</title>
+  <desc id="desc">The global cabinet is ~/.agents. The project cabinet is .agents inside a repository. AGENTS.md is the file Claude Code, Cursor, or Codex is pointed at. init-global.sh and init-project.sh copy files and refuse to overwrite.</desc>
+  <rect width="880" height="420" rx="16" fill="#18181b"/>
+  <rect x="36" y="36" width="250" height="250" rx="12" fill="#09090b" stroke="#3f3f46"/>
+  <text x="56" y="68" fill="#a1a1aa" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">global cabinet</text>
+  <text x="56" y="98" fill="#fafafa" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">~/.agents</text>
+  <text x="56" y="138" fill="#e4e4e7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">rules/  skills/  scripts/</text>
+  <text x="56" y="164" fill="#e4e4e7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">template/  memory/</text>
+  <text x="56" y="190" fill="#e4e4e7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">outputs/&lt;project&gt;/</text>
+  <text x="56" y="230" fill="#a1a1aa" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">survives a repo change</text>
+  <text x="56" y="254" fill="#a1a1aa" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">skips rules/project.md</text>
+  <rect x="594" y="36" width="250" height="250" rx="12" fill="#09090b" stroke="#3f3f46"/>
+  <text x="614" y="68" fill="#a1a1aa" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">this repository</text>
+  <text x="614" y="98" fill="#fafafa" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">.agents/</text>
+  <text x="614" y="138" fill="#e4e4e7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">rules/project.md</text>
+  <text x="614" y="164" fill="#e4e4e7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">memory/entries/</text>
+  <text x="614" y="190" fill="#e4e4e7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">AGENTS.md at the root</text>
+  <text x="614" y="230" fill="#a1a1aa" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">true only here</text>
+  <text x="614" y="254" fill="#a1a1aa" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">stack, tests, constraints</text>
+  <rect x="300" y="318" width="280" height="68" rx="12" fill="#09090b" stroke="#e4e4e7"/>
+  <text x="440" y="346" text-anchor="middle" fill="#fafafa" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16">AGENTS.md</text>
+  <text x="440" y="368" text-anchor="middle" fill="#a1a1aa" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">the file a tool can load</text>
+  <path d="M161 286 V318 H300" fill="none" stroke="#71717a" stroke-width="1.5"/>
+  <path d="M719 286 V318 H580" fill="none" stroke="#71717a" stroke-width="1.5"/>
+</svg>
